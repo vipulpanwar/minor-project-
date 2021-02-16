@@ -1,0 +1,26 @@
+.LoadingLogo {
+    line-height: 1;
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+  
+    transform: translate(-50%, -50%);
+    animation: bubbling 1s ease-in-out alternate-reverse infinite;
+  }
+  
+  .LoadingLogo h1 {
+    margin: 0;
+    font-size: 92px;
+    font-weight: 900;
+  }
+  
+  @keyframes bubbling {
+    from {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+  

@@ -6,20 +6,34 @@ import {  BrowserRouter as Router,
   Link,
 } from "react-router-dom";
 
+import firebase from './firebase';
+import {connect} from 'react-redux';
+import {AuthStateChanged} from './store/actions/auth';
+
 import HomeContainer  from "./containers/Home/home"; 
 import LoginContainer  from "./containers/Login/Login";
-import AppliedStudentsContainer from './containers/AppliedStudents/AppliedStudents'
+import AppliedStudentsContainer from './containers/AppliedStudents/AppliedStudents';
+import ProtectedRoute from './hoc/ProtectedRoute/ProtectedRoute';
+import AppLoading from './hoc/AppLoader/AppLoader';
 
-function App() {
+function App(props) {
+
+  firebase.auth().onAuthStateChanged(user=>props.authStateChange(user));
+  console.log("Rendering App")
   return (
-    <Router>
-      <Switch>
-        <Route path="/login" component={LoginContainer}/>
-        <Route path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
-        <Route matchPath={true} path="/" component={HomeContainer}/>
-      </Switch>
-    </Router>
+    <AppLoading>
+      <Router>
+        <Switch>
+          <Route path="/login" component={LoginContainer}/>
+          <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
+          <ProtectedRoute exact matchPath={true} path="/" component={HomeContainer}/>
+        </Switch>
+      </Router>
+    </AppLoading>
   );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch)=>({
+  authStateChange: (user)=> dispatch(AuthStateChanged(user))
+})
+export default connect( null , mapDispatchToProps)(App);

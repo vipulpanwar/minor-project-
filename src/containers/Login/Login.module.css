@@ -1,0 +1,46 @@
+.LoginGrid
+{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: minmax(540px, 1fr) 1.5fr;
+    height: 100vh;
+}
+
+.LoginSide 
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left:80px;
+    padding-right:120px
+}
+
+.Logo
+{
+    width: 120px;
+}
+
+.IllustrationSide
+{
+    background: #F4F4F6;
+    overflow: hidden;
+}
+
+.LoginShapes{
+    padding-left:10%;
+    width: 90%;
+    height: 100%;
+    object-position: 0% 100%;
+    object-fit: cover;
+}
+
+.H1 
+{
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 43px;
+    margin-bottom: 32px;
+    margin-top:23px;
+    color: #0D0C21;
+}

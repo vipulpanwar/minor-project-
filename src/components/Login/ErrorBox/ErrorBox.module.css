@@ -1,0 +1,40 @@
+.ErrorBox{ 
+    
+    
+    background: #ff000017;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    color: #f04949;
+    margin-top: -16px;
+    margin-bottom: 16px;
+    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+    position: relative;
+}
+
+
+.ErrorBox p {
+    margin: 0;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 100;
+    position: absolute;
+    opacity: 0;
+
+}
+
+.ErrorBox.Active
+{
+    opacity: 1;
+}
+
+.ErrorBox.Active p
+{
+    animation: fadein 0.2s forwards ease-in-out 0.15s;
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
