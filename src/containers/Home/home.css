@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar{
+  padding-top: 3%;
+}
+
+.logo{
+
+}
+
+.log-out{
+  position:absolute;
+  right: 2%;
+  margin-right: 5%;
+  background: #FFFFFF;
+  border: 1px solid #4A90E2;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 7.9rem;
+  height: 3rem;
+  margin-top: -0.5rem;
+}
+
+.middle-container{
+  margin-top: 3%;
+}
+
+.job-postings{
+  font-family: SF Pro Display;
+  margin-top: 1%;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 52px;
+  line-height: 62px;
+  text-align: center;
+  color: #000000;
+}
+
+.content-tbr{
+  margin: 3.8%;
+}
+
+.card{
+  display: inline-block;
+  background-image: url('./background-1.svg');
+  width: 363px;
+  height: 362px;
+  margin: 1%;
+  border: 1px solid #D4D5DA;
+  box-sizing: border-box;
+  border-radius: 24px;
+}
+
+.card-logo{
+  height: 65px;
+  float: left;
+  margin: 1.8rem;
+}
+
+.card-container{
+  width: 326px;
+  height: 186px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(44px);
+  border-radius: 15px;
+  margin: auto;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.bottom-container{
+  text-align: center;
+  position: absolute;
+  top: 75vh;
+  margin-left: 18%;
+  /* vertical-align: bottom; */
+}
+
+.announcement-text{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 4.3rem;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.25;
+  background: linear-gradient(270deg, #44D7B6 0%, #3BB0EA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+
+}
+
+.home-container{
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(166.67% 269.75% at 85.98% 167.57%, #DCE8F6 0%, #FFFFFF 100%);
+}
