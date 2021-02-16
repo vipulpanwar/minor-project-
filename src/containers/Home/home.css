@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+button{
+  background-color: transparent;
+  border: none;
+}
+
 .top-bar{
   padding-top: 3%;
 }
@@ -26,10 +31,6 @@
   margin-top: -0.5rem;
 }
 
-.middle-container{
-  margin-top: 3%;
-}
-
 .job-postings{
   font-family: SF Pro Display;
   margin-top: 1%;
@@ -39,6 +40,32 @@
   line-height: 62px;
   text-align: center;
   color: #000000;
+}
+
+.middle-container{
+  margin-top: 3%;
+}
+
+.slide-container{
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  overflow-y: auto;
+  vertical-align: center;
+}
+
+.single-item{
+  text-align: center;
+  cursor: pointer;
+}
+
+.items-container{
+  display: flex;
+  overflow-y: hidden;
+}
+
+.items-container::-webkit-scrollbar{
+  /* display: none; */
 }
 
 .content-tbr{
@@ -54,6 +81,21 @@
   border: 1px solid #D4D5DA;
   box-sizing: border-box;
   border-radius: 24px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.slider-button{
+  position: fixed;
+  z-index: 1;
+}
+
+.right-arrow{
+  right:20px;
+}
+
+.left-arrow{
+  left:20px;
 }
 
 .card-logo{
@@ -101,4 +143,13 @@
   width: 100vw;
   height: 100vh;
   background: radial-gradient(166.67% 269.75% at 85.98% 167.57%, #DCE8F6 0%, #FFFFFF 100%);
+}
+
+@media (min-width: 768px) {
+  /* show 3 items */
+  .carousel-inner .active,
+  .carousel-inner .active + .carousel-item,
+  .carousel-inner .active + .carousel-item + .carousel-item {
+    display: block;
+  }
 }

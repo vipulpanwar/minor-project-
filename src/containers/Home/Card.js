@@ -12,7 +12,7 @@ function Card () {
       <img className='card-logo' src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png" alt="google logo icon png transparent background osteopathy" />
       <br /><br /><br /><br /><br />
       <div className='card-container'>
-        <img className='content-tbr' src={Content} />
+        <img className='content-tbr' width='90%' src={Content} />
       </div>
     </div>
   );
