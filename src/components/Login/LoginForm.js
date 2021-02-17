@@ -1,10 +1,10 @@
 import React,{Component} from "react";
-import Button from "../../../components/UI/Button/Button";
-import Input from '../../../components/UI/Input/Input';
-import ErrorBox from '../../../components/Login/ErrorBox/ErrorBox';
+import Button from "../../components/shared/ui/Button/Button";
+import Input from '../../components/shared/ui/Input/Input';
+import ErrorBox from './ErrorBox';
 
 import { connect } from "react-redux";
-import {Login as loginAction} from '../../../store/actions/auth'
+import {Login as loginAction} from '../../store/actions/auth'
 
 class LoginForm extends Component {
     state = {

@@ -1,0 +1,11 @@
+.StudentListContainer
+{
+    background: #F4F4F6;
+    padding: 64px;
+    padding-top:84px;
+}
+
+.StudentList{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}

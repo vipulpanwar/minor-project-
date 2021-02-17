@@ -22,4 +22,5 @@
 
 .BackButton {
     float: left;
+    cursor: pointer;
 }

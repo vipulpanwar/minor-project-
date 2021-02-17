@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LoginForm from './LoginForm/LoginForm';
+import LoginForm from './LoginForm';
 import logo from '../../assets/images/ensvee-logo.svg';
 import shapes from '../../assets/shapes/login-shapes.svg';
 import styles from './Login.module.css';

@@ -11,10 +11,10 @@ import {connect} from 'react-redux';
 import {AuthStateChanged} from './store/actions/auth';
 
 import HomeContainer  from "./containers/Home/home"; 
-import LoginContainer  from "./containers/Login/Login";
-import AppliedStudentsContainer from './containers/AppliedStudents/AppliedStudents';
-import ProtectedRoute from './hoc/ProtectedRoute/ProtectedRoute';
-import AppLoading from './hoc/AppLoader/AppLoader';
+import LoginContainer  from "./components/Login/Login";
+import AppliedStudentsContainer from './components/AppliedStudents/AppliedStudents';
+import ProtectedRoute from './components/shared/hoc/ProtectedRoute/ProtectedRoute';
+import AppLoading from './components/shared/hoc/AppLoader/AppLoader';
 
 function App(props) {
 

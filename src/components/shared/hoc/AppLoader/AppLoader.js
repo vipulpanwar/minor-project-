@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import logo from '../../assets/images/ensvee-logo.svg';
+import logo from '../../../../assets/images/ensvee-logo.svg'
+
 import styles from './AppLoader.module.css';
 
 class AppLoader extends React.Component {
