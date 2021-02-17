@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {connect} from 'react-redux';
 import {Logout as logoutAction} from '../../store/actions/auth';
 
-
 import './home.css';
 import Logo from './images/ensvee-logo.svg';
 import Background1 from './background-1.svg';
@@ -13,6 +12,8 @@ import RightArrow from './images/rightArrow.svg';
 
 var flag = 0;
 var no_of_cards = 10;
+var right = 1;
+var left = 0;
 
 class Home extends React.Component{
 
@@ -22,9 +23,20 @@ class Home extends React.Component{
   };
 
   Leftscroll =() => {
+    if(flag==no_of_cards){
+      this.listRef.current.scrollLeft += 280;
+    }
+    else{
     this.listRef.current.scrollLeft -= 395;
+    }
     flag--;
+    console.log(flag);
+    right=1;
+    if(flag==0){
+      left=0;
+    }
   };
+
   Rightscroll =() => {
     if(flag==0){
       this.listRef.current.scrollLeft += 280;
@@ -34,6 +46,11 @@ class Home extends React.Component{
     }
     flag++;
     console.log(flag);
+    left=1;
+
+    if(flag==no_of_cards){
+      right=0;
+    }
   };
 
     render(){
@@ -45,7 +62,7 @@ class Home extends React.Component{
             </div>
 
             <div className="middle-container slide-container">
-              <button onClick={this.Leftscroll} className={(flag==0)?'hidden':"slider-button left-arrow"}>
+              <button onClick={this.Leftscroll} className={left?'hidden':"slider-button left-arrow"}>
                 <img width='12.5px' src={LeftArrow}/>
               </button>
               <div className='items-container' ref={this.listRef}>
@@ -60,7 +77,7 @@ class Home extends React.Component{
                 <Card className='single-item'/>
                 <Card className='single-item'/>
               </div>
-              <button onClick={this.Rightscroll} className={(flag==7)?'hidden':"slider-button right-arrow"}>
+              <button onClick={this.Rightscroll} className={right?'hidden':"slider-button right-arrow"}>
                 <img width='12.5px' src={RightArrow}/>
               </button>
             </div>
