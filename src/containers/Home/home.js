@@ -17,6 +17,15 @@ var left = 0;
 
 class Home extends React.Component{
 
+  flag = 0;
+  no_of_cards = 10;
+
+  state = {
+    left: 0,
+    right: 1,
+  }
+
+
   constructor(){
     super();
     this.listRef = createRef();
@@ -38,18 +47,18 @@ class Home extends React.Component{
   };
 
   Rightscroll =() => {
-    if(flag==0){
+    if(this.flag==0){
       this.listRef.current.scrollLeft += 280;
     }
     else{
       this.listRef.current.scrollLeft += 395;
     }
-    flag++;
-    console.log(flag);
-    left=1;
+    this.flag++;
+    console.log(this.flag, this.listRef.current.scrollLeft);
+    this.setState({left:1})
 
-    if(flag<=no_of_cards){
-      right=0;
+    if(this.flag<=this.no_of_cards){
+      this.setState({right:0})
     }
   };
 
@@ -62,7 +71,7 @@ class Home extends React.Component{
             </div>
 
             <div className="middle-container slide-container">
-              <button onClick={this.Leftscroll} className={!left?'hidden':"slider-button left-arrow"}>
+              <button onClick={this.Leftscroll} className={!this.state.left?'hidden':"slider-button left-arrow"}>
                 <img width='12.5px' src={LeftArrow}/>
               </button>
               <div className='items-container' ref={this.listRef}>
@@ -92,7 +101,7 @@ class Home extends React.Component{
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    logout : (email,password)=> dispatch(logoutAction())
+    logout : ()=> dispatch(logoutAction())
 })
 
 
