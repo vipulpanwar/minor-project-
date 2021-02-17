@@ -32,7 +32,7 @@ class Home extends React.Component{
     flag--;
     console.log(flag);
     right=1;
-    if(flag==0){
+    if(flag<1){
       left=0;
     }
   };
@@ -48,7 +48,7 @@ class Home extends React.Component{
     console.log(flag);
     left=1;
 
-    if(flag==no_of_cards){
+    if(flag<=no_of_cards){
       right=0;
     }
   };
@@ -62,7 +62,7 @@ class Home extends React.Component{
             </div>
 
             <div className="middle-container slide-container">
-              <button onClick={this.Leftscroll} className={left?'hidden':"slider-button left-arrow"}>
+              <button onClick={this.Leftscroll} className={!left?'hidden':"slider-button left-arrow"}>
                 <img width='12.5px' src={LeftArrow}/>
               </button>
               <div className='items-container' ref={this.listRef}>
@@ -77,7 +77,7 @@ class Home extends React.Component{
                 <Card className='single-item'/>
                 <Card className='single-item'/>
               </div>
-              <button onClick={this.Rightscroll} className={right?'hidden':"slider-button right-arrow"}>
+              <button onClick={this.Rightscroll} className={!right?'hidden':"slider-button right-arrow"}>
                 <img width='12.5px' src={RightArrow}/>
               </button>
             </div>
