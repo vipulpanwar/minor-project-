@@ -1,0 +1,23 @@
+.Overlay{
+    z-index: 100;
+    position: fixed;
+    top:0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    background: #232D4C;
+    opacity: 0.3;
+}
+
+.Modal{
+  
+    z-index: 110;
+    position: fixed;
+    top: 200px;
+    background: white;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 900px;
+    left: 50%;
+    transform: translateX(-50%);
+}

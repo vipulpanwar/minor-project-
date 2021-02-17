@@ -2,6 +2,8 @@ import React from 'react';
 import StudentCard from './StudentCard';
 import styles from './StudentList.module.css';
 
+
+
 export default ()=>{
     return(
     <div className={styles.StudentListContainer}>
@@ -10,5 +12,6 @@ export default ()=>{
             <StudentCard/>
             <StudentCard/>
         </div>
+
     </div>)
 }

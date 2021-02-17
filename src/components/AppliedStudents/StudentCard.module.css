@@ -1,0 +1,88 @@
+.StudentCard {
+    border: 1px solid #D3D5DB;
+    box-sizing: border-box;
+    border-radius: 14px;    
+    background: white;
+    padding: 22px 18px;
+}
+
+.StudentImage{
+    border-radius: 12px;
+    width: 106px;
+    height: 103px;
+    object-fit: cover;
+}
+
+.StudentInfo{
+    display: flex;
+    margin-bottom: 16px;
+    grid-gap: 16px;
+}
+
+.StudentName{
+    font-size: 24px;
+    color:#232D4C;
+}
+.StudentSubTitle{
+    color:#9196A5;
+    font-size: 12px;
+    line-height: 14px;
+    margin-top:2px
+}
+
+.RatingAndView 
+{
+    display: flex;
+    grid-gap:20px;
+    margin-top:12px;
+}
+
+.Rating{
+    font-size: 20px;
+    padding:  9px 27px 14px 19px;
+    background: #F4F4F6;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+.Rating :first-child{
+    font-weight: 500;
+    color: gray;
+}
+.Rating :last-child{
+    font-weight:700;
+    color: #4A90E2;
+}
+
+.SkillsRow h4 {
+    font-size: 14px;
+    color:#9196A5;
+    font-weight: 400;
+
+}
+.SkillList{
+    list-style: none;
+    display: flex;
+    margin-top: 8px;
+}
+
+.SkillList li 
+{
+    
+    background: #FFD666;
+    border-radius: 4px;
+    padding: 3px 11px;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+    color: #E09320;
+    margin: 0px 5px;
+}
+
+.SkillList :first-child{
+    margin-left: 0;
+}
+
+.SkillList :last-child{
+    margin-right: 0;
+}
+

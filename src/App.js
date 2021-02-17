@@ -13,8 +13,8 @@ import {AuthStateChanged} from './store/actions/auth';
 import HomeContainer  from "./containers/Home/home"; 
 import LoginContainer  from "./components/Login/Login";
 import AppliedStudentsContainer from './components/AppliedStudents/AppliedStudents';
-import ProtectedRoute from './components/shared/hoc/ProtectedRoute/ProtectedRoute';
-import AppLoading from './components/shared/hoc/AppLoader/AppLoader';
+import ProtectedRoute from './components/shared/ProtectedRoute/ProtectedRoute';
+import AppLoading from './components/shared/AppLoader/AppLoader';
 
 function App(props) {
 

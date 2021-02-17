@@ -7,7 +7,7 @@ class SearchBar extends Component{
     render(){
         return(<div className={styles.SearchRow}>
             <input className={styles.SearchInput} type="Text" placeholder="Search by name"/>
-            <Button width="unset" style={{marginLeft:20, padding:21}}>
+            <Button width="unset" style={{marginLeft:20, padding:21, borderColor:'#D3D5DB'}}>
                 <img className={styles.Icon} src={filterIcon}></img>
             </Button>
         </div>)
