@@ -32,23 +32,27 @@ class Home extends React.Component{
   };
 
   Leftscroll =() => {
-    if(flag==no_of_cards){
-      this.listRef.current.scrollLeft += 280;
+    if(this.flag==no_of_cards-3){
+      this.listRef.current.scrollLeft += 300;
+    }
+    else if (this.flag==1) {
+      this.listRef.current.scrollLeft -= 1000;
+
     }
     else{
     this.listRef.current.scrollLeft -= 395;
     }
-    flag--;
+    this.flag--;
     console.log(flag);
-    right=1;
-    if(flag<1){
-      left=0;
+    this.setState({right:1})
+    if(this.flag<1){
+      this.setState({left:0})
     }
   };
 
   Rightscroll =() => {
     if(this.flag==0){
-      this.listRef.current.scrollLeft += 280;
+      this.listRef.current.scrollLeft += 300;
     }
     else{
       this.listRef.current.scrollLeft += 395;
@@ -57,7 +61,7 @@ class Home extends React.Component{
     console.log(this.flag, this.listRef.current.scrollLeft);
     this.setState({left:1})
 
-    if(this.flag<=this.no_of_cards){
+    if(this.flag>=this.no_of_cards-3){
       this.setState({right:0})
     }
   };
@@ -86,7 +90,7 @@ class Home extends React.Component{
                 <Card className='single-item'/>
                 <Card className='single-item'/>
               </div>
-              <button onClick={this.Rightscroll} className={!right?'hidden':"slider-button right-arrow"}>
+              <button onClick={this.Rightscroll} className={!this.state.right?'hidden':"slider-button right-arrow"}>
                 <img width='12.5px' src={RightArrow}/>
               </button>
             </div>
