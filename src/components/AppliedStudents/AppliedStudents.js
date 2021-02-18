@@ -16,7 +16,7 @@ class AppliedStudents extends Component{
                 <StudentsHeader title="42 Students Applied" subTitle="Android Developer"/>
                 <StudentList/>
                 <Route path={`${this.props.path}/student/:studentId`}  >
-                    <Modal closeHandler={this.modalCloseHandler}>
+                    <Modal style={{maxWidth:'886px', borderRadius: '14px'}} closeHandler={this.modalCloseHandler}>
                         <Resume/>
                     </Modal>
                 </Route>

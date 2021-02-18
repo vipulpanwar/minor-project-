@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+hr{
+  height: 0px;
+  border: none;
+  border-bottom: 1px solid #D3D5DB;
+}
+
+.top-bar{
+  width: 886px;
+  height: 39px;
+  background: #17203A;
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 14px 14px 0px 0px;
+}
+
+.cross-button{
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 31px;
+  top:25px;
+  color: #232D4C;
+  background-color: #FF5670;
+  border-radius: 100%;
+}
+
+.x-button{
+  margin-bottom: 2px;
+}
+
+.minus-img{
+  margin-bottom: 4px;
+  width: 8px;
+}
+
+.minus-button{
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 54px;
+  top:25px;
+  background: #FDB400;
+  border-radius: 100%;
+}
+
+.holo-circle-button{
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 77px;
+  top:25px;
+  background: #232D4C;
+  border: 2px solid #999999;
+  box-sizing: border-box;
+  border-radius: 100%;
+}
+
+.resume-container{
+  width: 886px;
+  /* height: 400px; */
+  padding-bottom: 100px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 26px 24px -20px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+}
+
+.profilepic{
+  position: absolute;
+  top: 90px;
+  left: 31px;
+  width: 160px;
+  height: 154px;
+  box-shadow: 0px 22px 20px -13px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
+.profileimg{
+  margin: 0;
+  padding: 0;
+}
+
+.applicant-name{
+  position: absolute;
+  width: 193px;
+  height: 33px;
+  left: 223px;
+  top: 90px;
+  /* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 33px;
+  color: #232D4C;
+}
+
+.applicant-details{
+  position: absolute;
+  top:125px;
+  left:223px;
+/* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #232D4C;
+}
+
+.applicant-bio{
+  position: absolute;
+/* width: 591px; */
+/* height: 34px; */
+  left: 223px;
+  top: 145px;
+  /* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #9196A5;
+}
+
+.rating-box{
+  position: absolute;
+  width: 163px;
+  height: 56px;
+  left: 223px;
+  top: 189px;
+  background: #F4F4F6;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.rating-text{
+  /* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #4A90E2;
+  margin-top: 13.5px;
+}
+
+.next-button{
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  right:-27px;
+  top: 90px;
+  background: #27272D;
+  border: 1px solid #FFFFFF;
+  box-shadow: 0px 7px 23px rgba(0, 0, 0, 0.25);
+  border-radius: 100%;
+}
+
+.skills-heading{
+  /* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #9196A5;
+  margin-bottom: 8px;
+}
+
+.skills-section{
+  margin-left: 31px;
+  margin-top: 212px;
+  margin-bottom: 26px;
+}
+
+.skillBox{
+  height: 23px;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 4px 11px 0 11px;
+  margin-right: 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.skillText{
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.section-section{
+  padding: 28px 0 28px 48px;
+}
+
+.section-title{
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.01em;
+  color: #9196A5;
+  padding-bottom: 5px;
+}
+
+.project{
+  width: 390px;
+  display: inline-block;
+  padding: 5px 15px 15px 0;
+}
+
+.project-pic{
+  width: 30px;
+  height: 30px;
+  background: #daf7f0;
+  /* opacity: 0.2; */
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.project-img{
+  margin: 7px 8.19px 7px 8px;
+}
+
+.project-name{
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.project-title{
+/* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.project-date{
+  /* font-family: SF Pro Display; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #969BA9;
+}
+
+.project-description{
+  /* font-family: SF Pro Display; */
+  font-style: italic;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  text-transform: lowercase;
+  color: #9196A5;
+}
+
+.visit-link-button{
+  background: #FFFFFF;
+  border: 1px solid #4A90E2;
+  box-sizing: border-box;
+  border-radius: 4px;
+  display: inline-block;
+  margin-left: 14px;
+  padding: 2px 6px 2px 6px;
+  position: relative;
+  top: -10px;
+}
+
+.title-date-div{
+  display: inline-block;
+}
+
+.visit-text{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 10px;
+line-height: 12px;
+/* identical to box height */
+letter-spacing: -0.01em;
+
+/* m */
+color: #4A90E2;
+
+}
