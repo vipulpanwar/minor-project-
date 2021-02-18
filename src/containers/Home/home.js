@@ -33,10 +33,10 @@ class Home extends React.Component{
 
   Leftscroll =() => {
     if(this.flag==no_of_cards-3){
-      this.listRef.current.scrollLeft += 300;
+      this.listRef.current.scrollLeft -= 100;
     }
     else if (this.flag==1) {
-      this.listRef.current.scrollLeft -= 1000;
+      this.listRef.current.scrollLeft -= 1000 ;
 
     }
     else{
