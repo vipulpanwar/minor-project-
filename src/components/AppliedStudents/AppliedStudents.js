@@ -34,7 +34,7 @@ class AppliedStudents extends Component{
         return(<div>
                 <StudentsHeader title="42 Students Applied" subTitle="Android Developer" filterToggle={this.toggleFilterHandler}/>
                 <StudentList/>
-                {this.state.showFilters? 
+                {this.state.showFilters?
                     <Modal>
                         <Filters />
                     </Modal>
