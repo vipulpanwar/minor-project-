@@ -34,14 +34,13 @@ class AppliedStudents extends Component{
         return(<div>
                 <StudentsHeader title="42 Students Applied" subTitle="Android Developer" filterToggle={this.toggleFilterHandler}/>
                 <StudentList/>
-                {this.state.showFilters? 
-                    <Modal>
-                        <Filters />
-                    </Modal>
-                :null}
+
+                <Modal show={this.state.showFilters} closeHandler={this.toggleFilterHandler}>
+                    <Filters />
+                </Modal>
 
                 <Route path={`${this.props.path}/student/:studentId`}  >
-                    <Modal style={modalStyle} closeHandler={this.modalCloseHandler}>
+                    <Modal show style={modalStyle} closeHandler={this.modalCloseHandler}>
                         <Resume/>
                     </Modal>
                 </Route>
