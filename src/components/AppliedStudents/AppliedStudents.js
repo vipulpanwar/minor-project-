@@ -14,6 +14,7 @@ const modalStyle = {
     overflowY: 'auto',
     overflowX: 'hidden',
     borderRadius:14,
+    transform:"translate(-50%, -50%)"
 }
 
 class AppliedStudents extends Component{
