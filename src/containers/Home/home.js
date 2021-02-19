@@ -68,7 +68,7 @@ class Home extends React.Component{
 
     render(){
         return(<div className="home-container">
-            <div className='top-bar'>
+            <div className='home-top-bar'>
               <img className='logo' src= {Logo} />
               <button className='log-out' onClick={this.props.logout}>Log Out</button>
               <p className='job-postings'>Job Postings</p>
