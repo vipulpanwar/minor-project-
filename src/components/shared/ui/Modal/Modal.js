@@ -6,7 +6,7 @@ export default ({show, children, style, closeHandler,...props})=>{
         return(
             <div>
                 <div className={styles.Overlay} onClick={closeHandler}></div>
-                <div className={styles.Modal} style={style}>
+                <div className={[styles.Modal, styles.NewScrollBar].join(' ')} style={style}>
                     {children}
                 </div>
             </div>)
