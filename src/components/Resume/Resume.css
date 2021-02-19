@@ -16,22 +16,21 @@ hr{
 }
 
 .resume-class-for-scrollbar::-webkit-scrollbar {
- width: 7px;
- height: 7px;
+ width: 9px;
+ height: 9px;
 }
 .resume-class-for-scrollbar::-webkit-scrollbar-thumb {
- background: linear-gradient(13deg, #f9d4ff 14%,#c7ceff 64%);
- border-radius: 10px;
+ background: #C0C0C0;
+ border-radius: 8px;
 }
 .resume-class-for-scrollbar::-webkit-scrollbar-thumb:hover{
- background: linear-gradient(13deg, #c7ceff 14%,#f9d4ff 64%);
+ background: #C0C0C0;
 }
 .resume-class-for-scrollbar::-webkit-scrollbar-track{
  background: #ffffff;
  border-radius: 15px;
  box-shadow: inset 17px 0px 0px #f0f0f0;
 }
-
 
 .top-bar{
   width: 886px;
@@ -46,8 +45,8 @@ hr{
   width: 10px;
   height: 10px;
   margin-left: 32px;
-  /* left: 31px;
-  top:25px; */
+  /* left: 31px; */
+  margin-top:12.5px;
   color: #232D4C;
   background-color: #FF5670;
   border-radius: 100%;
