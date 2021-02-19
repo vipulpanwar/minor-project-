@@ -9,12 +9,12 @@ export default  ()=>{
               <div className='skills-heading'>
                 Skills
               </div>
-              <SkillTag bgcolor="#FFD600" color="#E09320" skill="Java"/>
-              <SkillTag bgcolor="#CFCFD1" color="#898989" skill="Android"/>
-              <SkillTag bgcolor="#C48F63" color="#AF6E38" skill="Python"/>
-              <SkillTag border="1px solid #D4D5DA " color="#000" skill="HTML"/>
-              <SkillTag border="1px solid #D4D5DA " color="#000" skill="Python"/>
-              <SkillTag border="1px solid #D4D5DA " color="#000" skill="HTML"/>
+              <SkillTag level="gold" skill="Java"/>
+              <SkillTag level="silver" skill="Android"/>
+              <SkillTag level="bronze" skill="Python"/>
+              <SkillTag level="no-level" skill="HTML"/>
+              <SkillTag level="no-level" skill="Python"/>
+              <SkillTag level="no-level" skill="HTML"/>
             </div>
     )
 }

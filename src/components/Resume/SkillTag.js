@@ -3,9 +3,10 @@ import React from 'react';
 import './Resume.css';
 
 export default  (props)=>{
+  var styleNames = props.level + ' ' + 'skillBox';
     return(
-            <div style={{backgroundColor:props.bgcolor, border:props.border}} className="skillBox">
-              <p style={{color: props.color}} className="skillText">{props.skill}</p>
+            <div className={styleNames} >
+              <p className="skillText">{props.skill}</p>
             </div>
     )
 }
