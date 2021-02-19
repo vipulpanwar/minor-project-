@@ -105,6 +105,7 @@ class Home extends React.Component{
 }
 
 const mapDispatchToProps = (dispatch) => ({
+    
     logout : ()=> dispatch(logoutAction())
 })
 

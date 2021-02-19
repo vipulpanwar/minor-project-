@@ -40,7 +40,7 @@ const StudentData = withRouter((props)=>{
                 <span>Rating: </span>
                 <span>4.5</span>
             </span>
-            <Button clicked={()=>props.history.push(props.location.pathname + '/student/someone')} style={{padding:"13px 25px"}}>
+            <Button clicked={()=>props.history.replace(props.location.pathname + '/student/someone')} style={{padding:"13px 25px"}}>
                 View Profile
             </Button>
         </div>
