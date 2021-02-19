@@ -10,6 +10,6 @@ export default (props)=>{
         <img src={logo} className={styles.Logo}></img>
         <h2 className={styles.Title}>{props.title}</h2>
         <h4 className={styles.SubTitle}>{props.subTitle}</h4>
-        <SearchBar/>
+        <SearchBar filterToggle= {props.filterToggle}/>
     </header>)
 }

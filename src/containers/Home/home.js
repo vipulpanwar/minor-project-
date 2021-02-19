@@ -1,7 +1,8 @@
-import React, {useRef, createRef, Component} from 'react';
+import React, { createRef} from 'react';
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux';
 import {Logout as logoutAction} from '../../store/actions/auth';
+import {FetchJobs as FetchJobsAction } from '../../store/actions/jobs';
 
 import './home.css';
 import Logo from './images/ensvee-logo.svg';
@@ -26,9 +27,10 @@ class Home extends React.Component{
   }
 
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.listRef = createRef();
+    this.props.getJobs();
   };
 
   Leftscroll =() => {
@@ -105,8 +107,8 @@ class Home extends React.Component{
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    
-    logout : ()=> dispatch(logoutAction())
+    logout : ()=> dispatch(logoutAction()),
+    getJobs: ()=> dispatch(FetchJobsAction()),
 })
 
 
