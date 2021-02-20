@@ -16,11 +16,15 @@ export default ()=>{
               <button className="next-button"><img src={NextArrow} /></button>
               <Skills />
               <hr />
-              <Section />
+              <Section type='Education'/>
               <hr />
-              <Section />
+              <Section type='Experience'/>
               <hr />
-              <Section />
+              <Section type='Projects'/>
+              <hr />
+              <Section type='Accomplishments'/>
+              <hr />
+              <Section type='Courses'/>
             </div>
         </div>
     )

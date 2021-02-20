@@ -3,13 +3,13 @@ import React from 'react';
 import './Resume.css';
 import Project from './Project.js'
 
-export default  ()=>{
+export default  (props)=>{
     return(
             <div className="section-section">
-              <p className="section-title"> Projects </p>
-              <Project />
-              <Project />
-              <Project />
+              <p className="section-title"> {props.type} </p>
+              <Project type={props.type}/>
+              <Project type={props.type}/>
+              <Project type={props.type}/>
             </div>
     )
 }
