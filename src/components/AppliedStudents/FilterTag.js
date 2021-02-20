@@ -5,7 +5,7 @@ export default (props)=>{
     return (<div className="filter-tag-container">
         {props.name}
         <select className="filter-input-field">
-          <option value="" disabled selected>All</option>
+          <option>All</option>
         </select>
     </div>)
 }

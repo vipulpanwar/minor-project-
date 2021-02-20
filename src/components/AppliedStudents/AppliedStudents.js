@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import StudentsHeader from './StudentsHeader';
 import StudentList from './StudentList';
+import {FetchJobDetails as fetchJobAction} from '../../store/actions/jobs';
 
 import Modal from '../shared/ui/Modal/Modal';
 import Resume from '../Resume/Resume';
 import {Route, withRouter} from 'react-router-dom';
 import Filters from './Filter';
+import {connect} from 'react-redux';
 
 const modalStyle = {
     maxWidth: 886,
@@ -30,6 +31,12 @@ class AppliedStudents extends Component{
             showFilters : !prevState.showFilters,
         }))
     }
+
+    componentDidMount (){
+        let jobId = this.props.computedMatch.params.jobId;
+        this.props.getJob(jobId);
+    }
+
     render(){
         return(<div>
                 <StudentsHeader title="42 Students Applied" subTitle="Android Developer" filterToggle={this.toggleFilterHandler}/>
@@ -49,4 +56,14 @@ class AppliedStudents extends Component{
     }
 }
 
-export default withRouter(AppliedStudents);
+const mapDispatchToProps = (dispatch)=>({
+    getJob: (id)=> dispatch(fetchJobAction(id))
+})
+
+const mapStateToProps = (state)=>({
+    job: state.jobs.job,
+    loading: state.jobs.jobLoading,
+    appliedStudents: state.jobs.appliedStudents
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AppliedStudents));

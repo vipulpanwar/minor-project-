@@ -18,7 +18,11 @@ import AppLoading from './components/shared/AppLoader/AppLoader';
 
 function App(props) {
 
-  firebase.auth().onAuthStateChanged(user=>props.authStateChange(user));
+  firebase.auth().onAuthStateChanged(user=>
+    {
+      props.authStateChange(user);
+      console.log('Auth State Changed');
+    });
   console.log("Rendering App")
   return (
     <AppLoading>

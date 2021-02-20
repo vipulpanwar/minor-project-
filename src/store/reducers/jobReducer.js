@@ -2,40 +2,41 @@ import * as actionTypes from "../actions/actionTypes";
 import firebase from '../../firebase';
 
 const initialState = {
-    user: firebase.auth().user,
-    isAuthenticated:undefined,
-    isLoginFormLoading: false,
-    loginError: null,
+    jobs: undefined,
+    refLoading:true,
 }
 
 const reducer = (state = initialState, action)=>{
 
     switch(action.type)
     {
-        case actionTypes.USER_LOGIN:
-            return {...state, isLoginFormLoading: true, loginError: null};
+        case actionTypes.FETCH_ALL_JOB_REFS_SUCCESS :
+            let jobs = action.payload;
+            jobs.forEach(job=>job['loading'] = true)
+            return {...state, jobs: action.payload, refLoading:false}
 
-        case actionTypes.USER_LOGIN_FAILED:
-            return {...state, isLoginFormLoading: false,loginError :action.payload }
+        case actionTypes.FETCH_JOB_SUCCESS:
+            let newJobs = state.jobs.map(job=>{
+                if(job.id == action.payload.id)
+                    return {...job, ...action.payload.data(), loading: false}
+                return job;
+            })
+        
+            return {...state, jobs:newJobs}
 
-        case actionTypes.USER_LOGIN_SUCCESS:
-            return {...state, isLoginFormLoading: false, user: action.payload.user}
+        case actionTypes.FETCH_JOB_DETAILS_SUCCESS:
+            let jobInfo = action.payload;
+            let appliedStudents = [];
+            let job= {}
+            jobInfo.forEach(doc=>{
+                if(doc.id == "allDetails")
+                    job = doc.data();
+                else
+                    appliedStudents = doc.data()['studentsApplied'].concat(appliedStudents);  
+            })
+            appliedStudents.forEach(stud=> stud['loading']=true)
 
-
-        case actionTypes.FIREBASE_AUTH_STATECHANGED:
-            if(action.payload == null)
-                return {...state, loading: false, user: action.payload, isAuthenticated:false}
-            else
-                return {...state, loading: false, user: action.payload, isAuthenticated:true}
-
-        case actionTypes.USER_LOGOUT:
-            return {...state, loading: true};
-
-        case actionTypes.USER_LOGOUT_FAILED:
-            return {...state, loading: false, logoutError :action.payload }
-
-        case actionTypes.USER_LOGOUT_SUCCESS:
-            return {...state, loading: false, user: null}
+        return {...state, appliedStudents, job};
 
         default:
         return state;
