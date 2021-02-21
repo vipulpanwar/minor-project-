@@ -9,6 +9,10 @@ export default (props)=>{
     <div className={styles.StudentListContainer}>
         <div className={styles.StudentList}>
             {mapStudentListToCards(props.students)}
+            {mapStudentListToCards(props.students)}
+            {mapStudentListToCards(props.students)}
+            {mapStudentListToCards(props.students)}
+            {mapStudentListToCards(props.students)}
         </div>
 
     </div>)

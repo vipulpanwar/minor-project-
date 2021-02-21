@@ -12,12 +12,11 @@ import { Fragment } from 'react';
 
 const modalStyle = {
     maxWidth: 886,
-    top: '50%',
-    maxHeight: '80vh',
-    overflowY: 'auto',
-    overflowX: 'hidden',
+    margin:'150px 0',
+    top:0,
     borderRadius:14,
-    transform:"translate(-50%, -50%)"
+    transform:"translateX(-50%)",
+    position:'relative'
 }
 
 class AppliedStudents extends Component{
@@ -45,7 +44,7 @@ class AppliedStudents extends Component{
                 <StudentsHeader job={this.props.job} title="42 Students Applied" subTitle="Android Developer" filterToggle={this.toggleFilterHandler}/>
                 <StudentList students={this.props.appliedStudents}/>
 
-                <Modal show={this.state.showFilters} style={{width:'853px'}} closeHandler={this.toggleFilterHandler}>
+                <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
                     <Filters />
                 </Modal>
 
