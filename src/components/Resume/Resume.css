@@ -17,8 +17,8 @@ hr{
 
 
 .top-bar{
-  /* width: 886px; */
-  height: 39px;
+
+  height: 59px;
   background: #17203A;
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.25);
   border-radius: 14px 14px 0px 0px;
@@ -30,7 +30,7 @@ hr{
   height: 10px;
   margin-left: 32px;
   /* left: 31px; */
-  margin-top:12.5px;
+  margin-top:25px;
   color: #232D4C;
   background-color: #FF5670;
   border-radius: 100%;
@@ -89,11 +89,17 @@ hr{
   box-shadow: 0px 22px 20px -13px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
   display: inline-block;
+  overflow: hidden;
 }
 
 .profileimg{
   margin: 0;
   padding: 0;
+  width: 160px;
+  height: 154px;
+  overflow: hidden;
+  object-fit: cover;
+  object-fit: center;
 }
 
 .applicant-info{
@@ -203,7 +209,7 @@ hr{
 
 .skills-section{
   margin-left: 31px;
-  margin-top: 10px;
+  margin-top: 32px;
   margin-bottom: 26px;
 }
 
@@ -230,7 +236,7 @@ hr{
 }
 
 .section-title{
-  font-family: SF Pro Display;
+  /* font-family: SF Pro Display; */
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -250,6 +256,42 @@ hr{
   width: 30px;
   height: 30px;
   background: #daf7f0;
+  /* opacity: 0.2; */
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.courses-pic{
+  width: 30px;
+  height: 30px;
+  background: #fdedd3;
+  /* opacity: 0.2; */
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.accomplishments-pic{
+  width: 30px;
+  height: 30px;
+  background: #e1edfa;
+  /* opacity: 0.2; */
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.education-pic{
+  width: 30px;
+  height: 30px;
+  background: #ffe9e9;
+  /* opacity: 0.2; */
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.experience-pic{
+  width: 30px;
+  height: 30px;
+  background: #ead2ff;
   /* opacity: 0.2; */
   border-radius: 4px;
   display: inline-block;
