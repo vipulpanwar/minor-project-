@@ -11,13 +11,14 @@ import LeftArrow from './images/leftArrow.svg';
 import RightArrow from './images/rightArrow.svg';
 import Slider from './Slider.js';
 import NoSlider from './NoSlider.js';
+import Button from '../../components/shared/ui/Button/Button.js';
 
-var no_of_cards=3;
+var no_of_cards=4;
 
 
 class Home extends React.Component{
 
-    no_of_cards = 3;
+    no_of_cards = 4;
 
 
     constructor(props){
@@ -36,7 +37,7 @@ class Home extends React.Component{
           {this.props.jobsState.refLoading?<h1>Loading...</h1>: <Fragment>
             <div className='home-top-bar'>
               <img className='logo' src= {Logo} />
-              <button className='log-out' onClick={this.props.logout}>Log Out</button>
+              <Button className='log-out' onClick={this.props.logout} width="127px" height="51px" style={{position:'absolute', right:'29px', top:'30px'}}>Log Out</Button>
               <p className='job-postings'>Job Postings</p>
             </div>
 
@@ -57,8 +58,8 @@ class Home extends React.Component{
                 <Card className='single-item'/>
                 {cardList(this.props.jobsState.jobs)}
               </div>*/}
-              {/*<Slider className={(no_of_cards>3)?'hidden':''}/>*/}
-              <NoSlider className={(no_of_cards<4)?'hidden':''} />
+              <Slider className={(no_of_cards>3)?'hidden':''}/>
+              {/*<NoSlider className={(no_of_cards<4)?'hidden':''} />*/}
 
             <div className='bottom-container'>
               <p className='announcement-text'>

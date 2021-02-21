@@ -25,15 +25,12 @@ button{
 
 .log-out{
   position:absolute;
-  right: 2%;
-  margin-right: 5%;
   background: #FFFFFF;
   border: 1px solid #4A90E2;
   box-sizing: border-box;
   border-radius: 10px;
-  width: 7.9rem;
-  height: 3rem;
-  margin-top: -0.5rem;
+  width: 127px;
+  height: 51px;
 }
 
 .job-postings{
@@ -166,7 +163,6 @@ left: 17px;
 
 .students-applied{
   position: absolute;
-  width: 112px;
   height: 18px;
   left: 18px;
   top: 98px;

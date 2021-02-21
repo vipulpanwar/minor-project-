@@ -10,13 +10,12 @@ import ProjectPic from './images/projectpic.svg';
 export default (props)=>{
     return(
             <div className="project">
-              <div className="project-pic">
-                <img style={(props.type=="Experience")?{}:{display:'none'}} className="experience-img" src={ExperiencePic} />
-                <img style={(props.type=="Education")?{}:{display:'none'}} className="education-img" src={EducationPic} />
-                <img style={(props.type=="Projects")?{}:{display:'none'}} className="project-img" src={ProjectPic} />
-                <img style={(props.type=="Accomplishments")?{}:{display:'none'}} className="project-img" src={AccomplishmentsPic} />
-                <img style={(props.type=="Courses")?{}:{display:'none'}} className="project-img" src={CoursesPic} />
-              </div>
+
+                {(props.type=="Experience")?<div className="experience-pic"><img className="experience-img" src={ExperiencePic} /></div>:null}
+                {(props.type=="Education")?<div className="education-pic"><img className="education-img" src={EducationPic} /></div>:null}
+                {(props.type=="Projects")?<div className="project-pic"><img className="project-img" src={ProjectPic}  /></div>:null}
+                {(props.type=="Accomplishments")?<div className="accomplishments-pic"><img className="project-img" src={AccomplishmentsPic}  /></div>:null}
+                {(props.type=="Courses")?<div className="courses-pic"><img className="project-img" src={CoursesPic}  /></div>:null}
               <div className="project-name">
                 <div className="title-date-div">
                 <p className="project-title">{props.type} 1</p>

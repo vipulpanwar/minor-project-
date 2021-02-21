@@ -22,7 +22,7 @@ function Card (props) {
           <img src={Ibutton} className="i-button"/>
           <p className='job-details'>{props.job.type ='Full-time' ? 'Full Time' : 'Internship'} | {props.job.ctc} {props.job.type ='Full-time' ? "LPA" : "KPM"} | 12 Jan’20</p>
           <p className='students-applied'>Students Applied</p>
-          <p className='students-number'>42</p> 
+          <p className='students-number'>42</p>
         </div>
       </Fragment>}
     </div>
