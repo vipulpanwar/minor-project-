@@ -28,7 +28,9 @@ class Resume extends Component{
                     <TopBar />
                     <div className="resume-container">
                     <Profile student={student}/>
-                    <button className="next-button"><img src={NextArrow} /></button>
+                    <div className='next-button-container'>
+                        <button className="next-button"><img src={NextArrow} /></button>
+                    </div>
                     <Skills hardSkills={student.hardSkills} softSkills={student.softSkills} />
                     <hr />
                     <Section />

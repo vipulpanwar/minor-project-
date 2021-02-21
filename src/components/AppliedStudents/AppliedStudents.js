@@ -16,7 +16,8 @@ const modalStyle = {
     top:0,
     borderRadius:14,
     transform:"translateX(-50%)",
-    position:'relative'
+    position:'relative',
+    background:'transparent'
 }
 
 class AppliedStudents extends Component{
