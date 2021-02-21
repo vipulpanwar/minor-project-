@@ -8,6 +8,7 @@ import Resume from '../Resume/Resume';
 import {Route, withRouter} from 'react-router-dom';
 import Filters from './Filter';
 import {connect} from 'react-redux';
+import { Fragment } from 'react';
 
 const modalStyle = {
     maxWidth: 886,
@@ -39,19 +40,21 @@ class AppliedStudents extends Component{
 
     render(){
         return(<div>
-                <StudentsHeader title="42 Students Applied" subTitle="Android Developer" filterToggle={this.toggleFilterHandler}/>
-                <StudentList/>
+            {this.props.loading? <h1>Loading...</h1>:
+            <Fragment>
+                <StudentsHeader job={this.props.job} title="42 Students Applied" subTitle="Android Developer" filterToggle={this.toggleFilterHandler}/>
+                <StudentList students={this.props.appliedStudents}/>
 
                 <Modal show={this.state.showFilters} style={{width:'853px'}} closeHandler={this.toggleFilterHandler}>
                     <Filters />
                 </Modal>
 
                 <Route path={`${this.props.path}/student/:studentId`}  >
-                    <Modal show style={modalStyle} closeHandler={this.modalCloseHandler}>
+                    <Modal show={!this.props.loading} style={modalStyle} closeHandler={this.modalCloseHandler}>
                         <Resume/>
                     </Modal>
                 </Route>
-
+            </Fragment>}
             </div>);
     }
 }

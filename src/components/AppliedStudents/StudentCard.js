@@ -5,12 +5,12 @@ import placeholderImage from '../../assets/images/Placeholder Image.png';
 import Button from '../shared/ui/Button/Button';
 import {withRouter} from 'react-router-dom';
 
-export default ()=>{
+export default (props)=>{
     return(
         <div className={styles.StudentCard}>
             <div className={styles.StudentInfo}>
                 <img className={styles.StudentImage} src={placeholderImage}/>
-                <StudentData/>
+                <StudentData student={props.student}/>
             </div>
             <Skills/>
         </div>)
@@ -33,14 +33,14 @@ const Skills = ()=>{
 const StudentData = withRouter((props)=>{
     
     return(<div>
-        <h3 className={styles.StudentName}>Shikha Sharma</h3>
+        <h3 className={styles.StudentName}>{props.student.name}</h3>
         <p className={styles.StudentSubTitle}>IT - BCA | New Delhi</p>
         <div className={styles.RatingAndView}>
             <span className={styles.Rating}>
                 <span>Rating: </span>
                 <span>4.5</span>
             </span>
-            <Button clicked={()=>props.history.replace(props.location.pathname + '/student/someone')} style={{padding:"13px 25px"}}>
+            <Button clicked={()=>props.history.replace(props.location.pathname + `/student/${props.student.email}`)} style={{padding:"13px 25px"}}>
                 View Profile
             </Button>
         </div>

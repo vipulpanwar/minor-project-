@@ -4,6 +4,8 @@ import firebase from '../../firebase';
 const initialState = {
     jobs: undefined,
     refLoading:true,
+    jobLoading: true,
+    appliedStudents: []
 }
 
 const reducer = (state = initialState, action)=>{
@@ -18,7 +20,7 @@ const reducer = (state = initialState, action)=>{
         case actionTypes.FETCH_JOB_SUCCESS:
             let newJobs = state.jobs.map(job=>{
                 if(job.id == action.payload.id)
-                    return {...job, ...action.payload.data(), loading: false}
+                    return {...job, ...action.payload.jobDoc.data(), loading: false}
                 return job;
             })
         
@@ -36,7 +38,16 @@ const reducer = (state = initialState, action)=>{
             })
             appliedStudents.forEach(stud=> stud['loading']=true)
 
-        return {...state, appliedStudents, job};
+        return {...state, appliedStudents, job, jobLoading: false};
+
+        case actionTypes.FETCH_STUDENT_SUCCESS:
+            let newAppliedStudents = state.appliedStudents.map(student=>{
+                if(student.email == action.payload.data().email)
+                    return {...student, ...action.payload.data(), loading: false}
+                return student;
+            })
+        
+            return {...state, appliedStudents: newAppliedStudents, loading:false}
 
         default:
         return state;

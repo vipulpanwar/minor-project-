@@ -1,27 +1,59 @@
-import { Component } from "react";
-import React from 'react';
+import React, { Component } from "react";
 import './Resume.css';
+
 import TopBar from './TopBar.js';
-import ProfilePic from './profilepic.js';
+import Profile from './Profile.js';
 import NextArrow from './images/NextArrow.svg';
 import Skills from './Skills.js';
 import Section from './Section.js';
 
-export default ()=>{
-    return(
-        <div>
-            <TopBar />
-            <div className="resume-container">
-              <ProfilePic />
-              <button className="next-button"><img src={NextArrow} /></button>
-              <Skills />
-              <hr />
-              <Section />
-              <hr />
-              <Section />
-              <hr />
-              <Section />
+import {connect} from 'react-redux';
+import {FetchStudent as getStudentAction} from '../../store/actions/jobs';
+import {withRouter} from 'react-router-dom';
+import { Fragment } from "react";
+
+
+class Resume extends Component{
+    componentDidMount(){
+        // this.props.getStudent(this.props.match.params.studentId)
+    }
+
+    render (){
+        let student = this.props.student;
+        // console.log(this.props.student);
+        return(
+            <div>
+                {this.props.student.loading?<h1>Loading...</h1>: 
+                <Fragment>
+                    <TopBar />
+                    <div className="resume-container">
+                    <Profile student={student}/>
+                    <button className="next-button"><img src={NextArrow} /></button>
+                    <Skills hardSkills={student.hardSkills} softSkills={student.softSkills} />
+                    <hr />
+                    <Section />
+                    <hr />
+                    <Section />
+                    <hr />
+                    <Section />
+                    </div>
+                </Fragment>
+                }
             </div>
-        </div>
-    )
+        )
+    }
+} 
+
+
+const mapDispatchToProps = (dispatch)=>({
+    getStudent: (email)=>dispatch(getStudentAction(email))
+})
+
+const mapStateToProps = (state, ownProps)=>{ 
+    let student = state.jobs.appliedStudents.find(stud=> stud.email== ownProps.match.params.studentId)
+    return {
+        student: student
+    }
 }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Resume))

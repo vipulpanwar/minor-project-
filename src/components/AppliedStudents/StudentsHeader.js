@@ -9,7 +9,7 @@ export default (props)=>{
         <button className={styles.BackButton}><img src={backIcon}></img></button>
         <img src={logo} className={styles.Logo}></img>
         <h2 className={styles.Title}>{props.title}</h2>
-        <h4 className={styles.SubTitle}>{props.subTitle}</h4>
+        <h4 className={styles.SubTitle}>{props.job.profile}</h4>
         <SearchBar filterToggle= {props.filterToggle}/>
     </header>)
 }

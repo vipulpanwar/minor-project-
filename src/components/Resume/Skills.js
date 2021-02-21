@@ -9,6 +9,7 @@ export default  ()=>{
               <div className='skills-heading'>
                 Skills
               </div>
+
               <SkillTag level="gold" skill="Java"/>
               <SkillTag level="silver" skill="Android"/>
               <SkillTag level="bronze" skill="Python"/>
@@ -18,3 +19,7 @@ export default  ()=>{
             </div>
     )
 }
+
+// const mapSkillToSkillTags=(skills)=>{
+//   return skill.map
+// }

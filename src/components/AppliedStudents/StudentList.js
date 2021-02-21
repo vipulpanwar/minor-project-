@@ -4,14 +4,16 @@ import styles from './StudentList.module.css';
 
 
 
-export default ()=>{
+export default (props)=>{
     return(
     <div className={styles.StudentListContainer}>
         <div className={styles.StudentList}>
-            <StudentCard/>
-            <StudentCard/>
-            <StudentCard/>
+            {mapStudentListToCards(props.students)}
         </div>
 
     </div>)
+}
+
+const mapStudentListToCards = (studentList)=>{
+    return studentList.map(student=><StudentCard key={student.email} student={student}/>)
 }

@@ -4,6 +4,8 @@ import firebase from '../../firebase';
 const db = firebase.firestore();
 
 
+//-----------------Fetch All Job---------------------
+
 export const FetchAllJobs = ()=>{
     return async (dispatch, getState) => {
         const {auth} = getState();
@@ -39,12 +41,15 @@ export const FetchAllJobRefsSuccess = (jobs)=>({
         payload: jobs,
     })
 
+
+//-----------------Fetch Single Job---------------------
+
 export const FetchJob = (ref)=>{
     return async (dispatch)=>{
         dispatch(FetchJobStart())
         try{
-            let jobDoc = await ref.get();
-            dispatch(FetchJobSuccess(jobDoc))
+            let jobDoc = await ref.collection('jobInformation').doc('allDetails').get();
+            dispatch(FetchJobSuccess(jobDoc, ref.id))
         }
         catch(e){
             dispatch(FetchJobFailed(e))
@@ -57,9 +62,9 @@ export const FetchJobStart = ()=>({
     type: actionTypes.FETCH_JOB,
 });
 
-export const FetchJobSuccess = (jobDoc)=>({
+export const FetchJobSuccess = (jobDoc, id)=>({
     type: actionTypes.FETCH_JOB_SUCCESS,
-    payload: jobDoc
+    payload: {jobDoc, id},
 });
 
 export const FetchJobFailed = (error)=>({
@@ -77,6 +82,8 @@ export const FetchAppliedStudents = (jobId)=>{
     }
 }
 
+//-----------------Fetch Job Details---------------------
+
 export const FetchJobDetails = (jobId) =>{
     return async (dispatch, getState) => {
         const {auth}=getState();
@@ -89,10 +96,42 @@ export const FetchJobDetails = (jobId) =>{
         let jobInfo = await jobRefDoc.collection('jobInformation').get();
         console.log('Dispatch')
         dispatch(FetchJobDetailsSuccess(jobInfo))
+        let {jobs} = getState();
+        jobs.appliedStudents.forEach(student=>{
+            dispatch(FetchStudent(student.email))
+        })
     }
 }
 
 export const FetchJobDetailsSuccess = (jobInfo)=>({
     type: actionTypes.FETCH_JOB_DETAILS_SUCCESS,
     payload: jobInfo
+})
+
+
+//-----------------Fetch Student---------------------
+
+export const FetchStudent = (email)=>{
+    return async (dispatch)=>{
+        try{
+            let studentDoc = await db.collection('student').doc(email).get();
+            dispatch(FetchStudentSuccess(studentDoc));
+        }
+        catch(e)
+        {
+            console.log(e);
+            dispatch(FetchStudentFailed(e, email))
+        }
+
+    }
+}
+
+export const FetchStudentSuccess = (student)=>({
+    type: actionTypes.FETCH_STUDENT_SUCCESS,
+    payload:student
+})
+
+export const FetchStudentFailed = (error, id)=>({
+    type: actionTypes.FETCH_STUDENT_FAILED,
+    payload: {studentId:id,  error}
 })
