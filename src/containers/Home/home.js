@@ -59,11 +59,7 @@ class Home extends React.Component{
                 {cardList(this.props.jobsState.jobs)}
               </div>*/}
               <Slider className={(no_of_cards>3)?'hidden':''}/>
-<<<<<<< HEAD
-              <NoSlider className={(no_of_cards < 4)?'hidden':''} />
-=======
               {/*<NoSlider className={(no_of_cards<4)?'hidden':''} />*/}
->>>>>>> 37cb05aa4bda49ded94e10098aa4d6ede31d511c
 
             <div className='bottom-container'>
               <p className='announcement-text'>

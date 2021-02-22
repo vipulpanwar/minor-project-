@@ -6,6 +6,8 @@ import CoursesPic from './images/CoursesPic.svg';
 import EducationPic from './images/EducationPic.svg';
 import AccomplishmentsPic from './images/AccomplishmentsPic.svg';
 import ProjectPic from './images/projectpic.svg';
+import moment from 'moment';
+
 
 export default (props)=>{
     return(
@@ -17,14 +19,26 @@ export default (props)=>{
                 {(props.type=="Courses")?<div className="courses-pic"><img className="project-img" src={CoursesPic}  /></div>:null}
               <div className="project-name">
                 <div className="title-date-div">
-                <p className="project-title">{props.type} 1</p>
-                <p className="project-date">23 Sept' 20 - 25 Oct' 20</p>
+                  <p className="project-title">{props.title}</p>
+                  <p className="project-date"> {props.info.company} • {props.info.employmentType} | {formatDate(props.info.durationStartTime)} - {formatDate(props.info.durationEndTime)}</p>
                 </div>
                 <button style={(props.type=="Projects" || props.type=="Courses")?{}:{display:'none'}} className="visit-link-button"><span className="visit-text">Visit Link</span></button>
               </div>
               <div className="project-description">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type a
+                {props.info.description}
               </div>
             </div>
     )
+}
+
+
+const formatDate = (timestamp)=>{
+  var t = new Date(1970, 0, 1);
+  let dateTime = t.setSeconds(timestamp.seconds);
+  if(timestamp.seconds==4102425000)
+    return "Present";
+  else
+    // return moment(dateTime).format('Do MMM YYYY')
+    return moment(dateTime).format('MMM\'YY');
+    ;
 }

@@ -33,7 +33,7 @@ class Resume extends Component{
                     </div>
                     <Skills hardSkills={student.hardSkills} softSkills={student.softSkills} />
                     <hr />
-                    <Section />
+                    <Section type="Experience" data={student.workExperience}/>
                     <hr />
                     <Section />
                     <hr />
