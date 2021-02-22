@@ -37,7 +37,7 @@ class Slider extends React.Component{
   }
 
   Leftscroll =() => {
-    if(this.flag==this.no_of_cards-3){
+    if(this.flag==this.state.no_of_cards-3){
       this.listRef.current.scrollLeft -= 100;
     }
     else if (this.flag==1) {
@@ -45,11 +45,12 @@ class Slider extends React.Component{
 
     }
     else{
-    this.listRef.current.scrollLeft -= 395;
+      this.listRef.current.scrollLeft -= 395;
     }
     this.flag--;
-    console.log(this.flag);
+    // console.log(this.flag);
     this.setState({right:1})
+    
     if(this.flag<1){
       this.setState({left:0})
     }
@@ -66,18 +67,18 @@ class Slider extends React.Component{
     console.log(this.flag, this.listRef.current.scrollLeft);
     this.setState({left:1})
 
-    if(this.flag>=this.no_of_cards-3){
+    if(this.flag>=this.state.no_of_cards-3){
       this.setState({right:0})
     }
   };
 
     render(){
         return(
-            <div className="middle-container slide-container">
+            <div className="middle-container slide-container" ref={this.listRef}>
               <button onClick={this.Leftscroll} className={!this.state.left?'hidden':"slider-button left-arrow"}>
                 <img width='12.5px' src={LeftArrow}/>
               </button>
-              <div className='items-container' ref={this.listRef}>
+              <div className='items-container' >
                 {cardList(this.props.jobsState.jobs)}
               </div>
               <button onClick={this.Rightscroll} className={!this.state.right?'hidden':"slider-button right-arrow"}>
