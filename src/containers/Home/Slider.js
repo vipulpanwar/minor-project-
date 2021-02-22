@@ -10,10 +10,7 @@ import Card from './Card.js';
 import LeftArrow from './images/leftArrow.svg';
 import RightArrow from './images/rightArrow.svg';
 
-var flag = 0;
-var no_of_cards = 10;
-var right = 1;
-var left = 0;
+
 
 class Slider extends React.Component{
 
@@ -21,24 +18,26 @@ class Slider extends React.Component{
   no_of_cards = 10;
 
   state = {
+    no_of_cards: 0,
     left: 0,
     right: 1,
+    translate: 0,
   }
 
 
   constructor(props){
     super(props);
-
     this.listRef = createRef();
   };
 
   componentDidMount(){
     this.props.getJobs();
+    this.setState({no_of_cards: this.props.jobsState?.jobs?.length})
     console.log('Component did mount');
   }
 
   Leftscroll =() => {
-    if(this.flag==no_of_cards-3){
+    if(this.flag==this.no_of_cards-3){
       this.listRef.current.scrollLeft -= 100;
     }
     else if (this.flag==1) {
@@ -49,7 +48,7 @@ class Slider extends React.Component{
     this.listRef.current.scrollLeft -= 395;
     }
     this.flag--;
-    console.log(flag);
+    console.log(this.flag);
     this.setState({right:1})
     if(this.flag<1){
       this.setState({left:0})

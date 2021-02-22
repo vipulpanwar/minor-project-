@@ -52,8 +52,9 @@ button{
   display: flex;
   align-items: center;
   max-width: 100%;
-  overflow-y: auto;
-  vertical-align: center;
+  /* justify-content: center; */
+  /* overflow-y: auto; */
+  /* vertical-align: center; */
 }
 
 .single-item{
@@ -63,10 +64,11 @@ button{
 
 .items-container{
   display: flex;
-  overflow-y: hidden;
-  width: 100%;
-  padding-left: 32px;
-  padding-right: 73px;
+  /* overflow-y: hidden; */
+  /* width: 100%; */
+  padding-left: 50px;
+  padding-right: 50px;
+  box-sizing: border-box;
 }
 
 .items-container::-webkit-scrollbar{
