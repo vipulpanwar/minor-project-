@@ -37,7 +37,10 @@ class Slider extends React.Component{
   }
 
   Leftscroll =() => {
-    if(this.flag==this.state.no_of_cards-3){
+    if(this.state.no_of_cards==4){
+      this.listRef.current.scrollLeft -= 1000;
+    }
+    else if(this.flag==this.state.no_of_cards-3){
       this.listRef.current.scrollLeft -= 100;
     }
     else if (this.flag==1) {
@@ -50,14 +53,17 @@ class Slider extends React.Component{
     this.flag--;
     // console.log(this.flag);
     this.setState({right:1})
-    
+
     if(this.flag<1){
       this.setState({left:0})
     }
   };
 
   Rightscroll =() => {
-    if(this.flag==0){
+    if(this.state.no_of_cards==4){
+      this.listRef.current.scrollLeft += 1000;
+    }
+    else if(this.flag==0){
       this.listRef.current.scrollLeft += 300;
     }
     else{
