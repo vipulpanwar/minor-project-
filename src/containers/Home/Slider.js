@@ -31,9 +31,7 @@ class Slider extends React.Component{
   };
 
   componentDidMount(){
-    this.props.getJobs();
     this.setState({no_of_cards: this.props.jobsState?.jobs?.length})
-    console.log('Component did mount');
   }
 
   Leftscroll =() => {
@@ -101,13 +99,8 @@ const cardList = (jobsList)=>{
     </Fragment>))
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    logout : ()=> dispatch(logoutAction()),
-    getJobs: ()=> dispatch(FetchJobsAction()),
-})
-
 const mapStateToProps = (state)=>({
   jobsState: state.jobs
 })
 
-export default connect(mapStateToProps, mapDispatchToProps) (Slider);
+export default connect(mapStateToProps, null) (Slider);

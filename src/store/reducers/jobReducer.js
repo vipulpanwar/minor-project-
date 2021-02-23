@@ -49,6 +49,32 @@ const reducer = (state = initialState, action)=>{
         
             return {...state, appliedStudents: newAppliedStudents, loading:false}
 
+        case actionTypes.APPLY_FILTERS:
+            let filters = action.payload;
+            let filtersActive = filters.degree !='All' || filters.course!='All' || filters.degree !='All'  ? true: false;
+            let visibleStudentsIndices = [];
+            state.appliedStudents.forEach((student, i)=>{
+                let select = true;
+                if(filters.degree!='All' && student.degree != filters.degree )
+                    select = select && false;
+                if(filters.course!='All' && student[student.degree].course != filters.course)
+                    select = select && false;
+                if(filters.branch!='All' && student[student.degree].branch != filters.branch)
+                    select = select && false;
+                
+                if(select)
+                    visibleStudentsIndices.push(i);
+            })
+
+            return {...state, filters, filtersActive, visibleStudentsIndices}
+
+            // case actionTypes.SEARCH:
+            //     let query = action.payload;
+            //     state.appliedStudents.forEach((student, i)=>{
+            //         visibleStudentsIndices.push(i);
+            //     })
+
+            // return {...state, query: action.payload}
         default:
         return state;
     }

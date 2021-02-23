@@ -5,12 +5,12 @@ import SkillTag from './SkillTag.js'
 
 export default  (props)=>{
     return(
-            <div className="skills-section">
+            <div style={props.style} className="skills-section">
               <div className='skills-heading'>
                 Skills
               </div>
-                {mapSkillToSkillTags(props.softSkills)}
-                {mapSkillToSkillTags(props.hardSkills)}
+                { props.softSkills && mapSkillToSkillTags(props.softSkills)}
+                { props.hardSkills && mapSkillToSkillTags(props.hardSkills)}
 
               {/* <SkillTag level="gold" skill="Java"/>
               <SkillTag level="silver" skill="Android"/>

@@ -35,9 +35,13 @@ class Resume extends Component{
                     <hr />
                     <Section type="Experience" data={student.workExperience}/>
                     <hr />
-                    <Section />
+                    <Section type="Projects" data={student.projects}/>
                     <hr />
-                    <Section />
+                    <Section type="Education" data={student} />
+                    <hr />
+                    <Section type="Courses" data={student.courses}/>
+                    <hr />
+                    <Section type="Accomplishments" data={student.accomplishments}/>
                     </div>
                 </Fragment>
                 }

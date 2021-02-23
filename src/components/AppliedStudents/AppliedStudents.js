@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import StudentsHeader from './StudentsHeader';
 import StudentList from './StudentList';
-import {FetchJobDetails as fetchJobAction} from '../../store/actions/jobs';
+import {FetchJobDetails as fetchJobAction, Search as SearchAction} from '../../store/actions/jobs';
 
 import Modal from '../shared/ui/Modal/Modal';
 import Resume from '../Resume/Resume';
@@ -36,17 +36,26 @@ class AppliedStudents extends Component{
     componentDidMount (){
         let jobId = this.props.computedMatch.params.jobId;
         this.props.getJob(jobId);
+        document.body.style.background = "#F4F4F6";
+    }
+
+    componentWillUnmount(){
+        document.body.style.background = "";
+    }
+
+    searchInputHandler=(e)=>{
+        this.setState({'query': e.target.value});
     }
 
     render(){
         return(<div>
             {this.props.loading? <h1>Loading...</h1>:
             <Fragment>
-                <StudentsHeader job={this.props.job} title="42 Students Applied" subTitle="Android Developer" filterToggle={this.toggleFilterHandler}/>
+                <StudentsHeader title={`${this.props.job.appliedStudentsCount} Students Applied`} subTitle={this.props.job.profile} filterToggle={this.toggleFilterHandler}/>
                 <StudentList students={this.props.appliedStudents}/>
 
                 <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
-                    <Filters />
+                    <Filters eligibleCourses={this.props.job.eligibleCourses} closeHandler={this.toggleFilterHandler} />
                 </Modal>
 
                 <Route path={`${this.props.path}/student/:studentId`}  >
@@ -60,7 +69,8 @@ class AppliedStudents extends Component{
 }
 
 const mapDispatchToProps = (dispatch)=>({
-    getJob: (id)=> dispatch(fetchJobAction(id))
+    getJob: (id)=> dispatch(fetchJobAction(id)),
+    search:(query)=> dispatch(SearchAction),
 })
 
 const mapStateToProps = (state)=>({

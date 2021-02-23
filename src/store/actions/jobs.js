@@ -16,7 +16,7 @@ export const FetchAllJobs = ()=>{
 
         //getting refDocs
         let companyDocRef = companyDocSnap.docs[0].ref;
-        let jobsRefsDocList = await companyDocRef.collection('jobs').orderBy('time').get();
+        let jobsRefsDocList = await companyDocRef.collection('jobs').orderBy('time', 'desc').get();
         
         let jobs = [];
         jobsRefsDocList.forEach(doc=>{
@@ -134,4 +134,24 @@ export const FetchStudentSuccess = (student)=>({
 export const FetchStudentFailed = (error, id)=>({
     type: actionTypes.FETCH_STUDENT_FAILED,
     payload: {studentId:id,  error}
+})
+
+// ---------------- Filters -------------------
+
+export const ApplyFilters = (filters)=>{
+    return (dispatch)=>{
+        dispatch(ApplyFilterStart(filters));
+
+    }
+}
+
+export const ApplyFilterStart = (filters)=>({
+    type: actionTypes.APPLY_FILTERS,
+    payload: filters
+})
+
+
+export const Search = (query)=>({
+    type:actionTypes.SEARCH,
+    payload:query
 })
