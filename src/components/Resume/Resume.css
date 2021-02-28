@@ -233,7 +233,13 @@ hr{
 }
 
 .section-section{
-  padding: 28px 0 28px 48px;
+  padding: 0 10 0 10;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.section-container{
+  padding: 28px 18px 28px 48px;
 }
 
 .section-title{
@@ -324,6 +330,7 @@ hr{
   font-size: 14px;
   line-height: 17px;
   color: #000000;
+  max-width: 300px;;
 }
 
 .project-date{
@@ -334,6 +341,7 @@ hr{
   line-height: 14px;
   color: #969BA9;
   text-transform: capitalize;
+  max-width: 300px;
 }
 
 .project-description{

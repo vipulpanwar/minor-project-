@@ -5,9 +5,11 @@ import moment from 'moment';
 
 export default  (props)=>{
     return(
-            <div className="section-section">
-              <p className="section-title"> {props.type} </p>
+          <div>
+              <hr />
+            <div className="section-container">
               { props.data? mapDataToSectionTile(props.data, props.type) : null     }
+            </div>
             </div>
     )
 }
