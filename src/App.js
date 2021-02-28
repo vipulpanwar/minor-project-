@@ -10,7 +10,7 @@ import firebase from './firebase';
 import {connect} from 'react-redux';
 import {AuthStateChanged} from './store/actions/auth';
 
-import HomeContainer  from "./containers/Home/home"; 
+import HomeContainer  from "./components/Home/home"; 
 import LoginContainer  from "./components/Login/Login";
 import AppliedStudentsContainer from './components/AppliedStudents/AppliedStudents';
 import ProtectedRoute from './components/shared/ProtectedRoute/ProtectedRoute';
