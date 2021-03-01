@@ -87,7 +87,7 @@ export const FetchAppliedStudents = (jobId)=>{
 export const FetchJobDetails = (jobId) =>{
     return async (dispatch, getState) => {
         const {auth}=getState();
-
+        dispatch(FetchJobDetailsStart());
         let companyDocSnap = await db.collection('companies').where('email','==', auth.user.email).get();
         if(companyDocSnap.empty);
         let companyDocRef = companyDocSnap.docs[0].ref;
@@ -103,6 +103,10 @@ export const FetchJobDetails = (jobId) =>{
     }
 }
 
+export const FetchJobDetailsStart = ()=>({
+    type:actionTypes.FETCH_JOB_DETAILS
+})
+
 export const FetchJobDetailsSuccess = (jobInfo)=>({
     type: actionTypes.FETCH_JOB_DETAILS_SUCCESS,
     payload: jobInfo
@@ -113,9 +117,12 @@ export const FetchJobDetailsSuccess = (jobInfo)=>({
 
 export const FetchStudent = (email)=>{
     return async (dispatch)=>{
+        // console.log('Student Fetch Start');
         try{
             let studentDoc = await db.collection('student').doc(email).get();
+            // console.log('Student Fetch end');
             dispatch(FetchStudentSuccess(studentDoc));
+            // console.log('Student Fetch end end');
         }
         catch(e)
         {

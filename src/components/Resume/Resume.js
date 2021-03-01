@@ -7,10 +7,12 @@ import NextArrow from './images/NextArrow.svg';
 import Skills from './Skills.js';
 import Section from './Section.js';
 
+
 import {connect} from 'react-redux';
 import {FetchStudent as getStudentAction} from '../../store/actions/jobs';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import { Fragment } from "react";
+import { StudentsContext } from '../AppliedStudents/StudentsContext';
 
 
 class Resume extends Component{
@@ -21,16 +23,31 @@ class Resume extends Component{
     render (){
         let student = this.props.student;
         // console.log(this.props.student);
+        let [prev,next] = getPrevAndNextStudent (this.props.student.email, this.context.students)
         return(
+
             <div>
                 {this.props.student.loading?<h1>Loading...</h1>: 
                 <Fragment>
                     <TopBar />
                     <div className="resume-container">
                     <Profile student={student}/>
-                    <div className='next-button-container'>
-                        <button className="next-button"><img src={NextArrow} /></button>
-                    </div>
+                    {next?
+                        <div className='next-button-container'>
+                            <Link to={`/jobs/${this.props.match.params.jobId}/student/${next}`}>
+                                <button className="next-button"><img src={NextArrow} /></button>
+                            </Link>
+                        </div>
+                    :null}
+
+                    {prev?
+                        <div className='prev-button-container'>
+                            <Link to={`/jobs/${this.props.match.params.jobId}/student/${prev}`}>
+                                <button className="prev-button"><img src={NextArrow} /></button>
+                            </Link>
+                        </div>
+                    :null}
+
                     <Skills hardSkills={student.hardSkills} softSkills={student.softSkills} />
                     <hr />
                     <Section type="Experience" data={student.workExperience}/>
@@ -50,6 +67,16 @@ class Resume extends Component{
     }
 } 
 
+const getPrevAndNextStudent = (email, students)=>{
+    let index= students.findIndex(student=> student.email == email);
+    let prev, next;
+    if( index > 0)
+        prev = students[index - 1]?.email;
+    if( index < students.length)
+        next = students[index + 1]?.email;
+
+    return [prev, next]
+}
 
 const mapDispatchToProps = (dispatch)=>({
     getStudent: (email)=>dispatch(getStudentAction(email))
@@ -61,5 +88,6 @@ const mapStateToProps = (state, ownProps)=>{
         student: student
     }
 }
+Resume.contextType = StudentsContext;
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Resume))

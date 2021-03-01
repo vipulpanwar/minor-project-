@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import styles from './StudentCard.module.css'
-import placeholderImage from '../../assets/images/Placeholder Image.png';
+import userPlaceholder from '../../assets/images/user_placeholder.jpg'
 import Button from '../shared/ui/Button/Button';
 import Skills from '../Resume/Skills';
 import {withRouter} from 'react-router-dom';
@@ -10,14 +10,16 @@ import {withRouter} from 'react-router-dom';
 
 export default (props)=>{
     return(
-        !props.student.loading?
-        <div className={styles.StudentCard}>
+        // !props.student.loading?
+        <div className={[styles.StudentCard, props.student.loading?styles.Loading:null].join(' ')}>
             <div className={styles.StudentInfo}>
-                <img className={styles.StudentImage} src={ props.student.profilePicture|| placeholderImage}/>
+                <img className={styles.StudentImage} src={ props.student.profilePicture || userPlaceholder}/>
                 <StudentData student={props.student}/>
             </div>
-            <Skills style={{margin:0, padding:0}} hardSkills={props.student.hardSkills} softSkills={props.student.softSkills}/>
-        </div>: <h1>Loading...</h1>)
+            <Skills loading={props.student.loading} style={{margin:0, padding:0}} hardSkills={props.student.hardSkills} softSkills={props.student.softSkills}/>
+        </div>
+        //: <h1>Loading...</h1>
+        )
 }
 
 // const Skills = ()=>{
@@ -36,9 +38,9 @@ export default (props)=>{
 
 const StudentData = withRouter((props)=>{
     let degree = props.student.degree
-    return(<div>
+    return(<div className={styles.StudentData}>
         <h3 className={styles.StudentName}>{props.student.name}</h3>
-        <p className={styles.StudentSubTitle}>{props.student[degree].branch} - {props.student[degree].course} | New Delhi</p>
+        <p className={styles.StudentSubTitle}>{props.student[degree]?.branch} - {props.student[degree]?.course} | New Delhi</p>
         <div className={styles.RatingAndView}>
             {/* <span className={styles.Rating}>
                 <span>Rating: </span>

@@ -1,7 +1,7 @@
 import { Component } from "react";
 import React from 'react';
 import './Resume.css';
-import Profileimg from './images/profileimg.svg';
+import userPlaceholder from '../../assets/images/user_placeholder.jpg'
 
 export default  (props)=>{
   console.log(props.student)
@@ -11,7 +11,7 @@ export default  (props)=>{
     return(
             <div>
               <div className="profilepic">
-                <img className="profileimg" src={student.profilePicture} />
+                <img className="profileimg" src={student.profilePicture || userPlaceholder} />
               </div>
               <div className="applicant-info">
                 <p className="applicant-name">{student.name}</p>

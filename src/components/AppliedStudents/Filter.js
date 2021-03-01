@@ -4,27 +4,30 @@ import X from './images/x.svg';
 import FilterTag from './FilterTag.js';
 import Button from '../shared/ui/Button/Button.js';
 import {connect} from 'react-redux';
-import {ApplyFilters, ApplyFilters as ApplyFiltersAction} from '../../store/actions/jobs';
+import { ApplyFilters as ApplyFiltersAction} from '../../store/actions/jobs';
+import {StudentsContext} from './StudentsContext';
 
  class Filter extends Component{
+
   state= {
-    degreeOptions: ['All'],
-    degreeValue:'All',
+    degreeOptions:["All"],
+    degreeValue: this.context.filters['degree'] || 'All',
 
     courseOptions:['All'],
-    courseValue:'All',
+    courseValue: this.context.filters['course'] || 'All',
 
     branchOptions:['All'],
-    branchValue:'All',
+    branchValue: this.context.filters['branch'] || 'All',
   }
 
   componentDidMount(){
     let degreeOptions = this.getDegreeOptions();
     let courseOptions = this.getCourseOptions();
     let branchOptions = this.getBranchOptions();
+
     this.setState({degreeOptions, courseOptions, branchOptions});
-    
   }
+
 
   getDegreeOptions=()=>{
     let degreeOptions = ['All'];
@@ -38,7 +41,7 @@ import {ApplyFilters, ApplyFilters as ApplyFiltersAction} from '../../store/acti
   }
 
   getCourseOptions=(degree)=>{
-    let selectedDegree = degree || this.state.degreeValue;
+    let selectedDegree = degree || this.state?.degreeValue;
     let courseOptions = ['All'];
     let elCourses = this.props.eligibleCourses;
     for(let year in elCourses){
@@ -52,8 +55,8 @@ import {ApplyFilters, ApplyFilters as ApplyFiltersAction} from '../../store/acti
   }
 
   getBranchOptions=(course)=>{
-    let selectedDegree = this.state.degreeValue;
-    let selectedCourse = course || this.state.courseValue;
+    let selectedDegree = this.state?.degreeValue;
+    let selectedCourse = course || this.state?.courseValue;
     let branchOptions = ['All'];
     let elCourses = this.props.eligibleCourses;
 
@@ -92,18 +95,19 @@ import {ApplyFilters, ApplyFilters as ApplyFiltersAction} from '../../store/acti
       course: this.state.courseValue,
       branch: this.state.branchValue,
     }
-    this.props.applyFilters(filters);
+    this.context.setFilters(filters);
   }
 
 
   render (){
+    console.log('Filter render');
     return (<div className="filter-container">
         Filters
         <button className='close-filters-button' onClick={this.props.closeHandler}> <img src={X} /> </button>
         <div>
-          <FilterTag inputHandler={this.degreeInputHandler} name="Degree" options={this.state.degreeOptions}/>
-          <FilterTag inputHandler={this.courseInputHandler} name="Course" options={this.state.courseOptions}/>
-          <FilterTag inputHandler={this.branchInputHandler} name="Branch" options={this.state.branchOptions}/>
+          <FilterTag inputHandler={this.degreeInputHandler} name="Degree" selected={this.state.degreeValue} options={this.state.degreeOptions}/>
+          <FilterTag inputHandler={this.courseInputHandler} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>
+          <FilterTag inputHandler={this.branchInputHandler} name="Branch" selected={this.state.branchValue} options={this.state.branchOptions}/>
         </div>
         <div className="apply-filter-button-div">
           <Button clicked={this.applyFiltersHandler} primary="Primary" className="apply-filters-button" width="135px" height="50px" style={{fontSize: '14px', fontWeight: '300', letterSpacing: '-0.01em', lineHeight: '17px'}}>Apply Filters</Button>
@@ -112,13 +116,6 @@ import {ApplyFilters, ApplyFilters as ApplyFiltersAction} from '../../store/acti
   }
 }
 
-const mapStateToProps =(state)=>({
-  filters: state.jobs.filters,
-  filtersActive : state.jobs.filtersActive,
-})
+Filter.contextType = StudentsContext;
 
-const mapDispatchToProps =(dispatch)=>({
-  applyFilters: (filters)=> dispatch(ApplyFiltersAction(filters))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

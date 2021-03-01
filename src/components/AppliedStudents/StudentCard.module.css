@@ -86,3 +86,32 @@
     margin-right: 0;
 }
 
+.Loading .StudentImage{
+    background-color: #e7e7e7;
+    /* object-fit: none; */
+}
+
+.Loading .StudentName{
+    background-color: #e7e7e7;
+    color: transparent;
+    /* width: 80%; */
+    border-radius: 5px;
+    height: 28px;
+}
+
+.Loading Button {
+    display: none;
+}
+
+.Loading .StudentData {
+    min-width: 60%;
+}
+
+.Loading .StudentSubTitle{
+    background-color: #e7e7e7;
+    border-radius: 5px;
+    margin-top:11px;
+    width: 50%;
+    height: 17px;
+    content-visibility: hidden;
+}

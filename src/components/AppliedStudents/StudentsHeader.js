@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import {Link} from 'react-router-dom'
 
 export default (props)=>{
-    return(<header className={styles.StudentsHeader}>
+    return(<header className={[styles.StudentsHeader, props.loading?styles.Loading :null].join(" ") }>
         <Link to="/" className={styles.BackButton}><img src={backIcon}></img></Link>
         <img src={logo} className={styles.Logo}></img>
         <h2 className={styles.Title}>{props.title}</h2>

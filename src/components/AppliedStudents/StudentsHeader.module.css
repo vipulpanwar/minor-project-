@@ -13,12 +13,37 @@
     margin-bottom: 5px;
 }
 
+.Loading .Title{
+    background-color: #e7e7e7;
+    opacity: 0.2;
+    content-visibility: hidden;
+    height: 43px;
+    width: 80%;
+    border-radius: 5px;
+    max-width: 500px;
+    margin-left:auto;
+    margin-right: auto;
+}
+
 .SubTitle 
 {
     font-weight: 500;
     font-size: 26px;
     opacity: 0.5;
 }
+
+.Loading .SubTitle{
+    background-color: #e7e7e7;
+    opacity: 0.2;
+    content-visibility: hidden;
+    height: 31px;
+    width: 60%;
+    border-radius: 5px;
+    max-width: 350px;
+    margin-left:auto;
+    margin-right: auto;
+}
+
 
 .BackButton {
     float: left;

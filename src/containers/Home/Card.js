@@ -13,7 +13,7 @@ function Card (props) {
       <Fragment>
         <br />
         <br />
-        <img className='card-logo' src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png" alt="google logo icon png transparent background osteopathy" />
+        <img className='card-logo' src={`https://firebasestorage.googleapis.com/v0/b/ensveetest.appspot.com/o/${props.job.logo}?alt=media`} alt="google logo icon png transparent background osteopathy" />
         <br /><br /><br /><br /><br />
         <div className='card-container'>
           <Link to={`jobs/${props.job.id}`}>
@@ -22,7 +22,7 @@ function Card (props) {
           <img src={Ibutton} className="i-button"/>
           <p className='job-details'>{props.job.type ='Full-time' ? 'Full Time' : 'Internship'} | {props.job.ctc} {props.job.type ='Full-time' ? "LPA" : "KPM"} | 12 Jan’20</p>
           <p className='students-applied'>Students Applied</p>
-          <p className='students-number'>42</p>
+          <p className='students-number'>{props.job.appliedStudentsCount}</p>
         </div>
       </Fragment>}
     </div>

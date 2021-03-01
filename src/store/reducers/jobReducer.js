@@ -12,6 +12,9 @@ const reducer = (state = initialState, action)=>{
 
     switch(action.type)
     {
+        case actionTypes.FETCH_ALL_JOBS:
+            return {...state, refLoading:true}
+
         case actionTypes.FETCH_ALL_JOB_REFS_SUCCESS :
             let jobs = action.payload;
             jobs.forEach(job=>job['loading'] = true)
@@ -25,7 +28,11 @@ const reducer = (state = initialState, action)=>{
             })
         
             return {...state, jobs:newJobs}
-
+        
+        
+        case actionTypes.FETCH_JOB_DETAILS:
+            return {...state, jobLoading:true}
+        
         case actionTypes.FETCH_JOB_DETAILS_SUCCESS:
             let jobInfo = action.payload;
             let appliedStudents = [];

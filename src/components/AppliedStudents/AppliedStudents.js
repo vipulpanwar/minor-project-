@@ -9,6 +9,7 @@ import {Route, withRouter} from 'react-router-dom';
 import Filters from './Filter';
 import {connect} from 'react-redux';
 import { Fragment } from 'react';
+import {StudentsProvider} from './StudentsContext';
 
 const modalStyle = {
     maxWidth: 886,
@@ -19,6 +20,7 @@ const modalStyle = {
     position:'relative',
     background:'transparent'
 }
+
 
 class AppliedStudents extends Component{
     state = {
@@ -48,29 +50,33 @@ class AppliedStudents extends Component{
     }
 
     render(){
+        console.log("applied student render")
         return(<div>
-            {this.props.loading? <h1>Loading...</h1>:
-            <Fragment>
-                <StudentsHeader title={`${this.props.job.appliedStudentsCount} Students Applied`} subTitle={this.props.job.profile} filterToggle={this.toggleFilterHandler}/>
-                <StudentList students={this.props.appliedStudents}/>
-
-                <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
-                    <Filters eligibleCourses={this.props.job.eligibleCourses} closeHandler={this.toggleFilterHandler} />
-                </Modal>
-
-                <Route path={`${this.props.path}/student/:studentId`}  >
-                    <Modal show={!this.props.loading} style={modalStyle} closeHandler={this.modalCloseHandler}>
-                        <Resume/>
+        
+            <StudentsProvider>
+                <StudentsHeader loading={this.props.loading} title={`${this.props?.job?.appliedStudentsCount} Students Applied`} subTitle={this.props?.job?.profile} filterToggle={this.toggleFilterHandler}/>
+                <StudentList jobLoading={this.props.loading}/>
+                {this.props.loading? null :
+                <Fragment>
+                    <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
+                        <Filters eligibleCourses={this.props.job.eligibleCourses} closeHandler={this.toggleFilterHandler} />
                     </Modal>
-                </Route>
-            </Fragment>}
+
+                    <Route path={`${this.props.path}/student/:studentId`}  >
+                        <Modal show={!this.props.loading} style={modalStyle} closeHandler={this.modalCloseHandler}>
+                            <Resume/>
+                        </Modal>
+                    </Route>
+                </Fragment>
+                }
+            </StudentsProvider>
             </div>);
     }
 }
 
 const mapDispatchToProps = (dispatch)=>({
     getJob: (id)=> dispatch(fetchJobAction(id)),
-    search:(query)=> dispatch(SearchAction),
+    search: (query)=> dispatch(SearchAction),
 })
 
 const mapStateToProps = (state)=>({

@@ -37,10 +37,10 @@ class Home extends React.Component{
           {this.props.jobsState.refLoading?<h1>Loading...</h1>: <Fragment>
             <div className='home-top-bar'>
               <img className='logo' src= {Logo} />
-              <Button className='log-out' onClick={this.props.logout} width="127px" height="51px" style={{position:'absolute', right:'29px', top:'30px'}}>Log Out</Button>
+              <Button className='log-out' clicked={this.props.logout} width="127px" height="51px" style={{position:'absolute', right:'29px', top:'30px'}}>Log Out</Button>
               <p className='job-postings'>Job Postings</p>
             </div>
-            
+
             {/*}<div className="middle-container slide-container">
               <button onClick={this.Leftscroll} className={!this.state.left?'hidden':"slider-button left-arrow"}>
                 <img width='12.5px' src={LeftArrow}/>

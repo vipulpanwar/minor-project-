@@ -9,7 +9,7 @@ export default (props)=>{
 
     return (<div className="filter-tag-container">
         {props.name}
-        <select onChange={props.inputHandler} className="filter-input-field">
+        <select value={props.selected} onChange={props.inputHandler} className="filter-input-field">
           {renderOptions()}
         </select>
     </div>)

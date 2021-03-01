@@ -11,7 +11,7 @@ export default ({show, children, style, closeHandler,...props})=>{
         console.log('cleanup')
             document.body.style.overflow = "";
         }
-    })
+    },  [])
     if(show)
         return (
             <div>
