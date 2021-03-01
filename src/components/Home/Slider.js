@@ -20,6 +20,7 @@ class Slider extends React.Component{
     right: 1,
     translate: 0,
     cards_in_window: 3,
+    width_of_window: window.innerWidth,
   }
 
 
@@ -30,8 +31,9 @@ class Slider extends React.Component{
 
   componentDidMount(){
     this.setState({no_of_cards: this.props.jobsState?.jobs?.length})
-    if(window.innerWidth>1400){
+    if(this.state.width_of_window>1000){
       this.setState({cards_in_window:4})
+      console.log(this.state.width_of_window);
     }
   }
 
