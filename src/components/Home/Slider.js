@@ -35,6 +35,10 @@ class Slider extends React.Component{
       this.setState({cards_in_window:4})
       console.log(this.state.width_of_window);
     }
+    if(this.state.no_of_cards<=this.state.cards_in_window){
+      console.log("Don't Display Buttons");
+      this.setState({right:0})
+    }
   }
 
   Leftscroll =() => {
