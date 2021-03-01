@@ -213,6 +213,11 @@ hr{
   text-transform: capitalize;
 }
 
+.oneLiner{
+  display: flex;
+  overflow:hidden;
+}
+
 .section-section{
   padding: 0 10 0 10;
   display: inline-block;

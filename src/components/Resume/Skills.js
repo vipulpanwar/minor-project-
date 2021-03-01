@@ -9,6 +9,7 @@ export default  (props)=>{
               <div className='skills-heading'>
                 Skills
               </div>
+              <div className = {props.oneLiner}>
                 { props.softSkills && mapSkillToSkillTags(props.softSkills)}
                 { props.hardSkills && mapSkillToSkillTags(props.hardSkills)}
 
@@ -18,6 +19,7 @@ export default  (props)=>{
               <SkillTag level="no-level" skill="HTML"/>
               <SkillTag level="no-level" skill="Python"/>
               <SkillTag level="no-level" skill="HTML"/> */}
+              </div>
             </div>
     )
 }

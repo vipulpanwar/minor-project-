@@ -16,7 +16,7 @@ export default (props)=>{
                 <img className={styles.StudentImage} src={ props.student.profilePicture|| placeholderImage}/>
                 <StudentData student={props.student}/>
             </div>
-            <Skills style={{margin:0, padding:0}} hardSkills={props.student.hardSkills} softSkills={props.student.softSkills}/>
+            <Skills style={{margin:0, padding:0}} oneLiner="oneLiner" hardSkills={props.student.hardSkills} softSkills={props.student.softSkills}/>
         </div>: <h1>Loading...</h1>)
 }
 
