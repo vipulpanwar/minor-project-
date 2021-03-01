@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import './home.css';
-import Background1 from './background-1.svg';
-import Content from './images/content-to-be-replaced.svg';
 import Ibutton from './images/ibutton.svg';
 import { Fragment } from 'react';
+import CardSkeletonLoader from './CardSkeletonLoader';
 
 function Card (props) {
   return(
     <div className='card'>
-      {props.job.loading ? <h2>Loading...</h2>: 
+      {props.job.loading ? <CardSkeletonLoader />: 
       <Fragment>
         <br />
         <br />
