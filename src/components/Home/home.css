@@ -15,10 +15,6 @@ button{
   padding-top: 45px;
 }
 
-.logo{
-
-}
-
 .no-slider-container{
   text-align: center;
 }
@@ -159,7 +155,7 @@ left: 17px;
   top: 56px;
   /* font-family: SF Pro Display; */
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: #232D4C;
@@ -172,7 +168,7 @@ left: 17px;
   top: 98px;
   /* font-family: SF Pro Display; */
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 15px;
   line-height: 18px;
   color: #232D4C;

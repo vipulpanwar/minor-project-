@@ -11,6 +11,8 @@ import ProjectPic from './images/projectpic.svg';
 
 export default (props)=>{
     return(
+      <div className="section-section">
+      <p className="section-title"> {props.type} </p>
             <div className="project">
                 {(props.type=="Experience")?<div className="experience-pic"><img className="experience-img" src={ExperiencePic} /></div>:null}
                 {(props.type=="Education")?<div className="education-pic"><img className="education-img" src={EducationPic} /></div>:null}
@@ -33,6 +35,7 @@ export default (props)=>{
                     {props.info.description}
                   </div>
                 : null }
+            </div>
             </div>
     )
 }

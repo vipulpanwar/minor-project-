@@ -49,16 +49,16 @@ class Resume extends Component{
                     :null}
 
                     <Skills hardSkills={student.hardSkills} softSkills={student.softSkills} />
-                    <hr />
-                    <Section type="Experience" data={student.workExperience}/>
-                    <hr />
-                    <Section type="Projects" data={student.projects}/>
-                    <hr />
-                    <Section type="Education" data={student} />
-                    <hr />
-                    <Section type="Courses" data={student.courses}/>
-                    <hr />
-                    <Section type="Accomplishments" data={student.accomplishments}/>
+                
+                    {student.workExperience && <Section type="Experience" data={student.workExperience}/>}
+                    
+                    {student.projects && <Section type="Projects" data={student.projects}/>}
+                    
+                    {student && <Section type="Education" data={student} />}
+                
+                    {student.courses && <Section type="Courses" data={student.courses}/>}
+            
+                    {student.accomplishments && <Section type="Accomplishments" data={student.accomplishments}/>}
                     </div>
                 </Fragment>
                 }
