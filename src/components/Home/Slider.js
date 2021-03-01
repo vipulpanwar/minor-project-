@@ -1,10 +1,7 @@
 import React, { createRef, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Logout as logoutAction} from '../../store/actions/auth';
-import {FetchAllJobs as FetchJobsAction } from '../../store/actions/jobs';
 
 import './home.css';
-import Logo from './images/ensvee-logo.svg';
 import Background1 from './background-1.svg';
 import Card from './Card.js';
 import LeftArrow from './images/leftArrow.svg';
@@ -13,7 +10,7 @@ import RightArrow from './images/rightArrow.svg';
 
 
 class Slider extends React.Component{
-
+  
   flag = 0;
   no_of_cards = 10;
 
@@ -22,6 +19,7 @@ class Slider extends React.Component{
     left: 0,
     right: 1,
     translate: 0,
+    cards_in_window: 3,
   }
 
 
@@ -32,13 +30,16 @@ class Slider extends React.Component{
 
   componentDidMount(){
     this.setState({no_of_cards: this.props.jobsState?.jobs?.length})
+    if(window.innerWidth>1400){
+      this.setState({cards_in_window:4})
+    }
   }
 
   Leftscroll =() => {
-    if(this.state.no_of_cards==4){
+    if(this.state.no_of_cards==this.state.cards_in_window+1){
       this.listRef.current.scrollLeft -= 1000;
     }
-    else if(this.flag==this.state.no_of_cards-3){
+    else if(this.flag==this.state.no_of_cards-this.state.cards_in_window){
       this.listRef.current.scrollLeft -= 100;
     }
     else if (this.flag==1) {
@@ -58,7 +59,7 @@ class Slider extends React.Component{
   };
 
   Rightscroll =() => {
-    if(this.state.no_of_cards==4){
+    if(this.state.no_of_cards==this.state.cards_in_window+1){
       this.listRef.current.scrollLeft += 1000;
     }
     else if(this.flag==0){
@@ -71,7 +72,7 @@ class Slider extends React.Component{
     console.log(this.flag, this.listRef.current.scrollLeft);
     this.setState({left:1})
 
-    if(this.flag>=this.state.no_of_cards-3){
+    if(this.flag>=this.state.no_of_cards-this.state.cards_in_window){
       this.setState({right:0})
     }
   };

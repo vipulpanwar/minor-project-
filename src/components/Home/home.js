@@ -5,10 +5,7 @@ import {FetchAllJobs as FetchJobsAction } from '../../store/actions/jobs';
 
 import './home.css';
 import Logo from './images/ensvee-logo.svg';
-import Background1 from './background-1.svg';
 import Card from './Card.js';
-import LeftArrow from './images/leftArrow.svg';
-import RightArrow from './images/rightArrow.svg';
 import Slider from './Slider.js';
 import NoSlider from './NoSlider.js';
 import Button from '../../components/shared/ui/Button/Button.js';
