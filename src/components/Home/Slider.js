@@ -32,13 +32,20 @@ class Slider extends React.Component{
   componentDidMount(){
     this.setState({no_of_cards: this.props.jobsState?.jobs?.length})
     if(this.state.width_of_window>1600){
-      this.setState({cards_in_window:4})
+      this.setState({cards_in_window:4});
       console.log(this.state.width_of_window);
     }
-    if(this.state.no_of_cards<=this.state.cards_in_window){
-      console.log("Don't Display Buttons");
-      this.setState({right:0})
-    }
+    this.buttonChecker();
+    window.addEventListener('resize', this.updateDimensions);
+    this.updateDimensions = this.updateDimensions.bind(this)
+  }
+
+  updateDimensions = () =>{
+    this.setState({width_of_window:window.innerWidth})
+  }
+
+  buttonChecker(){
+    console.log(this.state.no_of_cards)
   }
 
   Leftscroll =() => {
@@ -81,10 +88,16 @@ class Slider extends React.Component{
     if(this.flag>=this.state.no_of_cards-this.state.cards_in_window){
       this.setState({right:0})
     }
+    console.log(this.state.no_of_cards)
+  };
+
+  noButton(){
+    this.setState({right:0})
   };
 
     render(){
         return(
+          
             <div className="middle-container slide-container" ref={this.listRef}>
               <button onClick={this.Leftscroll} className={!this.state.left?'hidden':"slider-button left-arrow"}>
                 <img width='12.5px' src={LeftArrow}/>

@@ -4,6 +4,7 @@ import './home.css';
 import Ibutton from './images/ibutton.svg';
 import { Fragment } from 'react';
 import CardSkeletonLoader from './CardSkeletonLoader';
+import blueNextButton from './images/next-button.svg';
 
 function Card (props) {
   return(
@@ -22,6 +23,7 @@ function Card (props) {
           <p className='job-details'>{props.job.type ='Full-time' ? 'Full Time' : 'Internship'} | {props.job.ctc} {props.job.type ='Full-time' ? "LPA" : "KPM"} | 12 Jan’20</p>
           <p className='students-applied'>Students Applied</p>
           <p className='students-number'>42</p>
+          <button className="blueNextButton"><img src={blueNextButton}></img></button>
         </div>
       </Fragment>}
     </div>
