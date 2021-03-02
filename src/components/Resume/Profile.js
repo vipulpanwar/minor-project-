@@ -9,7 +9,7 @@ export default  (props)=>{
   let degree = props.student.degree;
 
     return(
-            <div>
+            <div className="profile-container">
               <div className="profilepic">
                 <img className="profileimg" src={student.profilePicture || userPlaceholder} />
               </div>

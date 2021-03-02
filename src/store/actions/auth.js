@@ -9,8 +9,13 @@ export const Login = (email, password)=>{
     return (dispatch) => {
         dispatch(LoginStart())
         auth.signInWithEmailAndPassword(email, password)
-            .then(user=>{
-                dispatch(LoginSuccess(user))
+            .then(async user=>{
+                let token = await firebase.auth().currentUser.getIdTokenResult()              
+                if(token.claims?.userType === "company")
+                    dispatch(LoginSuccess(user));
+                else
+                dispatch(LoginFailed({message:"Please Login with a Company Account."})) ;
+                
             })
             .catch(err=>{
                 dispatch(LoginFailed(err))
@@ -32,7 +37,24 @@ export const LoginFailed = (err)=>({
     payload: err,
 });
 
-export const AuthStateChanged = (user)=>({
+
+export const AuthStateChanged = (user)=>{
+    return async(dispatch)=>{
+        if(!user)
+            return dispatch(AuthStateChangedStart(user));
+
+        let token = await firebase.auth().currentUser.getIdTokenResult()              
+        if(token.claims?.userType === "company")
+            dispatch(AuthStateChangedStart(user));
+        else
+        {
+            dispatch(LoginFailed({message:"Please login with a company account."})) ;
+            dispatch(Logout())
+        }
+    }
+}
+
+export const AuthStateChangedStart = (user)=>({
     type: actionTypes.FIREBASE_AUTH_STATECHANGED,
     payload: user,
 });
@@ -40,7 +62,7 @@ export const AuthStateChanged = (user)=>({
 
 
 export const Logout = ()=>{
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(LogoutStart())
         auth.signOut()
             .then(()=>{

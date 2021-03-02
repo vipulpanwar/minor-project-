@@ -16,8 +16,8 @@
 .Loading .Title{
     background-color: #e7e7e7;
     opacity: 0.2;
-    content-visibility: hidden;
-    height: 43px;
+    color:transparent;
+    /* height: 41.6px; */
     width: 80%;
     border-radius: 5px;
     max-width: 500px;
@@ -36,7 +36,7 @@
     background-color: #e7e7e7;
     opacity: 0.2;
     content-visibility: hidden;
-    height: 31px;
+    height: 29.6px;
     width: 60%;
     border-radius: 5px;
     max-width: 350px;
@@ -46,6 +46,6 @@
 
 
 .BackButton {
-    float: left;
-    cursor: pointer;
+    position: absolute;
+    left: 50px;
 }

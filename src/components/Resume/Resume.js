@@ -34,16 +34,16 @@ class Resume extends Component{
                     <Profile student={student}/>
                     {next?
                         <div className='next-button-container'>
-                            <Link to={`/jobs/${this.props.match.params.jobId}/student/${next}`}>
-                                <button className="next-button"><img src={NextArrow} /></button>
+                            <Link className="next-button" to={`/jobs/${this.props.match.params.jobId}/student/${next}`}>
+                                <img src={NextArrow} />
                             </Link>
                         </div>
                     :null}
 
                     {prev?
                         <div className='prev-button-container'>
-                            <Link to={`/jobs/${this.props.match.params.jobId}/student/${prev}`}>
-                                <button className="prev-button"><img src={NextArrow} /></button>
+                            <Link className="prev-button" to={`/jobs/${this.props.match.params.jobId}/student/${prev}`}>
+                                <img src={NextArrow} />
                             </Link>
                         </div>
                     :null}

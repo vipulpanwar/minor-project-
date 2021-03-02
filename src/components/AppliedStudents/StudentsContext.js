@@ -1,4 +1,4 @@
-import React , { createContext, useState, useEffect} from 'react';
+import React , { createContext, useState, useEffect, useLayoutEffect} from 'react';
 import {connect} from 'react-redux';
 export const StudentsContext = createContext();
 
@@ -7,7 +7,7 @@ const StudentsProviderComponent = (props) =>{
     const [students, setStudents] = useState([]);
     const [search, setSearch] = useState("");
 
-    useEffect(()=>{
+    useLayoutEffect(()=>{
         let filtersActive = filters.degree !='All' || filters.course!='All' || filters.degree !='All'  ? true: false;
         let filteredStudents = [];
 

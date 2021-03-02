@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import StudentsHeader from './StudentsHeader';
 import StudentList from './StudentList';
-import {FetchJobDetails as fetchJobAction, Search as SearchAction} from '../../store/actions/jobs';
+import {FetchJobDetails as fetchJobAction, Search as SearchAction, FetchStudent as getStudentAction} from '../../store/actions/jobs';
 
 import Modal from '../shared/ui/Modal/Modal';
 import Resume from '../Resume/Resume';
@@ -55,7 +55,7 @@ class AppliedStudents extends Component{
         
             <StudentsProvider>
                 <StudentsHeader loading={this.props.loading} title={`${this.props?.job?.appliedStudentsCount} Students Applied`} subTitle={this.props?.job?.profile} filterToggle={this.toggleFilterHandler}/>
-                <StudentList jobLoading={this.props.loading}/>
+                <StudentList getStudent={this.props.getStudent} jobLoading={this.props.loading}/>
                 {this.props.loading? null :
                 <Fragment>
                     <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
@@ -77,6 +77,8 @@ class AppliedStudents extends Component{
 const mapDispatchToProps = (dispatch)=>({
     getJob: (id)=> dispatch(fetchJobAction(id)),
     search: (query)=> dispatch(SearchAction),
+    getStudent: (email)=>dispatch(getStudentAction(email))
+    
 })
 
 const mapStateToProps = (state)=>({

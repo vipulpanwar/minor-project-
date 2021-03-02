@@ -11,18 +11,24 @@ export default  (props)=>{
               <div className='skills-heading'>
                 Skills
               </div>:null}
-              {props.loading ?
-                <Fragment>
-                  <SkillTag skill="" level="loading"/>
-                  <SkillTag skill="" level="loading"/>
-                  <SkillTag skill="" level="loading"/>
-                  <SkillTag skill="" level="loading"/>
-                  <SkillTag skill="" level="loading"/>
-                </Fragment>
-                : null}
+              <div className="skills-container">
+                <div className = {props.oneLiner}>
+                {props.loading ?
+                  <Fragment>
+                    <SkillTag skill="" level="loading"/>
+                    <SkillTag skill="" level="loading"/>
+                    <SkillTag skill="" level="loading"/>
+                    <SkillTag skill="" level="loading"/>
+                    <SkillTag skill="" level="loading"/>
+                  </Fragment>
+                  : null}
 
-                    { props.softSkills && mapSkillToSkillTags(props.softSkills)}
-                    { props.hardSkills && mapSkillToSkillTags(props.hardSkills)}
+                      { props.softSkills && mapSkillToSkillTags(props.softSkills)}
+                      { props.hardSkills && mapSkillToSkillTags(props.hardSkills)}
+                </div>
+                <SkillTag skill="+20 More" level="no-level"/>
+              </div>
+              
             </div>
     )
 }

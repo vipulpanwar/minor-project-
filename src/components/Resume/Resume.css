@@ -26,49 +26,22 @@ hr{
 
 .cross-button{
   position: relative;
-  width: 10px;
-  height: 10px;
-  margin-left: 32px;
+  width: 20px;
+  height: 20px;
+  float: right;
+  margin-right: 20px;
   /* left: 31px; */
-  margin-top:25px;
+  margin-top:20px;
   color: #232D4C;
   background-color: #FF5670;
   border-radius: 100%;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .x-button{
-  margin-bottom: 3.8px;
-  width: 6px;
-}
-
-.minus-img{
-  margin-bottom: 6px;
-  width: 6px;
-}
-
-.minus-button{
-  position: relative;
-  width: 10px;
-  height: 10px;
-  margin-left: 8px;
-  /* left: 54px;
-  top:25px; */
-  background: #FDB400;
-  border-radius: 100%;
-}
-
-.holo-circle-button{
-  position: relative;
-  width: 10px;
-  height: 10px;
-  margin-left: 8px;
-  top: -4px;
-  /* left: 77px;
-  top:25px; */
-  background: #232D4C;
-  border: 2px solid #999999;
-  box-sizing: border-box;
-  border-radius: 100%;
+  margin-left: 0.8px;
+  width: 8px;
 }
 
 .resume-container{
@@ -105,11 +78,20 @@ hr{
   position: relative;
   /* top: 5px; */
   display: inline-block;
-  margin-left: 58px;
+  margin-left: 32px;
   margin-top: 31px;
   width: 620px;
   vertical-align: top;
 }
+
+.profile-container{
+  display: flex;
+}
+/* @media (max-width:1060px){
+  .applicant-info{
+    width: 500px;
+  }
+} */
 
 .applicant-name{
   position: relative;
@@ -202,6 +184,9 @@ hr{
   border: 1px solid #FFFFFF;
   box-shadow: 0px 7px 23px rgb(0 0 0 / 25%);
   border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .prev-button{
@@ -213,10 +198,14 @@ hr{
   border: 1px solid #FFFFFF;
   box-shadow: 0px 7px 23px rgb(0 0 0 / 25%);
   border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .prev-button img {
   transform: rotate(180deg);
+  flex-grow: 0;
 }
 
 
@@ -258,10 +247,17 @@ hr{
   text-transform: capitalize;
 }
 
+.oneLiner{
+  display: flex;
+  overflow:hidden;
+}
+
 .section-section{
   padding: 0 10 0 10;
   display: inline-block;
   overflow: hidden;
+  box-sizing: border-box;
+  width: 50%;;
 }
 
 .section-container{
@@ -280,7 +276,6 @@ hr{
 }
 
 .project{
-  width: 390px;
   display: inline-block;
   padding: 5px 15px 15px 0;
 }
@@ -347,6 +342,7 @@ hr{
   top: -2px;
   display: inline-block;
   margin-left: 10px;
+  width: 300px;
 }
 
 .project-title{
@@ -356,7 +352,8 @@ hr{
   font-size: 14px;
   line-height: 17px;
   color: #000000;
-  max-width: 300px;;
+  max-width: 230px;
+  overflow-wrap: break-word;
 }
 
 .project-date{

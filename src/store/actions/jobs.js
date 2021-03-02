@@ -96,10 +96,10 @@ export const FetchJobDetails = (jobId) =>{
         let jobInfo = await jobRefDoc.collection('jobInformation').get();
         console.log('Dispatch')
         dispatch(FetchJobDetailsSuccess(jobInfo))
-        let {jobs} = getState();
-        jobs.appliedStudents.forEach(student=>{
-            dispatch(FetchStudent(student.email))
-        })
+        // let {jobs} = getState();
+        // jobs.appliedStudents.forEach(student=>{
+        //     dispatch(FetchStudent(student.email))
+        // })
     }
 }
 
@@ -118,6 +118,7 @@ export const FetchJobDetailsSuccess = (jobInfo)=>({
 export const FetchStudent = (email)=>{
     return async (dispatch)=>{
         // console.log('Student Fetch Start');
+        dispatch(FetchStudentStart(email))
         try{
             let studentDoc = await db.collection('student').doc(email).get();
             // console.log('Student Fetch end');
@@ -132,6 +133,11 @@ export const FetchStudent = (email)=>{
 
     }
 }
+
+export const FetchStudentStart= (email)=>({
+    type:actionTypes.FETCH_STUDENT_START,
+    payload:{email}
+})
 
 export const FetchStudentSuccess = (student)=>({
     type: actionTypes.FETCH_STUDENT_SUCCESS,

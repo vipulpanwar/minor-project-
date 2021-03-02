@@ -15,6 +15,16 @@ button{
   padding-top: 45px;
 }
 
+.slider-button:hover{
+  transform: scale(1.05);
+  box-shadow: 0px 9px 20px rgba(0, 0, 0, 0.25);
+}
+
+.slider-button:active{
+  filter: brightness(0.95);
+  transform: scale(0.99);
+}
+
 .no-slider-container{
   text-align: center;
 }
@@ -72,14 +82,18 @@ button{
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
 }
+.slide-container{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
 .card{
   display: inline-block;
-  background-image: url('./background-1.svg');
+  /* background-image: url('./background-1.svg'); */
   width: 363px;
   height: 362px;
   margin: 15px;
-  border: 1px solid #D4D5DA;
+  background:white;
   box-sizing: border-box;
   border-radius: 24px;
   flex-grow: 0;
@@ -97,6 +111,7 @@ button{
   text-align: center;
   vertical-align: center;
   align-items: center;
+  transition: filter 0.1s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 }
 
 .right-arrow{
@@ -116,6 +131,7 @@ button{
 
 .card-container{
   width: 326px;
+  position: relative;
   height: 186px;
   background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(44px);
