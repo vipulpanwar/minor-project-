@@ -29,6 +29,14 @@ button{
   text-align: center;
 }
 
+.blueNextButton{
+  position: absolute;
+  width: 9px;
+  height: 14px;
+  right: 20px;
+  bottom: 33px;
+}
+
 .log-out{
   position:absolute;
   background: #FFFFFF;
