@@ -1,9 +1,9 @@
 import React from 'react';
-import { Component, useEffect, useRef} from 'react';
+import {  useEffect, useRef} from 'react';
 import styles from './StudentCard.module.css'
 import userPlaceholder from '../../assets/images/user_placeholder.jpg'
 import Button from '../shared/ui/Button/Button';
-import Skills from '../Resume/Skills';
+import Skills from '../Resume/CompactSkills';
 import {withRouter} from 'react-router-dom';
 
 

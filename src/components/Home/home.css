@@ -20,13 +20,14 @@ button{
   box-shadow: 0px 9px 20px rgba(0, 0, 0, 0.25);
 }
 
+
 .slider-button:active{
   filter: brightness(0.95);
   transform: scale(0.99);
 }
 
-.no-slider-container{
-  text-align: center;
+.slider-button:focus{
+  outline: none;
 }
 
 .blueNextButton{
@@ -68,7 +69,7 @@ button{
   max-width: 100%;
   /* justify-content: center; */
   overflow-y: hidden;
-  /* vertical-align: center; */
+
 }
 
 .single-item{
@@ -78,12 +79,10 @@ button{
 
 .items-container{
   display: flex;
-  /* overflow-y: hidden; */
-  /* width: 100%; */
   padding-left: 20px;
   padding-right: 20px;
   box-sizing: border-box;
-
+  margin: auto;
 }
 
 .slide-container::-webkit-scrollbar{
@@ -109,6 +108,7 @@ button{
 }
 
 .slider-button{
+  cursor: pointer;
   position: fixed;
   z-index: 1;
   background: #FFFFFF;
@@ -120,6 +120,10 @@ button{
   vertical-align: center;
   align-items: center;
   transition: filter 0.1s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+@keyframes fade-in{
+  from{opacity: 0; transform: scale(0.8);}
+  to{opacity: 1; transform: scale(1);}
 }
 
 .right-arrow{
@@ -215,6 +219,11 @@ color: #4A90E2;
 .bottom-container{
   text-align: center;
   justify-content: center;
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
 }
 
 .hidden{
@@ -247,3 +256,37 @@ color: #4A90E2;
     font-size: 3.2rem;
   }
 }
+
+.central-loader {
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+.button-enter{
+  opacity: 0;
+  transform: scale(0.7);
+}
+.button-enter-active{
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.1s ease-in-out, trasform 0.1s ease-in-out;
+}
+
+.button-exit
+.button-exit:hover{
+  opacity: 1;
+  transform: scale(1);
+}
+.button-exit-active,
+.button-exit-active:hover{
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.1s ease-in-out , transform 0.1s ease-in-out;
+}
+
+/* .button-exit-done{
+  display: none;
+} */

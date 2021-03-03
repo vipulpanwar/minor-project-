@@ -5,6 +5,7 @@ import SkillTag from './SkillTag.js'
 import { Fragment } from "react";
 
 export default  (props)=>{
+
     return(
             <div style={props.style} className="skills-section">
               {!props.loading ?
@@ -12,7 +13,7 @@ export default  (props)=>{
                 Skills
               </div>:null}
               <div className="skills-container">
-                <div className = {props.oneLiner}>
+                <div>
                 {props.loading ?
                   <Fragment>
                     <SkillTag skill="" level="loading"/>
@@ -26,7 +27,6 @@ export default  (props)=>{
                       { props.softSkills && mapSkillToSkillTags(props.softSkills)}
                       { props.hardSkills && mapSkillToSkillTags(props.hardSkills)}
                 </div>
-                <SkillTag skill="+20 More" level="no-level"/>
               </div>
               
             </div>

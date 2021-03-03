@@ -247,9 +247,12 @@ hr{
   text-transform: capitalize;
 }
 
-.oneLiner{
+.skills-container{
   display: flex;
-  overflow:hidden;
+}
+.compact-skills{
+  height: 34px;
+  overflow: hidden;
 }
 
 .section-section{

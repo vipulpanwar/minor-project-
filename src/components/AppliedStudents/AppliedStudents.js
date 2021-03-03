@@ -64,7 +64,7 @@ class AppliedStudents extends Component{
 
                     <Route path={`${this.props.path}/student/:studentId`}  >
                         <Modal show={!this.props.loading} style={modalStyle} closeHandler={this.modalCloseHandler}>
-                            <Resume/>
+                            <Resume close={this.modalCloseHandler}/>
                         </Modal>
                     </Route>
                 </Fragment>

@@ -5,7 +5,7 @@ import './Resume.css';
 export default  (props)=>{
   var styleNames = props.level + ' ' + 'skillBox';
     return(
-            <div className={styleNames} >
+            <div className={styleNames} style={props.style} >
               <p className="skillText">{props.skill}</p>
             </div>
     )
