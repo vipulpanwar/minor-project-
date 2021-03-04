@@ -95,7 +95,8 @@ import {StudentsContext} from './StudentsContext';
       course: this.state.courseValue,
       branch: this.state.branchValue,
     }
-    this.context.setFilters(filters);
+    console.log('optoins ', this.getCourseOptions());
+    this.context.setFilters(filters,this.getCourseOptions());
   }
 
 

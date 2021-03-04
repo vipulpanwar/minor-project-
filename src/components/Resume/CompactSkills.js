@@ -31,10 +31,14 @@ export default  (props)=>{
             if( bottom < skill.getBoundingClientRect().bottom)
             {
                 skill.style.background="red";
+                // skill.style.display="none";
                 count++;
             }
             else
+            {
                 skill.style.background="";
+                // skill.style.display="";
+            }
 
         setMoreSkills(count);
         })

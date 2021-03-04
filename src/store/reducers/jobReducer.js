@@ -41,7 +41,9 @@ const reducer = (state = initialState, action)=>{
                 if(doc.id == "allDetails")
                     job = doc.data();
                 else
-                    appliedStudents = doc.data()['studentsApplied'].concat(appliedStudents);  
+                    appliedStudents = doc.data()['studentsApplied'].map(student=> ({...student, appliedDocName: doc.id})).concat(appliedStudents); 
+                
+ 
             })
             appliedStudents.forEach(stud=> {
                     stud['loaded']= false;
