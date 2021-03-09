@@ -109,7 +109,7 @@ class Slider extends React.Component{
         let outerFlexRect = this.outerFlexRef.current.getBoundingClientRect();
         let showLeftButton = false, showRightButton = false;
 
-        if(innerFlexRect.x <outerFlexRect.x)
+        if(innerFlexRect.x < outerFlexRect.x)
             showLeftButton=true;
         if(innerFlexRect.right > outerFlexRect.right)
             showRightButton=true

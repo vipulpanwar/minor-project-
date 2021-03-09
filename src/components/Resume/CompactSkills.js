@@ -47,7 +47,7 @@ export default  (props)=>{
 
     return(
             <div style={props.style} className="skills-section">
-              {!props.loading ? <div className='skills-heading'>Skills</div> : null}
+              {!props.loading && (props.softSkills || props.hardSkills) ? <div className='skills-heading'>Skills</div> : null}
               <div className="skills-container">
                 <div ref={compactSkillsRef} className="compact-skills">
                     {props.loading ?
@@ -60,8 +60,8 @@ export default  (props)=>{
                     </Fragment>
                     : null}
 
-                    { props.softSkills && mapSkillToSkillTags(props.softSkills)}
                     { props.hardSkills && mapSkillToSkillTags(props.hardSkills)}
+                    { props.softSkills && mapSkillToSkillTags(props.softSkills)}
                 </div>
                 {moreSkills?<SkillTag style={{flexShrink:0}} skill={"+ " + moreSkills + " more"} level="no-level"/>:null}
                 

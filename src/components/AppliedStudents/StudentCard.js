@@ -59,7 +59,7 @@ const StudentData = withRouter((props)=>{
     let degree = props.student.degree
     return(<div className={styles.StudentData}>
         <h3 className={styles.StudentName}>{props.student.name}</h3>
-        <p className={styles.StudentSubTitle}>{props.student[degree]?.branch} - {props.student[degree]?.course} | New Delhi</p>
+        <p className={styles.StudentSubTitle}>{props.student[degree]?.branch} - {props.student[degree]?.course}</p>
         <div className={styles.RatingAndView}>
             {/* <span className={styles.Rating}>
                 <span>Rating: </span>
