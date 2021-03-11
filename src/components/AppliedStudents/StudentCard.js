@@ -45,7 +45,7 @@ export default (props)=>{
     return(
         // !props.student.loading?
         <div ref={cardRef} className={[styles.StudentCard, !props.student.loaded?styles.Loading:null].join(' ')}>
-            <div className={styles.excellentTag}>Excellent</div>
+            <div className={styles.excellentTag}>EXCELLENT</div>
             <div className={styles.StudentInfo}>
                 <img className={styles.StudentImage} src={ props.student.profilePicture || userPlaceholder}/>
                 <StudentData student={props.student}/>

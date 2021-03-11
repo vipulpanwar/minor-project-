@@ -117,7 +117,6 @@
 }
 
 .excellentTag{
-    width: 94px;
     height: 23px;
     background: #4A90E2;
     border-radius: 4px;
@@ -131,5 +130,5 @@
     color: #FFFFFF;
     text-align: center;
     vertical-align: center;
-    padding:auto;
+    padding: 7px 10px 0 10px;
 }
