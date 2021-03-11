@@ -115,3 +115,21 @@
     height: 17px;
     content-visibility: hidden;
 }
+
+.excellentTag{
+    width: 94px;
+    height: 23px;
+    background: #4A90E2;
+    border-radius: 4px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    float:right;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    text-align: center;
+    vertical-align: center;
+    padding:auto;
+}

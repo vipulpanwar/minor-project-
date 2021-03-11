@@ -6,9 +6,9 @@ import "firebase/auth";
 import "firebase/firestore";
 
 
-process.env.MODE = "PROD";
+process.env.MODE = "";
 let firebaseConfig;
-if(process.env.MODE =="TEST")
+if(1)
 
   firebaseConfig = {
       apiKey: "AIzaSyBCKOMTrDv-Bci19nLP612gcTCIdlCdYXQ",

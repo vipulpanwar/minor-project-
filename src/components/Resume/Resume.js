@@ -6,7 +6,7 @@ import Profile from './Profile.js';
 import NextArrow from './images/NextArrow.svg';
 import Skills from './Skills.js';
 import Section from './Section.js';
-
+import CandidateTagger from './CandidateTagger.js';
 
 import {connect} from 'react-redux';
 import {FetchStudent as getStudentAction} from '../../store/actions/jobs';
@@ -37,6 +37,7 @@ class Resume extends Component{
                 <Fragment>
                     <TopBar close={this.props.close} />
                     <div className="resume-container">
+                    <CandidateTagger />
                     <Profile student={student}/>
 
                     <CSSTransition appear unmountOnExit in={Boolean(next)} timeout={100}>

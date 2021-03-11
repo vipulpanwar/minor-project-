@@ -1,0 +1,30 @@
+.outercontainer{
+    width:100%;
+    padding: 20px 31px 0px 31px;
+}
+
+.innercontainer{
+    background: #F4F4F6;
+    border-radius: 10px;
+    height: 108px;
+    padding-left: 13px; 
+    width:824px;
+}
+
+.candidatetaggertext{
+    height: 17px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #232D4C;
+}
+
+.spantext{
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+color: #4A90E2;
+}
+
+.buttoncontainer{
+    padding:12px 0 22px 0; 
+}
