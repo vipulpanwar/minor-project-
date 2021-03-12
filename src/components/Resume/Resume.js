@@ -37,7 +37,7 @@ class Resume extends Component{
                 <Fragment>
                     <TopBar close={this.props.close} />
                     <div className="resume-container">
-                    <CandidateTagger />
+                    <CandidateTagger student={student}/>
                     <Profile student={student}/>
 
                     <CSSTransition appear unmountOnExit in={Boolean(next)} timeout={100}>

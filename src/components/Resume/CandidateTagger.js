@@ -1,41 +1,46 @@
-import React, { Component } from "react";
-import style from './CandidateTagger.module.css'
-import {connect} from 'react-redux';
-import {FetchStudent as getStudentAction} from '../../store/actions/jobs';
-import {withRouter, Link} from 'react-router-dom';
-import { Fragment } from "react";
+import React from "react"; 
+import style from './CandidateTagger.module.css';
+import firebase from "../../firebase";
 import Button from "../shared/ui/Button/Button";
 
+const GoodMaker = () =>{
+    console.log("aaj se tu Good");
+}
 
-class CandidateTagger extends Component{
-    componentDidMount(){
-        
-    }
-    componentDidUpdate(){
-        
-    }
+const db = firebase.firestore();
 
-    render (){
-        return(
 
-            <div className = {style.outercontainer}>
-                <div className = {style.innercontainer}>
-                    <p className = {style.candidatetaggertext}><br/>Tag Candidate</p>
-                    <br />
-                    <div className= {style.buttoncontainer}>
-                    <Button width="115px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Excellent</Button>
-                    <Button width="90px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Good</Button>
-                    <Button width="109px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Average</Button>
-                    </div>
-                </div>
+const ExcellentMaker = () =>{
+    console.log("aaj se tu Excellent");
+}
+
+const AverageMaker = () =>{
+    console.log("aaj se tu Average");
+}
+
+
+export default  (props)=>{
+
+    console.log("Yahan se dekh");
+    console.log(props.student);
+  
+      return(
+        <div className = {style.outercontainer}>
+        <div className = {style.innercontainer}>
+            <p className = {style.candidatetaggertext}><br/>Tag Candidate</p>
+            <br />
+            <div className= {style.buttoncontainer}>
+            <a onClick={ExcellentMaker}>
+                <Button width="115px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Excellent</Button>
+            </a>
+            <a onClick={GoodMaker}>
+                <Button width="90px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Good</Button>
+            </a>
+            <a onClick={AverageMaker}>
+                <Button width="109px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Average</Button>
+            </a>
             </div>
-        )
-    }
-} 
-
-const mapDispatchToProps = (dispatch)=>({
-    getStudent: (email)=>dispatch(getStudentAction(email))
-})
-
-
-export default CandidateTagger;
+        </div>
+    </div>
+      )
+  }
