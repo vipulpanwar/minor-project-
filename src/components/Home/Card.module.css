@@ -1,0 +1,125 @@
+.Card {
+  display: flex;
+  flex-direction: column;
+  width: 363px;
+  padding:22px 18px;
+  margin: 15px;
+  background: white;
+  box-sizing: border-box;
+  border-radius: 24px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  gap:12px;
+}
+
+.NewCard{
+    border: 3.5px dashed #4A90E2;
+    background: transparent;
+    /* border-radius: 10px; */
+    color: #4A90E2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.NewCard p {
+    font-size: 18px;
+}
+.Plus{
+    font-size: 60px;
+}
+.Card a{
+    color: #232d4c;
+}
+
+.Container{
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(44px);
+    border-radius: 15px;
+    min-height: 50px;
+    padding:17px;
+    color: #232d4c;
+}
+
+.SingleContainer{
+    display: flex;
+    align-items: center;
+}
+
+.SingleContainer span {
+    width: 100%;
+}
+
+
+
+
+.CardContainer {
+  min-height: 186px;
+}
+
+.JobTitleDiv{
+    display: flex;
+}
+
+.JobTitle {
+  font-size: 28px;
+  line-height: 33px;
+  color: #232d4c;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.IButton {
+  /* position: absolute;
+  right: 18px;
+  top: 30px;
+  width: 15px;
+  height: 15px; */
+}
+
+.JobDetails {
+  /* position: absolute; */
+  /* width: 193px; */
+  /* height: 17px; */
+  /* left: 18px; */
+  /* top: 56px; */
+  /* font-family: SF Pro Display; */
+  /* font-style: normal; */
+  font-weight: 400;
+  font-size: 14px;
+  height: 34px;
+  line-height: 17px;
+  color: #232d4c;
+  margin-top:4px;
+}
+
+.StudentsApplied {
+  /* position: absolute;
+  height: 18px;
+  left: 18px;
+  top: 98px; */
+  /* font-family: SF Pro Display; */
+  /* font-style: normal; */
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: #232d4c;
+  margin-top:8px;
+}
+
+.StudentsNumber {
+  font-weight: bold;
+  font-size: 44px;
+  color: #4a90e2;
+}
+
+.BlueNextButton {
+  /* position: absolute;
+  width: 9px;
+  height: 14px;
+  right: 20px;
+  bottom: 33px; */
+  float: right;
+}
+

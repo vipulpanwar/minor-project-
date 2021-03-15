@@ -1,4 +1,4 @@
-.InputElement {
+/* .InputElement {
     color: #333333;
     font-size: 15px;
     background-color: transparent;
@@ -26,16 +26,12 @@
   
   .InputElement:placeholder-shown ~ .InputLabel {
     color: #959595;
-    /* bottom: 15px;
-    font-size: 15px; */
     background-color: transparent;
     transform: translateY(24px) scale(1.25) ;
   }
   
   .InputElement:focus {
-    /* border: 2px blue solid; */
     border-color: #4A90E2;
-    /* border-width: 2px; */
     outline: none;
   }
   
@@ -56,5 +52,47 @@
   
   .InputElement::placeholder {
     opacity: 0;
-  }
-  
+  } */
+
+.InputDiv{
+  position: relative;
+  margin-bottom: 17px;
+  background-color: white;
+  border: 1px solid #D3D5DB;
+  border-radius: 10px;
+}
+
+.InputElement {
+  color:#232D4C;
+  /* color: #333333; */
+  font-size: 15px;
+  background-color: transparent;
+  font-family: "Ubuntu", 'Segoe UI', 'Roboto', 'Oxygen', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif ;
+  padding: 11px 20px;
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.1s ease-in;
+  padding: 18px 16px;
+  padding: 11px 16px;
+}
+
+.InputElement:focus {
+  border-color: #4A90E2;
+  outline: none;
+}
+
+.InputLabel {
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+  color:#232D4C;
+}
+
+.RadioBox{
+  margin-top:20px;
+}
+.Option{
+  color:#232D4C;
+  margin-right:20px;
+}

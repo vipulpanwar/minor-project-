@@ -30,7 +30,7 @@ function App(props) {
         <Switch>
           <Route path="/login" component={LoginContainer}/>
           <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
-          <ProtectedRoute exact matchPath={true} path="/" component={HomeContainer}/>
+          <ProtectedRoute matchPath={true} path="/" component={HomeContainer}/>
         </Switch>
       </Router>
     </AppLoading>
