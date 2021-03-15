@@ -1,7 +1,8 @@
 import { Component } from "react";
 import React from 'react';
 import './Resume.css';
-import userPlaceholder from '../../assets/images/user_placeholder.jpg'
+import userPlaceholder from '../../assets/images/user_placeholder.jpg';
+import Button from '../shared/ui/Button/Button';
 
 export default  (props)=>{
   console.log(props.student)
@@ -19,7 +20,13 @@ export default  (props)=>{
                 <p className="applicant-bio">
                   {student.about}
                 </p>
-                {/* <div className="rating-box"><p className='rating-text'><span style={{color:"#898989"}}>Rating:</span> 4.5</p></div> */}
+                <div style={{paddingTop:"20px"}}>
+                  <div className="rating-box"><p className='rating-text'><span style={{color:"#898989"}}>Rating:</span> 4.5</p></div>
+                  <div style={{display:"inline-block", float:"right"}}>
+                    <Button width="129px" height="50px" style={{marginRight:"12px", color: "#D0021B", borderColor:"#D0021B"}}>Reject</Button>
+                    <Button width="129px" height="50px">Hire</Button>
+                  </div>
+                </div>
               </div>
             </div>
     )

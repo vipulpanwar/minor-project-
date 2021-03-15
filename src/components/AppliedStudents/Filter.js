@@ -106,9 +106,11 @@ import {StudentsContext} from './StudentsContext';
         Filters
         <button className='close-filters-button' onClick={this.props.closeHandler}> <img src={X} /> </button>
         <div>
+          <FilterTag name="College"/>
           <FilterTag inputHandler={this.degreeInputHandler} name="Degree" selected={this.state.degreeValue} options={this.state.degreeOptions}/>
           <FilterTag inputHandler={this.courseInputHandler} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>
           <FilterTag inputHandler={this.branchInputHandler} name="Branch" selected={this.state.branchValue} options={this.state.branchOptions}/>
+          <FilterTag name="Tag" />
         </div>
         <div className="apply-filter-button-div">
           <Button clicked={this.applyFiltersHandler} primary="Primary" className="apply-filters-button" width="135px" height="50px" style={{fontSize: '14px', fontWeight: '300', letterSpacing: '-0.01em', lineHeight: '17px'}}>Apply Filters</Button>

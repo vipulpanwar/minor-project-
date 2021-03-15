@@ -87,11 +87,6 @@ hr{
 .profile-container{
   display: flex;
 }
-/* @media (max-width:1060px){
-  .applicant-info{
-    width: 500px;
-  }
-} */
 
 .applicant-name{
   position: relative;
@@ -136,15 +131,12 @@ hr{
 }
 
 .rating-box{
-  position: relative;
   width: 163px;
   height: 50px;
-  /* left: 223px; */
-  /* top: 20px; */
-  margin-top: 20px;
   background: #F4F4F6;
   border-radius: 10px;
   text-align: center;
+  display:inline-block;
 }
 
 .rating-text{
