@@ -63,12 +63,44 @@ export default ({ inputType, value, label, elementConfig, ...props }) => {
   return (
     <div className={styles.InputDiv}>
       {inputElement}
-      <label
-        // style={{ position: inputType === "radio" ? "static" : null }}
-        className={styles.InputLabel}
-      >
-        {label}
-      </label>
+      <label className={styles.InputLabel}>{label}</label>
     </div>
   );
 };
+
+
+export const Input = (props)=>{
+  let inputElement;
+  switch(props.elementType){
+    case "input":
+      inputElement = <input className={styles.InputElement} value={props.value} onChange={props.inputHandler} {...props.elementConfig}/>
+      break;
+    case "select":
+      inputElement = <select className={styles.InputElement} value={props.value} onChange={props.inputHandler}>
+        {props.elementConfig.options.map(option=><option key={option} value={option}>{option}</option>)}
+      </select>
+      break;
+    case "radio":
+      inputElement = <div className={styles.RadioBox}>
+        {props.elementConfig.options.map(option=><label key={option} className={styles.Option}><input type="radio" onChange={props.inputHandler} name={props.elementConfig.name} selected={option==props.value} value={option}/> {option}</label>)}
+      </div>
+      break;
+  }
+  
+  if(props.elementType=="radio")
+    return <div>
+      <span className={styles.InputLabel}>{props.label}</span>
+      {inputElement}
+    </div>
+
+  return (
+    <label > 
+      <span className={styles.InputLabel}>{props.label}</span>
+      <div className={styles.InputDiv}>
+          {inputElement}
+      </div>
+    </label>
+  )
+
+}
+

@@ -2,23 +2,41 @@ import React, { createRef, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Logout as logoutAction} from '../../store/actions/auth';
 import {FetchAllJobs as FetchJobsAction } from '../../store/actions/jobs';
+import {Route} from 'react-router-dom';
 
 import './home.css';
-import Logo from './images/ensvee-logo.svg';
+import Logo from '../../assets/images/ensvee-logo.svg';
 import Slider from './Slider.js';
 import Button from '../../components/shared/ui/Button/Button.js';
 import HomeInfo from './HomeInfo.js';
 import Modal from '../shared/ui/Modal/Modal';
 import Loader from '../shared/ui/Loader/Loader';
-
+import BottomNav from './BottomNav';
+import {ModalWithHeader} from '../shared/ui/Modal/Modal';
+import NewJobForm from '../NewJobForm/NewJobForm';
+import {db} from '../../firebase';
 
 class Home extends React.Component{
-
-  componentDidMount(){
-    this.props.getJobs();
-    console.log('Component did mount');
+  state = {
+    jobs:[],
+    loading:true,
   }
 
+  async componentDidMount(){
+
+    let jobsDocs = await db.collection('jobs').get();
+    let jobs = [];
+    jobsDocs.forEach(jobDoc=>{
+      let job = jobDoc.data();
+      job.id = jobDoc.id;
+      jobs.push(job);
+    })
+
+    this.setState({jobs, loading:false})
+    console.log('Component did mount');
+    // this.props.getJobs();
+  }
+  modalCloseHandler(){}
     render(){
         return(
         <div className="home-container">
@@ -30,18 +48,20 @@ class Home extends React.Component{
               <Button className='log-out' clicked={this.props.logout} width="127px" height="51px" style={{position:'absolute', right:'29px', top:'30px'}}>Log Out</Button>
               <p className='job-postings'>Job Postings</p>
             </div>
-            { this.props.jobsState.refLoading ? 
+            { this.state.loading ? 
             <div className="central-loader"><Loader/></div>
             
             : 
             <Fragment>
-              <Slider />
+              <Slider jobs={this.state.jobs}/>
             </Fragment>}
-            <div className='bottom-container'>
-              <p className='announcement-text'>
-                more features comming soon
-              </p>
-            </div>
+            
+            <Route exact path={`/new`}  >
+              <ModalWithHeader show={true} closeHandler={this.modalCloseHandler}>
+                  <NewJobForm close={this.modalCloseHandler}/>
+              </ModalWithHeader>
+            </Route>
+            <BottomNav/>
         </div>);
     }
 }

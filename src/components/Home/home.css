@@ -30,14 +30,6 @@ button{
   outline: none;
 }
 
-.blueNextButton{
-  position: absolute;
-  width: 9px;
-  height: 14px;
-  right: 20px;
-  bottom: 33px;
-}
-
 .log-out{
   position:absolute;
   background: #FFFFFF;
@@ -94,18 +86,6 @@ button{
   scrollbar-width: none;  /* Firefox */
 }
 
-.card{
-  display: inline-block;
-  /* background-image: url('./background-1.svg'); */
-  width: 363px;
-  height: 362px;
-  margin: 15px;
-  background:white;
-  box-sizing: border-box;
-  border-radius: 24px;
-  flex-grow: 0;
-  flex-shrink: 0;
-}
 
 .slider-button{
   cursor: pointer;
@@ -134,87 +114,12 @@ button{
   left:50px;
 }
 
-.card-logo{
-  height: 65px;
-  float: left;
-  margin-left: 18px;
-  margin-top: 25px;
-}
 
-.card-container{
-  width: 326px;
-  position: relative;
-  height: 186px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(44px);
-  border-radius: 15px;
-  margin: auto;
-  margin-top: 15px;
-  text-align: left;
-}
 
-.job-title{
-  /* Android Developer */
 
-position: absolute;
-font-style: normal;
-font-weight: bold;
-font-size: 28px;
-line-height: 33px;
-color: #232D4C;
-top: 19px;
-left: 17px;
 
-}
 
-.i-button{
-  position: absolute;
-  right: 18px;
-  top:30px;
-  width: 15px;
-  height: 15px;
-}
 
-.job-details{
-  position: absolute;
-  width: 193px;
-  height: 17px;
-  left: 18px;
-  top: 56px;
-  /* font-family: SF Pro Display; */
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  color: #232D4C;
-}
-
-.students-applied{
-  position: absolute;
-  height: 18px;
-  left: 18px;
-  top: 98px;
-  /* font-family: SF Pro Display; */
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 18px;
-  color: #232D4C;
-}
-
-.students-number{
-position: absolute;
-width: 56px;
-height: 53px;
-left: 18px;
-top: 116px;
-/* font-family: SF Pro Display; */
-font-style: normal;
-font-weight: bold;
-font-size: 44px;
-line-height: 53px;
-color: #4A90E2;
-}
 
 .bottom-container{
   text-align: center;
@@ -245,7 +150,7 @@ color: #4A90E2;
 }
 
 .home-container{
-  text-align: center;
+  /* text-align: center; */
   width: 100vw;
   height: 100vh;
   background: radial-gradient(166.67% 269.75% at 85.98% 167.57%, #DCE8F6 0%, #FFFFFF 100%);

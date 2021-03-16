@@ -1,0 +1,10 @@
+.Slide{
+    padding: 26px 31px;
+}
+
+.TwoCol{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 62px;
+    padding-right: 114px;
+}

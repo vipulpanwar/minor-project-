@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import TopBar from './TopBar';
 import styles from './Modal.module.css';
 
-export default ({show, children, style, closeHandler,...props})=>{
+const Modal = ({show, children, style, closeHandler,...props})=>{
     useEffect(()=>{
         if(show)
         document.body.style.overflow = "hidden";
@@ -23,4 +24,26 @@ export default ({show, children, style, closeHandler,...props})=>{
                 </div>
             </div>)
     return (null)
+};
+
+export default Modal;
+
+const modalStyle = {
+    maxWidth: 886,
+    margin:'150px 0',
+    top:0,
+    borderRadius:14,
+    transform:"translateX(-50%)",
+    position:'relative',
+    background:'transparent'
+}
+
+export const ModalWithHeader = (props)=>{
+    if(props.maxWidth)
+    modalStyle['maxWidth'] =props.maxWidth;
+    return (
+    <Modal style={{...modalStyle}} {...props}>
+        <TopBar close={props.closeHandler}/>
+        {props.children}
+    </Modal>)
 }

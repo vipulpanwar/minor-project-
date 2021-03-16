@@ -1,0 +1,84 @@
+.BottomNav {
+    position: fixed;
+    background-color: #fff;
+    border-radius: 10px;;
+    /* padding: 10px; */
+    box-shadow: 0px 29px 34px -20px rgba(0, 0, 0, 0.25);
+    bottom: 40px;
+    left:50%;
+    overflow: hidden;
+    transform:translateX(-50%);
+}
+
+.NavLinks{
+    display: flex;
+}
+
+
+.ActiveMarker{
+    width: 100px;
+    transition: transform 0.3s cubic-bezier(0.64, 0, 0.1, 0.9);
+}
+
+.ActiveMarker div{
+    border-radius: 10px 10px 10px 10px;
+    background: #4A90E2;
+    height: 6px;
+    width: 100px;
+    /* transition: transform 0.3s cubic-bezier(0.64, 0, 0.1, 0.9); */
+}
+
+/* .ActiveMarker div.Moving{
+    animation: skew 0.3s cubic-bezier(0.64, 0, 0.1, 0.9);
+} */
+
+.ActiveMarker div.MovingLeft {
+    transform-origin: right;
+    animation: skew 0.4s ease-in-out;
+}
+
+.ActiveMarker div.MovingRight{
+    transform-origin: left;
+    animation: skew 0.4s ease-in-out;
+}
+
+
+@keyframes skew {
+    0%{transform: scaleX(1)}
+    50%{transform: scaleX(0.5)}
+    100%{transform: scaleX(1)}
+}
+
+.NavLink{
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding:18px;
+    transition: background-color 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+.NavLink .Icon{
+    height: 23px;
+    transform-origin: 50% 120%;
+    transition: transform 0.15s ease-in-out;
+}
+
+.NavLink span {
+    margin-top:5px;
+    font-size:14px;
+    color:#9196A5;
+}
+
+.NavLink:hover{
+    background-color: #f3f3f3;
+}
+
+.NavLink:hover .Icon{
+    transform: scale(1.05);
+}
+
+.NavLink.Active span{
+    color:#4A90E2;
+}
