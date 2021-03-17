@@ -42,7 +42,7 @@ export default class NewJobForm extends React.Component{
                     elementType:"radio",
                     name:"type"
                 },
-                "CTC": {value:"", elementType:'input' , name:"ctc"},
+                "CTC": {value:"", elementType:'input' , prefix:"₹", postfix:"MONTHLY", elementConfig:{type:'number', min:0},name:"ctc"},
                 "Job Category":{value:"",elementType:'input', name:'category'},
                 "Deadline":{value:'', elementType:'input',name:'deadline' ,elementConfig:{
                     type:'date'
@@ -242,7 +242,7 @@ export default class NewJobForm extends React.Component{
         }
 
         return(
-            <div style={{background:"white",paddingBottom:24}}>
+            <div className={styles.ModalContent}>
                 {Slide}
                 <Button clicked={this.nextButtonHandler} style={{width:"unset", display:'block', margin:'auto'}} primary>{this.state.nextButton.text}</Button>
             </div>)
@@ -252,13 +252,13 @@ export default class NewJobForm extends React.Component{
 const OneColSlide = (props)=>{
     return (
     <div className={styles.Slide}>
-        {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]}/>)}
+        {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
     </div>)
 }
 
 const TwoColSlide = (props)=>{
     return  (<div className={[styles.Slide,styles.TwoCol].join(" ")}>
-        {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]}/>)}
+        {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
     </div>)
 }
 

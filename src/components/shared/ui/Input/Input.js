@@ -62,7 +62,9 @@ export default ({ inputType, value, label, elementConfig, ...props }) => {
     );
   return (
     <div className={styles.InputDiv}>
-      {inputElement}
+      <div>
+        {inputElement}
+      </div>
       <label className={styles.InputLabel}>{label}</label>
     </div>
   );
@@ -93,14 +95,16 @@ export const Input = (props)=>{
   if(props.elementType=="radio")
     return <div style={props.style}>
       <span className={styles.InputLabel}>{props.label}</span>
-      {inputElement}
+        {inputElement}
     </div>
 
   return (
     <label style={props.style} > 
       <span  className={styles.InputLabel}>{props.label}</span>
       <div className={styles.InputDiv}>
+          {props.prefix?<span className={styles.prefix}>{props.prefix}</span>:null}
           {inputElement}
+          {props.postfix?<span className={styles.postfix}>{props.postfix}</span>:null}
       </div>
     </label>
   )

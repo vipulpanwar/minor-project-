@@ -43,7 +43,7 @@ export const ModalWithHeader = (props)=>{
     modalStyle['maxWidth'] =props.maxWidth;
     return (
     <Modal style={{...modalStyle}} {...props}>
-        <TopBar close={props.closeHandler}/>
+        <TopBar title={props.title} close={props.closeHandler}/>
         {props.children}
     </Modal>)
 }

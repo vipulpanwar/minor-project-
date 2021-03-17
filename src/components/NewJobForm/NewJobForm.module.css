@@ -14,3 +14,9 @@
     grid-template-columns: repeat(4, 1fr);
     gap:10px
 }
+
+.ModalContent {
+    background:white;
+    padding-bottom:24px;
+    border-radius: 0 0 14px 14px;
+}

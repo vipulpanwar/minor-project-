@@ -56,7 +56,7 @@ class Home extends React.Component{
             </Fragment>}
             
             <Route exact path={`/new`}  >
-              <ModalWithHeader show={true} closeHandler={this.modalCloseHandler}>
+              <ModalWithHeader title="Create New Job Posting" show={true} closeHandler={this.modalCloseHandler}>
                   <NewJobForm close={this.modalCloseHandler}/>
               </ModalWithHeader>
             </Route>

@@ -60,6 +60,8 @@
   background-color: white;
   border: 1px solid #D3D5DB;
   border-radius: 10px;
+  display: flex;
+  align-items: baseline;
 }
 
 .InputElement {
@@ -95,4 +97,18 @@
 .Option{
   color:#232D4C;
   margin-right:20px;
+}
+
+.prefix,
+.postfix
+{
+  color: #232D4C;
+  opacity: 0.3;
+  padding:12px
+}
+.prefix{
+  padding-right: 0;
+}
+.postfix{
+  padding-left: 0;
 }
