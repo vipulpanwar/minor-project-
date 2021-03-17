@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './HomeInfo.module.css';
-import image from './images/image.svg';
+import image from './bgimg.svg';
 import ThirdBox from './ThirdBox.js'
 import Button from '../shared/ui/Button/Button.js';
 

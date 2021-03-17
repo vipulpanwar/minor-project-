@@ -11,12 +11,12 @@ export const FetchAllJobs = ()=>{
         const {auth} = getState();
 
         dispatch(FetchAllJobsStart())
-        let companyDocSnap = await db.collection('companies').where('email','==', auth.user.email).get();
-        if(companyDocSnap.empty);
+        // let companyDocSnap = await db.collection('company').where('email','==', auth.user.email).get();
+        // if(companyDocSnap.empty);
 
-        //getting refDocs
-        let companyDocRef = companyDocSnap.docs[0].ref;
-        let jobsRefsDocList = await companyDocRef.collection('jobs').orderBy('time', 'desc').get();
+        // //getting refDocs
+        // let companyDocRef = companyDocSnap.docs[0].ref;
+        let jobsRefsDocList = await db.collection('jobs').where("creatorid", "==", auth.user.email).orderBy('time', 'desc').get();
         
         let jobs = [];
         jobsRefsDocList.forEach(doc=>{
@@ -88,12 +88,12 @@ export const FetchJobDetails = (jobId) =>{
     return async (dispatch, getState) => {
         const {auth}=getState();
         dispatch(FetchJobDetailsStart());
-        let companyDocSnap = await db.collection('companies').where('email','==', auth.user.email).get();
-        if(companyDocSnap.empty);
-        let companyDocRef = companyDocSnap.docs[0].ref;
+        // let companyDocSnap = await db.collection('companies').where('email','==', auth.user.email).get();
+        // if(companyDocSnap.empty);
+        // let companyDocRef = companyDocSnap.docs[0].ref;
 
-        let jobRefDoc = (await companyDocRef.collection('jobs').doc(jobId).get()).data()['jobRef'];
-        let jobInfo = await jobRefDoc.collection('jobInformation').get();
+        // let jobRefDoc = (await db.collection('jobs').get().jobid).data()['jobRef'];
+        let jobInfo = await db.collection('jobs').where('jobid', '==', jobId).get();
         console.log('Dispatch')
         dispatch(FetchJobDetailsSuccess(jobInfo))
         // let {jobs} = getState();

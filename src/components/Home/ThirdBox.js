@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './HomeInfo.module.css';
-import tbr from './images/tbr.svg';
+import tbr from './image.svg';
 
 function ThirdBox() {
     return (
@@ -14,7 +14,7 @@ function ThirdBox() {
                         </div>
                         <p className = {styles.descpara}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                            <ul  className = {styles.list}>
+                            <p  className = {styles.list}>
                                 <br/>
                                 <li>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
@@ -23,7 +23,7 @@ function ThirdBox() {
                                 <li>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
                                 </li>
-                            </ul>
+                            </p>
                         </p>
                     </div>
                 </div>

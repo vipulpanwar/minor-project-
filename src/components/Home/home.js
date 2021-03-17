@@ -40,7 +40,7 @@ class Home extends React.Component{
     render(){
         return(
         <div className="home-container">
-            <Modal show={true} style={ {maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px",}} closeHandler={console.log("band 1")}>
+            <Modal show={false} style={ {maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px",}} closeHandler={console.log("band 1")}>
               <HomeInfo closeHandler={console.log("band 2")} />
             </Modal>
             <div className='home-top-bar'>
