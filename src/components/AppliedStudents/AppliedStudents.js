@@ -9,6 +9,7 @@ import {Route, withRouter} from 'react-router-dom';
 import Filters from './Filter';
 import {connect} from 'react-redux';
 import { Fragment } from 'react';
+import {db} from '../../firebase';
 import {StudentsProvider} from './StudentsContext';
 
 const modalStyle = {
@@ -25,6 +26,11 @@ const modalStyle = {
 class AppliedStudents extends Component{
     state = {
         showFilters:false,
+        jobsdata: [],
+        countdata: [],
+        applicants: [],
+        applicantsData: [],
+        countLoading: true,
     }
     modalCloseHandler = ()=>{
         this.props.history.push("/jobs/" + this.props.computedMatch.params.jobId)
@@ -35,10 +41,44 @@ class AppliedStudents extends Component{
         }))
     }
 
-    componentDidMount (){
-        let jobId = this.props.computedMatch.params.jobId;
-        this.props.getJob(jobId);
+    async componentDidMount (){
+        // let jobId = this.props.computedMatch.params.jobId;
+        // this.props.getJob(jobId);
         document.body.style.background = "#F4F4F6";
+        let applicants = [];
+        let countdata =[];
+        let jobdata = [];
+
+        // let jd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).get();
+        // jd.forEach(jobDoc=>{
+        //     let job = jobDoc.data();
+        //     jobdata.push(job);
+        //     console.log(job);
+        // });
+        // this.setState({jobsdata: jobdata});
+        // console.log(jobdata, "see me");
+        
+        let cd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('count').get();
+        cd.forEach(jobDoc=>{
+            let job = jobDoc.data();
+            countdata.push(job);
+            console.log(job);
+        });
+        this.setState({countdata: countdata[0]});
+        // this.setState({countLoading: false});
+        
+
+        let ad = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('applicants').get();
+        this.setState({applicantsData: ad});
+        this.state.applicantsData.forEach(jobDoc=>{
+            let job = jobDoc.data();
+            applicants.push(job);
+            console.log(job);
+        });
+        this.setState({applicants: applicants});
+        this.setState({countLoading: false});
+        console.log(applicants, "applicants");
+
     }
 
     componentWillUnmount(){
@@ -54,8 +94,8 @@ class AppliedStudents extends Component{
         return(<div>
         
             <StudentsProvider>
-                <StudentsHeader loading={this.props.loading} title={`${this.props?.job?.appliedStudentsCount} Students Applied`} subTitle={this.props?.job?.profile} filterToggle={this.toggleFilterHandler}/>
-                <StudentList getStudent={this.props.getStudent} jobLoading={this.props.loading}/>
+                <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count} Students Applied`} subTitle={this.props?.job?.profile} filterToggle={this.toggleFilterHandler}/>
+                <StudentList getStudent={this.state.applicants} jobLoading={this.state.countLoading}/>
                 {this.props.loading? null :
                 <Fragment>
                     <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
