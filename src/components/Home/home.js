@@ -36,7 +36,9 @@ class Home extends React.Component{
     console.log('Component did mount');
     // this.props.getJobs();
   }
-  modalCloseHandler(){}
+  modalCloseHandler = ()=>{
+    this.props.history.push("/jobs/" + this.props.computedMatch.params.jobId)
+  }
     render(){
         return(
         <div className="home-container">

@@ -73,7 +73,10 @@ export const Input = (props)=>{
   let inputElement;
   switch(props.elementType){
     case "input":
-      inputElement = <input className={styles.InputElement} value={props.value} onChange={props.inputHandler} {...props.elementConfig}/>
+      inputElement = <input  className={styles.InputElement} value={props.value} onChange={props.inputHandler} {...props.elementConfig}/>
+      break;
+    case "textarea":
+      inputElement = <textarea  className={styles.InputElement} value={props.value} onChange={props.inputHandler} {...props.elementConfig}></textarea>
       break;
     case "select":
       inputElement = <select className={styles.InputElement} value={props.value} onChange={props.inputHandler}>
@@ -82,20 +85,20 @@ export const Input = (props)=>{
       break;
     case "radio":
       inputElement = <div className={styles.RadioBox}>
-        {props.elementConfig.options.map(option=><label key={option} className={styles.Option}><input type="radio" onChange={props.inputHandler} name={props.elementConfig.name} selected={option==props.value} value={option}/> {option}</label>)}
+        {props.elementConfig.options.map(option=><label key={option} className={styles.Option}><input type="radio" onChange={props.inputHandler} name={props.elementConfig.name} checked={option==props.value} value={option}/> {option}</label>)}
       </div>
       break;
   }
   
   if(props.elementType=="radio")
-    return <div>
+    return <div style={props.style}>
       <span className={styles.InputLabel}>{props.label}</span>
       {inputElement}
     </div>
 
   return (
-    <label > 
-      <span className={styles.InputLabel}>{props.label}</span>
+    <label style={props.style} > 
+      <span  className={styles.InputLabel}>{props.label}</span>
       <div className={styles.InputDiv}>
           {inputElement}
       </div>
