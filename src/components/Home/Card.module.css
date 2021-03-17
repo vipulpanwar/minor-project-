@@ -21,6 +21,23 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    transition: transform 0.1s ease-in-out;
+}
+
+.NewCard:hover{
+  transform:scale(1.01);
+}
+
+.NewCardContent{
+  transition: transform 0.1s ease-in-out;
+}
+.NewCard:hover .NewCardContent
+{
+  transform: scale(1.1);
+}
+.NewCard:active .NewCardContent
+{
+  transform: scale(1.05);
 }
 .NewCard p {
     font-size: 18px;

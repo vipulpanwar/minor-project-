@@ -2,7 +2,8 @@ import React, { createRef, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Logout as logoutAction} from '../../store/actions/auth';
 import {FetchAllJobs as FetchJobsAction } from '../../store/actions/jobs';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
+
 
 import './home.css';
 import Logo from '../../assets/images/ensvee-logo.svg';
@@ -35,7 +36,7 @@ class Home extends React.Component{
     // this.props.getJobs();
   }
   modalCloseHandler = ()=>{
-    this.props.history.push("/jobs/" + this.props.computedMatch.params.jobId)
+    this.props.history.push("/")
   }
     render(){
         return(
@@ -74,4 +75,4 @@ const mapStateToProps = (state)=>({
   jobsState: state.jobs
 })
 
-export default connect(mapStateToProps, mapDispatchToProps) (Home);
+export default connect(mapStateToProps, mapDispatchToProps) (withRouter(Home));
