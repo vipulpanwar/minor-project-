@@ -3,7 +3,11 @@ import {Input} from '../shared/ui/Input/Input';
 import Button from '../shared/ui/Button/Button';
 import styles from './QualInput.module.css';
 import {db} from '../../firebase';
+import CoursesList from './CoursesList';
 
+const inputStyles={
+    'fontSize':14
+}
 
 const initCollegeInfo = {
       Bachelors:{
@@ -27,9 +31,9 @@ export default class QualInput extends Component{
         branchOptions:['Select'],
         branchValue:  'Select',
 
-        college:'usict',
+        yearValue:'2020',
 
-        invitedCourses:[]
+        college:'usict',
     }
 
     componentDidMount(){
@@ -87,13 +91,14 @@ export default class QualInput extends Component{
     degreeInputHandler = (e)=>{
         let degree = e.target.value;
         let courseOptions = this.getCourseOptions(degree);
-        this.setState({degreeValue:degree, courseOptions})    
+        let branchOptions = this.getBranchOptions("Select");
+        this.setState({degreeValue:degree, courseOptions, courseValue:"Select", branchOptions:branchOptions, branchValue:"Select"})    
     }
 
     courseInputHandler = (e)=>{
         let course = e.target.value;
         let branchOptions = this.getBranchOptions(course);
-        this.setState({courseValue:course, branchOptions})    
+        this.setState({courseValue:course, branchOptions, branchValue:"Select"})    
     }
 
     branchInputHandler = (e)=>{
@@ -106,31 +111,40 @@ export default class QualInput extends Component{
     }
 
     inviteHandler = (e)=>{
-        let filters = {
+
+        let invited = {
             degree: this.state.degreeValue,
             course: this.state.courseValue,
             branch: this.state.branchValue,
+            year: this.state.yearValue,
+            college: this.state.college
         }
-        console.log('optoins ', this.getCourseOptions());
-        // this.context.setFilters(filters,this.getCourseOptions());
+
+        if(!Object.keys(invited).reduce((satisfies, key)=>{
+            return satisfies && invited[key] != "Select";
+        },true))
+        return;
+        
+        this.props.inviteHandler(invited)
     }
 
 
     render(){
-    return(<div className={styles.QualInput}>
-            <Input label="College" elementType="select" value={this.state.degreeValue} inputHandler={(e)=>{this.setState({degreeValue: e.target.value})}} elementConfig={{options:["usict"]}}/>     
-            <div className={styles.FirstRow}>
-                <Input label="Degree" elementType="select" inputHandler={this.degreeInputHandler} elementConfig={{options:this.state.degreeOptions}}/>   
-                <Input label="Course" elementType="select" inputHandler={this.courseInputHandler} elementConfig={{options:this.state.courseOptions}}/>   
-                <Input label="Branch" elementType="select" inputHandler={this.branchInputHandler} elementConfig={{options:this.state.branchOptions}}/> 
-                <Input label="Year" elementType="select" inputHandler={(e)=>this.inputHandler('yearValue', e.target.value)} elementConfig={{options:["2020","2021","2022","2023","2024","2025"]}}/>     
-            </div>   
-            <Button style={{width:"unset", marginBottom:40}} clicked={this.inviteHandler} primary>invite</Button>
-            <div className={styles.SecondRow}>
-                <Input label="Xth Percentage" inputHandler={(e)=>this.inputHandler('xthPercentage', e.target.value)} elementConfig={{type:"number", min:0, max:100, step:10}}  elementType="input"/>   
-                <Input label="XIIth Percentage" inputHandler={(e)=>this.inputHandler('xiithPercentage', e.target.value)} elementConfig={{type:"number", min:0, max:100,step:10}}  elementType="input"/>   
-                <Input label="Bachelors Percentage" inputHandler={(e)=>this.inputHandler('bachelorPercentage', e.target.value)} elementConfig={{type:"number", min:0, max:100, step:10}} elementType="input"/> 
-            </div> 
-        </div>)
-    }
+        return(
+            <div>
+                <p style={{fontWeight:500, marginBottom:8}}>9. Qualifications</p>
+                <div className={styles.QualInput}>
+                    <CoursesList deleteHandler={this.props.deleteHandler} courses={this.state.invitedCourses} courses={this.props.value}/>
+                    <Input label="College" elementType="select" value={this.state.degreeValue} inputHandler={(e)=>{this.setState({degreeValue: e.target.value})}} elementConfig={{options:["usict"]}} style={inputStyles}/>     
+                    <div className={styles.FirstRow}>
+                        <Input label="Degree" elementType="select" inputHandler={this.degreeInputHandler} elementConfig={{options:this.state.degreeOptions}} style={inputStyles}/>   
+                        <Input label="Course" elementType="select" inputHandler={this.courseInputHandler} elementConfig={{options:this.state.courseOptions}} style={inputStyles}/>   
+                        <Input label="Branch" elementType="select" inputHandler={this.branchInputHandler} elementConfig={{options:this.state.branchOptions}} style={inputStyles}/> 
+                        <Input label="Year" elementType="select" inputHandler={(e)=>this.inputHandler('yearValue', e.target.value)} elementConfig={{options:["2020","2021","2022","2023","2024","2025"]}} style={inputStyles}/>     
+                    </div>   
+                    <Button clicked={this.inviteHandler} style={{width:"unset", marginBottom:40}} clicked={this.inviteHandler} primary>invite</Button>
+                </div>
+            </div>
+            )
+        }
 }
