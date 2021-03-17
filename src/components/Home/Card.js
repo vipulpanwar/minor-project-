@@ -58,12 +58,14 @@ function DetailCard(props){
 
 const AddNewJobCard = ()=>{
   return(
-    <div className={[styles.Card, styles.NewCard].join(" ")}>
-      <div className={styles.NewCardContent}>
-        <div className={styles.Plus}>+</div>
-        <p>Create New Job Posting</p>
-      </div>
-    </div>
+    <Link className={[styles.Card, styles.NewCard].join(" ")} to="/new">
+
+        <div className={styles.NewCardContent}>
+          <div className={styles.Plus}>+</div>
+          <p>Create New Job Posting</p>
+        </div>
+    </Link>
+
   )
 }
 

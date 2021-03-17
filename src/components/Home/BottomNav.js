@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import styles from './BottomNav.module.css';
 import JobIcon from '../../assets/icons/job.svg';
 import ProfileIcon from '../../assets/icons/profile-icon.svg';
+import Plus from '../../assets/icons/plus.svg';
+import {Link} from 'react-router-dom'
 
 const BottomNav = (props)=> {
     const [markerPos, setMarkerPos] = useState(0);
@@ -49,6 +51,10 @@ const BottomNav = (props)=> {
                 <img className={styles.Icon} src={ProfileIcon}/>
                 <span>Profile</span>
             </div>
+            <Link to="/new" onMouseEnter={()=>HoverStart(3)} onMouseLeave={HoverEnd} className={styles.NavLink}>
+                <img className={styles.Icon} src={Plus}/>
+                <span>Add Job</span>
+            </Link>
         </div>
         <div className={styles.ActiveMarker} style={{transform: `translate(${markerPos}px)`}}>
             <div className={[markerMovingLeft? styles.MovingLeft:null,markerMovingRight? styles.MovingRight:null ].join(" ")}></div>
