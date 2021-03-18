@@ -7,51 +7,52 @@ import Skills from '../Resume/CompactSkills';
 import {withRouter} from 'react-router-dom';
 
 
-export default (props)=>{
+const StudentCard = (props)=>{
     let cardRef = useRef(null);
-    useEffect(()=>{
-        var options = {
-            root: null, // Page as root
-            rootMargin: '0px',
-            threshold: 0
-          };
-        //   console.log("use effect" , props.student.email);
-        // Create an observer
-        let observer = new IntersectionObserver(
-            (e)=>{
-                console.log(props.student.email , props.student.loading, props.student.loaded);
-                e.forEach(entry=>{
-                    if(entry.isIntersecting){
-                        console.log("intersecting ", props.student.email)
-                        if( props.student.email && !props.student.loading && !props.student.loaded){
-                            // console.log("fetching student")
-                            // console.log(props.student.email , props.student.loading, props.student.loaded)
-                            props.getStudent(props.student.email)
-                        }
-                    } 
-                })
+    // useEffect(()=>{
+    //     var options = {
+    //         root: null, // Page as root
+    //         rootMargin: '0px',
+    //         threshold: 0
+    //       };
+    //     //   console.log("use effect" , props.student.email);
+    //     // Create an observer
+    //     let observer = new IntersectionObserver(
+    //         (e)=>{
+    //             console.log(props.student.email , props.student.loading, props.student.loaded);
+    //             e.forEach(entry=>{
+    //                 if(entry.isIntersecting){
+    //                     console.log("intersecting ", props.student.email)
+    //                     if( props.student.email && !props.student.loading && !props.student.loaded){
+    //                         // console.log("fetching student")
+    //                         // console.log(props.student.email , props.student.loading, props.student.loaded)
+    //                         // props.getStudent(props.student.email)
+    //                     }
+    //                 } 
+    //             })
 
-            },
-            options
-        );
+    //         },
+    //         options
+    //     );
         
-        observer.observe(cardRef.current);
+    //     observer.observe(cardRef.current);
 
-        return ()=>{
-            console.log('cleanup')
-            observer.disconnect();
-        }
-    })
+    //     return ()=>{
+    //         console.log('cleanup')
+    //         observer.disconnect();
+    //     }
+    // })
     return(
         // !props.student.loading?
-        <div ref={cardRef} className={[styles.StudentCard, !props.student.loaded?styles.Loading:null].join(' ')}>
+        <div ref={cardRef} className={styles.StudentCard}>
+            {console.log(props, "props")}
             <div className={styles[props?.student?.flag?.toUpperCase()]}>{props?.student?.flag?.toUpperCase()}</div>
             <div className={styles.StudentInfo}>
                 <img className={styles.StudentImage} src={ props.student.profilePicture || userPlaceholder}/>
                 <StudentData student={props.student}/>
                 
             </div>
-            <Skills  oneLiner="oneLiner"  loading={!props.student.loaded} style={{margin:0, padding:0}} hardSkills={props.student.hardSkills} softSkills={props.student.softSkills}/>
+            <Skills  oneLiner="oneLiner" style={{margin:0, padding:0}} hardSkills={props.student.hskills} softSkills={props.student.sskills}/>
         </div>
         // : <h1>Loading...</h1>
         )
@@ -62,7 +63,7 @@ const StudentData = withRouter((props)=>{
     return(<div>
         <div className={styles.StudentData}>
         <h3 className={styles.StudentName}>{props.student.name}</h3>
-        <p className={styles.StudentSubTitle}>{props.student[degree]?.branch} - {props.student[degree]?.course}</p>
+        <p className={styles.StudentSubTitle}>{props.student.education?.degree?.field_of_study} - {props.student.education?.degree?.course}</p>
         <div className={styles.RatingAndView}>
             {/* <span className={styles.Rating}>
                 <span>Rating: </span>
@@ -75,3 +76,19 @@ const StudentData = withRouter((props)=>{
     </div>
     </div>)
 })
+
+
+export const LoadingStudentCard = (props)=>{
+    return(
+        <div className={[styles.StudentCard, styles.Loading].join(' ')}>
+            <div className={styles.StudentInfo}>
+                <img className={styles.StudentImage} src={ props.student.profilePicture || userPlaceholder}/>
+                <StudentData student={props.student}/>
+                
+            </div>
+            <Skills  oneLiner="oneLiner" loading style={{margin:0, padding:0}}/>
+        </div>
+    )
+}
+
+export default StudentCard

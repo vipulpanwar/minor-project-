@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import { Fragment } from 'react';
 import {db} from '../../firebase';
 import {StudentsProvider} from './StudentsContext';
+import StudentsCard from './StudentCard';
 
 const modalStyle = {
     maxWidth: 886,
@@ -49,14 +50,9 @@ class AppliedStudents extends Component{
         let countdata =[];
         let jobdata = [];
 
-        // let jd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).get();
-        // jd.forEach(jobDoc=>{
-        //     let job = jobDoc.data();
-        //     jobdata.push(job);
-        //     console.log(job);
-        // });
-        // this.setState({jobsdata: jobdata});
-        // console.log(jobdata, "see me");
+        let jd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).get();
+        this.setState({jobsdata: jd.data()});
+        console.log(this.state.jobsdata, "see me");
         
         let cd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('count').get();
         cd.forEach(jobDoc=>{
@@ -65,7 +61,6 @@ class AppliedStudents extends Component{
             console.log(job);
         });
         this.setState({countdata: countdata[0]});
-        // this.setState({countLoading: false});
         
 
         let ad = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('applicants').get();
@@ -78,7 +73,6 @@ class AppliedStudents extends Component{
         this.setState({applicants: applicants});
         this.setState({countLoading: false});
         console.log(applicants, "applicants");
-
     }
 
     componentWillUnmount(){
@@ -93,9 +87,11 @@ class AppliedStudents extends Component{
         console.log("applied student render")
         return(<div>
         
-            <StudentsProvider>
-                <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count} Students Applied`} subTitle={this.props?.job?.profile} filterToggle={this.toggleFilterHandler}/>
-                <StudentList getStudent={this.state.applicants} jobLoading={this.state.countLoading}/>
+            <StudentsProvider jobId={this.props.computedMatch.params.jobId}>
+                <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count} Students Applied`} subTitle={this.state.jobsdata.title} filterToggle={this.toggleFilterHandler}/>
+                
+                {/* {!this.state.countLoading && <StudentsCard getStudent={this.state.applicants} student={this.state.applicants[0]}/>} */}
+                <StudentList/>
                 {this.props.loading? null :
                 <Fragment>
                     <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>

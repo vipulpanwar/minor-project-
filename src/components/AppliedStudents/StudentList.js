@@ -4,6 +4,7 @@ import StudentCard from './StudentCard';
 import styles from './StudentList.module.css';
 import {StudentsContext} from './StudentsContext';
 import Loader from '../shared/ui/Loader/Loader';
+import {LoadingStudentCard} from './StudentCard';
 
 class StudentList extends Component{
     render(){
@@ -12,20 +13,20 @@ class StudentList extends Component{
         <div className={styles.StudentListContainer}>
             {/* { this.props.jobLoading?<Loader color="#232d4c"/>: */}           
             <div className={styles.StudentList}>
-            { this.props.jobLoading ? mapLoadingStudentList() : mapStudentListToCards(this.context.students, this.props.getStudent) }
+            { this.context.countLoading ? mapLoadingStudentList() : mapStudentListToCards(this.context.applicants) }
             </div>
         </div>)
     }
 }
 StudentList.contextType = StudentsContext;
 
-const mapStudentListToCards = (studentList, getStudent)=>{
-    return studentList.map((student, i)=><StudentCard getStudent={getStudent} key={i} student={student}/>)
+const mapStudentListToCards = (studentList)=>{
+    return studentList.map((student, i)=><StudentCard loaded={true} key={i} student={student}/>)
 }
 
 const mapLoadingStudentList = ()=>{
     let arr = [1,2,3,4];
-    return arr.map(student=><StudentCard getStudent={()=>{}} key={student} student={{loading:true}}/>)
+    return arr.map(student=><LoadingStudentCard key={student} student={{loading:true, name:"Anuj Talwar"}}/>)
 }
 
 export default StudentList;
