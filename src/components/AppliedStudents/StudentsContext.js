@@ -18,10 +18,11 @@ class StudentsProviderComponent extends Component{
 
         let ad = await db.collection('jobs').doc(this.props.jobId).collection('applicants').get();
         this.setState({applicantsData: ad});
-        this.state.applicantsData.forEach(jobDoc=>{
-            let job = jobDoc.data();
-            applicants.push(job);
-            console.log(job);
+        this.state.applicantsData.forEach(applicantsDoc=>{
+            let applicant = applicantsDoc.data();
+            applicant.id= applicantsDoc.id;
+            applicants.push(applicant);
+            console.log(applicant);
         });
         this.setState({applicants: applicants});
         this.setState({countLoading: false});

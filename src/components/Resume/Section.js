@@ -8,6 +8,7 @@ export default  (props)=>{
           <div>
               <hr />
             <div className="section-container">
+              <p className="section-title"> {props.type} </p>
               { props.data? mapDataToSectionTile(props.data, props.type) : null     }
             </div>
             </div>
@@ -39,28 +40,14 @@ const mapDataToSectionTile = (data, type)=>{
 }
 
 const mapStudentToInfo = (student)=>{
-  let xth = {
-    'title': `Xth - ${student.xthDetails.percentage}`,
-    'subTitle': `${student.xthDetails.board} • ${student.xthDetails.year}`
-  }, xiith ={
-    'title': `XIIth - ${student.xiithDetails.percentage}`,
-    'subTitle': `${student.xiithDetails.board} • ${student.xiithDetails.year}`
-  }, bachelors = {
-    'title': `Bachelors - ${student.bachelors.percentage}`,
-    'subTitle': `${student.bachelors.college} • ${student.bachelors.year}`
-  } 
-
-  let education = {
-    1:bachelors,
-    2:xiith,
-    3:xth,
+  let degrees = Object.keys(student);
+  let education = {}
+  for(degrees in student){
+    education.[degrees] = {
+      'title': `${[degrees]} - ${student.[degrees].percent}`,
+      'subTitle': `${student.[degrees].clg_board} • ${student.[degrees].year}`
+    }
   }
-
-  if(student.degree=="masters")
-    education[0] = {
-      'title': `Masters - ${student.masters.percentage}`,
-      'subTitle': `${student.masters.college} • ${student.masters.year}`
-    } 
 
   return education;
 }
@@ -68,9 +55,9 @@ const mapStudentToInfo = (student)=>{
 const mapExperienceToInfo = (exp)=>{
   return Object.keys(exp).map(expName=>({
     'title':expName,
-    'subTitle': `${exp[expName].company} • ${exp[expName].employmentType}`,
-    'subTitle2': `${formatDate(exp[expName].durationStartTime)} - ${ exp[expName].durationEndTime.seconds == 4102425000 ?'Present' :formatDate(exp[expName].durationEndTime)}`,
-    'description': exp[expName].description,
+    'subTitle': `${exp.[expName].company} • ${exp.[expName].type}`,
+    'subTitle2': ` | ${exp.[expName]?.startdate} - ${exp.[expName]?.enddate}`,
+    'description': exp.[expName].description,
   }))
 }
 

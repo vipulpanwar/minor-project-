@@ -92,14 +92,14 @@ class AppliedStudents extends Component{
                 
                 {/* {!this.state.countLoading && <StudentsCard getStudent={this.state.applicants} student={this.state.applicants[0]}/>} */}
                 <StudentList/>
-                {this.props.loading? null :
+                {this.state.countLoading? null :
                 <Fragment>
-                    <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
+                    {/* <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
                         <Filters eligibleCourses={this.props.job.eligibleCourses} closeHandler={this.toggleFilterHandler} />
-                    </Modal>
+                    </Modal> */}
 
                     <Route path={`${this.props.path}/student/:studentId`}  >
-                        <Modal show={!this.props.loading} style={modalStyle} closeHandler={this.modalCloseHandler}>
+                        <Modal show={!this.state.countLoading} style={modalStyle} closeHandler={this.modalCloseHandler}>
                             <Resume close={this.modalCloseHandler}/>
                         </Modal>
                     </Route>

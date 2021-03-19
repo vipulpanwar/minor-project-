@@ -7,7 +7,13 @@ import Button from '../shared/ui/Button/Button';
 export default  (props)=>{
   console.log(props.student)
   let student = props.student;
-  let degree = props.student.degree;
+  let degrees = Object.keys(props.student.edu);
+  let degree = props.student.edu[degrees[0]];
+  for (let degreeKey in props.student.edu){
+    if(degree.year<=props.student.edu[degreeKey].year){
+      degree = props.student.edu[degreeKey];
+    }
+  }
 
     return(
             <div className="profile-container">
@@ -16,7 +22,7 @@ export default  (props)=>{
               </div>
               <div className="applicant-info">
                 <p className="applicant-name">{student.name}</p>
-                <p className="applicant-details">{student[degree].branch} - {student[degree].course}  |  {student.address}</p>
+                <p className="applicant-details">{degree.field} - {degree.course}  |  {student.city}</p>
                 <p className="applicant-bio">
                   {student.about}
                 </p>

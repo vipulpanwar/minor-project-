@@ -58,12 +58,24 @@ const StudentCard = (props)=>{
         )
 }
 
+const getDegree = (student)=>{
+    let degrees = Object.keys(student.edu);
+    let degree = student.edu[degrees[0]];
+    for (let degreeKey in student.edu){
+        if(degree.year<=student.edu[degreeKey].year){
+          degree = student.edu[degreeKey];
+        }
+    }
+    return degree
+}
+
 const StudentData = withRouter((props)=>{
-    let degree = props.student.degree
+    
+    
     return(<div>
         <div className={styles.StudentData}>
         <h3 className={styles.StudentName}>{props.student.name}</h3>
-        <p className={styles.StudentSubTitle}>{props.student.education?.degree?.field_of_study} - {props.student.education?.degree?.course}</p>
+        {props.student.edu && <p className={styles.StudentSubTitle}>{getDegree(props.student).field} - {getDegree(props.student).course}</p>}
         <div className={styles.RatingAndView}>
             {/* <span className={styles.Rating}>
                 <span>Rating: </span>
