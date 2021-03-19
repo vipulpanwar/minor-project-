@@ -34,6 +34,7 @@ export default (props)=>{
             },
             options
         );
+
         
         observer.observe(cardRef.current);
 
