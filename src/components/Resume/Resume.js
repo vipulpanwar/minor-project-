@@ -17,29 +17,34 @@ import { CSSTransition } from "react-transition-group";
 
 
 class Resume extends Component{
-    componentDidMount(){
-        if(this.props.student.loading==false && this.props.student.loaded==false)
-        this.props.getStudent(this.props.match.params.studentId)
+    state = {
+        student : undefined,
+    }
+    async componentDidMount(){
+        let selectedstudent = this.context.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
+        this.setState({student: selectedstudent});
     }
     componentDidUpdate(){
-        if(this.props.student.loading==false && this.props.student.loaded==false)
-        this.props.getStudent(this.props.match.params.studentId)
+        if(this.state.student.email!=this.props.match.params.studentId){
+            let selectedstudent = this.context.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
+            this.setState({student: selectedstudent});
+        }
     }
 
     render (){
-        let student = this.props.student;
-        // console.log(this.props.student);
-        let [prev,next] = getPrevAndNextStudent (this.props.student.email, this.context.students)
+        let student = this.state.student;
+        let prev, next 
+        if(student != undefined){
+            [prev,next] = getPrevAndNextStudent (this.state.student?.email, this.context.applicants)
+        }
         return(
 
             <div>
-                {!this.props.student.loaded?<h1>Loading...</h1>: 
+                {!this.state.student?<h1>Loading...</h1>: 
                 <Fragment>
                     <TopBar close={this.props.close} />
                     <div className="resume-container">
                     <CandidateTagger student={student}/>
-                    <Profile student={student}/>
-
                     <CSSTransition appear unmountOnExit in={Boolean(next)} timeout={100}>
                         <div className='next-button-container'>
                             <Link className="next-button" to={`/jobs/${this.props.match.params.jobId}/student/${next}`}>
@@ -56,18 +61,19 @@ class Resume extends Component{
                         </div>
                     </CSSTransition>
 
+                    <Profile student={student}/>
 
                     <Skills hardSkills={student.hardSkills} softSkills={student.softSkills} />
                 
-                    {student.workExperience && <Section type="Experience" data={student.workExperience}/>}
+                    {Object.keys(student.exp).length !=0 && <Section type="Experience" data={student.exp}/>}
                     
-                    {student.projects && <Section type="Projects" data={student.projects}/>}
+                    {Object.keys(student.project).length !=0 && <Section type="Projects" data={student.project}/>}
                     
-                    {student && <Section type="Education" data={student} />}
+                    {Object.keys(student.edu).length !=0 && <Section type="Education" data={student.edu} />}
                 
-                    {student.courses && <Section type="Courses" data={student.courses}/>}
+                    {Object.keys(student.course).length !=0 && <Section type="Courses" data={student.course}/>}
             
-                    {student.accomplishments && <Section type="Accomplishments" data={student.accomplishments}/>}
+                    {Object.keys(student.accomp).length !=0 && <Section type="Accomplishments" data={student.accomp}/>}
                     </div>
                 </Fragment>
                 }

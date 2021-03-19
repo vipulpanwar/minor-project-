@@ -53,15 +53,23 @@
   .InputElement::placeholder {
     opacity: 0;
   } */
+.InputRow{
+  min-height: 90px;
+  padding-bottom: 10px;
+}
 
 .InputDiv{
   position: relative;
-  margin-bottom: 17px;
+  /* margin-bottom: 17px; */
   background-color: white;
   border: 1px solid #D3D5DB;
   border-radius: 10px;
   display: flex;
   align-items: baseline;
+}
+
+.InputDiv.ErrorInput{
+  border-color: #FF6565;
 }
 
 .InputElement {
@@ -97,18 +105,40 @@
 .Option{
   color:#232D4C;
   margin-right:20px;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
 }
 
-.prefix,
-.postfix
+.Prefix,
+.Postfix
 {
   color: #232D4C;
   opacity: 0.3;
   padding:12px
 }
-.prefix{
+.Prefix{
   padding-right: 0;
 }
-.postfix{
+.Postfix{
   padding-left: 0;
+}
+
+.Errors {
+  /* background: #FF6565; */
+  /* border-radius: 0px 0px 10px 10px; */
+  /* padding: 10px 10px 4px 10px; */
+  /* font-size: 0.9em;
+  /* margin-top: -10px; 
+  color: #FF6565;
+  margin-left:10px;
+  font-weight: 100; */
+
+  font-size: 0.8em;
+  background: #FF6565;
+  color: white;
+  margin-left: 4px;
+  font-weight: 300;
+  padding: 2px 6px;
+  border-radius: 3px;
 }

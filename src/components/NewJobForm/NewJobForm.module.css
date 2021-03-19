@@ -1,5 +1,6 @@
 .Slide{
     padding: 26px 31px;
+    display: grid;
 }
 
 .TwoCol{
@@ -12,7 +13,8 @@
 .Row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap:10px
+    gap:10px;
+    margin-top:14px;
 }
 
 .ModalContent {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Filter.css';
-import X from './images/x.svg';
+import X from '../../assets/icons/x.svg';
 import FilterTag from './FilterTag.js';
 import Button from '../shared/ui/Button/Button.js';
 import {connect} from 'react-redux';

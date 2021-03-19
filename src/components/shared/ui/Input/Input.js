@@ -94,20 +94,30 @@ export const Input = (props)=>{
   
   if(props.elementType=="radio")
     return <div style={props.style}>
-      <span className={styles.InputLabel}>{props.label}</span>
+        <InputLabel label={props.label} errors={props.errors} validation={props.validation}/>
         {inputElement}
     </div>
 
   return (
-    <label style={props.style} > 
-      <span  className={styles.InputLabel}>{props.label}</span>
-      <div className={styles.InputDiv}>
-          {props.prefix?<span className={styles.prefix}>{props.prefix}</span>:null}
+    <label className={styles.InputRow} style={props.style} > 
+      <InputLabel label={props.label} errors={props.errors} validation={props.validation}/>
+      <div className={`${styles.InputDiv} ${props?.errors?.length ? styles.ErrorInput: null}`}>
+          {props.prefix?<span className={styles.Prefix}>{props.prefix}</span>:null}
           {inputElement}
-          {props.postfix?<span className={styles.postfix}>{props.postfix}</span>:null}
+          {props.postfix?<span className={styles.Postfix}>{props.postfix}</span>:null}
       </div>
+      
     </label>
   )
 
 }
+
+export const InputLabel=(props)=>(
+  <span className={styles.InputLabel}>
+  <span>{props.label}
+    {props?.validation?.includes('required')?<span style={{color:"#FF6565"}}>*</span>:null}
+  </span>
+  {props.errors?.length> 0?<span className={styles.Errors}>{props.errors}</span>:null}
+</span>
+)
 

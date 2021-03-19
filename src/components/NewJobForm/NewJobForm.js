@@ -29,10 +29,11 @@ export default class NewJobForm extends React.Component{
                     },
                     elementType:"radio",
                     skip:true,
+                    validation:"required"
                 },
-                "Job Position":{value:"", elementType:"input" , name:'title'},
-                "Job Location": {value:"", elementType:"input", name:'job_loc'},
-                "Placement Drive Location":{ value:"", elementType:"input", name:'drive_loc'},
+                "Job Position":{value:"", elementType:"input" , name:'title', validation:"required"},
+                "Job Location": {value:"", elementType:"input", name:'job_loc', validation:"required"},
+                "Placement Drive Location":{ value:"", elementType:"input", name:'drive_loc', validation:"required"},
                 "Employment Type":{ 
                     value:"", 
                     elementConfig:{
@@ -40,17 +41,21 @@ export default class NewJobForm extends React.Component{
                         options:["Full Time", "Internship", 'Freelance']
                     },
                     elementType:"radio",
-                    name:"type"
+                    name:"type",
+                    validation:"required"
                 },
-                "CTC": {value:"", elementType:'input' , prefix:"₹", postfix:"MONTHLY", elementConfig:{type:'number', min:0},name:"ctc"},
-                "Job Category":{value:"",elementType:'input', name:'category'},
-                "Deadline":{value:'', elementType:'input',name:'deadline' ,elementConfig:{
+                "CTC": {value:"", elementType:'input' , prefix:"₹", postfix:"MONTHLY", 
+                        elementConfig:{type:'number', min:0}, name:"ctc", validation:"required"},
+                "Job Category":{ value:"", elementType:'input', name:'category', validation:"required"},
+                "Deadline":{value:'', elementType:'input', name:'deadline' ,validation:"required",
+                elementConfig:{
                     type:'date'
                 }},
             },
             "2-campus":{
                 "Qualifications":{
-                    value:[]
+                    value:[],
+                    validation:"required",
                 },
                 "Xth Percentage":{ 
                     value:0, 
@@ -58,7 +63,6 @@ export default class NewJobForm extends React.Component{
                     elementConfig:{
                         options:[0,60,70,80,90]
                     },
-
                     elementType:"select"
                 },
                 "XIIth Percentage":{ 
@@ -86,13 +90,15 @@ export default class NewJobForm extends React.Component{
                     value:"",
                     elementType:"textarea",
                     elementConfig:{ rows:5},
-                    name:'schedule'
+                    name:'schedule',
+                    validation:"required",
                 },
                 "Job Description":{
                     value:"",
                     elementType:"textarea",
                     elementConfig:{ rows:10},
-                    name:'desc'
+                    name:'desc',
+                    validation:"required",
                 }
             },
             "2-open":{
@@ -100,13 +106,15 @@ export default class NewJobForm extends React.Component{
                     value:"",
                     elementType:"textarea",
                     elementConfig:{ rows:5},
-                    name:'schedule'
+                    name:'schedule',
+                    validation:"required",
                 },
                 "Job Description":{
                     value:"",
                     elementType:"textarea",
                     elementConfig:{ rows:10},
-                    name:'desc'
+                    name:'desc',
+                    validation:"required",
                 }
             }
         }
@@ -117,6 +125,8 @@ export default class NewJobForm extends React.Component{
         let open = this.state.form["1"]["Job Type"].value =="Off Campus";
         let step = this.state.form.step;
         let stepCtn = Number(step[0]);
+
+        if(this.validateSection(step)) return;
 
         let nextButton = {...this.state.nextButton};
         const maxSteps = open? 2: 3;
@@ -139,6 +149,40 @@ export default class NewJobForm extends React.Component{
 
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], [label]:inputState}}})
         console.log(e.target.value, label, step)
+    }
+
+    validateSection(step){
+        let hasErrors = false;
+        let section = {...this.state.form[step]};
+
+        for(let inputKey in section){
+            let input = {...section[inputKey]};
+            let errors= this.inputValidator(input);
+            input['errors'] = errors;
+            console.log(errors)
+            section[inputKey] = input;
+            if(errors.length > 0)
+                hasErrors = true
+        }
+
+        this.setState({form:{...this.state.form, [step]:section}})
+        return hasErrors;
+
+    }
+
+    inputValidator(input){
+        if(!input.validation) return [];
+        let errors = [], checks = input.validation.split(" ");
+
+        if(checks.find(sub=> sub=='required'))
+        {
+            if (!input.value)
+                errors.push("Required")
+            else if (Object.keys(input.value).length == 0)
+                errors.push("Required")
+        }
+        
+        return errors;
     }
 
     inviteHandler=(invited)=>{

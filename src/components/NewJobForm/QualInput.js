@@ -4,6 +4,7 @@ import Button from '../shared/ui/Button/Button';
 import styles from './QualInput.module.css';
 import {db} from '../../firebase';
 import CoursesList from './CoursesList';
+import {InputLabel} from '../shared/ui/Input/Input'
 
 const inputStyles={
     'fontSize':14
@@ -132,7 +133,7 @@ export default class QualInput extends Component{
     render(){
         return(
             <div>
-                <p style={{fontWeight:500, marginBottom:8}}>9. Qualifications</p>
+                <InputLabel label="9. Qualifications" validation={this.props.validation} errors={this.props.errors}/>
                 <div className={styles.QualInput}>
                     <CoursesList deleteHandler={this.props.deleteHandler} courses={this.state.invitedCourses} courses={this.props.value}/>
                     <Input label="College" elementType="select" value={this.state.degreeValue} inputHandler={(e)=>{this.setState({degreeValue: e.target.value})}} elementConfig={{options:["usict"]}} style={inputStyles}/>     
