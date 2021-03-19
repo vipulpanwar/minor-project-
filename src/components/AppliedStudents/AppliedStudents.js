@@ -46,13 +46,10 @@ class AppliedStudents extends Component{
         // let jobId = this.props.computedMatch.params.jobId;
         // this.props.getJob(jobId);
         document.body.style.background = "#F4F4F6";
-        let applicants = [];
         let countdata =[];
-        let jobdata = [];
 
         let jd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).get();
         this.setState({jobsdata: jd.data()});
-        console.log(this.state.jobsdata, "see me");
         
         let cd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('count').get();
         cd.forEach(jobDoc=>{
@@ -61,18 +58,7 @@ class AppliedStudents extends Component{
             console.log(job);
         });
         this.setState({countdata: countdata[0]});
-        
-
-        let ad = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('applicants').get();
-        this.setState({applicantsData: ad});
-        this.state.applicantsData.forEach(jobDoc=>{
-            let job = jobDoc.data();
-            applicants.push(job);
-            console.log(job);
-        });
-        this.setState({applicants: applicants});
-        this.setState({countLoading: false});
-        console.log(applicants, "applicants");
+        this.setState({countLoading:false})
     }
 
     componentWillUnmount(){

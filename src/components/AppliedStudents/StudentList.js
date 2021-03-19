@@ -8,12 +8,11 @@ import {LoadingStudentCard} from './StudentCard';
 
 class StudentList extends Component{
     render(){
-        // console.log(this.context)
         return(
         <div className={styles.StudentListContainer}>
             {/* { this.props.jobLoading?<Loader color="#232d4c"/>: */}           
             <div className={styles.StudentList}>
-            { this.context.countLoading ? mapLoadingStudentList() : mapStudentListToCards(this.context.applicants) }
+            { this.context.state.countLoading ? mapLoadingStudentList() : mapStudentListToCards(this.context.state.applicants) }
             </div>
         </div>)
     }

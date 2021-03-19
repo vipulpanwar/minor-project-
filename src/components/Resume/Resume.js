@@ -21,12 +21,12 @@ class Resume extends Component{
         student : undefined,
     }
     async componentDidMount(){
-        let selectedstudent = this.context.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
+        let selectedstudent = this.context.state.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
         this.setState({student: selectedstudent});
     }
     componentDidUpdate(){
-        if(this.state.student.email!=this.props.match.params.studentId){
-            let selectedstudent = this.context.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
+        let selectedstudent = this.context.state.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
+        if((this.state.student.email!=this.props.match.params.studentId)||this.state.student.flag!=selectedstudent.flag){
             this.setState({student: selectedstudent});
         }
     }
@@ -35,7 +35,7 @@ class Resume extends Component{
         let student = this.state.student;
         let prev, next 
         if(student != undefined){
-            [prev,next] = getPrevAndNextStudent (this.state.student?.email, this.context.applicants)
+            [prev,next] = getPrevAndNextStudent (this.state.student?.email, this.context.state.applicants)
         }
         return(
 

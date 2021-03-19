@@ -1,29 +1,31 @@
-import React from "react"; 
+import React from "react";
+import {Component} from "react"; 
 import style from './CandidateTagger.module.css';
 import firebase from "../../firebase";
 import Button from "../shared/ui/Button/Button";
-
-const GoodMaker = () =>{
-    console.log("aaj se tu Good");
-}
-
-const db = firebase.firestore();
+import db from '../../firebase';
+import { StudentsContext } from '../AppliedStudents/StudentsContext';
 
 
-const ExcellentMaker = () =>{
-    console.log("aaj se tu Excellent");
-}
+class CandidateTagger extends Component{
 
-const AverageMaker = () =>{
-    console.log("aaj se tu Average");
-}
-
-
-export default  (props)=>{
-
-    console.log("Yahan se dekh");
-    console.log(props.student);
-  
+    render(){
+        const GoodMaker = () =>{
+            pusher("good");
+        }
+        
+        
+        const ExcellentMaker = () =>{
+            pusher("excellent");
+        }
+        
+        const AverageMaker = () =>{
+            pusher("average");
+        }
+        
+        const pusher = (newflag) =>{
+            this.context.updatef(this.props.student.id, newflag)
+        }
       return(
         <div className = {style.outercontainer}>
         <div className = {style.innercontainer}>
@@ -31,16 +33,22 @@ export default  (props)=>{
             <br />
             <div className= {style.buttoncontainer}>
             <a onClick={ExcellentMaker}>
-                <Button width="115px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Excellent</Button>
+                <Button width="115px" primary={this.props.student.flag?.toLowerCase()=="excellent"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Excellent</Button>
             </a>
             <a onClick={GoodMaker}>
-                <Button width="90px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Good</Button>
+                <Button width="90px" primary={this.props.student.flag?.toLowerCase()=="good"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Good</Button>
             </a>
             <a onClick={AverageMaker}>
-                <Button width="109px" style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Average</Button>
+                <Button width="109px" primary={this.props.student.flag?.toLowerCase()=="average"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Average</Button>
             </a>
             </div>
         </div>
     </div>
       )
   }
+}
+
+CandidateTagger.contextType = StudentsContext;
+
+
+export default CandidateTagger
