@@ -73,16 +73,15 @@ class AppliedStudents extends Component{
         console.log("applied student render")
         return(<div>
         
-            <StudentsProvider jobId={this.props.computedMatch.params.jobId}>
+            <StudentsProvider count ={this.state.countdata} jobId={this.props.computedMatch.params.jobId}>
                 <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count} Students Applied`} subTitle={this.state.jobsdata.title} filterToggle={this.toggleFilterHandler}/>
                 
-                {/* {!this.state.countLoading && <StudentsCard getStudent={this.state.applicants} student={this.state.applicants[0]}/>} */}
-                <StudentList/>
+                <StudentList count={this.state.countdata}/>
                 {this.state.countLoading? null :
                 <Fragment>
-                    {/* <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
-                        <Filters eligibleCourses={this.props.job.eligibleCourses} closeHandler={this.toggleFilterHandler} />
-                    </Modal> */}
+                    <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
+                        <Filters closeHandler={this.toggleFilterHandler} />
+                    </Modal>
 
                     <Route path={`${this.props.path}/student/:studentId`}  >
                         <Modal show={!this.state.countLoading} style={modalStyle} closeHandler={this.modalCloseHandler}>

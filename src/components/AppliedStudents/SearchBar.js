@@ -14,7 +14,7 @@ class SearchBar extends Component{
 
     render(){
         return(<div className={styles.SearchRow}>
-            <input onInput={this.searchInputHandler} className={styles.SearchInput} type="Text" placeholder="Search by name"/>
+            <input onInput={this.searchInputHandler} className={styles.SearchInput} type="Text" placeholder="Search by Email"/>
             <Button clicked={this.props.filterToggle} width="unset" style={{marginLeft:20, padding:21, borderColor:'#D3D5DB'}}>
                 <img className={styles.Icon} src={filterIcon}></img>
             </Button>

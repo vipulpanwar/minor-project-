@@ -14,6 +14,17 @@
   width: 100%;
 }
 
+.searchTagInput{
+  padding-top: 2px;
+  padding-left: 10px;
+  font:18x;
+  display:inline-block;
+  border: 0px;
+  display: flex;
+  color: #4A90E2;
+  width: 40%;
+}
+
 .close-filters-button{
   display: inline-block;
   float: right;

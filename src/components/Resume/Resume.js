@@ -26,7 +26,7 @@ class Resume extends Component{
     }
     componentDidUpdate(){
         let selectedstudent = this.context.state.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
-        if((this.state.student.email!=this.props.match.params.studentId)||this.state.student.flag!=selectedstudent.flag){
+        if((this.state.student.email!=this.props.match.params.studentId)||(this.state.student.flag!=selectedstudent.flag)||((this.state.student.status!=selectedstudent.status))){
             this.setState({student: selectedstudent});
         }
     }

@@ -37,8 +37,8 @@ class Profile extends Component{
                   <div className="rating-box"><p className='rating-text'><span style={{color:"#898989"}}>Rating:</span> 4.5</p></div>
                   <div style={{display:"inline-block", float:"right"}}>
                     {console.log(this.props.student.id)}
-                    <Button width="129px" height="50px" clicked={updatestatus("Reject")} style={rejectstyle}>Reject</Button>
-                    <Button width="129px" height="50px" clicked={updatestatus("Hire")} primary={this.props.student.status=="Hire"}>Hire</Button>
+                    <Button width="129px" height="50px" clicked={()=>{updatestatus("Reject")}} style={rejectstyle}>Reject</Button>
+                    <Button width="129px" height="50px" clicked={()=>{updatestatus("Hire")}} primary={this.props.student.status=="Hire"}>Hire</Button>
                   </div>
                 </div>
               </div>

@@ -11,16 +11,16 @@ class CandidateTagger extends Component{
 
     render(){
         const GoodMaker = () =>{
-            pusher("good");
+            pusher("Good");
         }
         
         
         const ExcellentMaker = () =>{
-            pusher("excellent");
+            pusher("Excellent");
         }
         
         const AverageMaker = () =>{
-            pusher("average");
+            pusher("Average");
         }
         
         const pusher = (newflag) =>{

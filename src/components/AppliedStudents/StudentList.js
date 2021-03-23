@@ -12,7 +12,9 @@ class StudentList extends Component{
         <div className={styles.StudentListContainer}>
             {/* { this.props.jobLoading?<Loader color="#232d4c"/>: */}           
             <div className={styles.StudentList}>
-            { this.context.state.countLoading ? mapLoadingStudentList() : mapStudentListToCards(this.context.state.applicants) }
+            {mapStudentListToCards(this.context.state.applicants)}
+            { this.context.state.studentLoading ? mapLoadingStudentList() : null }
+            {/* { this.context.state.newStudentsLoading ? mapLoadingStudentList() : null } */}
             </div>
         </div>)
     }
