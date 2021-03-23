@@ -86,6 +86,7 @@ import {db} from '../../firebase'
         if(collegeData.id==selectedCol){
           college = collegeData;
           // break;
+          return 0;
         }
       });
       let degrees = Object.keys(college.edu)

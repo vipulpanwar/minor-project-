@@ -12,9 +12,11 @@ import {AuthStateChanged} from './store/actions/auth';
 
 import HomeContainer  from "./components/Home/home"; 
 import LoginContainer  from "./components/Login/Login";
+import Signup from "./components/CreateAccount/Signup";
 import AppliedStudentsContainer from './components/AppliedStudents/AppliedStudents';
 import ProtectedRoute from './components/shared/ProtectedRoute/ProtectedRoute';
 import AppLoading from './components/shared/AppLoader/AppLoader';
+import CreateAccount from './components/CreateAccount/CreateAccount';
 
 function App(props) {
 
@@ -29,6 +31,8 @@ function App(props) {
       <Router>
         <Switch>
           <Route path="/login" component={LoginContainer}/>
+          <Route path="/signup" component={Signup} />
+          <Route path="/createaccount" component={CreateAccount} />
           <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
           <ProtectedRoute matchPath={true} path="/" component={HomeContainer}/>
         </Switch>
