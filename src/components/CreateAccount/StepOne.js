@@ -15,7 +15,10 @@ class StepOne extends Component {
                     <p className={styles.tellus}>Tell Us About Your Company</p>
                     <br />
                     <div className={styles.companylogodiv}>
-                        <img className = {styles.leftimage} src={logoinput} />
+                        <label>
+                            <img className = {styles.leftimage} src={logoinput} />
+                            <input className={styles.hide} id="CompanyLogo" type="file"></input>
+                        </label>
                     </div>
                     <form>
                         <TextInput label="Company Name"/>
