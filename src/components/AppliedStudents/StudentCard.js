@@ -5,48 +5,22 @@ import userPlaceholder from '../../assets/images/user_placeholder.jpg'
 import Button from '../shared/ui/Button/Button';
 import Skills from '../Resume/CompactSkills';
 import {withRouter} from 'react-router-dom';
+import Excellent from './images/excellent.svg';
+import Good from './images/good.svg';
+import Average from './images/average.svg';
+import New from './images/new.svg';
 
 
 const StudentCard = (props)=>{
     let cardRef = useRef(null);
-    // useEffect(()=>{
-    //     var options = {
-    //         root: null, // Page as root
-    //         rootMargin: '0px',
-    //         threshold: 0
-    //       };
-    //     //   console.log("use effect" , props.student.email);
-    //     // Create an observer
-    //     let observer = new IntersectionObserver(
-    //         (e)=>{
-    //             console.log(props.student.email , props.student.loading, props.student.loaded);
-    //             e.forEach(entry=>{
-    //                 if(entry.isIntersecting){
-    //                     console.log("intersecting ", props.student.email)
-    //                     if( props.student.email && !props.student.loading && !props.student.loaded){
-    //                         // console.log("fetching student")
-    //                         // console.log(props.student.email , props.student.loading, props.student.loaded)
-    //                         // props.getStudent(props.student.email)
-    //                     }
-    //                 } 
-    //             })
-
-    //         },
-    //         options
-    //     );
-        
-    //     observer.observe(cardRef.current);
-
-    //     return ()=>{
-    //         console.log('cleanup')
-    //         observer.disconnect();
-    //     }
-    // })
     return(
         // !props.student.loading?
         <div ref={cardRef} className={styles.StudentCard}>
             {console.log(props, "props")}
-            <div className={styles[props?.student?.flag?.toUpperCase()]}>{props?.student?.flag?.toUpperCase()}</div>
+            {props.student.flag=="Excellent" && <div className={styles.excellent}><img src={Excellent} alt={props.student.flag}/></div>}
+            {props.student.flag=="Good" && <div className={styles.excellent}><img src={Good} alt={props.student.flag}/></div>}
+            {props.student.flag=="Average" && <div className={styles.excellent}><img src={Average} alt={props.student.flag}/></div>}
+            {props.student.flag=="New" && <div className={styles.excellent}><img src={New} alt={props.student.flag}/></div>}
             <div className={styles.StudentInfo}>
                 <img className={styles.StudentImage} src={ props.student.profilePicture || userPlaceholder}/>
                 <StudentData student={props.student}/>
