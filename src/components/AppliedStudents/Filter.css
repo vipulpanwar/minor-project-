@@ -23,6 +23,7 @@
   display: flex;
   color: #4A90E2;
   width: 40%;
+  vertical-align: middle;
 }
 
 .close-filters-button{
@@ -71,6 +72,42 @@
   font-size: 14px;
   line-height: 17px;
   color: #4A90E2;
+}
+
+.filter-input-field-multi{
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #4A90E2;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: block;
+  padding: 11px 20px 0 7px;
+  margin: 8px 0 3px 0;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  color: #4A90E2;
+  min-height: 40px;
+}
+
+/* .noHighlight:focus-visible{
+  display:none;
+} */
+
+.searchTagInput:focus{
+  outline:none;
+}
+
+.noHightlight{
+  padding-top: 2px;
+  padding-left: 10px;
+  font:18x;
+  display:inline-block;
+  border: none;
+  display: flex;
+  color: #4A90E2;
+  width: 40%;
 }
 
 .apply-filters-button{

@@ -426,3 +426,7 @@ color: #4A90E2;
   width: 64px;
   background-color: #e7e7e7;
 }
+
+.tagRemoverButton{
+  margin-left: 13px;
+}

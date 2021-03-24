@@ -10,28 +10,43 @@ class FilterMultiTag extends Component{
     abc = (e)=>{
         e.preventDefault();
         let pusher = this.state.skills;
-        pusher.push("Oh")
+        console.log(e.target.parentElement[0].value);
+        pusher.push(e.target.parentElement[0].value);
+        e.target.parentElement[0].value=''
         this.setState({skills:pusher})
         console.log("state updated");
     }
 
+    tagRemover = (tag)=>{
+        let array = this.state.skills
+        array.splice(array.indexOf(tag), 1);
+        console.log(array.indexOf(tag), tag)
+        this.setState({skills:array});
+    }
+
+    mapTags = ()=>{
+            return this.state.skills.map(tag=><SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} func={this.tagRemover} multi key={tag} skill={tag} level="silver" />)
+    }
+
     state = {
-        skills : ['Hello', 'No', 'not', 'this', 'please',]
+        skills : []
     }
     render(){
-    return (<div className="filter-tag-container" style={{minHeight:'30px'}}>
+    return (<div className="filter-tag-container" style={{minHeight:'40px'}}>
         {this.props.name}
-        <div className = 'filter-input-field' style={{minHeight:'30px'}}>
-            <div style={{maxWidth:'60%', float:'left', marginTop:'-4px'}}>
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[0]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[1]} level="silver" />
-                {/* <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[2]} level="silver" />
+        <div className = 'filter-input-field-multi'>
+            <div style={{maxWidth:'55%', float:'left', marginTop:'-4px'}}>
+
+                {this.mapTags()}
+                {/* <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} multi skill={this.state.skills[0]} level="silver" />
+                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} multi skill={this.state.skills[1]} level="silver" />
+                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[2]} level="silver" />
                 <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[3]} level="silver" />
                 <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" />
                 <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" />
                 <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" /> */}
-                <SkillTag style={{margin:'auto', marginBottom:'5px',}} skill={this.state.skills[5]} level="silver" />
+                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" />
+                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[5]} multi level="silver" /> */}
             </div>
             <div style={{verticalAlign:'middle'}}>
                 <form style={{verticalAlign:'middle'}} ref={this.myref}>
