@@ -43,7 +43,7 @@ firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 firebase.analytics();
-
+export const storage = firebase.storage();
 export const db = firebase.firestore();
 console.log("Firebase inited");
 
