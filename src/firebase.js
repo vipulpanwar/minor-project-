@@ -4,6 +4,7 @@ import "firebase/analytics";
 
 import "firebase/auth";
 import "firebase/firestore";
+import 'firebase/storage';
 
 
 process.env.MODE = "TEST";
