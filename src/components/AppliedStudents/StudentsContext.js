@@ -22,10 +22,14 @@ class StudentsProviderComponent extends Component{
                     collegeOptions: ['All'],
         },        
         searchValue: '',
-        hasMore:undefined,
+        appliedHired: 'Applied',
     }
 
     async componentDidMount (){
+        console.log(this.props)
+        if(this.props.hired=='true'){
+            this.setState({appliedHired:"Hired"})
+        }
         this.fetchStudents(this.state.filters)
     }
 
@@ -84,7 +88,7 @@ class StudentsProviderComponent extends Component{
 
     fetchStudents = async (filters, moreStudents = false)=>{
             let applicants = []
-            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Applied').limit(10);
+            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', this.state.appliedHired).limit(10);
             for (let filterKey in filters){
                 if(filters[filterKey]!='All' && filters[filterKey]!=''){
                     if(filterKey=="course"||filterKey=="field"){
@@ -96,8 +100,6 @@ class StudentsProviderComponent extends Component{
                 }
             }
             if(moreStudents){
-                console.log(this.state.studentLoading, "nae bache")
-                console.log("I bought more students!")
                 let studs = this.state.applicants.length
                 let lastStudent = this.state.applicants[studs - 1];
                 console.log(lastStudent.id);

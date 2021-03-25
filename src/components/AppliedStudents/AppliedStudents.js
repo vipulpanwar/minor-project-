@@ -74,7 +74,7 @@ class AppliedStudents extends Component{
         return(<div>
         
             <StudentsProvider count ={this.state.countdata} jobId={this.props.computedMatch.params.jobId}>
-                <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count} Students Applied`} subTitle={this.state.jobsdata.title} filterToggle={this.toggleFilterHandler}/>
+                <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count}`} subTitle={this.state.jobsdata.title} filterToggle={this.toggleFilterHandler}/>
                 
                 <StudentList count={this.state.countdata}/>
                 {this.state.countLoading? null :

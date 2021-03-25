@@ -5,7 +5,7 @@ import TextInput from './TextInput'
 import logoinput from './images/inputlogo.svg'
 import { CreateAccountContext } from './CreateAccountContext'
 import { Redirect } from 'react-router-dom'
-import firebase from '../../firebase'
+// import 'firebase/storage'
 
 class StepOne extends Component {
 
@@ -56,16 +56,16 @@ class StepOne extends Component {
     }
 
     imgUploader = (file) =>{
-        let ref = firebase.storage().ref();
-        let name = 'logo'
-        let metadata = {
-            contentType: file.type,
-        }
-        let task = ref.child(name).put(file, metadata);
-        task.then(snapshot => snapshot.ref.getDownloadURL()).then((url) => {
-            console.log(url);
-            this.setState({logo:url});
-        })
+        // // let ref = firebase().storage().ref();
+        // let name = 'logo'
+        // let metadata = {
+        //     contentType: file.type,
+        // }
+        // let task = ref.child(name).put(file, metadata);
+        // task.then(snapshot => snapshot.ref.getDownloadURL()).then((url) => {
+        //     console.log(url);
+        //     this.setState({logo:url});
+        // })
     }
 
     nextPagehandler = (e) =>{
