@@ -5,7 +5,7 @@ import styles from './CreateAccount.module.css'
 
 class CreateAccount extends Component {
     state = {
-        stepOne: true,
+        stepOne: false,
     }
     render() {
         return (

@@ -11,7 +11,7 @@ export const Login = (email, password)=>{
         auth.signInWithEmailAndPassword(email, password)
             .then(async user=>{
                 let token = await firebase.auth().currentUser.getIdTokenResult();
-                token.claims.userType ="company";    
+                // token.claims.userType = "company";    
                 if(token.claims?.userType === "company")
                     dispatch(LoginSuccess(user));
                 else
@@ -45,7 +45,7 @@ export const AuthStateChanged = (user)=>{
             return dispatch(AuthStateChangedStart(user));
 
         let token = await firebase.auth().currentUser.getIdTokenResult()   ;
-        token.claims.userType ="company";              
+        // token.claims.userType ="company";              
         if(token.claims?.userType === "company")
             dispatch(AuthStateChangedStart(user));
         else
