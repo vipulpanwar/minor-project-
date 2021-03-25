@@ -34,7 +34,7 @@ function App(props) {
           <Route path="/signup" component={Signup} />
           <Route path="/createaccount" component={CreateAccount} />
           <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
-          <ProtectedRoute path="/jobs/:jobId/hired" render= {(props)=><AppliedStudentsContainer hired {...props}/>}/>
+          <ProtectedRoute path="/jobs/:jobId/hired" render= {(props)=><AppliedStudentsContainer hired='true' {...props}/>}/>
           <ProtectedRoute matchPath={true} path="/" component={HomeContainer}/>
         </Switch>
       </Router>

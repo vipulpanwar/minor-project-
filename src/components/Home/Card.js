@@ -49,7 +49,7 @@ function DetailCard(props){
       <span>Student Navigator</span>
       <img className={styles.BlueNextButton} src={blueNextButton}/>
     </div>
-    <Link to={`jobs/${props.job.id}`} hired='true'>
+    <Link to={`jobs/${props.job.id}/hired`}>
     <div className={[styles.Container,styles.SingleContainer].join(" ")}>
       <span>Hiring Room</span>
       <img className={styles.BlueNextButton} src={blueNextButton}/>

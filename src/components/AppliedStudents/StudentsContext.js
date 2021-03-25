@@ -15,6 +15,7 @@ class StudentsProviderComponent extends Component{
                     field: 'All',
                     flag: 'All',
                     collegeid: 'All',
+                    skillValue: [],
         },
         options: {  degreeOptions: ['All'],
                     courseOptions: ['All'],
@@ -93,6 +94,9 @@ class StudentsProviderComponent extends Component{
                 if(filters[filterKey]!='All' && filters[filterKey]!=''){
                     if(filterKey=="course"||filterKey=="field"){
                         query = query.where(`edu.${filters.degree}.${filterKey}`, '==', filters[filterKey])
+                    }
+                    else if(filterKey=="skillValue"){
+                        query = query.where('hskills', 'array-contains-any', filters[filterKey])
                     }
                     else{
                         query = query.where(filterKey, '==', filters[filterKey])
