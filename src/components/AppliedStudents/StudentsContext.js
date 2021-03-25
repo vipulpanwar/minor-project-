@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import React , { createContext, Component, createRef, useCallBack, useRef, useState, useEffect, useLayoutEffect} from 'react';
+import React , { createContext, Component, createRef, useState, useEffect, useLayoutEffect} from 'react';
 import {db} from '../../firebase'
 export const StudentsContext = createContext();
 
@@ -15,6 +15,7 @@ class StudentsProviderComponent extends Component{
                     field: 'All',
                     flag: 'All',
                     collegeid: 'All',
+                    skillValue: [],
         },
         options: {  degreeOptions: ['All'],
                     courseOptions: ['All'],
@@ -22,11 +23,15 @@ class StudentsProviderComponent extends Component{
                     collegeOptions: ['All'],
         },        
         searchValue: '',
-        hasMore:undefined,
+        showHired:false,
     }
 
     async componentDidMount (){
-        this.fetchStudents(this.state.filters)
+        console.log(this.props)
+        if(this.props.hired){
+            this.setState({showHired:true})
+        }
+        this.fetchStudents(this.state.filters, false, this.props.hired)
     }
 
     endOfPageHandler = ()=>{
@@ -82,13 +87,20 @@ class StudentsProviderComponent extends Component{
         this.fetchStudents(emails);
     }
 
-    fetchStudents = async (filters, moreStudents = false)=>{
+    fetchStudents = async (filters, moreStudents = false, showHired= false)=>{
             let applicants = []
             let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Applied').limit(10);
+            console.log(this.props.hired, "showHired")
+            if(this.props.hired){
+                query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Hire').limit(10);
+            }
             for (let filterKey in filters){
                 if(filters[filterKey]!='All' && filters[filterKey]!=''){
                     if(filterKey=="course"||filterKey=="field"){
                         query = query.where(`edu.${filters.degree}.${filterKey}`, '==', filters[filterKey])
+                    }
+                    else if(filterKey=="skillValue"){
+                        query = query.where('hskills', 'array-contains-any', filters[filterKey])
                     }
                     else{
                         query = query.where(filterKey, '==', filters[filterKey])
@@ -96,8 +108,6 @@ class StudentsProviderComponent extends Component{
                 }
             }
             if(moreStudents){
-                console.log(this.state.studentLoading, "nae bache")
-                console.log("I bought more students!")
                 let studs = this.state.applicants.length
                 let lastStudent = this.state.applicants[studs - 1];
                 console.log(lastStudent.id);

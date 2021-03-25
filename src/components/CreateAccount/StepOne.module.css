@@ -10,14 +10,14 @@
 }
 
 .container{
-    width:100%;
+    width:100vw;
     height:100vh;
 }
 
 .rightcontainer{
     display:inline-block;
-    height: 100%;
     width: 75vw;
+    height: 100%;
     padding: 38px 69px 57px 69px;
     background: #F1F2F3;
 }
@@ -61,10 +61,19 @@
     margin-right: 21px;
 }
 
-.submitButton{
+.submitButtoninactive{
     width: 150px;
     height: 50px;
     background: #D3D5DB;
+    border-radius: 10px;
+    color:white;
+    display:block;
+}
+
+.submitButton{
+    width: 150px;
+    height: 50px;
+    background: #4A90E2;
     border-radius: 10px;
     color:white;
     display:block;
@@ -87,12 +96,38 @@
 .createButton{
     width: 373px;
     height: 51px;
-    background: #D3D5DB;
+    background: #4A90E2;
     border-radius: 10px;
     color:white;
     margin-top: 44px;
 }
 
+.createButtonInactive{
+    width: 373px;
+    height: 51px;
+    background: #D3D5DB;
+    border-radius: 10px;
+    color:white;
+    margin-top: 44px; 
+}
+
 .hide{
     display:none;
+}
+
+.nooutline:focus{
+    outline:none;
+}
+
+.logoName{
+    width: 165px;
+    height: 115px;
+    background: #4A90E2;
+    border: 1px dashed #4A90E2;
+    box-sizing: border-box;
+    border-radius: 12px;
+    text-align: center;
+    vertical-align: center;
+    color: #F1F2F3;
+    padding-top: 31px;
 }

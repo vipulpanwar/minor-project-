@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import StepOne from './StepOne.js';
-import StepTwo from './StepTwo.js';
+import Form from './Form'
 import styles from './CreateAccount.module.css'
+import {CreateAccountProvider} from './CreateAccountContext';
 
 class CreateAccount extends Component {
-    state = {
-        stepOne: false,
-    }
     render() {
         return (
-            <div className = {styles.container}>   
-                {this.state.stepOne? <StepOne />: <StepTwo />}
-            </div>
+            <CreateAccountProvider>
+                <div className = {styles.container}>   
+                    <Form />
+                </div>
+            </CreateAccountProvider>
         )
     }
 }

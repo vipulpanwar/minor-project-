@@ -126,13 +126,19 @@ import {db} from '../../firebase'
   degreeInputHandler = (e)=>{
     let degree = e.target.value;
     this.getCourseOptions(degree)
-    this.setState({degreeValue:degree})    
+    this.setState({degreeValue:degree})
+    if(degree=="All"){
+      this.setState({courseOptions:["All"], courseValue:'All', branchOptions:['All'], branchValue:'All'})
+    }
   }
 
   courseInputHandler = (e)=>{
     let course = e.target.value;
     this.getBranchOptions(course)
-    this.setState({courseValue:course})    
+    this.setState({courseValue:course})
+    if(course=='All'){
+      this.setState({branchOptions:["All"], branchValue: 'All'})
+    }
   }
 
   branchInputHandler = (e)=>{
@@ -149,6 +155,9 @@ import {db} from '../../firebase'
     let college = e.target.value
     this.getDegreeOptions(college)
     this.setState({collegeValue: college})
+    if(college == 'All'){
+      this.setState({courseOptions:["All"], branchOptions:['All'], degreeOptions: ['All'], courseValue:'All', branchValue:'All', degreeValue:'All'})
+    }
   }
 
   applyFiltersHandler = (e)=>{
@@ -158,6 +167,7 @@ import {db} from '../../firebase'
       field: this.state.branchValue,
       flag: this.state.tagValue,
       collegeid: this.state.collegeValue,
+      skillValue :this.state.skillValue
     }
     let options = { 
         degreeOptions: this.state.degreeOptions,
@@ -174,12 +184,12 @@ import {db} from '../../firebase'
         Filters
         <button className='close-filters-button' onClick={this.props.closeHandler}> <img src={X} /> </button>
         <div>
-          <FilterTag inputHandler={this?.collegeInputHandler} name="College" selected={this.state.collegeValue} options={this.state.collegeOptions}/>
-          <FilterTag inputHandler={this?.degreeInputHandler} name="Degree" selected={this.state.degreeValue} options={this.state.degreeOptions}/>
-          <FilterTag inputHandler={this?.courseInputHandler} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>
-          <FilterTag inputHandler={this?.branchInputHandler} name="Branch" selected={this.state.branchValue} options={this.state.branchOptions}/>
-          <FilterTag inputHandler={this?.tagInputHandler} name="Tag" selected={this.state.tagValue} options={this.state.tagOptions} />
-          <FilterMultiTag inputHandler={this?.tagInputHandler} name="Skills" selected={this.state.tagValue} options={this.state.tagOptions} />
+          {this.props.campus && <FilterTag inputHandler={this?.collegeInputHandler} name="College" selected={this.state.collegeValue} options={this.state.collegeOptions}/>}
+          {this.props.campus && <FilterTag inputHandler={this?.degreeInputHandler} name="Degree" selected={this.state.degreeValue} options={this.state.degreeOptions}/>}
+          {this.props.campus && <FilterTag inputHandler={this?.courseInputHandler} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>}
+          {this.props.campus && <FilterTag inputHandler={this?.branchInputHandler} name="Branch" selected={this.state.branchValue} options={this.state.branchOptions}/>}
+          {this.props.campus && <FilterTag inputHandler={this?.tagInputHandler} name="Tag" selected={this.state.tagValue} options={this.state.tagOptions} />}
+          {!this.props.campus && <FilterMultiTag inputHandler={this?.tagInputHandler} name="Skills" selected={this.state.tagValue} options={this.state.tagOptions} />}
         </div>
         <div className="apply-filter-button-div">
           <Button clicked={this.applyFiltersHandler} primary="Primary" className="apply-filters-button" width="135px" height="50px" style={{fontSize: '14px', fontWeight: '300', letterSpacing: '-0.01em', lineHeight: '17px'}}>Apply Filters</Button>

@@ -70,17 +70,21 @@ class AppliedStudents extends Component{
     }
 
     render(){
-        console.log("applied student render")
+        let Modalstyling = {maxWidth:791}
+        if(!this.state.jobsdata.campus){
+            Modalstyling = {maxWidth: 400}
+        }
+        console.log(this.props.hired, "applied studs props")
         return(<div>
         
-            <StudentsProvider count ={this.state.countdata} jobId={this.props.computedMatch.params.jobId}>
-                <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count} Students Applied`} subTitle={this.state.jobsdata.title} filterToggle={this.toggleFilterHandler}/>
+            <StudentsProvider hired={this.props.hired} count ={this.state.countdata} jobId={this.props.computedMatch.params.jobId}>
+                <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count}`} subTitle={this.state.jobsdata.title} filterToggle={this.toggleFilterHandler}/>
                 
                 <StudentList count={this.state.countdata}/>
                 {this.state.countLoading? null :
                 <Fragment>
-                    <Modal show={this.state.showFilters} style={ {maxWidth: 791}} closeHandler={this.toggleFilterHandler}>
-                        <Filters closeHandler={this.toggleFilterHandler} />
+                    <Modal show={this.state.showFilters} style={Modalstyling} closeHandler={this.toggleFilterHandler}>
+                        <Filters campus={this.state.jobsdata.campus} closeHandler={this.toggleFilterHandler} />
                     </Modal>
 
                     <Route path={`${this.props.path}/student/:studentId`}  >

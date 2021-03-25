@@ -21,6 +21,7 @@ class Profile extends Component{
     }
 
     let rejectstyle = {marginRight:"12px", color: "#D0021B", borderColor:"#D0021B"}
+    let profilepicLink = "gs://oneios.appspot.com/users/"+ student.uid +"/myphoto.jpg"
     return(
             <div className="profile-container">
               {console.log(this.context.state, "context")}
