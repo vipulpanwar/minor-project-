@@ -16,8 +16,8 @@ export default class TextInput extends Component {
         return (
             <div className={styles.inputcontainer} style={this.divstyle}>
                 <p className={styles.label}>{this.props.label}</p>
-                {!this.props.textarea && <input style={this.styling} className={styles.inputbox} type="text" ></input>}
-                {this.props.textarea && <textarea style={this.styling} className={styles.inputbox} type="textarea" ></textarea>}
+                {!this.props.textarea && <input style={this.styling} onChange={this.props.change} className={styles.inputbox} type="text" ></input>}
+                {this.props.textarea && <textarea style={this.styling} onChange={this.props.change} className={styles.inputbox} type="textarea" ></textarea>}
             </div>
         )
     }

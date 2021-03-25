@@ -2,9 +2,11 @@ import React,{Component} from "react";
 import Button from "../../components/shared/ui/Button/Button";
 import Input from '../../components/shared/ui/Input/Input';
 import ErrorBox from './ErrorBox';
+import firebase from '../../firebase'
 
 import { connect } from "react-redux";
 import {Login as loginAction} from '../../store/actions/auth'
+import { Route, Redirect } from "react-router";
 
 class LoginForm extends Component {
     state = {
@@ -37,7 +39,9 @@ class LoginForm extends Component {
                 },
                 value: "",
             },
-        }
+        },
+
+        signedUp: false,
     }
 
     inputHandler = (e, elName)=>{
@@ -54,18 +58,38 @@ class LoginForm extends Component {
         });
     }
     
-    onLoginHandler =(e)=>{
+    signup =(e)=>{
         e.preventDefault();
-        this.props.login(this.state.form.email.value, this.state.form.password.value)
+        if(this.state.form["password"].value==this.state.form["confirm password"].value){
+            let email = this.state.form["email"].value;
+            let password = this.state.form["password"].value;
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                console.log("created");
+                console.log(userCredential)
+                this.setState({signedUp:true})
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage)
+            });
+        }
+        else{
+            alert("please enter same passwords");
+        }
     }
 
     render()
     {
+        if(this.state.signedUp){
+            return <Redirect to='/createaccount' />
+        }
         return (
             <form>
                 <ErrorBox error={this.props.error?.message}/>
                 {this.renderForm()}
-                <Button primary style={{'marginTop': 25}} clicked={this.onLoginHandler} loading={this.props.isLoading}>
+                <Button primary style={{'marginTop': 25}} clicked={this.signup} loading={this.props.isLoading}>
                     Login
                 </Button>
             </form>
