@@ -23,15 +23,15 @@ class StudentsProviderComponent extends Component{
                     collegeOptions: ['All'],
         },        
         searchValue: '',
-        appliedHired: 'Applied',
+        showHired:false,
     }
 
     async componentDidMount (){
         console.log(this.props)
-        if(this.props.hired=='true'){
-            this.setState({appliedHired:"Hired"})
+        if(this.props.hired){
+            this.setState({showHired:true})
         }
-        this.fetchStudents(this.state.filters)
+        this.fetchStudents(this.state.filters, false, this.props.hired)
     }
 
     endOfPageHandler = ()=>{
@@ -87,9 +87,13 @@ class StudentsProviderComponent extends Component{
         this.fetchStudents(emails);
     }
 
-    fetchStudents = async (filters, moreStudents = false)=>{
+    fetchStudents = async (filters, moreStudents = false, showHired= false)=>{
             let applicants = []
-            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', this.state.appliedHired).limit(10);
+            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Applied').limit(10);
+            console.log(this.props.hired, "showHired")
+            if(this.props.hired){
+                query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Hire').limit(10);
+            }
             for (let filterKey in filters){
                 if(filters[filterKey]!='All' && filters[filterKey]!=''){
                     if(filterKey=="course"||filterKey=="field"){

@@ -1,5 +1,6 @@
 import React , { createContext, Component, createRef, useCallBack, useRef, useState, useEffect, useLayoutEffect} from 'react';
 import {db} from '../../firebase'
+import { storage } from '../../firebase'
 export const CreateAccountContext = createContext();
 
 
@@ -20,7 +21,8 @@ class CreateAccountProviderComponent extends Component{
 
             }
         },
-        stepOne: true
+        stepOne: true,
+        img:''
     }
 
     stepOneHandler =(data)=>{
@@ -30,7 +32,7 @@ class CreateAccountProviderComponent extends Component{
             updater.industry_type=data.industry_type
             updater.company_address= data.company_address
             updater.website= data.website
-        this.setState({form:updater,stepOne:false})
+        this.setState({form:updater,stepOne:false, img: data.img})
     }
 
     stepTwoHandler = (data)=>{
@@ -41,7 +43,8 @@ class CreateAccountProviderComponent extends Component{
             updater.email = data.email
             updater.phone = data.phone
             updater.social_media =data.social_media
-
+        let url = this.imgUploader(this.state.img)
+        updater.logo = url
         this.setState({form:updater})
         console.log(updater, "updater")
         db.collection("company").add(this.state.form)
@@ -52,6 +55,17 @@ class CreateAccountProviderComponent extends Component{
         .catch((error) => {
             console.error("Error adding document: ", error);
         });
+    }
+
+    imgUploader = async (file) =>{
+        console.log(file, "file")
+        let ref = storage.ref('company');
+        let name = 'logo'
+        let task = ref.child(name).put(file.files[0]);
+        await task.then(snapshot => snapshot.ref.getDownloadURL()).then((url) => {
+            console.log(url, "url");
+            return url;
+        })
     }
 
     render(){

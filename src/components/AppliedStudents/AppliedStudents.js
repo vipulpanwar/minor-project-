@@ -74,7 +74,7 @@ class AppliedStudents extends Component{
         if(!this.state.jobsdata.campus){
             Modalstyling = {maxWidth: 400}
         }
-        console.log(this.props, "applied studs props")
+        console.log(this.props.hired, "applied studs props")
         return(<div>
         
             <StudentsProvider hired={this.props.hired} count ={this.state.countdata} jobId={this.props.computedMatch.params.jobId}>
