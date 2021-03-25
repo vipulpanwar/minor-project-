@@ -32,7 +32,7 @@ class FilterMultiTag extends Component{
         skills : []
     }
     render(){
-    return (<div className="filter-tag-container" style={{minHeight:'40px'}}>
+    return (<div className="filter-tag-container" style={{minHeight:'40px', width:'100%', paddingRight:0}}>
         {this.props.name}
         <div className = 'filter-input-field-multi'>
             <div style={{maxWidth:'55%', float:'left', marginTop:'-4px'}}>

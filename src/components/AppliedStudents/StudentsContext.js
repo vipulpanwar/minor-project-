@@ -15,6 +15,7 @@ class StudentsProviderComponent extends Component{
                     field: 'All',
                     flag: 'All',
                     collegeid: 'All',
+                    skillValue: [],
         },
         options: {  degreeOptions: ['All'],
                     courseOptions: ['All'],
@@ -22,10 +23,14 @@ class StudentsProviderComponent extends Component{
                     collegeOptions: ['All'],
         },        
         searchValue: '',
-        hasMore:undefined,
+        appliedHired: 'Applied',
     }
 
     async componentDidMount (){
+        console.log(this.props)
+        if(this.props.hired=='true'){
+            this.setState({appliedHired:"Hired"})
+        }
         this.fetchStudents(this.state.filters)
     }
 
@@ -84,11 +89,14 @@ class StudentsProviderComponent extends Component{
 
     fetchStudents = async (filters, moreStudents = false)=>{
             let applicants = []
-            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Applied').limit(10);
+            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', this.state.appliedHired).limit(10);
             for (let filterKey in filters){
                 if(filters[filterKey]!='All' && filters[filterKey]!=''){
                     if(filterKey=="course"||filterKey=="field"){
                         query = query.where(`edu.${filters.degree}.${filterKey}`, '==', filters[filterKey])
+                    }
+                    else if(filterKey=="skillValue"){
+                        query = query.where('hskills', 'array-contains-any', filters[filterKey])
                     }
                     else{
                         query = query.where(filterKey, '==', filters[filterKey])
@@ -96,8 +104,6 @@ class StudentsProviderComponent extends Component{
                 }
             }
             if(moreStudents){
-                console.log(this.state.studentLoading, "nae bache")
-                console.log("I bought more students!")
                 let studs = this.state.applicants.length
                 let lastStudent = this.state.applicants[studs - 1];
                 console.log(lastStudent.id);
