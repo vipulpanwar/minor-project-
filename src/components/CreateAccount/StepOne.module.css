@@ -126,8 +126,10 @@
     border: 1px dashed #4A90E2;
     box-sizing: border-box;
     border-radius: 12px;
-    text-align: center;
-    vertical-align: center;
+    /* text-align: center; */
+    /* vertical-align: center; */
     color: #F1F2F3;
-    padding-top: 31px;
+    place-items: center;
+    /* padding-top: 31px; */
+    display: grid
 }

@@ -1,0 +1,125 @@
+.container{
+    height:100vh;
+    width:100vw;
+}
+
+.leftcontainer{
+    width:28vw;
+    height: 100vh;
+    display:inline-block;
+    vertical-align: top;
+    overflow:hidden;
+}
+
+.rightcontainer{
+    width: 72vw;
+    display:inline-block;
+    vertical-align: top;
+    height: 100vh;
+    background: radial-gradient(166.67% 269.75% at 85.98% 167.57%, #DCE8F6 0%, #FFFFFF 100%);
+}
+
+.title{
+    height: 36px;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    color: #9196A5;
+    padding-bottom: 30px;
+}
+
+.leftForm{
+    width: 49%;
+    display:inline-block;
+    padding-top:30px;
+}
+
+.rightForm{
+    float:right;
+    padding-top:30px;
+    width:50%;
+    vertical-align: top;
+}
+
+.logocontainer{
+    position:relative;
+    left: 55px;
+    top: -101px;
+    width: 129px;
+    height: 125.35px;
+    background: #FFFFFF;
+    box-shadow: 0px 7px 21px rgba(0, 0, 0, 0.22);
+    border-radius: 12px;
+    place-items: center;
+    display:grid;
+}
+
+.companyDetails{
+    margin-top: -80px;
+    padding-left: 53px;
+}
+
+.companyName{
+    height: 29px;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    color: #232D4C;
+}
+
+.Industry{
+    padding-top:3px;
+    height: 17px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #232D4C;
+}
+
+.otherDetails{
+    padding: 48px 0 0 0;
+}
+
+.website{
+    height: 17px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration-line: underline;
+    color: #4A90E2;
+    display:inline-block;
+    vertical-align: top;
+    padding-left: 4px;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.address{
+    padding-top: 10px;
+}
+
+.location{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #9196A5;
+    width:260px;
+    display:inline-block;
+    vertical-align: top;
+    padding-top: 2px;
+}
+
+.nooutline:focus{
+    outline:none;
+}
+
+.addmore{
+    height: 17px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #4A90E2;
+}

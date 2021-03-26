@@ -6,6 +6,7 @@ import logoinput from './images/inputlogo.svg'
 import { CreateAccountContext } from './CreateAccountContext'
 import Camera from './images/camera.svg'
 import { Redirect } from 'react-router-dom'
+import Success from '../shared/ui/Modal/success'
 // import 'firebase/storage'
 
 class StepOne extends Component {
@@ -66,6 +67,7 @@ class StepOne extends Component {
     render() {
         return (
             <div className={styles.container}>
+                {/* <Success show title="Account Created" subtitle="Your Account will get activated in 24hours" buttonText="Go To Login Page"/> */}
                 <div className={styles.leftcontainer}>
                     <img className = {styles.leftimage} src={leftimg} />
                 </div>
@@ -74,7 +76,7 @@ class StepOne extends Component {
                     <br />
                     <div className={styles.companylogodiv}>
                         <label>
-                            {this.state.logoName?<div className={styles.logoName}><img src={Camera}/><br/>{this.state.logoName}</div>:<img className = {styles.leftimage} src={logoinput} />}
+                            {this.state.logoName?<div className={styles.logoName}><div style={{textAlign:'center'}}><img src={Camera}/><br/>{this.state.logoName}</div></div>:<img className = {styles.leftimage} src={logoinput} />}
                             <input className={styles.hide} id="CompanyLogo" type="file" onChange={this.logoinputHandler} accept="image/png, image/jpeg"></input>
                         </label>
                     </div>
