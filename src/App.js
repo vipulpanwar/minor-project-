@@ -9,7 +9,7 @@ import {  BrowserRouter as Router,
 import firebase from './firebase';
 import {connect} from 'react-redux';
 import {AuthStateChanged} from './store/actions/auth';
-
+import Profile from './components/Profile/Profile.js';
 import HomeContainer  from "./components/Home/home"; 
 import LoginContainer  from "./components/Login/Login";
 import Signup from "./components/CreateAccount/Signup";
@@ -35,6 +35,7 @@ function App(props) {
           <Route path="/createaccount" component={CreateAccount} />
           <ProtectedRoute path="/jobs/:jobId/hired" render= {(props)=><AppliedStudentsContainer hired {...props}/>}/>
           <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
+          <ProtectedRoute path="/profile" component= {Profile}/>
           <ProtectedRoute matchPath={true} path="/" component={HomeContainer}/>
         </Switch>
       </Router>

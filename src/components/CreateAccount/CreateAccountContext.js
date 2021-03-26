@@ -35,7 +35,7 @@ class CreateAccountProviderComponent extends Component{
         this.setState({form:updater,stepOne:false, img: data.img})
     }
 
-    stepTwoHandler = (data)=>{
+    stepTwoHandler = async (data)=>{
         let updater = this.state.form
             updater.founded_in = data.founded_in
             updater.size = data.size
@@ -43,8 +43,9 @@ class CreateAccountProviderComponent extends Component{
             updater.email = data.email
             updater.phone = data.phone
             updater.social_media =data.social_media
-        let url = this.imgUploader(this.state.img)
+        let url = await this.imgUploader(this.state.img)
         updater.logo = url
+        // console.log(url.['[PromiseResult]'])
         this.setState({form:updater})
         console.log(updater, "updater")
         db.collection("company").add(this.state.form)
@@ -58,14 +59,18 @@ class CreateAccountProviderComponent extends Component{
     }
 
     imgUploader = async (file) =>{
-        console.log(file, "file")
+        let logo
+        console.log(file.files, "file")
         let ref = storage.ref('company');
-        let name = 'logo'
-        let task = ref.child(name).put(file.files[0]);
-        await task.then(snapshot => snapshot.ref.getDownloadURL()).then((url) => {
-            console.log(url, "url");
-            return url;
-        })
+        let name = this.state.form.email+'logo'
+        let task = await ref.child(name).put(file.files[0]);
+        // task.then(snapshot => snapshot.ref.getDownloadURL()).then((url) => {
+        //     console.log(url, "url");
+        //     logo = url
+        // })
+        logo = await task.ref.getDownloadURL()
+        console.log(logo, "logo")
+        return logo
     }
 
     render(){
