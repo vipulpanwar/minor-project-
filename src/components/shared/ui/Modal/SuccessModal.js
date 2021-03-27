@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import Modal from './Modal'
 import Tick from './images/tick.svg'
-import styles from './success.module.css'
+import styles from './SuccessModal.module.css'
 import Button from '../Button/Button'
 
-export default class success extends Component {
+export default class Success extends Component {
     style={
         width: '488px',
         height: '415px',

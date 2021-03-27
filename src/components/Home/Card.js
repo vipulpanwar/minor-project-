@@ -45,15 +45,17 @@ function DetailCard(props){
         <img src={blueNextButton} style={{position:"absolute", right:17, bottom:33}}/>
       </div>
     </Link>
-    <div className={[styles.Container,styles.SingleContainer].join(" ")}>
-      <span>Student Navigator</span>
-      <img className={styles.BlueNextButton} src={blueNextButton}/>
-    </div>
+    <Link to="">
+      <div className={[styles.Container,styles.SingleContainer].join(" ")}>
+        <span>Job Details</span>
+        <img className={styles.BlueNextButton} src={blueNextButton}/>
+      </div>
+    </Link>
     <Link to={`jobs/${props.job.id}/hired`}>
-    <div className={[styles.Container,styles.SingleContainer].join(" ")}>
-      <span>Hiring Room</span>
-      <img className={styles.BlueNextButton} src={blueNextButton}/>
-    </div>
+      <div className={[styles.Container,styles.SingleContainer].join(" ")}>
+        <span>Hired Students</span>
+        <img className={styles.BlueNextButton} src={blueNextButton}/>
+      </div>
     </Link>
   </div>)
 }

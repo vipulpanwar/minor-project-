@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import Button from "../../components/shared/ui/Button/Button";
-import Input from '../../components/shared/ui/Input/Input';
+import {FloatingInput as Input} from '../../components/shared/ui/Input/Input';
 import ErrorBox from './ErrorBox';
 import firebase from '../../firebase'
 

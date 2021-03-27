@@ -4,6 +4,7 @@ import firebase from '../../firebase';
 const initialState = {
     user: firebase.auth().user,
     isAuthenticated:undefined,
+    isProfileLoaded: false,
     isLoginFormLoading: false,
     loginError: null,
 }
@@ -19,23 +20,26 @@ const reducer = (state = initialState, action)=>{
             return {...state, isLoginFormLoading: false,loginError :action.payload }
 
         case actionTypes.USER_LOGIN_SUCCESS:
-            return {...state, isLoginFormLoading: false, user: action.payload.user}
+            return {...state, isLoginFormLoading: false, user: action.payload.user, isProfileLoaded:false}
 
 
         case actionTypes.FIREBASE_AUTH_STATECHANGED:
             if(action.payload == null)
-                return {...state, loading: false, user: action.payload, isAuthenticated:false}
+                return {...state, user: action.payload, isAuthenticated:false, isProfileLoaded:true}
             else
-                return {...state, loading: false, user: action.payload, isAuthenticated:true}
+                return {...state, user: action.payload, isAuthenticated:true}
+
+        case actionTypes.GET_PROFILE:
+            return {...state, isProfileLoaded:true, profile: action.payload}
 
         case actionTypes.USER_LOGOUT:
-            return {...state, loading: true};
+            return {...state, loading: true, isAuthenticated: undefined};
 
         case actionTypes.USER_LOGOUT_FAILED:
-            return {...state, loading: false, logoutError :action.payload }
+            return {...state, loading: false, isAuthenticated:true, logoutError :action.payload }
 
         case actionTypes.USER_LOGOUT_SUCCESS:
-            return {...state, loading: false, user: null}
+            return {...state, loading: false, isAuthenticated:false, user: null, profile: undefined}
 
         default:
         return state;

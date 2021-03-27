@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import Button from "../../components/shared/ui/Button/Button";
-import Input from '../../components/shared/ui/Input/Input';
+import {FloatingInput as Input} from '../../components/shared/ui/Input/Input';
 import ErrorBox from './ErrorBox';
 
 import { connect } from "react-redux";
@@ -40,7 +40,7 @@ class LoginForm extends Component {
     renderForm = ()=>{
         return  Object.keys(this.state.form).map(elName=>{ 
             let el= this.state.form[elName];
-            return <Input key={elName} changed={(e)=> this.inputHandler(e, elName)} {...el} />
+            return <Input key={elName} style={{'marginBottom':10}} changed={(e)=> this.inputHandler(e, elName)} {...el} />
         });
     }
     

@@ -18,6 +18,7 @@ import ProtectedRoute from './components/shared/ProtectedRoute/ProtectedRoute';
 import AppLoading from './components/shared/AppLoader/AppLoader';
 import CreateAccount from './components/CreateAccount/CreateAccount';
 import ForgotPassword from './components/Login/ForgotPassword';
+import Alerts from './components/Alerts/Alerts'
 
 function App(props) {
 
@@ -26,6 +27,7 @@ function App(props) {
       props.authStateChange(user);
       console.log('Auth State Changed');
     });
+    
   console.log("Rendering App")
   return (
     <AppLoading>
@@ -41,7 +43,9 @@ function App(props) {
           <ProtectedRoute matchPath={true} path="/" component={HomeContainer}/>
         </Switch>
       </Router>
+      <Alerts/>
     </AppLoading>
+    
   );
 }
 

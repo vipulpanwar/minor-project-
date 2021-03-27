@@ -10,7 +10,7 @@ class AppLoader extends React.Component {
     render() {
         const isAuthenticated =this.props.isAuthenticated;
         
-        if(isAuthenticated=== undefined)
+        if(isAuthenticated=== undefined || this.props.loading == false)
         return  (
             <div className={styles.LoadingLogo}>
                 <img src={logo}/>
@@ -23,6 +23,7 @@ class AppLoader extends React.Component {
 
 const mapStateToProps  = (state)=>({
     user: state.auth.user,
+    loading: state.auth.isProfileLoaded,
     isAuthenticated: state.auth.isAuthenticated,
 })
 
