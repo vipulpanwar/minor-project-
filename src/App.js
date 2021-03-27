@@ -17,6 +17,7 @@ import AppliedStudentsContainer from './components/AppliedStudents/AppliedStuden
 import ProtectedRoute from './components/shared/ProtectedRoute/ProtectedRoute';
 import AppLoading from './components/shared/AppLoader/AppLoader';
 import CreateAccount from './components/CreateAccount/CreateAccount';
+import ForgotPassword from './components/Login/ForgotPassword';
 
 function App(props) {
 
@@ -33,6 +34,7 @@ function App(props) {
           <Route path="/login" component={LoginContainer}/>
           <Route path="/signup" component={Signup} />
           <Route path="/createaccount" component={CreateAccount} />
+          <Route path="/forgotpassword" component={ForgotPassword} />
           <ProtectedRoute path="/jobs/:jobId/hired" render= {(props)=><AppliedStudentsContainer hired {...props}/>}/>
           <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
           <ProtectedRoute path="/profile" component= {Profile}/>

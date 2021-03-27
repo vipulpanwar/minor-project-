@@ -90,7 +90,7 @@ class LoginForm extends Component {
                 <ErrorBox error={this.props.error?.message}/>
                 {this.renderForm()}
                 <Button primary style={{'marginTop': 25}} clicked={this.signup} loading={this.props.isLoading}>
-                    Login
+                    Sign Up
                 </Button>
             </form>
         )
