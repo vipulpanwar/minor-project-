@@ -3,14 +3,16 @@ import Button from '../shared/ui/Button/Button';
 import {Input} from '../shared/ui/Input/Input';
 import styles from './NewJobForm.module.css';
 import QualInput from './QualInput';
+import { v4 as uuidv4 } from 'uuid';
 
 import {db} from '../../firebase';
+import {connect} from 'react-redux';
 
 const inputStyles={
     'fontSize':14
 }
 
-export default class NewJobForm extends React.Component{
+class NewJobForm extends React.Component{
     state = {
         nextButton:{
             text:"Next",
@@ -44,8 +46,8 @@ export default class NewJobForm extends React.Component{
                     name:"type",
                     validation:"required"
                 },
-                "CTC": {value:"", elementType:'input' , prefix:"₹", postfix:"MONTHLY", 
-                        elementConfig:{type:'number', min:0}, name:"ctc", validation:"required"},
+                "CTC": {value:"", elementType:'input' , 
+                        elementConfig:{type:'text'}, name:"ctc", validation:"required"},
                 "Job Category":{ value:"", elementType:'input', name:'category', validation:"required"},
                 "Deadline":{value:'', elementType:'input', name:'deadline' ,validation:"required",
                 elementConfig:{
@@ -260,12 +262,15 @@ export default class NewJobForm extends React.Component{
 
         job['status'] = true
         job['easy_apply'] = false;
-        job['creatorid'] = "company@ensvee.com";
+        job['creatorid'] = this.props.user.uid;
         job['created'] = new Date();
         job['deadline'] = new Date(job['deadline']);
         job['placed'] = false
-
-        await db.collection('jobs').doc().set(job);
+        let uid = uuidv4();
+        job['uid'] = uid;
+        await db.collection('jobs').doc(uid).set(job);
+        await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0, lastCheck: new Date()})
+        this.props.close();
         alert("Job Created")
     }
 
@@ -325,3 +330,9 @@ const createPercentage =(val)=>({
     80: 80 >= Number(val),
     90: 90 >= Number(val),
 })
+
+const mapStateToProps = (state)=>({
+    user: state.auth.user
+  })
+  
+  export default connect(mapStateToProps, null) (NewJobForm);

@@ -5,10 +5,11 @@ import Background from './images/backgroundimg.svg'
 import Website from './images/website.svg'
 import Location from './images/location.svg'
 import Logo from './images/logo.svg'
+import {connect} from 'react-redux';
 
-export default class Profile extends Component {
+class Profile extends Component {
     state={
-        count:0
+        count:0,
     }
 
     counter = (e)=>{
@@ -24,6 +25,7 @@ export default class Profile extends Component {
         for(let i=0;i<this.state.count; i++){
             social.push(<TextInput inline width='100%' key={i} label="Social Media Links"/>)
         }
+        let profile = this.props.profile;
         return (
             <div className={styles.container}>
                 <div className={styles.leftcontainer}>
@@ -33,17 +35,17 @@ export default class Profile extends Component {
                     </div>
                     <div className={styles.companyDetails}>
                         <div className={styles.companyName}>
-                            Google Pvt. Ltd.
+                            {profile.name}
                         </div>
                         <div className={styles.Industry}>
-                            Technology Company
-                            <p>Founded In 2001 | Email:google@gmail.com </p>
+                            {profile.industry}
+                            <p>Founded In {profile.founded_in} | Email: {profile.email}</p>
                         </div>
                         <div className={styles.otherDetails}>
                             <img src={Website}/>
-                            <a className={styles.link} href="https://www.google.com"> <div className={styles.website}>www.google.com</div></a>
+                            <a className={styles.link} href={profile.website}> <div className={styles.website}>{profile.website}</div></a>
                             <div className={styles.address}>
-                                <img src={Location}/> <div className={styles.location}> Unitech Signature Tower 2 Tower B, Gurgaon Sector 15 Part 2, Gurgaon - 122001, Near 32 Mile Stone, Village Silokhera</div>
+                                <img src={Location}/> <div className={styles.location}> {profile.company_address}</div>
                             </div>
                         </div>
                     </div>
@@ -52,9 +54,9 @@ export default class Profile extends Component {
                 <div style={{padding:'44px'}}>
                     <div className={styles.title}>Edit Company Details</div>
                     <div className={styles.leftForm}>
-                        <TextInput inline width='100%' label="Company Size"/>
-                        <TextInput inline width='100%' label="Phone Number"/>
-                        <TextInput inline width='100%' height="290px" textarea label="About"/>
+                        <TextInput inline width='100%' value={profile.size} label="Company Size"/>
+                        <TextInput inline width='100%' value={profile.phone} label="Phone Number"/>
+                        <TextInput inline width='100%' value={profile.about} height="290px" textarea label="About"/>
                     </div>
                     <div className={styles.rightForm}>
                         {social}
@@ -67,3 +69,9 @@ export default class Profile extends Component {
         )
     }
 }
+
+const mapStateToProps = (state)=>({
+    profile:state.auth.profile
+})
+
+export default connect(mapStateToProps, null)(Profile)
