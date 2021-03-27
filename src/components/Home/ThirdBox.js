@@ -1,12 +1,14 @@
 import React from 'react'
 import styles from './HomeInfo.module.css';
 import tbr from './image.svg';
+import MinimumQualifications from './MinimumQualifications'
 
 function ThirdBox() {
     return (
         <div>
             <div className = {styles.thirdBox}>
                 <img style = {{display:"inline-block"}} src={tbr}></img>
+                {/* <MinimumQualifications /> */}
                 <div style = {{width:"50%", display: "inline-block", verticalAlign: "top"}}>
                     <div className = {styles.jobdesc}>
                         <div className = {styles.catTitle}>

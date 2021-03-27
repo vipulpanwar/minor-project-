@@ -3,11 +3,7 @@ import SkillTag from '../Resume/SkillTag';
 import './Filter.css';
 
 class FilterMultiTag extends Component{
-//   renderOptions= ()=>{
-//     if(props.options)
-//     return props.options.map((option, i)=><option key={i}>{option}</option>)
-//   }
-    abc = (e)=>{
+    takeInput = (e)=>{
         e.preventDefault();
         let pusher = this.state.skills;
         console.log(e.target.parentElement[0].value);
@@ -51,7 +47,7 @@ class FilterMultiTag extends Component{
             <div style={{verticalAlign:'middle'}}>
                 <form style={{verticalAlign:'middle'}} ref={this.myref}>
                     <input className='searchTagInput' type="Text" placeholder="Search Tags"/>
-                    <button style={{display:'none'}} type="submit" onClick={this.abc}>submit</button>
+                    <button style={{display:'none'}} type="submit" onClick={this.takeInput}>submit</button>
                 </form>
             </div>
         </div>

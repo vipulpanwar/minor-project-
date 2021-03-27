@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import styles from './HomeInfo.module.css';
-import image from './bgimg.svg';
+import ButtonImage from './images/buttonimage.svg'
 import ThirdBox from './ThirdBox.js'
 import Button from '../shared/ui/Button/Button.js';
 
  class homeInfo extends Component{
 
   render (){
-    return (<div className={styles.container} style ={{height:'554px'}}>    
-        <div className={styles.header}>
-            <div className = {styles.headerInner}>
-                <div className = {styles.titleBox}>
-                    <h1 className = {styles.title}>Android Developer</h1>
-                    <p className = {styles.desc}>Full Time  |  2.3 LPA  |  12 Jan’20</p>
-                </div>
-                <div className = {styles.appliedBox}>
-                    <span style={{display:'inline-block', marginRight: '11px'}}>42 Students Applied </span><img style = {{display:'inline-block'}} src = {image}></img>
+    return (
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <div className = {styles.headerInner}>
+                    <div className = {styles.titleBox}>
+                        <h1 className = {styles.title}>Android Developer</h1>
+                        <div className = {styles.desc}>Full Time  |  2.3 LPA  |  12 Jan’20</div>
+                    </div>
+                    <div className = {styles.appliedBox}>
+                        <span style={{display:'inline-block', marginRight: '11px'}}>42 Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className = {styles.secondaryBox}>
+            <div className = {styles.secondaryBox}>
             <div className = {styles.categoryBox}>
                 <div className = {styles.catBox}>
                     <div className = {styles.catTitle}>Job Category:</div>
@@ -48,7 +49,8 @@ import Button from '../shared/ui/Button/Button.js';
             11:00 AM - Apptitude    |    12:00 PM - GD    |    5:00 PM - PI
             </div>
         </div>
-    </div>)   
+        </div>
+    )   
   }
 }
 
