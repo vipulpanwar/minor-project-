@@ -22,6 +22,7 @@
     align-items: center;
     text-align: center;
     transition: transform 0.1s ease-in-out;
+    min-height: 362px;
 }
 
 .NewCard:hover{
