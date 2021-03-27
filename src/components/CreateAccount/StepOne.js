@@ -85,7 +85,7 @@ class StepOne extends Component {
                         <TextInput change={this.typeinputhandler} label="Industry Type"/>
                         <TextInput change={this.websiteinputhandler} label="Company Website"/>
                         <TextInput change={this.addinputhandler} label="Company Address"/>
-                        {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<button className={styles.submitButtoninactive}>Next</button>}
+                        {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<button disabled='true' className={styles.submitButtoninactive}>Next</button>}
                         {this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName && <button type = "submit" onClick={this.nextPagehandler} className={styles.submitButton}>Next</button>}
                     </form>
                 </div>

@@ -1,0 +1,57 @@
+.LoginGrid
+{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: minmax(540px, 1fr) 1.5fr;
+    height: 100vh;
+}
+
+
+.LoginSide 
+{
+    display:grid;
+    /* display: flex; */
+    /* flex-direction: column; */
+    place-items: center;
+    padding-left:80px;
+    padding-right:120px;
+    vertical-align: middle;
+    height: 100vh;
+    margin-left: 60px;
+}
+
+.H1 
+{
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 43px;
+    margin-top:23px;
+    color: #0D0C21;
+}
+
+.IllustrationSide
+{
+    display:grid;
+    place-items: center;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.DescriptionText{
+    /* width: 250px; */
+    height: 38px;
+    font-size: 14px;
+    line-height: 135.2%;
+    color: #000000;
+    margin-top: 13px;
+    margin-bottom: 36px;
+}
+
+.label{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 106.2%;
+    color: #28292E;
+    padding-bottom: 9px;
+}
