@@ -5,11 +5,11 @@ import './Filter.css';
 class FilterMultiTag extends Component{
     takeInput = (e)=>{
         e.preventDefault();
-        let pusher = this.state.skills;
+        let newSkills = this.state.skills;
         console.log(e.target.parentElement[0].value);
-        pusher.push(e.target.parentElement[0].value);
+        newSkills.push(e.target.parentElement[0].value);
         e.target.parentElement[0].value=''
-        this.setState({skills:pusher})
+        this.setState({skills:newSkills})
         console.log("state updated");
     }
 
