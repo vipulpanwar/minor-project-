@@ -10,9 +10,9 @@ export default class MinimumQualifications extends Component {
                     Minimum Qualifications
                 </div>
                 <Qualification degree="xth" percent="90"/>
-                <Qualification degree="xth" percent="90"/>
-                <Qualification degree="xth" percent="90"/>
-                <Qualification degree="xth" percent="90"/>
+                <Qualification degree="Diploma" percent="90"/>
+                <Qualification degree="Bachelors" percent="90"/>
+                <Qualification degree="Masters" percent="90"/>
             </div>
         )
     }

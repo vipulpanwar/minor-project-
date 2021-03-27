@@ -45,7 +45,8 @@
     line-height: 17px;
     color: #232D4C;
     margin-top: 4px;
-}
+    text-transform: capitalize;
+}    
 
 .appliedBox{
     padding: 9px 14px 9px 11px;

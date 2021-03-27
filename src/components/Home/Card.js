@@ -49,7 +49,7 @@ const [showHomeInfo, ToggleHomeInfo] = useState(false)
       </div>
     </Link>
     <Modal show={showHomeInfo} style={ {maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px",}} closeHandler={()=>{ToggleHomeInfo(false)}}>
-      <HomeInfo/>
+      <HomeInfo job={props.job}/>
     </Modal>
     {/* <button> */}
       <div onClick={()=>ToggleHomeInfo(true)} className={[styles.Container,styles.SingleContainer].join(" ")}>

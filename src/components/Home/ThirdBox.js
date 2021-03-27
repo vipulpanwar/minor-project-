@@ -3,7 +3,7 @@ import styles from './HomeInfo.module.css';
 import tbr from './image.svg';
 import MinimumQualifications from './MinimumQualifications'
 
-function ThirdBox() {
+function ThirdBox(props) {
     return (
         <div>
             <div className = {styles.thirdBox}>
@@ -13,7 +13,7 @@ function ThirdBox() {
                         <div className = {styles.catTitle}>
                             Job Description:
                         </div>
-                        Lorem Ipsum Dolar 
+                        {props.job.desc}
                     </div>
                 </div>
             </div>
