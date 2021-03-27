@@ -17,11 +17,11 @@ formatDate = (timestamp)=>{
             <div className={styles.header}>
                 <div className = {styles.headerInner}>
                     <div className = {styles.titleBox}>
-                        <h1 className = {styles.title}>{this.props.job.title}</h1>
-                        <div className = {styles.desc}>{this.props.job.type} |  {this.props.job.ctc}  |  {this.formatDate(this.props.job.deadline)}</div>
+                        <h1 className = {styles.title}>{this.props.job?.title}</h1>
+                        <div className = {styles.desc}>{this.props.job?.type} |  {this.props.job?.ctc}  |  {this.formatDate(this.props.job?.deadline)}</div>
                     </div>
                     <div className = {styles.appliedBox}>
-                        <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job.appliedStudentsCount || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
+                        <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.appliedStudentsCount || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
                     </div>
                 </div>
             </div>

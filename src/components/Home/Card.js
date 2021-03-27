@@ -48,9 +48,11 @@ const [showHomeInfo, ToggleHomeInfo] = useState(false)
         <img src={blueNextButton} style={{position:"absolute", right:17, bottom:33}}/>
       </div>
     </Link>
+    <div style={{position:'absolute'}}>
     <Modal show={showHomeInfo} style={ {maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px",}} closeHandler={()=>{ToggleHomeInfo(false)}}>
       <HomeInfo job={props.job}/>
     </Modal>
+    </div>
     {/* <button> */}
       <div onClick={()=>ToggleHomeInfo(true)} className={[styles.Container,styles.SingleContainer].join(" ")}>
         <span>Job Details</span>

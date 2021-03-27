@@ -4,6 +4,7 @@ import xth from './images/xth.svg'
 
 export default class Qualification extends Component {
     render() {
+        console.log(this.props.degree)
         return (
             <div className={styles.qualificationcontainer}>
                 <div style={{alignItems:'right'}}>
