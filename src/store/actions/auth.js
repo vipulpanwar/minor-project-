@@ -1,7 +1,8 @@
 import * as actionTypes from './actionTypes';
-import firebase from '../../firebase';
+import {auth,db} from '../../firebase'
+import {CreateAlert } from './alert';
+// const auth = firebase.auth();
 
-const auth = firebase.auth();
 
 console.log("auth inited")
 
@@ -10,8 +11,8 @@ export const Login = (email, password)=>{
         dispatch(LoginStart())
         auth.signInWithEmailAndPassword(email, password)
             .then(async user=>{
-                let token = await firebase.auth().currentUser.getIdTokenResult();
-                // token.claims.userType = "company";    
+                let token = await auth.currentUser.getIdTokenResult();
+                token.claims.userType = "company";    
                 if(token.claims?.userType === "company")
                     dispatch(LoginSuccess(user));
                 else
@@ -44,10 +45,21 @@ export const AuthStateChanged = (user)=>{
         if(!user)
             return dispatch(AuthStateChangedStart(user));
 
-        let token = await firebase.auth().currentUser.getIdTokenResult()   ;
-        // token.claims.userType ="company";              
+        let token = await auth.currentUser.getIdTokenResult();
+        token.claims.userType ="company";              
         if(token.claims?.userType === "company")
+        {
             dispatch(AuthStateChangedStart(user));
+            let profile = await db.collection('company').doc(user.uid).get();
+            
+            if(profile.data()?.verified == false)
+            {
+                dispatch(CreateAlert({subtitle:'Your account will be active in 24hrs',title:"Success", mode:'success'}))
+                dispatch(Logout())
+            }
+            else
+                dispatch(GetCompanyProfile(profile.data()))
+        }
         else
         {
             dispatch(LoginFailed({message:"Please login with a company account."})) ;
@@ -55,6 +67,11 @@ export const AuthStateChanged = (user)=>{
         }
     }
 }
+
+export const GetCompanyProfile = (profile)=>({
+    type: actionTypes.GET_PROFILE,
+    payload: profile,
+})
 
 export const AuthStateChangedStart = (user)=>({
     type: actionTypes.FIREBASE_AUTH_STATECHANGED,

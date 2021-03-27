@@ -20,7 +20,7 @@ class Login extends Component{
                     <h1 className={styles.H1}>Please log in.</h1>
                     <LoginForm></LoginForm>
                     <div className={styles.linksContainer}>
-                        <Link style={{ textDecoration: 'none' }} to='/forgorpassword'><p className={styles.linkText}>Forgot Password?</p></Link>
+                        <Link style={{ textDecoration: 'none' }} to='/forgotpassword'><p className={styles.linkText}>Forgot Password?</p></Link>
                         <Link style={{ textDecoration: 'none' }} to='/signup'><p style={{marginTop:'10px'}}className={styles.linkText}>New User? Sign up now</p></Link>
                     </div>
                 </div>

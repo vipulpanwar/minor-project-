@@ -1,6 +1,10 @@
 import React , { createContext, Component, createRef, useCallBack, useRef, useState, useEffect, useLayoutEffect} from 'react';
 import {db} from '../../firebase'
 import { storage } from '../../firebase'
+import {CreateAlert} from '../../store/actions/alert';
+import {Logout} from '../../store/actions/auth';
+
+import {connect} from 'react-redux';
 export const CreateAccountContext = createContext();
 
 
@@ -43,19 +47,22 @@ class CreateAccountProviderComponent extends Component{
             updater.email = data.email
             updater.phone = data.phone
             updater.social_media =data.social_media
+            updater.verified=false
+            updater.useremail = this.props.user.email
+            
         let url = await this.imgUploader(this.state.img)
         updater.logo = url
         // console.log(url.['[PromiseResult]'])
-        this.setState({form:updater})
+        this.setState({form: updater})
         console.log(updater, "updater")
-        db.collection("company").add(this.state.form)
-        .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-                alert("Account Created SuccessFully")
-        })
-        .catch((error) => {
+        try{
+            await db.collection("company").doc(this.props.user.uid).set(updater)
+            this.props.logout();
+            this.props.createAlert({subtitle:'Your account will be active in 24hrs', title:"Success", mode:'success'})
+        }
+        catch(error) {
             console.error("Error adding document: ", error);
-        });
+        }
     }
 
     imgUploader = async (file) =>{
@@ -85,4 +92,13 @@ class CreateAccountProviderComponent extends Component{
     
 }
 
-export const CreateAccountProvider = (CreateAccountProviderComponent);
+const mapStateToProps = (state)=>({
+    user:state.auth.user
+})
+
+const mapDispatchToProps= (dispatch)=>({
+    createAlert: (alert)=>dispatch(CreateAlert(alert)),
+    logout: ()=>dispatch(Logout())
+})
+
+export const CreateAccountProvider = connect(mapStateToProps, mapDispatchToProps)(CreateAccountProviderComponent);

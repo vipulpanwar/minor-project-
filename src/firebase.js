@@ -42,10 +42,12 @@ firebaseConfig = {
 // };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 firebase.analytics();
+export const auth= firebase.auth();
 export const storage = firebase.storage();
 export const db = firebase.firestore();
 console.log("Firebase inited");
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
 export default firebase;
