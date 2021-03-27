@@ -1,0 +1,38 @@
+.container{
+    width: 393px;
+    /* height: 221px; */
+    background: #FFFFFF;
+    border: 1px solid #D3D5DB;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display:inline-block;
+    padding: 16px 35px 0px 16px;
+}
+
+.Title{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #232D4C;
+    padding-bottom: 14px;
+}
+
+.qualificationcontainer{
+    width:50%;
+    display:inline-block;
+    padding-bottom: 40px;
+}
+
+.degreeTitle{
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    color: #9196A5;
+}
+
+.percent{
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 31px;
+    color: #4A90E2;
+}

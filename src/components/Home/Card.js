@@ -1,7 +1,9 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import { Link } from "react-router-dom";
 import BgImage from './background-1.svg';
 import './home.css';
+import HomeInfo from './HomeInfo.js';
+import Modal from '../shared/ui/Modal/Modal';
 import styles from './Card.module.css';
 import Ibutton from '../../assets/icons/ibutton.svg';
 import CardSkeletonLoader from './CardSkeletonLoader';
@@ -31,6 +33,7 @@ const LoadingCard = () => (
   </div>)
 
 function DetailCard(props){
+const [showHomeInfo, ToggleHomeInfo] = useState(false)
   return(
     <div className={styles.Card} style={style}>
     <Link to={`jobs/${props.job.id}`}>
@@ -45,12 +48,15 @@ function DetailCard(props){
         <img src={blueNextButton} style={{position:"absolute", right:17, bottom:33}}/>
       </div>
     </Link>
-    <Link to="">
-      <div className={[styles.Container,styles.SingleContainer].join(" ")}>
+    <Modal show={showHomeInfo} style={ {maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px",}} closeHandler={()=>{ToggleHomeInfo(false)}}>
+      <HomeInfo/>
+    </Modal>
+    {/* <button> */}
+      <div onClick={()=>ToggleHomeInfo(true)} className={[styles.Container,styles.SingleContainer].join(" ")}>
         <span>Job Details</span>
         <img className={styles.BlueNextButton} src={blueNextButton}/>
       </div>
-    </Link>
+    {/* </button> */}
     <Link to={`jobs/${props.job.id}/hired`}>
       <div className={[styles.Container,styles.SingleContainer].join(" ")}>
         <span>Hired Students</span>

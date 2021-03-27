@@ -160,6 +160,10 @@ import {db} from '../../firebase'
     }
   }
 
+  skillsInputHandler = (skills)=>{
+    this.setState({skillValue : skills});
+  }
+
   applyFiltersHandler = (e)=>{
     let filters = {
       degree: this.state.degreeValue,
@@ -189,7 +193,7 @@ import {db} from '../../firebase'
           {this.props.campus && <FilterTag inputHandler={this?.courseInputHandler} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.branchInputHandler} name="Branch" selected={this.state.branchValue} options={this.state.branchOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.tagInputHandler} name="Tag" selected={this.state.tagValue} options={this.state.tagOptions} />}
-          {!this.props.campus && <FilterMultiTag inputHandler={this?.tagInputHandler} name="Skills" selected={this.state.tagValue} options={this.state.tagOptions} />}
+          {!this.props.campus && <FilterMultiTag inputHandler={this?.skillsInputHandler} name="Skills" selected={this.state.tagValue} options={this.state.tagOptions} />}
         </div>
         <div className="apply-filter-button-div">
           <Button clicked={this.applyFiltersHandler} primary="Primary" className="apply-filters-button" width="135px" height="50px" style={{fontSize: '14px', fontWeight: '300', letterSpacing: '-0.01em', lineHeight: '17px'}}>Apply Filters</Button>

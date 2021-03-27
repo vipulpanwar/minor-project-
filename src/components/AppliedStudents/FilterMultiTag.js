@@ -7,10 +7,11 @@ class FilterMultiTag extends Component{
         e.preventDefault();
         let newSkills = this.state.skills;
         console.log(e.target.parentElement[0].value);
-        newSkills.push(e.target.parentElement[0].value);
+        newSkills.push(e.target.parentElement[0].value.toLowerCase());
         e.target.parentElement[0].value=''
         this.setState({skills:newSkills})
         console.log("state updated");
+        this.props.inputHandler(newSkills);
     }
 
     tagRemover = (tag)=>{
@@ -27,6 +28,7 @@ class FilterMultiTag extends Component{
     state = {
         skills : []
     }
+
     render(){
     return (<div className="filter-tag-container" style={{minHeight:'40px', width:'100%', paddingRight:0}}>
         {this.props.name}

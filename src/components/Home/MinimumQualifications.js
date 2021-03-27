@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
-import styles from "./HomeInfo.module.css"
+import styles from "./minimumqualifications.module.css"
+import Qualification from './Qualification'
 
 export default class MinimumQualifications extends Component {
     render() {
         return (
-            <div>
-                
+            <div className={styles.container}>
+                <div className={styles.Title}>
+                    Minimum Qualifications
+                </div>
+                <Qualification degree="xth" percent="90"/>
+                <Qualification degree="xth" percent="90"/>
+                <Qualification degree="xth" percent="90"/>
+                <Qualification degree="xth" percent="90"/>
             </div>
         )
     }
