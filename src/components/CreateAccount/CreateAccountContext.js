@@ -56,7 +56,7 @@ class CreateAccountProviderComponent extends Component{
         this.setState({form: updater})
         console.log(updater, "updater")
         try{
-            await db.collection("company").doc(this.props.user.uid).set(updater)
+            await db.collection("company").doc(this.props.user.uid).set(updater);
             this.props.logout();
             this.props.createAlert({subtitle:'Your account will be active in 24hrs', title:"Success", mode:'success'})
         }

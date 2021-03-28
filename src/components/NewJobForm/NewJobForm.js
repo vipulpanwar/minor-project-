@@ -48,7 +48,13 @@ class NewJobForm extends React.Component{
                 },
                 "CTC": {value:"", elementType:'input' , 
                         elementConfig:{type:'text'}, name:"ctc", validation:"required"},
-                "Job Category":{ value:"", elementType:'input', name:'category', validation:"required"},
+                "Job Category":{ 
+                    value:"", 
+                    elementConfig:{
+                        options:["Information Technology", "Human Resources", "Mazdoori"]
+                    },
+                    elementType:"select",
+                    name:'category', validation:"required"},
                 "Deadline":{value:'', elementType:'input', name:'deadline' ,validation:"required",
                 elementConfig:{
                     type:'date'
@@ -61,7 +67,7 @@ class NewJobForm extends React.Component{
                 },
                 "Xth Percentage":{ 
                     value:0, 
-                    name:"xth", 
+                    name:"ssc", 
                     elementConfig:{
                         options:[0,60,70,80,90]
                     },
@@ -69,7 +75,7 @@ class NewJobForm extends React.Component{
                 },
                 "XIIth Percentage":{ 
                     value:0, 
-                    name:"xiith",
+                    name:"hsc",
                     elementConfig:{
                         
                         options:[0,60,70,80,90]
@@ -239,25 +245,36 @@ class NewJobForm extends React.Component{
             }
         });
 
-        let edu =[], percentages={'diploma': createPercentage(0), 'bachelors':createPercentage(0), 'masters':createPercentage(0),'xth':createPercentage(0), 'xiith':createPercentage(0)};
+        let edu = {}, percentages={'diploma': createPercentage(0), 'bachelors':createPercentage(0), 'masters':createPercentage(0),'ssc':createPercentage(0), 'hsc':createPercentage(0)};
         let qualSection = form['2-campus'];
         
         if(!open){
-        for(let inputKey in qualSection)
-        {
-            if(inputKey=='Qualifications')
-                qualSection[inputKey].value.forEach(invited=>{
-                    edu.push(`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`)
-                })
-            else {
-                let input = qualSection[inputKey];
-                percentages[input.name] = createPercentage(input.value); 
-            }   
-        }
+            
+            for(let inputKey in qualSection)
+            {
+                if(inputKey=='Qualifications')
+                    qualSection[inputKey].value.forEach(invited=>{
+                        edu[`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`] = true;
+                        // edu.push(`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`)
+                    })
+                else {
+                    let input = qualSection[inputKey];
+                    percentages[input.name] = createPercentage(input.value); 
+                }   
+            }
 
         
-        job['edu'] = edu;
-        job['marks'] = percentages;
+            job['edu'] = edu;
+            job['marks'] = percentages;
+                    
+            let recipients = new Set();
+            Object.keys(job['edu']).forEach(course=>{
+                let college = course.split('#')[0];
+                recipients.add(college);
+            })
+            job['recipient'] = {}
+            job['company'] = this.props.profile.name;
+            Array.from(recipients).forEach(college=> {job['recipient'][college]= false});
         }
 
         job['status'] = true
@@ -268,6 +285,8 @@ class NewJobForm extends React.Component{
         job['placed'] = false
         let uid = uuidv4();
         job['uid'] = uid;
+
+
         await db.collection('jobs').doc(uid).set(job);
         await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0, lastCheck: new Date()})
         this.props.close();
@@ -332,7 +351,8 @@ const createPercentage =(val)=>({
 })
 
 const mapStateToProps = (state)=>({
-    user: state.auth.user
+    user: state.auth.user,
+    profile: state.auth.profile,
   })
   
   export default connect(mapStateToProps, null) (NewJobForm);

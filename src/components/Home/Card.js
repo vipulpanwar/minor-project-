@@ -42,7 +42,7 @@ const [showHomeInfo, ToggleHomeInfo] = useState(false)
           <h1 className={styles.JobTitle}>{props.job.title}</h1>
           <img src={Ibutton} className={styles.IButton}/>
         </div>
-        <p className={styles.JobDetails}>{props.job.type =='Full-time' ? 'Full Time' : 'Internship'} | {props.job.ctc} {props.job.type == 'Full-time' ? "LPA" : "KPM"} | {formatDate(props.job.deadline)}</p>
+        <p className={styles.JobDetails}>{props.job.type =='Full-time' ? 'Full Time' : 'Internship'} | {props.job.ctc} | {formatDate(props.job.deadline)}</p>
         <p className={styles.StudentsApplied}>Students Applied</p>
         <p className={styles.StudentsNumber}>{props.job.appliedStudentsCount || 0}</p>
         <img src={blueNextButton} style={{position:"absolute", right:17, bottom:33}}/>

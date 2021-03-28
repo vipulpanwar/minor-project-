@@ -31,14 +31,14 @@ class StepTwo extends Component {
     socialinputhandler = (i, e)=>{
         // console.log(i,e, "i e")
         let social = this.state.form.social_media;
-        social.[i] = e.target.value
+        social[i] = e.target.value
         console.log(social, 'social');
         this.setState({social_media:social})
     }
 
     inputHandler = (thing, e)=>{
         let form = this.state.form
-        form.[thing] = e.target.value
+        form[thing] = e.target.value
         this.setState({form:form})
         console.log(form)
     }
@@ -78,8 +78,8 @@ class StepTwo extends Component {
                             <TextInput display="inlineBlock" change={(e)=>this.inputHandler('email',e)} width='315px' label="Company Email ID"/>
                             <TextInput textarea width='315px' change={(e)=>this.inputHandler('about',e)} height="131px" label="About" />
                         </div>
-                            {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.email && this.state.form.phone && <button type = "submit" onClick={this.createaccount} disabled='true' className={styles.createButton}>Create Account</button>}
-                            {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.email && this.state.form.phone) && <button type = "submit" className={styles.createButtonInactive}>Create Account</button>}
+                            {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.email && this.state.form.phone && <button type = "submit" onClick={this.createaccount} className={styles.createButton}>Create Account</button>}
+                            {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.email && this.state.form.phone) && <button type = "submit" disabled className={styles.createButtonInactive}>Create Account</button>}
                     </form>
                 </div>
             </div>
