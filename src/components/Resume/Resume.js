@@ -63,7 +63,7 @@ class Resume extends Component{
 
                     <Profile student={student}/>
 
-                    <Skills hardSkills={student.hardSkills} softSkills={student.softSkills} />
+                    <Skills hardSkills={student.hskills} softSkills={student.sskills} />
                 
                     {Object.keys(student.exp).length !=0 && <Section type="Experience" data={student.exp}/>}
                     

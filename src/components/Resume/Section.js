@@ -44,8 +44,8 @@ const mapStudentToInfo = (student)=>{
   let education = {}
   for(degrees in student){
     education.[degrees] = {
-      'title': `${[degrees]} - ${student.[degrees].percent}`,
-      'subTitle': `${student.[degrees].clg_board} • ${student.[degrees].year}`
+      'title': `${[degrees]} - ${student[degrees].percent}`,
+      'subTitle': `${student[degrees].clg_board} • ${student[degrees].year}`
     }
   }
 
@@ -53,37 +53,37 @@ const mapStudentToInfo = (student)=>{
 }
 
 const mapExperienceToInfo = (exp)=>{
-  return Object.keys(exp).map(expName=>({
-    'title':expName,
-    'subTitle': `${exp.[expName].company} • ${exp.[expName].type}`,
-    'subTitle2': ` | ${exp.[expName]?.startdate} - ${exp.[expName]?.enddate}`,
-    'description': exp.[expName].description,
+  return Object.keys(exp).map(key=>({
+    'title':exp[key].title,
+    'subTitle': `${exp[key].company} • ${exp[key].type}`,
+    'subTitle2': ` | ${formatDate(exp[key]?.startdate)} - ${formatDate(exp[key]?.enddate)}`,
+    'description': exp[key].desc,
   }))
 }
 
 const mapProjectToInfo = (project)=>{
-  return Object.keys(project).map(name=>({
-    'title':name,
-    'link': project[name].projectLink,
-    'subTitle2': `${formatDate(project[name].durationStartTime)} - ${ project[name].durationEndTime ? formatDate(project[name].durationEndTime): null}`,
-    'description': project[name].description,
+  return Object.keys(project).map(key=>({
+    'title':project[key].name,
+    'link': project[key].link,
+    // 'subTitle2': `${formatDate(project[name].durationStartTime)} - ${ project[name].durationEndTime ? formatDate(project[name].durationEndTime): null}`,
+    'description': project[key].desc,
   }))
 }
 
 const mapCourseToInfo = (course)=>{
-  return Object.keys(course).map(name=>({
-    'title':name,
-    'link': course[name].courseLink,
-    'subTitle2': `${formatDate(course[name].timestamp)}`,
-    'description': course[name].description,
+  return Object.keys(course).map(key=>({
+    'title':course[key].name,
+    // 'link': course[key].courseLink,
+    // 'subTitle2': `${formatDate(course[name].timestamp)}`,
+    'description': course[key].desc,
   }))
 }
 
 const mapAccomplishmentToInfo = (accomplishment)=>{
-  return Object.keys(accomplishment).map(name=>({
-    'title':name,
-    'subTitle2': `${formatDate(accomplishment[name].achievementDate)}`,
-    'description': accomplishment[name].description,
+  return Object.keys(accomplishment).map(key=>({
+    'title':accomplishment[key].name,
+    // 'subTitle2': `${formatDate(accomplishment[name].achievementDate)}`,
+    'description': accomplishment[key].desc,
   }))
 }
 const formatDate = (timestamp)=>{
