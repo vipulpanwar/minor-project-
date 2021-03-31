@@ -5,6 +5,8 @@ import firebase from "../../firebase";
 import Button from "../shared/ui/Button/Button";
 import db from '../../firebase';
 import { StudentsContext } from '../AppliedStudents/StudentsContext';
+import Phone from './images/phone.svg'
+import Email from './images/email.svg'
 
 
 class CandidateTagger extends Component{
@@ -41,6 +43,21 @@ class CandidateTagger extends Component{
             <a onClick={AverageMaker}>
                 <Button width="109px" primary={this.props.student.flag?.toLowerCase()=="average"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Average</Button>
             </a>
+            </div>
+        </div>
+        <div className={style.contactContainer}>
+            Contact
+            <div className={style.numberdiv}>
+                <img src={Phone}/>
+                <div className={style.number}>
+                    {this.props.student.phone}
+                </div>
+            </div>
+            <div className={style.numberdiv}>
+                <img src={Email}/>
+                <div className={style.number}>
+                    {this.props.student.email}
+                </div>
             </div>
         </div>
     </div>

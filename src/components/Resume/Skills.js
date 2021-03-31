@@ -8,7 +8,7 @@ export default  (props)=>{
 
     return(
             <div style={props.style} className="skills-section">
-              {!props.loading && (props.softSkills || props.hardSkills)?
+              {!props.loading && !props.offcampus && (props.softSkills || props.hardSkills)?
               <div className='skills-heading'>
                 Skills
               </div>:null}

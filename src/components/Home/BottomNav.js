@@ -61,10 +61,12 @@ const BottomNav = (props)=> {
                 <img className={styles.Icon} src={JobIcon}/>
                 <span>Jobs</span>
             </Link>
-            <div onMouseEnter={()=>HoverStart(1)} onMouseLeave={HoverEnd} className={styles.NavLink}>
-                <img className={styles.Icon} src={ProfileIcon}/>
-                <span>Help</span>
-            </div>
+            <a href="mailto:ensvee@gmail.com">
+                <div onMouseEnter={()=>HoverStart(1)} onMouseLeave={HoverEnd} className={styles.NavLink}>
+                    <img className={styles.Icon} src={ProfileIcon}/>
+                    <span>Help</span>
+                </div>
+            </a>
             <Link to="/profile" onMouseEnter={()=>HoverStart(2)} onMouseLeave={HoverEnd} className={styles.NavLink}>
                 <img className={styles.Icon} src={ProfileIcon}/>
                 <span>Profile</span>

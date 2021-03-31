@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import styles from './StepOne.module.css'
 
 export default class TextInput extends Component {
+    change = ()=>{
+        console.log("change")
+    }
     render() {
         let styling = {
             width: this.props.width,
@@ -19,8 +22,9 @@ export default class TextInput extends Component {
         return (
             <div className={styles.inputcontainer} style={divstyle}>
                 <p className={styles.label}>{this.props.label}</p>
-                {!this.props.textarea && <input style={styling} onChange={this.props.change} className={styles.inputbox} type="text" ></input>}
-                {this.props.textarea && <textarea style={styling} onChange={this.props.change} className={styles.inputbox} type="textarea" ></textarea>}
+                {!this.props.textarea && !this.props.value && <input style={styling} onChange={this.props.change} className={styles.inputbox} type="text" ></input>}
+                {!this.props.textarea && this.props.value && <input style={styling} onChange={()=>this.change} value={this.props.value} className={styles.inputbox} type="text" ></input>}
+                {this.props.textarea && this.props.value && <textarea style={styling} onChange={()=>this.change} value={this.props.value} className={styles.inputbox} type="textarea" ></textarea>}
             </div>
         )
     }

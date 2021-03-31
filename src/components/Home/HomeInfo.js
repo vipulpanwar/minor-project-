@@ -3,8 +3,9 @@ import styles from './HomeInfo.module.css';
 import ButtonImage from './images/buttonimage.svg'
 import ThirdBox from './ThirdBox.js'
 import moment from 'moment';
+import { Link } from 'react-router-dom'
 
- class homeInfo extends Component{
+class homeInfo extends Component{
 formatDate = (timestamp)=>{
     var t = new Date(1970, 0, 1);
     let dateTime = t.setSeconds(timestamp.seconds);
@@ -21,7 +22,9 @@ formatDate = (timestamp)=>{
                         <div className = {styles.desc}>{this.props.job?.type} |  {this.props.job?.ctc}  |  {this.formatDate(this.props.job?.deadline)}</div>
                     </div>
                     <div className = {styles.appliedBox}>
-                        <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.appliedStudentsCount || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
+                        <Link to={`jobs/${this.props.job.id}`}>
+                            <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.appliedStudentsCount || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
+                        </Link>
                     </div>
                 </div>
             </div>

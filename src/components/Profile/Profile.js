@@ -6,10 +6,12 @@ import Website from './images/website.svg'
 import Location from './images/location.svg'
 import Logo from './images/logo.svg'
 import {connect} from 'react-redux';
+import Button from '../shared/ui/Button/Button'
 
 class Profile extends Component {
     state={
         count:0,
+        changed: false,
     }
 
     counter = (e)=>{
@@ -20,10 +22,24 @@ class Profile extends Component {
         console.log(count)
     }
 
+    componentDidMount(){
+        console.log(this.props, "props")
+        let count = 0
+        let map = this.props.profile.social_media
+        for(let i=0; i<5; i++){
+            if(!map[i]){
+                count = i
+                break;
+            }
+        }
+        
+        this.setState({count:count})
+    }
+
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<TextInput inline width='100%' key={i} label="Social Media Links"/>)
+            social.push(<TextInput change={console.log(this)} inline width='100%' key={i} value={this.props.profile.social_media[i]} label="Social Media Links"/>)
         }
         let profile = this.props.profile;
         return (
@@ -48,20 +64,29 @@ class Profile extends Component {
                                 <img src={Location}/> <div className={styles.location}> {profile.company_address}</div>
                             </div>
                         </div>
+                        <div className={styles.logout}>
+                            <Button width='187px'>Log Out</Button>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.rightcontainer}>
                 <div style={{padding:'44px'}}>
                     <div className={styles.title}>Edit Company Details</div>
                     <div className={styles.leftForm}>
-                        <TextInput inline width='100%' value={profile.size} label="Company Size"/>
-                        <TextInput inline width='100%' value={profile.phone} label="Phone Number"/>
-                        <TextInput inline width='100%' value={profile.about} height="290px" textarea label="About"/>
+                        {console.log(profile.size, "size")}
+                        <TextInput change={console.log(this)} inline width='100%' value={profile.size} label="Company Size"/>
+                        <TextInput change={console.log(this)} inline width='100%' value={profile.phone} label="Phone Number"/>
+                        <TextInput change={console.log(this)} inline width='100%' value={profile.about} height="290px" textarea label="About"/>
                     </div>
                     <div className={styles.rightForm}>
-                        {social}
-                        <TextInput inline width='100%' label="Social Media Links"/>
-                        {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
+                        <div style={{minHeight:'393px'}}>
+                            {social}
+                            {/* <TextInput inline width='100%' label="Social Media Links"/> */}
+                            {this.socailrender}
+                            {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
+                        </div>
+                        {!this.state.changed &&<button disabled className={styles.createButtoninactive}>Save Changes</button>}
+                        {this.state.changed && <button type = "submit" onClick={console.log("Hehe")} className={styles.createButton}>Save Changes</button>}
                     </div>
                 </div>
                 </div>

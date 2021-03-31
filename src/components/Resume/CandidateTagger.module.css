@@ -8,7 +8,25 @@
     border-radius: 10px;
     height: 108px;
     padding-left: 13px; 
-    width:824px;
+    width: 396px;
+    display:inline-block;
+    vertical-align: top;
+}
+
+.contactContainer{
+    vertical-align: top;
+    height: 108px;
+    background: #FFFFFF;
+    border: 1px solid #D3D5DB;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 16px 26px 22px 26px;
+    display:inline-block;
+    margin-left: 30px;
+    width:376px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #232D4C;
 }
 
 .candidatetaggertext{
@@ -17,6 +35,24 @@
     line-height: 17px;
     color: #232D4C;
 }
+
+.numberdiv{
+    padding-top:8px;
+    vertical-align: top;
+
+}
+
+.number{
+    height: 19px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #9196A5;
+    display:inline-block;
+    vertical-align: top;
+    padding-top:-4px;
+    padding-left: 11px;
+}
+
 
 .spantext{
     font-weight: 500;

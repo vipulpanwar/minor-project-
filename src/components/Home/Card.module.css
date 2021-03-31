@@ -62,14 +62,12 @@
 .SingleContainer{
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .SingleContainer span {
     width: 100%;
 }
-
-
-
 
 .CardContainer {
   min-height: 186px;
@@ -88,13 +86,6 @@
   text-overflow: ellipsis;
 }
 
-.IButton {
-  /* position: absolute;
-  right: 18px;
-  top: 30px;
-  width: 15px;
-  height: 15px; */
-}
 
 .JobDetails {
   /* position: absolute; */

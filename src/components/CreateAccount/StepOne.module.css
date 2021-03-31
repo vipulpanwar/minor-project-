@@ -1,7 +1,7 @@
 .leftcontainer{
-    display:inline-flex;
-    height:100%;
-    vertical-align: bottom;
+    display:inline-block;
+    height:100vh;
+    vertical-align: top;
     width: 25vw;
 }
 
@@ -20,6 +20,11 @@
     min-height: 100vh;
     padding: 38px 69px 57px 69px;
     background: #F1F2F3;
+}
+
+.uppercontainer{
+    padding: 54px;
+    display:block;
 }
 
 .tellus{
@@ -132,4 +137,59 @@
     place-items: center;
     /* padding-top: 31px; */
     display: grid
+}
+
+.CreateAccount{
+    padding-top: 26px;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 43px;
+    color: #0D0C21;
+}
+
+.stepsContainer{
+    padding-top: 32px;
+    padding-left: 17px;
+    vertical-align: top;
+}
+
+.currentstep{
+    display:inline-block;
+    padding-left: 12px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #4A90E2;
+    vertical-align: top;
+}
+
+.incompletestep{
+    padding-top:16px;
+    padding-left: 12px;
+    display:inline-block;
+    font-size: 20px;
+    line-height: 24px;
+    color: #9196A5;
+    vertical-align: top;
+}
+
+.bottomImage{
+    vertical-align: bottom;
+    position:absolute;
+    bottom:0
+}
+
+.completedstep{
+    display:inline-block;
+    padding-left: 12px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #44D7B6;
+    vertical-align: top;
+}
+
+.filledLogo{
+    text-align: center;
+    word-break: break-word;
 }

@@ -4,8 +4,24 @@ import './Resume.css';
 import userPlaceholder from '../../assets/images/user_placeholder.jpg';
 import Button from '../shared/ui/Button/Button';
 import { StudentsContext } from '../AppliedStudents/StudentsContext';
+import { storage } from '../../firebase'
 
 class Profile extends Component{
+  state = {
+    source : userPlaceholder
+  }
+
+  componentDidMount = async ()=>{
+    let src = ""
+    let profilepicLink = "users/"+ this.props.student.uid + '/myphoto.jpg'
+    storage.ref().child(profilepicLink).getDownloadURL().then((url)=>{
+      src = url
+      console.log(src)
+      this.setState({source:src})
+    })    
+  }
+
+
   render(){
     let student = this.props.student;
     let degrees = Object.keys(this.props.student.edu);
@@ -19,14 +35,15 @@ class Profile extends Component{
     const updatestatus=(hireOrReject)=>{
       this.context.updatestat(this.props.student.id, hireOrReject)
     }
-
     let rejectstyle = {marginRight:"12px", color: "#D0021B", borderColor:"#D0021B"}
-    let profilepicLink = "gs://oneios.appspot.com/users/"+ student.uid +"/myphoto.jpg"
+    
+    
     return(
             <div className="profile-container">
               {console.log(this.context.state, "context")}
               <div className="profilepic">
-                <img className="profileimg" src={student.profilePicture || userPlaceholder} />
+                {console.log(this.state.source, "source")}
+                <img className='profileimg' src={this.state.source} alt="Image not found"/>
               </div>
               <div className="applicant-info">
                 <p className="applicant-name">{student.name}</p>

@@ -4,6 +4,7 @@ import styles from './StepOne.module.css'
 import TextInput from './TextInput'
 import logoinput from './images/inputlogo.svg'
 import { CreateAccountContext } from './CreateAccountContext'
+import Sidepanel from './Sidepanel'
 
 class StepTwo extends Component {
     state={
@@ -59,9 +60,7 @@ class StepTwo extends Component {
         }
         return (
             <div className={styles.container}>
-                <div className={styles.leftcontainer}>
-                    <img className = {styles.leftimage} src={leftimg} />
-                </div>
+                <Sidepanel />
                 <div className={styles.rightcontainer}>
                     <p className={styles.tellus}>Tell Us About Your Company</p>
                     <br /><br/>

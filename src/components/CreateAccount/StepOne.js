@@ -6,6 +6,8 @@ import logoinput from './images/inputlogo.svg'
 import { CreateAccountContext } from './CreateAccountContext'
 import Camera from './images/camera.svg'
 import { Redirect } from 'react-router-dom'
+import Resizer from 'react-image-file-resizer'
+import Sidepanel from './Sidepanel'
 // import Success from '../shared/ui/Modal/SuccessModal'
 // import 'firebase/storage'
 
@@ -19,6 +21,22 @@ class StepOne extends Component {
         logoName:'',
         img: '',
     }
+
+    resizeFile = (file) =>
+    new Promise((resolve) => {
+        Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "JPG",
+        80,
+        0,
+        (uri) => {
+            resolve(uri);
+        },
+        "base64"
+        );
+    });
 
     nameinputhandler = (e)=>{
         if(this.state.name!=e.target.value){
@@ -41,20 +59,37 @@ class StepOne extends Component {
         }
     }
 
-    logoinputHandler = (e)=>{
+    logoinputHandler = async (e)=>{
         let imgName
         console.log(e.target.value)
         let img = e.target.value.toLowerCase()
-        if(img.endsWith('.jpg')||img.endsWith('.png')){
+        if(img.endsWith('.jpg')||img.endsWith('.png')||img.endsWith('.jpeg')){
             console.log("Theek hai img");
             imgName = e.target.value.slice(e.target.value.indexOf('C:/fakepath/') + 13);
             console.log(imgName);
-            this.setState({logoName:imgName, img:e.target})
+            // alert(e.target.files[0])
+            // this.compressor(e.target.files[0])
+            let URIimg = await this.resizeFile(e.target.files[0]);
+            let compressedImg = this.dataURIToBlob(URIimg)
+            this.setState({img:compressedImg})
+            this.setState({logoName:imgName})
         }
         else{
-            console.log("Not an Img");
+            alert("Please upload a jpeg, jpg or png file only");
         }
     }
+
+    dataURIToBlob = (dataURI) => {
+        const splitDataURI = dataURI.split(",");
+        const byteString =
+          splitDataURI[0].indexOf("base64") >= 0
+            ? atob(splitDataURI[1])
+            : decodeURI(splitDataURI[1]);
+        const mimeString = splitDataURI[0].split(":")[1].split(";")[0];
+        const ia = new Uint8Array(byteString.length);
+        for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+        return new Blob([ia], { type: mimeString });
+      };
 
     nextPagehandler = (e) =>{
         //validations
@@ -68,15 +103,13 @@ class StepOne extends Component {
         return (
             <div className={styles.container}>
                 {/* <Success show title="Account Created" subtitle="Your Account will get activated in 24hours" buttonText="Go To Login Page"/> */}
-                <div className={styles.leftcontainer}>
-                    <img className = {styles.leftimage} src={leftimg} />
-                </div>
+                <Sidepanel stepOne/>
                 <div className={styles.rightcontainer}>
                     <p className={styles.tellus}>Tell Us About Your Company</p>
                     <br />
                     <div className={styles.companylogodiv}>
                         <label>
-                            {this.state.logoName?<div className={styles.logoName}><div style={{textAlign:'center'}}><img src={Camera}/><br/>{this.state.logoName}</div></div>:<img className = {styles.leftimage} src={logoinput} />}
+                            {this.state.logoName?<div className={styles.logoName}><div className={styles.filledLogo}><img src={Camera}/><br/>{this.state.logoName}</div></div>:<img className = {styles.leftimage} src={logoinput} />}
                             <input className={styles.hide} id="CompanyLogo" type="file" onChange={this.logoinputHandler} accept="image/png, image/jpeg"></input>
                         </label>
                     </div>

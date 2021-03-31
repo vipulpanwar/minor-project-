@@ -67,10 +67,10 @@ class CreateAccountProviderComponent extends Component{
 
     imgUploader = async (file) =>{
         let logo
-        console.log(file.files, "file")
+        console.log(file, "file")
         let ref = storage.ref('company');
         let name = this.state.form.email+'logo'
-        let task = await ref.child(name).put(file.files[0]);
+        let task = await ref.child(name).put(file);
         // task.then(snapshot => snapshot.ref.getDownloadURL()).then((url) => {
         //     console.log(url, "url");
         //     logo = url

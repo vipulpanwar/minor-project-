@@ -1,6 +1,6 @@
 .container{
     width: 393px;
-    /* height: 221px; */
+    min-height: 221px;
     background: #FFFFFF;
     border: 1px solid #D3D5DB;
     box-sizing: border-box;
