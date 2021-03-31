@@ -11,7 +11,7 @@ class Studentsheader extends Component{
     return(<header className={[styles.StudentsHeader, this.props.loading?styles.Loading :null].join(" ") }>
         <Link to="/" className={styles.BackButton}><img src={backIcon}></img></Link>
         <Link to="/" ><img src={logo} className={styles.Logo}></img></Link>
-        <h2 className={styles.Title}>{this.props.title} {!this.context.state.showHired?'Students Applied':'Students Hired'}</h2>
+        <h2 className={styles.Title}> {!this.context.state.showHired?`${this.props.counts.count} Students Applied`:`${this.props.counts.hired} Students Hired`}</h2>
         <h4 className={styles.SubTitle}>{this.props.subTitle}</h4>
         <SearchBar filterToggle= {this.props.filterToggle}/>
     </header>)

@@ -288,7 +288,7 @@ class NewJobForm extends React.Component{
 
 
         await db.collection('jobs').doc(uid).set(job);
-        await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0, lastCheck: new Date()})
+        await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
         this.props.close();
         alert("Job Created")
     }
