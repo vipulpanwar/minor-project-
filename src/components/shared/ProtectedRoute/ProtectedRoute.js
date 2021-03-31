@@ -15,7 +15,8 @@ class ProtectedRoute extends React.Component {
             return <Redirect to={{ pathname: '/login' }} />
 
         let renderedComp = null;
-        if( this.props.noProfile || profile?.verified)
+
+        if(this.props.ignoreVerification || profile?.verified )
             renderedComp = Component ? <Component {...this.props} /> : this.props.render(this.props);
 
         // else if(!profile?.verified)
@@ -26,7 +27,6 @@ class ProtectedRoute extends React.Component {
         // }
         else if(!profile)
             renderedComp = <Redirect to={{pathname: '/createaccount'}}/>
-
 
         return renderedComp;
     }
