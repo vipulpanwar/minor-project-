@@ -63,6 +63,22 @@
     vertical-align:middle;
 }
 
+.deletejobBox{
+    padding: 9px 28px 9px 28px;
+    height: 35px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    float: right;
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FF5670;
+    vertical-align:middle;
+    margin-left:16px;
+}
+
 .secondaryBox{
     padding: 16px 18px 18px 18px;
 }

@@ -4,20 +4,25 @@ import TextInput from '../CreateAccount/TextInput'
 import Background from './images/backgroundimg.svg'
 import Website from './images/website.svg'
 import Location from './images/location.svg'
-import Logo from './images/logo.svg'
+import { v4 as uuidv4 } from 'uuid';
 import {connect} from 'react-redux';
 import Button from '../shared/ui/Button/Button'
+import { db } from '../../firebase'
 
 class Profile extends Component {
     state={
         count:0,
         changed: false,
-        size: undefined,
+        size: '',
         social_media: {
-            
+            0: '',
+            1: '',
+            2: '',
+            3: '',
+            4: '',
             },
-        about: undefined,
-        phone: undefined,
+        about: '',
+        phone: '',
     }
 
     counter = (e)=>{
@@ -29,6 +34,7 @@ class Profile extends Component {
     }
 
     componentDidMount(){
+        let social = this.state.social_media
         let count = 0
         let map = this.props.profile.social_media
         for(let i=0; i<5; i++){
@@ -36,15 +42,58 @@ class Profile extends Component {
                 count = i
                 break;
             }
+            else{
+                social[i] = this.props.profile.social_media[i]
+            }
         }
         
-        this.setState({count:count, social_media: this.props.profile.social_media, about: this.props.profile.about, phone: this.props.profile.phone, size: this.props.profile.b})
+        this.setState({count:count, social_media: social, about: this.props.profile.about, phone: this.props.profile.phone, size: this.props.profile.size})
+    }
+
+    socialchangeHandler = (i,e)=>{
+        let social = this.state.social_media
+        social[i] = e.target.value
+        this.setState({socail_media:social})
+        console.log(e.target.value, "social")
+        if(this.state.changed==false){
+            this.setState({changed:true})
+        }
+    }
+
+    sizeChangeHandler = (e)=>{
+        this.setState({size:e.target.value})
+        console.log(e.target.value, "value")
+        if(this.state.changed==false){
+            this.setState({changed:true})
+        }
+    }
+
+    phoneChangeHandler = (e)=>{
+        this.setState({phone:e.target.value})
+        console.log(e.target.value, "value")
+        if(this.state.changed==false){
+            this.setState({changed:true})
+        }
+    }
+
+    aboutChangeHandler = (e)=>{
+        this.setState({about:e.target.value})
+        console.log(e.target.value, "value")
+        if(this.state.changed==false){
+            this.setState({changed:true})
+        }
+    }
+
+    savechangesHandler = async ()=>{
+        console.log("saving....")
+        await db.collection('company').doc(this.props.user.uid).update({size:this.state.size, about:this.state.about, social_media: this.state.social_media, phone: this.state.phone})
+        this.setState({changed:false})
     }
 
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<TextInput change={console.log(this)} inline width='100%' key={i} value={this.props.profile.social_media[i]} label="Social Media Links"/>)
+            social.push(<TextInput change={(e)=>this.socialchangeHandler(i,e)} inline width='100%' key={i} value={this.state.social_media[i]} label="Social Media Links"/>)
         }
         let profile = this.props.profile;
         return (
@@ -52,7 +101,7 @@ class Profile extends Component {
                 <div className={styles.leftcontainer}>
                     <div>
                         <img width="110%" src={Background}></img>
-                        <div className={styles.logocontainer}><img src={Logo}/></div>
+                        <div className={styles.logocontainer}><img width="47px" src={this.props.profile.logo}/></div>
                     </div>
                     <div className={styles.companyDetails}>
                         <div className={styles.companyName}>
@@ -79,9 +128,9 @@ class Profile extends Component {
                     <div className={styles.title}>Edit Company Details</div>
                     <div className={styles.leftForm}>
                         {console.log(profile.size, "size")}
-                        <TextInput change={console.log(this)} inline width='100%' value={profile.size} label="Company Size"/>
-                        <TextInput change={console.log(this)} inline width='100%' value={profile.phone} label="Phone Number"/>
-                        <TextInput change={console.log(this)} inline width='100%' value={profile.about} height="290px" textarea label="About"/>
+                        <TextInput change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
+                        <TextInput change={this.phoneChangeHandler} inline width='100%' value={this.state.phone} label="Phone Number"/>
+                        <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" textarea label="About"/>
                     </div>
                     <div className={styles.rightForm}>
                         <div style={{minHeight:'393px'}}>
@@ -91,7 +140,7 @@ class Profile extends Component {
                             {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
                         </div>
                         {!this.state.changed &&<button disabled className={styles.createButtoninactive}>Save Changes</button>}
-                        {this.state.changed && <button type = "submit" onClick={console.log("Hehe")} className={styles.createButton}>Save Changes</button>}
+                        {this.state.changed && <button type = "submit" onClick={this.savechangesHandler} className={styles.createButton}>Save Changes</button>}
                     </div>
                 </div>
                 </div>
@@ -101,7 +150,8 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state)=>({
-    profile:state.auth.profile
+    profile:state.auth.profile,
+    user:state.auth.user,
 })
 
 export default connect(mapStateToProps, null)(Profile)
