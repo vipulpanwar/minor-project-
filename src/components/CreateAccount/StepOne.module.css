@@ -63,7 +63,7 @@
 .inputcontainer{
     padding-bottom: 24px;
     display:inline-block;
-    margin-right: 21px;
+    /* margin-right: 21px; */
 }
 
 .submitButtoninactive{

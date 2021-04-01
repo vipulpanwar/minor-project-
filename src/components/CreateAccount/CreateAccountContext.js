@@ -69,7 +69,7 @@ class CreateAccountProviderComponent extends Component{
         let logo
         console.log(file, "file")
         let ref = storage.ref('company');
-        let name = this.state.form.email+'logo'
+        let name = this.props.user.uid + '.png'
         let task = await ref.child(name).put(file);
         // task.then(snapshot => snapshot.ref.getDownloadURL()).then((url) => {
         //     console.log(url, "url");

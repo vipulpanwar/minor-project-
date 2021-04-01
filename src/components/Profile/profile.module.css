@@ -1,32 +1,44 @@
 .container{
     min-height:100vh;
     width:100vw;
+    display:grid;
+    grid-template-columns: 366px 1fr;
 }
 
 .leftcontainer{
-    width:28vw;
-    min-height: 100vh;
+    width:366px;
+    height: 100vh;
+    overflow-y: auto;
     display:inline-block;
     vertical-align: top;
     overflow:hidden;
 }
 
 .rightcontainer{
-    width: 72vw;
-    display:inline-block;
+    /* width: 72vw; */
+    display:flex;
+    flex-direction: column;
     vertical-align: top;
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: auto;
     padding-bottom: 100px;
+    /* padding-right: 44px; */
     background: radial-gradient(166.67% 269.75% at 85.98% 167.57%, #DCE8F6 0%, #FFFFFF 100%);
 }
 
 .title{
-    height: 36px;
+    display:inline-block;
     font-weight: 600;
     font-size: 30px;
     line-height: 36px;
     color: #9196A5;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
+}
+
+.gridBox{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
 }
 
 .logout{
@@ -34,7 +46,7 @@
 }
 
 .leftForm{
-    width: 49%;
+    /* width: 49%; */
     display:inline-block;
     padding-top:30px;
 }
@@ -42,7 +54,7 @@
 .rightForm{
     float:right;
     padding-top:30px;
-    width:50%;
+    /* width:50%; */
     vertical-align: top;
 }
 
@@ -127,22 +139,4 @@
     font-size: 14px;
     line-height: 17px;
     color: #4A90E2;
-}
-
-.createButton{
-    width: 373px;
-    height: 51px;
-    background: #4A90E2;
-    border-radius: 10px;
-    color:white;
-    margin-top: 44px;
-}
-
-.createButtoninactive{
-    width: 373px;
-    height: 51px;
-    background: #D3D5DB;
-    border-radius: 10px;
-    color:white;
-    margin-top: 44px; 
 }

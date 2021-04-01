@@ -8,11 +8,13 @@ import { v4 as uuidv4 } from 'uuid';
 import {connect} from 'react-redux';
 import Button from '../shared/ui/Button/Button'
 import { db } from '../../firebase'
+import { SetCompanyProfile } from '../../store/actions/auth'
 
 class Profile extends Component {
     state={
         count:0,
         changed: false,
+        isLoading:false,
         size: '',
         social_media: {
             0: '',
@@ -86,8 +88,16 @@ class Profile extends Component {
 
     savechangesHandler = async ()=>{
         console.log("saving....")
+        this.setState({isLoading: true})
         await db.collection('company').doc(this.props.user.uid).update({size:this.state.size, about:this.state.about, social_media: this.state.social_media, phone: this.state.phone})
         this.setState({changed:false})
+        let profile = this.props.profile;
+        profile.size = this.state.size
+        profile.about = this.state.about
+        profile.socail_media = this.state.social_media
+        profile.phone = this.state.phone
+        this.props.setCompany(profile)
+        this.setState({isLoading:false})
     }
 
     render() {
@@ -100,7 +110,7 @@ class Profile extends Component {
             <div className={styles.container}>
                 <div className={styles.leftcontainer}>
                     <div>
-                        <img width="110%" src={Background}></img>
+                        <img style={{minHeight:'345px'}} width="100%" src={Background}></img>
                         <div className={styles.logocontainer}><img width="47px" src={this.props.profile.logo}/></div>
                     </div>
                     <div className={styles.companyDetails}>
@@ -124,8 +134,8 @@ class Profile extends Component {
                     </div>
                 </div>
                 <div className={styles.rightcontainer}>
-                <div style={{padding:'44px'}}>
-                    <div className={styles.title}>Edit Company Details</div>
+                <div className={styles.title}>Edit Company Details</div>
+                <div className={styles.gridBox} style={{padding:'44px'}}>
                     <div className={styles.leftForm}>
                         {console.log(profile.size, "size")}
                         <TextInput change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
@@ -139,8 +149,8 @@ class Profile extends Component {
                             {this.socailrender}
                             {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
                         </div>
-                        {!this.state.changed &&<button disabled className={styles.createButtoninactive}>Save Changes</button>}
-                        {this.state.changed && <button type = "submit" onClick={this.savechangesHandler} className={styles.createButton}>Save Changes</button>}
+                        {/* {!this.state.changed &&<Button width='373px' disabled>Save Changes</Button>} */}
+                        <Button loading={this.state.isLoading} clicked={this.savechangesHandler} primary={this.state.changed}>Save Changes</Button>
                     </div>
                 </div>
                 </div>
@@ -154,4 +164,8 @@ const mapStateToProps = (state)=>({
     user:state.auth.user,
 })
 
-export default connect(mapStateToProps, null)(Profile)
+const mapDispatchToProps = (dispatch)=>({
+    setCompany: (profile)=> dispatch(SetCompanyProfile(profile))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
