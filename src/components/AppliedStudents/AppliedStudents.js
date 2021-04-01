@@ -52,7 +52,7 @@ class AppliedStudents extends Component{
         let jd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).get();
         this.setState({jobsdata: jd.data()});
 
-        let res = await axios.get('http://us-central1-oneios.cloudfunctions.net/app/get_applied_count/' + this.props.computedMatch.params.jobId);
+        let res = await axios.get('https://us-central1-oneios.cloudfunctions.net/app/get_applied_count/' + this.props.computedMatch.params.jobId);
 
 
         // let cd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('count').get();
