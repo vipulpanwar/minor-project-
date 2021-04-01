@@ -12,6 +12,12 @@ class Profile extends Component {
     state={
         count:0,
         changed: false,
+        size: undefined,
+        social_media: {
+            
+            },
+        about: undefined,
+        phone: undefined,
     }
 
     counter = (e)=>{
@@ -23,7 +29,6 @@ class Profile extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props, "props")
         let count = 0
         let map = this.props.profile.social_media
         for(let i=0; i<5; i++){
@@ -33,7 +38,7 @@ class Profile extends Component {
             }
         }
         
-        this.setState({count:count})
+        this.setState({count:count, social_media: this.props.profile.social_media, about: this.props.profile.about, phone: this.props.profile.phone, size: this.props.profile.b})
     }
 
     render() {

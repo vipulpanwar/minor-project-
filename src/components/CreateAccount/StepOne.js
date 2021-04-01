@@ -28,7 +28,7 @@ class StepOne extends Component {
         file,
         300,
         300,
-        "JPG",
+        "PNG",
         80,
         0,
         (uri) => {

@@ -13,7 +13,7 @@ class Profile extends Component{
 
   componentDidMount = async ()=>{
     let src = ""
-    let profilepicLink = "users/"+ this.props.student.uid + '/myphoto.jpg'
+    let profilepicLink = "users/"+ this.props.student.uid + '/myphoto.png'
     storage.ref().child(profilepicLink).getDownloadURL().then((url)=>{
       src = url
       console.log(src)
@@ -42,8 +42,7 @@ class Profile extends Component{
             <div className="profile-container">
               {console.log(this.context.state, "context")}
               <div className="profilepic">
-                {console.log(this.state.source, "source")}
-                <img className='profileimg' src={this.state.source} alt="Image not found"/>
+              <img className='profileimg' src={this.state.source} alt="Image not found"/>
               </div>
               <div className="applicant-info">
                 <p className="applicant-name">{student.name}</p>
