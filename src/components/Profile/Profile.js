@@ -35,7 +35,7 @@ class Profile extends Component {
 
     componentDidMount(){
         let social = this.state.social_media
-        let count = 0
+        let count = 5
         let map = this.props.profile.social_media
         for(let i=0; i<5; i++){
             if(!map[i]){

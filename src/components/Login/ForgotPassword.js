@@ -8,13 +8,11 @@ export default class ForgotPassword extends Component {
     render() {
         return(
             <div className={styles.LoginGrid}>
-                
                 <div className={styles.LoginSide}>
                     <div>
                         <div style={{textAlign:'left'}}>
                             <h1 className={styles.H1}>Forgot Password</h1>
                             <p className={styles.DescriptionText}>A password reset link will be sent to your email ID, but first let’s find your account</p>
-                            <p className={styles.label}>Email ID</p>
                             <ForgotForm></ForgotForm>
                         </div>
                     </div>

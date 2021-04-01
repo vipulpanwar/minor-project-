@@ -41,7 +41,7 @@ class LoginForm extends Component {
             <form>
                 <ErrorBox error={this.props.error?.message}/>
                 {this.renderForm()}
-                <Button primary style={{'marginTop': 25}} clicked={alert("Link")} loading={this.props.isLoading}>
+                <Button primary style={{'marginTop': 25}} clicked={()=>alert('Link')} loading={this.props.isLoading}>
                     Send Password Reset Link
                 </Button>
             </form>
