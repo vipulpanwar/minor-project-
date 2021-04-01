@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import axios from 'axios';
 import React , { createContext, Component, createRef, useState, useEffect, useLayoutEffect} from 'react';
 import {db} from '../../firebase'
 export const StudentsContext = createContext();
@@ -72,13 +73,21 @@ class StudentsProviderComponent extends Component{
         console.log(newstatus);
         let findingstudent = this.state.applicants.find((student)=>{return student.id == studentId});
         if(newstatus!=findingstudent.status){
-            await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({status:newstatus});
-            let updatingstudent = {...findingstudent}
-            updatingstudent.status = newstatus;
-            let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
-            let applicantsCopy = [...this.state.applicants]
-            applicantsCopy[index] = updatingstudent;
-            this.setState({applicants:applicantsCopy})
+            console.log(studentId, newstatus);
+
+            await axios.post('http://us-central1-oneios.cloudfunctions.net/app/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:'Hired'}).then((res)=>{
+                            // await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({status:newstatus});
+                let updatingstudent = {...findingstudent}
+                updatingstudent.status = newstatus;
+                let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
+                let applicantsCopy = [...this.state.applicants]
+                applicantsCopy[index] = updatingstudent;
+                this.setState({applicants:applicantsCopy})
+            }).catch(e=>{
+                console.log(e);
+            });
+
+            
         }
     }
 
@@ -92,7 +101,7 @@ class StudentsProviderComponent extends Component{
             let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Applied').limit(10);
             console.log(this.props.hired, "showHired")
             if(this.props.hired){
-                query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Hire').limit(10);
+                query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Hired').limit(10);
             }
             for (let filterKey in filters){
                 if(filters[filterKey]!='All' && filters[filterKey]!=''){

@@ -12,6 +12,7 @@ import { Fragment } from 'react';
 import {db} from '../../firebase';
 import {StudentsProvider} from './StudentsContext';
 import StudentsCard from './StudentCard';
+import axios from 'axios';
 
 const modalStyle = {
     maxWidth: 886,
@@ -50,14 +51,18 @@ class AppliedStudents extends Component{
 
         let jd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).get();
         this.setState({jobsdata: jd.data()});
-        
-        let cd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('count').get();
-        cd.forEach(jobDoc=>{
-            let job = jobDoc.data();
-            countdata.push(job);
-            console.log(job);
-        });
-        this.setState({countdata: countdata[0]});
+
+        let res = await axios.get('http://us-central1-oneios.cloudfunctions.net/app/get_applied_count/' + this.props.computedMatch.params.jobId);
+
+
+        // let cd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('count').get();
+        // cd.forEach(jobDoc=>{
+        //     let job = jobDoc.data();
+        //     countdata.push(job);
+        //     console.log(job);
+        // });
+
+        this.setState({countdata: res.data});
         this.setState({countLoading:false})
     }
 
@@ -78,7 +83,7 @@ class AppliedStudents extends Component{
         return(<div>
         
             <StudentsProvider hired={this.props.hired} count ={this.state.countdata} jobId={this.props.computedMatch.params.jobId}>
-                <StudentsHeader loading={this.state.countLoading} title={`${this.state.countdata.count}`} subTitle={this.state.jobsdata.title} filterToggle={this.toggleFilterHandler}/>
+                <StudentsHeader loading={this.state.countLoading} counts={this.state.countdata} subTitle={this.state.jobsdata.title} filterToggle={this.toggleFilterHandler}/>
                 
                 <StudentList count={this.state.countdata}/>
                 {this.state.countLoading? null :

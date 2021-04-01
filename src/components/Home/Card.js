@@ -44,7 +44,7 @@ const [showHomeInfo, ToggleHomeInfo] = useState(false)
         </div>
         <p className={styles.JobDetails}>{props.job.type} | {props.job.ctc} | {formatDate(props.job.deadline)}</p>
         <p className={styles.StudentsApplied}>Students Applied</p>
-        <p className={styles.StudentsNumber}>{props.job.appliedStudentsCount || 0}</p>
+        <p className={styles.StudentsNumber}>{props.job.count || 0}</p>
         <img src={blueNextButton} style={{position:"absolute", right:17, bottom:33}}/>
       </div>
     </Link>
