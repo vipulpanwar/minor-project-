@@ -104,6 +104,12 @@
   padding: 18px 16px;
 }
 
+.FloatingInputElement:-webkit-autofill {
+  background-color: #FAFFBD !important;
+  background-image:none !important;
+  color: #000000 !important;
+}
+
 
 .FloatingInputLabel {
   position: absolute;

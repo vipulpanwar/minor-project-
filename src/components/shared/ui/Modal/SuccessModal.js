@@ -3,6 +3,7 @@ import Modal from './Modal'
 import Tick from './images/tick.svg'
 import styles from './SuccessModal.module.css'
 import Button from '../Button/Button'
+import { Link } from 'react-router-dom'
 
 export default class Success extends Component {
     style={
@@ -21,7 +22,8 @@ export default class Success extends Component {
                     <img src={Tick} style={{width:'150px'}}/>
                     {this.props.title && <div className={styles.title}>{this.props.title}</div>}
                     {this.props.subtitle && <div className={styles.subtitle}>{this.props.subtitle}</div>}
-                    {this.props.buttonText && <button className={styles.button} onClick={this.props.click}>{this.props.buttonText}</button>}
+                    {this.props.buttonText && !this.props.link && <button className={styles.button} onClick={this.props.click}>{this.props.buttonText}</button>}
+                    {this.props.buttonText && this.props.link && <Link to={this.props.link}><button className={styles.button} onClick={this.props.click}>{this.props.buttonText}</button></Link>}
                 </div>
             </Modal>            
         )

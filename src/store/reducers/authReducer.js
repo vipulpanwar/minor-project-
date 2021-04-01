@@ -30,6 +30,9 @@ const reducer = (state = initialState, action)=>{
                 return {...state, user: action.payload, isAuthenticated:true}
 
         case actionTypes.GET_PROFILE:
+            return {...state, isProfileLoaded:false}
+
+        case actionTypes.SET_PROFILE:
             return {...state, isProfileLoaded:true, profile: action.payload}
 
         case actionTypes.USER_LOGOUT:

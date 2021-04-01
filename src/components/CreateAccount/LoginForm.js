@@ -44,6 +44,7 @@ class LoginForm extends Component {
         signedUp: false,
         showError: false,
         errorMsg: '',
+        isLoading: false,
     }
 
     inputHandler = (e, elName)=>{
@@ -62,6 +63,7 @@ class LoginForm extends Component {
     
     signup =(e)=>{
         e.preventDefault();
+        this.setState({isLoading:true})
         if(this.state.form["password"].value==this.state.form["confirm password"].value){
             let email = this.state.form["email"].value;
             let password = this.state.form["password"].value;
@@ -80,7 +82,7 @@ class LoginForm extends Component {
         }
         else{
             // alert("please enter same passwords");
-            this.setState({errorMsg: "The password does not match", showError:true,})
+            this.setState({errorMsg: "The password does not match", showError:true,isLoading:false})
         }
     }
 
@@ -93,7 +95,7 @@ class LoginForm extends Component {
             <form>
                 {this.state.showError && <ErrorBox error={this.state.errorMsg} />}
                 {this.renderForm()}
-                <Button primary style={{'marginTop': 25}} clicked={this.signup} loading={this.props.isLoading}>
+                <Button primary style={{'marginTop': 25}} clicked={this.signup} loading={this.state.isLoading}>
                     Sign Up
                 </Button>
             </form>
@@ -103,7 +105,6 @@ class LoginForm extends Component {
 
 const mapStateToProps = (state)=>({
     user : state.auth.user,
-    isLoading : state.auth.isLoginFormLoading, 
 })
 
 const mapDispatchToProps = (dispatch) => ({
