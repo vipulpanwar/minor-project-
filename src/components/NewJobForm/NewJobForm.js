@@ -1,16 +1,12 @@
 import React from 'react';
 import Button from '../shared/ui/Button/Button';
-import {Input} from '../shared/ui/Input/Input';
 import styles from './NewJobForm.module.css';
-import QualInput from './QualInput';
+
+import {TwoColSlide, OneColSlide, QualSlide, Slide2Open} from './Slides';
 import { v4 as uuidv4 } from 'uuid';
 
 import {db} from '../../firebase';
 import {connect} from 'react-redux';
-
-const inputStyles={
-    'fontSize':14
-}
 
 class NewJobForm extends React.Component{
     state = {
@@ -18,6 +14,7 @@ class NewJobForm extends React.Component{
             text:"Next",
             icon:"",
         },
+        showBack:false,
         open:false,
         form : {
             step:"1",
@@ -49,7 +46,7 @@ class NewJobForm extends React.Component{
                 "CTC": {value:"", elementType:'input' , 
                         elementConfig:{type:'text'}, name:"ctc", validation:"required"},
                 "Job Category":{ 
-                    value:"", 
+                    value:"Information Technology", 
                     elementConfig:{
                         options:["Information Technology", "Human Resources", "Mazdoori"]
                     },
@@ -123,6 +120,11 @@ class NewJobForm extends React.Component{
                     elementConfig:{ rows:10},
                     name:'desc',
                     validation:"required",
+                },
+                "Skills":{
+                    value:[],
+                    validation: "required",
+                    name:"hskills"
                 }
             }
         }
@@ -139,6 +141,8 @@ class NewJobForm extends React.Component{
         let nextButton = {...this.state.nextButton};
         const maxSteps = open? 2: 3;
 
+        let showBack = true;
+
         nextButton.text= stepCtn == maxSteps-1 ? "Create Job Posting" : "Next";
         if(stepCtn == maxSteps)
             this.createJob();
@@ -146,11 +150,37 @@ class NewJobForm extends React.Component{
         {
             step = `${stepCtn+1}-${open?"open":"campus"}`;
             form.step = step; 
-            this.setState({form, nextButton})
+            this.setState({form, nextButton, showBack})
         }
         
     }
 
+    backButtonHandler = (e)=>{
+        let form = {...this.state.form};
+        let open = this.state.form["1"]["Job Type"].value =="Off Campus";
+        let step = this.state.form.step;
+        let stepCtn = Number(step[0]);
+
+        let nextButton = {...this.state.nextButton};
+
+        nextButton.text =  "Next";
+
+        if(stepCtn == 1)
+            return
+        else if(stepCtn == 2)
+        {
+            step = `1`;
+            form.step = step; 
+            this.setState({form, nextButton, showBack:false})
+        }
+        else
+        {
+            step = `${stepCtn-1}-${open?"open":"campus"}`;
+            form.step = step; 
+            this.setState({form, nextButton})
+        }
+    }
+    
 
     inputChangeHandler=(e,step, label)=>{
         let inputState = {...this.state.form[step][label], value: e.target.value};
@@ -211,6 +241,13 @@ class NewJobForm extends React.Component{
         qualifications.value = [...oldInvited, invited];
 
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
+    }
+
+    skillInputHandler = (skillsVal)=>{
+        let step = this.state.form.step;
+        let skills = {...this.state.form[step]["Skills"]};
+        skills.value = skillsVal;
+        this.setState({form:{...this.state.form, [step]:{...this.state.form[step], "Skills": skills}}});
     }
 
 
@@ -304,43 +341,49 @@ class NewJobForm extends React.Component{
                 Slide = <QualSlide inviteHandler={this.inviteHandler} deleteInviteHandler={this.deleteInviteHandler}  step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
                 break;
             case "3-campus":
-            case "2-open":
                 Slide = <OneColSlide step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
+                break;
+            case "2-open":
+                Slide = <Slide2Open skillInputHandler={this.skillInputHandler} step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>
                 break;
         }
 
         return(
             <div className={styles.ModalContent}>
                 {Slide}
-                <Button clicked={this.nextButtonHandler} style={{width:"unset", display:'block', margin:'auto'}} primary>{this.state.nextButton.text}</Button>
+                <div className={styles.ButtonTray}>
+                    {this.state.showBack?<Button clicked={this.backButtonHandler} style={{width:"unset"}}>Go Back</Button>:null}
+                    <Button clicked={this.nextButtonHandler} style={{width:"unset"}} primary>{this.state.nextButton.text}</Button>
+
+                </div>
             </div>)
     }
 }
 
-const OneColSlide = (props)=>{
-    return (
-    <div className={styles.Slide}>
-        {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
-    </div>)
-}
+// const OneColSlide = (props)=>{
+//     return (
+//     <div className={styles.Slide}>
+//         {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
+//     </div>)
+// }
 
-const TwoColSlide = (props)=>{
-    return  (<div className={[styles.Slide,styles.TwoCol].join(" ")}>
-        {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
-    </div>)
-}
+// const TwoColSlide = (props)=>{
+//     return  (<div className={[styles.Slide,styles.TwoCol].join(" ")}>
+//         {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
+//     </div>)
+// }
 
-const QualSlide = (props)=>{
-    return  (<div className={styles.Slide}>
-        <QualInput inviteHandler={props.inviteHandler} deleteHandler={props.deleteInviteHandler} label={`${9}. Qualifications`} {...props.inputs['Qualifications']}/>
-        <div className={styles.Row}>
-            {Object.keys(props.inputs).map((key, i) => {
-                if(key !="Qualifications")
-                return <Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${key}`} style={inputStyles} {...props.inputs[key]}/>
-            })}
-        </div> 
-    </div>)
-}
+// const QualSlide = (props)=>{
+//     return  (<div className={styles.Slide}>
+//         <QualInput inviteHandler={props.inviteHandler} deleteHandler={props.deleteInviteHandler} label={`${9}. Qualifications`} {...props.inputs['Qualifications']}/>
+//         <div className={styles.Row}>
+//             {Object.keys(props.inputs).map((key, i) => {
+//                 if(key !="Qualifications")
+//                 return <Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${key}`} style={inputStyles} {...props.inputs[key]}/>
+//             })}
+//         </div> 
+//     </div>)
+// }
 
 const createPercentage =(val)=>({
     0 : 0  >= Number(val),

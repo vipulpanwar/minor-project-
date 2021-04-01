@@ -16,16 +16,3 @@
     gap:10px;
     margin-top:14px;
 }
-
-.ModalContent {
-    background:white;
-    padding-bottom:24px;
-    border-radius: 0 0 14px 14px;
-}
-
-.ButtonTray{
-    display: flex;
-    justify-content: center;
-    padding: 0 26px;
-    gap:20px;
-}

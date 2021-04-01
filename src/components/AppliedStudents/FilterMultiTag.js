@@ -34,24 +34,13 @@ class FilterMultiTag extends Component{
         {this.props.name}
         <div className = 'filter-input-field-multi'>
             <div style={{maxWidth:'55%', float:'left', marginTop:'-4px'}}>
-
                 {this.mapTags()}
-                {/* <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} multi skill={this.state.skills[0]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} multi skill={this.state.skills[1]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[2]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[3]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[4]} level="silver" />
-                <SkillTag style={{margin:'auto', marginBottom:'5px', marginRight:'5px' ,}} skill={this.state.skills[5]} multi level="silver" /> */}
             </div>
-            <div style={{verticalAlign:'middle'}}>
-                <form style={{verticalAlign:'middle'}} ref={this.myref}>
-                    <input className='searchTagInput' type="Text" placeholder="Search Tags"/>
-                    <button style={{display:'none'}} type="submit" onClick={this.takeInput}>submit</button>
-                </form>
-            </div>
+
+            <form style={{verticalAlign:'middle'}} ref={this.myref}>
+                <input className='searchTagInput' type="Text" placeholder="Search Tags"/>
+                <button style={{display:'none'}} type="submit" onClick={this.takeInput}>submit</button>
+            </form>
         </div>
     </div>)
 }
