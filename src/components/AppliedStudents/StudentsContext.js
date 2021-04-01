@@ -75,7 +75,7 @@ class StudentsProviderComponent extends Component{
         if(newstatus!=findingstudent.status){
             console.log(studentId, newstatus);
 
-            await axios.post('http://us-central1-oneios.cloudfunctions.net/app/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:'Hired'}).then((res)=>{
+            await axios.post('https://us-central1-oneios.cloudfunctions.net/app/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:'Hired'}).then((res)=>{
                             // await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({status:newstatus});
                 let updatingstudent = {...findingstudent}
                 updatingstudent.status = newstatus;
