@@ -161,7 +161,7 @@ export default class QualInput extends Component{
                         <Input label="Degree" elementType="select" inputHandler={this.degreeInputHandler} elementConfig={{options:this.state.degreeOptions}} style={inputStyles}/>   
                         <Input label="Course" elementType="select" inputHandler={this.courseInputHandler} elementConfig={{options:this.state.courseOptions}} style={inputStyles}/>   
                         <Input label="Branch" elementType="select" inputHandler={this.branchInputHandler} elementConfig={{options:this.state.branchOptions}} style={inputStyles}/> 
-                        <Input label="Year" elementType="select" inputHandler={(e)=>this.inputHandler('yearValue', e.target.value)} elementConfig={{options:["2020","2021","2022","2023","2024","2025"]}} style={inputStyles}/>     
+                        <Input label="Graduation Year" elementType="select" inputHandler={(e)=>this.inputHandler('yearValue', e.target.value)} elementConfig={{options:["2020","2021","2022","2023","2024","2025"]}} style={inputStyles}/>     
                     </div>   
                     <Button clicked={this.inviteHandler} style={{width:"unset", marginBottom:40}} clicked={this.inviteHandler} primary>invite</Button>
                 </div>

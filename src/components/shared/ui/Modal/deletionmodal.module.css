@@ -1,0 +1,51 @@
+.title{
+    font-size: 18px;
+    line-height: 33px;
+    text-align: center;
+    color: #232D4C;
+    padding:5px;
+    font-weight: 500;
+}
+
+.container{
+    text-align: center;
+    padding-top: 28px;
+}
+
+.buttonsdiv{
+    height:52px;
+    display:flex;
+}
+
+.cancelButton{
+    background: #FFFFFF;
+    border-radius: 0px 0px 0 14px;
+    display:inline-block;
+    width:50%;
+    vertical-align: center;
+    border: 1px solid #F4F3F3;
+    vertical-align: center;
+    display:grid;
+    place-items: center;
+    text-align: center;
+}
+
+.deleteButton{
+    background: #FFFFFF;
+    border-radius: 0px 0px 14px 0px;
+    display:inline-block;
+    width:50%;
+    vertical-align: center;
+    border: 1px solid #F4F3F3;
+    vertical-align: center;
+    display:grid;
+    place-items: center;
+    text-align: center;
+}
+
+.padder{
+    font-size: 13px;
+    font-weight: 200;
+    padding: 19px 0 19px 0;
+}
+
