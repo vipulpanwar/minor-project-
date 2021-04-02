@@ -43,7 +43,7 @@ formatDate = (timestamp)=>{
                     <div className = {styles.cat}>{this.props.job.drive_loc}</div>
                 </div>
                 <div className = {styles.catBox}>
-                    <div className = {styles.catTitle}>Drive Location:</div>
+                    <div className = {styles.catTitle}>Interview Location:</div>
                     <div className = {styles.cat}>{this.props.job.job_loc}</div>
                 </div>
                 <div className = {styles.catBox}>

@@ -74,7 +74,7 @@ const AddNewJobCard = ()=>{
 
         <div className={styles.NewCardContent}>
           <div className={styles.Plus}>+</div>
-          <p>Create New Job Posting</p>
+          <p>Create a New Job Posting</p>
         </div>
     </Link>
 
