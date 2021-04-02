@@ -110,7 +110,7 @@ class StepOne extends Component {
                     <br />
                     <div className={styles.companylogodiv}>
                         <label>
-                            {this.state.logoName?<div className={styles.logopreviewdiv}><img className={styles.logopreviewimg} src={URL.createObjectURL(this.state.img)}/><img src={Editimg} className={styles.editPencil}/></div>:<img className = {styles.leftimage} width='150px' height='150px' src={logoinput} />}
+                            {this.state.logoName?<div className={styles.logopreviewdiv}><img className={styles.logopreviewimg} src={URL.createObjectURL(this.state.img)}/><img src={Editimg} className={styles.editPencil}/></div>:<img className = {styles.leftimage} width='150px' height='150px' style={{cursor:'pointer'}} src={logoinput} />}
                             <input className={styles.hide} id="CompanyLogo" type="file" onChange={this.logoinputHandler} accept="image/png, image/jpeg"></input>
                         </label>
                     </div>

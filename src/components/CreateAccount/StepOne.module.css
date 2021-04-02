@@ -236,6 +236,7 @@
     box-sizing: border-box;
     border: 1px dashed #4A90E2;
     background-color: #FFFFFF;
+    cursor:pointer;
 }
 
 .logopreviewdiv{
