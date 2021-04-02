@@ -77,7 +77,7 @@ class LoginForm extends Component {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // alert(errorMessage)
-                this.setState({errorMsg:errorMessage, showError:true})
+                this.setState({errorMsg:errorMessage, showError:true, isLoading:false})
             });
         }
         else{

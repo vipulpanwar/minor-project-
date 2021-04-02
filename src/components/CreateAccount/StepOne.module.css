@@ -2,7 +2,7 @@
     display:inline-block;
     height:100vh;
     vertical-align: top;
-    width: 25vw;
+    width: 380px;
 }
 
 .leftimage{
@@ -11,15 +11,28 @@
 
 .container{
     width:100vw;
-    min-height:100vh;
+    height:100vh;
+    display: grid;
+    grid-template-columns: 380px 1fr;
 }
 
 .rightcontainer{
-    display:inline-block;
-    width: 75vw;
+    display:flex;
+    /* width: 75vw; */
     min-height: 100vh;
     padding: 38px 69px 57px 69px;
     background: #F1F2F3;
+    flex-direction: column;
+    vertical-align: top;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.formcontainer{
+    padding-right:100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 50px;
 }
 
 .uppercontainer{
@@ -37,7 +50,7 @@
 }
 
 .companylogodiv{
-    padding: 37px 0 24px 0;
+    padding: 27px 0 24px 0;
 }
 
 .label{
@@ -86,9 +99,15 @@
 
 .leftForm{
     display:inline-block;
-    width: 355px;
+    /* width: 355px; */
     vertical-align: top;
 }
+.rightForm{
+    /* width: 355px; */
+    vertical-align: top;
+    float: right;
+}
+
 .addmore{
     height: 17px;
     font-style: normal;
@@ -125,8 +144,10 @@
 }
 
 .logoName{
-    width: 165px;
-    height: 115px;
+    /* width: 165px;
+    height: 115px; */
+    width: 140px;
+    height: 140px;
     background: #4A90E2;
     border: 1px dashed #4A90E2;
     box-sizing: border-box;
@@ -192,4 +213,34 @@
 .filledLogo{
     text-align: center;
     word-break: break-word;
+}
+
+.logopreviewimg{
+    width: 140px;
+    height: 140px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    /* place-items: center; */
+    margin-left:auto;
+    margin-right:auto;
+    border:1px solid #4A90E2;
+
+}
+
+.editPencil{
+    position:absolute;
+    top:-14px;
+    right:-14px;
+    width: 35px;
+    border-radius: 100%;
+    box-sizing: border-box;
+    border: 1px dashed #4A90E2;
+    background-color: #FFFFFF;
+}
+
+.logopreviewdiv{
+    box-sizing: border-box;
+    display:inline-block;
+    position:relative;
+    border-radius:'12px';
 }

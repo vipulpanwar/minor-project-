@@ -44,7 +44,7 @@ class CreateAccountProviderComponent extends Component{
             updater.founded_in = data.founded_in
             updater.size = data.size
             updater.about = data.about
-            updater.email = data.email
+            updater.email = this.props.user.email
             updater.phone = data.phone
             updater.social_media =data.social_media
             updater.verified=false
@@ -58,7 +58,7 @@ class CreateAccountProviderComponent extends Component{
         try{
             await db.collection("company").doc(this.props.user.uid).set(updater);
             this.props.logout();
-            this.props.createAlert({subtitle:'Your account will be active in 24hrs', title:"Success", mode:'success'})
+            this.props.createAlert({subtitle:'Your profile verification is under process. Kindly wait for 24 hours.', title:"Profile Created", mode:'success'})
         }
         catch(error) {
             console.error("Error adding document: ", error);

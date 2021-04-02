@@ -8,6 +8,7 @@ import Camera from './images/camera.svg'
 import { Redirect } from 'react-router-dom'
 import Resizer from 'react-image-file-resizer'
 import Sidepanel from './Sidepanel'
+import Editimg from './images/editpencil.png'
 // import Success from '../shared/ui/Modal/SuccessModal'
 // import 'firebase/storage'
 
@@ -109,7 +110,7 @@ class StepOne extends Component {
                     <br />
                     <div className={styles.companylogodiv}>
                         <label>
-                            {this.state.logoName?<div className={styles.logoName}><div className={styles.filledLogo}><img src={URL.createObjectURL(this.state.img)}/><br/>{this.state.logoName}</div></div>:<img className = {styles.leftimage} src={logoinput} />}
+                            {this.state.logoName?<div className={styles.logopreviewdiv}><img className={styles.logopreviewimg} src={URL.createObjectURL(this.state.img)}/><img src={Editimg} className={styles.editPencil}/></div>:<img className = {styles.leftimage} width='150px' height='150px' src={logoinput} />}
                             <input className={styles.hide} id="CompanyLogo" type="file" onChange={this.logoinputHandler} accept="image/png, image/jpeg"></input>
                         </label>
                     </div>

@@ -13,7 +13,6 @@ class StepTwo extends Component {
             founded_in: '',
             size: '',
             about: '',
-            email: '',
             phone: '',
             social_media:{
 
@@ -56,29 +55,30 @@ class StepTwo extends Component {
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<TextInput padding='7px' key={i} change={(e)=>{this.socialinputhandler(i, e)}} display="inlineBlock" width='315px' label="Social Media Link"/>)
+            social.push(<TextInput inline padding='7px' key={i} change={(e)=>{this.socialinputhandler(i, e)}} width='100%' label="Social Media Link"/>)
         }
         return (
             <div className={styles.container}>
                 <Sidepanel />
                 <div className={styles.rightcontainer}>
-                    <p className={styles.tellus}>Tell Us About Your Company</p>
                     <br /><br/>
                     <form>
-                        <div className={styles.leftForm}>
-                            <TextInput display="inlineBlock" change={(e)=>this.inputHandler('founded_in',e)} width='147px' label="Founded In"/>
-                            <TextInput display="inlineBlock" change={(e)=>this.inputHandler('size',e)} width='147px' label="Company Size"/>
-                            <TextInput display="inlineBlock" change={(e)=>this.inputHandler('phone',e)} width='315px' label="Contact Number"/>
-                            {/* <TextInput padding='7px' display="inlineBlock" width='315px' label="Social Media Link"/> */}
-                            {social}
-                            {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
+                        <div className={styles.formcontainer}>
+                            <div className={styles.leftForm}>
+                                <TextInput inline change={(e)=>this.inputHandler('founded_in',e)} width='100%' label="Founded In"/>
+                                <TextInput inline change={(e)=>this.inputHandler('phone',e)} width='100%' label="Contact Number"/>
+                                {/* <TextInput padding='7px' display="inlineBlock" width='315px' label="Social Media Link"/> */}
+                                {social}
+                                {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
+                            </div>
+                            <div className={styles.rightForm}>
+                                <TextInput inline change={(e)=>this.inputHandler('size',e)} width='100%' label="Company Size"/>
+                                {/* <TextInput display="inlineBlock" change={(e)=>this.inputHandler('email',e)} width='315px' label="Company Email ID"/> */}
+                                <TextInput inline textarea width='100%' change={(e)=>this.inputHandler('about',e)} height="131px" label="About" />
+                            </div>
+                                {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone && <button type = "submit" onClick={this.createaccount} className={styles.createButton}>Create Account</button>}
+                                {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone) && <button type = "submit" disabled className={styles.createButtonInactive}>Create Account</button>}
                         </div>
-                        <div className={styles.leftForm}>
-                            <TextInput display="inlineBlock" change={(e)=>this.inputHandler('email',e)} width='315px' label="Company Email ID"/>
-                            <TextInput textarea width='315px' change={(e)=>this.inputHandler('about',e)} height="131px" label="About" />
-                        </div>
-                            {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.email && this.state.form.phone && <button type = "submit" onClick={this.createaccount} className={styles.createButton}>Create Account</button>}
-                            {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.email && this.state.form.phone) && <button type = "submit" disabled className={styles.createButtonInactive}>Create Account</button>}
                     </form>
                 </div>
             </div>

@@ -135,7 +135,7 @@ class Profile extends Component {
                 </div>
                 <div className={styles.rightcontainer}>
                 <div className={styles.title}>Edit Company Details</div>
-                <div className={styles.gridBox} style={{padding:'44px'}}>
+                <div className={styles.gridBox}>
                     <div className={styles.leftForm}>
                         {console.log(profile.size, "size")}
                         <TextInput change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
@@ -143,14 +143,14 @@ class Profile extends Component {
                         <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" textarea label="About"/>
                     </div>
                     <div className={styles.rightForm}>
-                        <div style={{minHeight:'393px'}}>
+                        <div style={{minHeight:'445px'}}>
                             {social}
                             {/* <TextInput inline width='100%' label="Social Media Links"/> */}
                             {this.socailrender}
                             {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
                         </div>
                         {/* {!this.state.changed &&<Button width='373px' disabled>Save Changes</Button>} */}
-                        <Button loading={this.state.isLoading} clicked={this.savechangesHandler} primary={this.state.changed}>Save Changes</Button>
+                        <Button loading={this.state.isLoading} clicked={this.savechangesHandler} disabled={!this.state.changed} primary={this.state.changed}>Save Changes</Button>
                     </div>
                 </div>
                 </div>

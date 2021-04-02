@@ -61,7 +61,7 @@ const BottomNav = (props)=> {
                 <img className={styles.Icon} src={JobIcon}/>
                 <span>Jobs</span>
             </Link>
-            <a href="mailto:ensvee@gmail.com">
+            <a href="mailto:support@ensvee.com">
                 <div onMouseEnter={()=>HoverStart(1)} onMouseLeave={HoverEnd} className={styles.NavLink}>
                     <img className={styles.Icon} src={ProfileIcon}/>
                     <span>Help</span>
