@@ -13,7 +13,7 @@ class Alerts extends Component{
 }
 
 const mapStateToProps = (state)=>({
-    alerts:state.alerts,
+    alerts:state.alerts.alerts,
 })
 
 const mapDispatchToProps = (dispatch)=>({

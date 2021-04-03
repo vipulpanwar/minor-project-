@@ -39,3 +39,4 @@ export const SEARCH = "SEARCH";
 
 export const CREATE_ALERT = "CREATE ALERT";
 export const REMOVE_ALERT = "REMOVE ALERT";
+export const CREATE_TOAST = "CREATE TOAST"

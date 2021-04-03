@@ -256,7 +256,7 @@ class NewJobForm extends React.Component{
         let invited = [...this.state.form[step].Qualifications.value];
         let qualifications = {...this.state.form[step].Qualifications};
 
-        invited.pop(i);
+        invited.splice(i,1);
         qualifications.value = invited;
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
     }

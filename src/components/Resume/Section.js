@@ -43,7 +43,7 @@ const mapStudentToInfo = (student)=>{
   let degrees = Object.keys(student);
   let education = {}
   for(degrees in student){
-    education.[degrees] = {
+    education[degrees] = {
       'title': `${[degrees]} - ${student[degrees].percent}`,
       'subTitle': `${student[degrees].clg_board} • ${student[degrees].year}`
     }

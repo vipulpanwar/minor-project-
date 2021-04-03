@@ -8,7 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 import {connect} from 'react-redux';
 import Button from '../shared/ui/Button/Button'
 import { db } from '../../firebase'
-import { SetCompanyProfile } from '../../store/actions/auth'
+import { SetCompanyProfile } from '../../store/actions/auth';
+import {CreateToast} from '../../store/actions/alert';;
 
 class Profile extends Component {
     state={
@@ -129,7 +130,7 @@ class Profile extends Component {
                             </div>
                         </div>
                         <div className={styles.logout}>
-                            <Button width='187px'>Log Out</Button>
+                            <Button clicked={()=>this.props.createToast({message:"Logged Out Successfully"})} width='187px'>Log Out</Button>
                         </div>
                     </div>
                 </div>
@@ -165,7 +166,8 @@ const mapStateToProps = (state)=>({
 })
 
 const mapDispatchToProps = (dispatch)=>({
-    setCompany: (profile)=> dispatch(SetCompanyProfile(profile))
+    setCompany: (profile)=> dispatch(SetCompanyProfile(profile)),
+    createToast: (toast)=>dispatch(CreateToast(toast))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
