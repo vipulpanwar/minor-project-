@@ -35,43 +35,52 @@ const LoadingCard = () => (
 function DetailCard(props){
 const [showHomeInfo, ToggleHomeInfo] = useState(false)
   return(
-    <div className={styles.Card} style={style}>
-    <Link to={`jobs/${props.job.id}`}>
-      <div className={[styles.Container,styles.CardContainer].join(" ")}>
-        <div className={styles.JobTitleDiv}>
-          <h1 className={styles.JobTitle}>{props.job.title}</h1>
-          <img src={Ibutton} className={styles.IButton}/>
+    <div className={styles.CardContainer}>
+      {props.job.newCount?
+      <div className={styles.NewApplicants}>
+        {props.job.newCount} New Applicants
+      </div>
+      :null}
+      <div className={styles.Card} style={style}>
+        <Link to={`jobs/${props.job.id}`}>
+          <div className={[styles.Container, styles.CardContentContainer].join(" ")}>
+            <div>
+              <div className={styles.JobTitleDiv}>
+                <h1 className={styles.JobTitle}>{props.job.title}</h1>
+                <img src={Ibutton} className={styles.IButton} />
+              </div>
+              <p className={styles.JobDetails}>{props.job.type} | {props.job.ctc} | {formatDate(props.job.deadline)}</p>
+            </div>
+            <p className={styles.StudentsApplied}><span className={styles.StudentsNumber}>{props.job.count || 0}</span> Applicants</p>
+            
+            <img src={blueNextButton} style={{ position: "absolute", right: 17, bottom: 20}} />
+          </div>
+        </Link>
+        <div style={{ position: 'absolute' }}>
+          <Modal show={showHomeInfo} style={{ maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px", }} closeHandler={() => { ToggleHomeInfo(false) }}>
+            <HomeInfo job={props.job} />
+          </Modal>
         </div>
-        <p className={styles.JobDetails}>{props.job.type} | {props.job.ctc} | {formatDate(props.job.deadline)}</p>
-        <p className={styles.StudentsApplied}>Students Applied</p>
-        <p className={styles.StudentsNumber}>{props.job.count || 0}</p>
-        <img src={blueNextButton} style={{position:"absolute", right:17, bottom:33}}/>
+        {/* <button> */}
+        <div onClick={() => ToggleHomeInfo(true)} className={[styles.Container, styles.SingleContainer].join(" ")}>
+          <span>Job Details</span>
+          <img className={styles.BlueNextButton} src={blueNextButton} />
+        </div>
+        {/* </button> */}
+        <Link to={`jobs/${props.job.id}/hired`}>
+          <div className={[styles.Container, styles.SingleContainer].join(" ")}>
+            <span>Hired Students</span>
+            <img className={styles.BlueNextButton} src={blueNextButton} />
+          </div>
+        </Link>
       </div>
-    </Link>
-    <div style={{position:'absolute'}}>
-    <Modal show={showHomeInfo} style={ {maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px",}} closeHandler={()=>{ToggleHomeInfo(false)}}>
-      <HomeInfo job={props.job}/>
-    </Modal>
     </div>
-    {/* <button> */}
-      <div onClick={()=>ToggleHomeInfo(true)} className={[styles.Container,styles.SingleContainer].join(" ")}>
-        <span>Job Details</span>
-        <img className={styles.BlueNextButton} src={blueNextButton}/>
-      </div>
-    {/* </button> */}
-    <Link to={`jobs/${props.job.id}/hired`}>
-      <div className={[styles.Container,styles.SingleContainer].join(" ")}>
-        <span>Hired Students</span>
-        <img className={styles.BlueNextButton} src={blueNextButton}/>
-      </div>
-    </Link>
-  </div>)
+    )
 }
 
 const AddNewJobCard = ()=>{
   return(
     <Link className={[styles.Card, styles.NewCard].join(" ")} to="/new">
-
         <div className={styles.NewCardContent}>
           <div className={styles.Plus}>+</div>
           <p>Create New Job Posting</p>

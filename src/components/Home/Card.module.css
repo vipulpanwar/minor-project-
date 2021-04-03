@@ -1,15 +1,24 @@
+.CardContainer{
+  position: relative;
+  margin: 15px;
+  padding-top: 32px;
+}
+
 .Card {
   display: flex;
   flex-direction: column;
   width: 363px;
-  padding:22px 18px;
-  margin: 15px;
+  padding: 22px 18px;
   background: white;
   box-sizing: border-box;
   border-radius: 24px;
   flex-grow: 0;
   flex-shrink: 0;
-  gap:12px;
+  grid-gap: 12px;
+  gap: 12px;
+  z-index: 10;
+  position: relative;
+  
 }
 
 .NewCard{
@@ -69,8 +78,12 @@
     width: 100%;
 }
 
-.CardContainer {
+.CardContentContainer {
   min-height: 186px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
 }
 
 .JobTitleDiv{
@@ -132,3 +145,19 @@
   float: right;
 }
 
+
+
+.NewApplicants{
+  position: absolute;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 24px 24px 0px 0px;
+  background: #FF5670;
+  padding-bottom: 40px;
+  transform: translateY(-4px);
+  font-weight: 300;
+}
