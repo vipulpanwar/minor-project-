@@ -21,11 +21,15 @@ formatDate = (timestamp)=>{
                         <h1 className = {styles.title}>{this.props.job?.title}</h1>
                         <div className = {styles.desc}>{this.props.job?.type} |  {this.props.job?.ctc}  |  {this.formatDate(this.props.job?.deadline)}</div>
                     </div>
+                    <button className = {styles.deletejobBox}>
+                       Delete Job
+                    </button>
                     <div className = {styles.appliedBox}>
                         <Link to={`jobs/${this.props.job.id}`}>
                             <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.appliedStudentsCount || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
                         </Link>
                     </div>
+                    
                 </div>
             </div>
             <div className = {styles.secondaryBox}>
@@ -39,7 +43,7 @@ formatDate = (timestamp)=>{
                     <div className = {styles.cat}>{this.props.job.drive_loc}</div>
                 </div>
                 <div className = {styles.catBox}>
-                    <div className = {styles.catTitle}>Drive Location:</div>
+                    <div className = {styles.catTitle}>Interview Location:</div>
                     <div className = {styles.cat}>{this.props.job.job_loc}</div>
                 </div>
                 <div className = {styles.catBox}>

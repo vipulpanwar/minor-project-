@@ -53,7 +53,7 @@ const [showHomeInfo, ToggleHomeInfo] = useState(false)
             </div>
             <p className={styles.StudentsApplied}><span className={styles.StudentsNumber}>{props.job.count || 0}</span> Applicants</p>
             
-            <img src={blueNextButton} style={{ position: "absolute", right: 17, bottom: 20}} />
+            <img src={blueNextButton} style={{ position: "absolute", right: 17, bottom: 2}} />
           </div>
         </Link>
         <div style={{ position: 'absolute' }}>

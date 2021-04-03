@@ -10,3 +10,8 @@ export const RemoveAlert= (i)=>({
     type: actionTypes.REMOVE_ALERT,
     payload: i,
 });
+
+export const CreateToast= (toast)=>({
+    type: actionTypes.CREATE_TOAST,
+    payload: toast,
+});

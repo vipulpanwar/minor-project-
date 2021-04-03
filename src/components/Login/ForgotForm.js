@@ -2,6 +2,8 @@ import React,{Component} from "react";
 import Button from "../../components/shared/ui/Button/Button";
 import {FloatingInput as Input} from '../../components/shared/ui/Input/Input';
 import ErrorBox from './ErrorBox';
+import { auth } from '../../firebase'
+import SuccessModal from '../shared/ui/Modal/SuccessModal'
 
 import { connect } from "react-redux";
 import {Login as loginAction} from '../../store/actions/auth';
@@ -18,7 +20,11 @@ class LoginForm extends Component {
                 },
                 value: "",
               },
-        }
+        },
+        isLoading: false,
+        errorMsg: '',
+        showError: false,
+        showModal: false,
     }
 
     inputHandler = (e, elName)=>{
@@ -35,13 +41,37 @@ class LoginForm extends Component {
         });
     }
 
+    forgotHandler = (e)=>{
+        e.preventDefault();
+        this.setState({isLoading:true})
+        auth.sendPasswordResetEmail(this.state.form["email"].value).then(()=>{
+            this.setState({isLoading: false, showModal:true})
+          }).catch((err)=>{
+                let message = ''
+                if(err.code=="auth/wrong-password"){
+                    message = 'The email and password do not match'
+                }
+                else if(err.code=="auth/invalid-email"){
+                    message = "Please enter a valid email address"
+                }
+                else if(err.code=="auth/user-not-found"){
+                    message = "No data of a user associated with this email exists"
+                }
+                else{
+                    message = err.message
+                }
+                this.setState({isLoading:false, errorMsg: message, showError: true})
+          });
+    }
+
     render()
     {
         return (
             <form>
-                <ErrorBox error={this.props.error?.message}/>
+                {this.state.showError && <ErrorBox error={this.state.errorMsg} />}
                 {this.renderForm()}
-                <Button primary style={{'marginTop': 25}} clicked={alert("Link")} loading={this.props.isLoading}>
+                {this.state.showModal && <SuccessModal title="Password reset link sent" show subtitle="Please reset your password and login again" link="/" buttonText="Go to Login Page"/>}
+                <Button primary style={{'marginTop': 25}} clicked={this.forgotHandler} loading={this.state.isLoading}>
                     Send Password Reset Link
                 </Button>
             </form>

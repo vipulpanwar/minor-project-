@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {withAlerts} from '../../Alerts/AlertsContext';
+// import {withAlerts} from '../../Alerts/AlertsContext';
 import {Logout as logoutAction} from '../../../store/actions/auth';
 
 class ProtectedRoute extends React.Component {
@@ -43,4 +43,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAlerts(ProtectedRoute));
+export default connect(mapStateToProps, mapDispatchToProps)(ProtectedRoute);

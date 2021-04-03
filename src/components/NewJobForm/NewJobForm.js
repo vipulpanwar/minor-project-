@@ -32,7 +32,7 @@ class NewJobForm extends React.Component{
                 },
                 "Job Position":{value:"", elementType:"input" , name:'title', validation:"required"},
                 "Job Location": {value:"", elementType:"input", name:'job_loc', validation:"required"},
-                "Placement Drive Location":{ value:"", elementType:"input", name:'drive_loc', validation:"required"},
+                "Interview Location":{ value:"", elementType:"input", name:'drive_loc', validation:"required"},
                 "Employment Type":{ 
                     value:"", 
                     elementConfig:{
@@ -256,7 +256,7 @@ class NewJobForm extends React.Component{
         let invited = [...this.state.form[step].Qualifications.value];
         let qualifications = {...this.state.form[step].Qualifications};
 
-        invited.pop(i);
+        invited.splice(i,1);
         qualifications.value = invited;
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
     }

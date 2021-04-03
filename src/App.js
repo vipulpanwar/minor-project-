@@ -16,7 +16,8 @@ import ProtectedRoute from './components/shared/ProtectedRoute/ProtectedRoute';
 import AppLoading from './components/shared/AppLoader/AppLoader';
 import CreateAccount from './components/CreateAccount/CreateAccount';
 import ForgotPassword from './components/Login/ForgotPassword';
-import Alerts from './components/Alerts/Alerts'
+import Alerts from './components/Alerts/Alerts';
+import Toasts from './components/Alerts/Toasts'
 
 function App(props) {
 
@@ -42,6 +43,7 @@ function App(props) {
         </Switch>
       </Router>
       <Alerts/>
+      <Toasts/>
     </AppLoading>
     
   );

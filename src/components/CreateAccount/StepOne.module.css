@@ -2,7 +2,7 @@
     display:inline-block;
     height:100vh;
     vertical-align: top;
-    width: 25vw;
+    width: 380px;
 }
 
 .leftimage{
@@ -11,15 +11,37 @@
 
 .container{
     width:100vw;
-    min-height:100vh;
+    height:100vh;
+    display: grid;
+    grid-template-columns: 380px 1fr;
 }
 
 .rightcontainer{
-    display:inline-block;
-    width: 75vw;
+    display:flex;
+    /* width: 75vw; */
     min-height: 100vh;
     padding: 38px 69px 57px 69px;
     background: #F1F2F3;
+    flex-direction: column;
+    vertical-align: top;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.formcontainer{
+    padding-right:100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 50px;
+}
+
+@media (max-width:1000px) {
+    .formcontainer{
+        grid-template-columns: 1fr;
+    }
+    .rightForm{
+        margin-top:20px;
+    }
 }
 
 .uppercontainer{
@@ -37,11 +59,10 @@
 }
 
 .companylogodiv{
-    padding: 37px 0 24px 0;
+    padding: 27px 0 24px 0;
 }
 
 .label{
-    height: 19px;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -57,13 +78,15 @@
     box-sizing: border-box;
     border-radius: 5px;
     margin-top:8px;
-    padding-left: 5px;
+    padding: 12px;
+    font-family: "Ubuntu", 'Segoe UI', 'Roboto', 'Oxygen', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif ;
 }
 
 .inputcontainer{
     padding-bottom: 24px;
     display:inline-block;
-    margin-right: 21px;
+    /* margin-right: 21px; */
 }
 
 .submitButtoninactive{
@@ -86,9 +109,15 @@
 
 .leftForm{
     display:inline-block;
-    width: 355px;
+    /* width: 355px; */
     vertical-align: top;
 }
+.rightForm{
+    /* width: 355px; */
+    vertical-align: top;
+    float: right;
+}
+
 .addmore{
     height: 17px;
     font-style: normal;
@@ -96,6 +125,7 @@
     font-size: 14px;
     line-height: 17px;
     color: #4A90E2;
+    cursor:pointer;
 }
 
 .createButton{
@@ -125,8 +155,10 @@
 }
 
 .logoName{
-    width: 165px;
-    height: 115px;
+    /* width: 165px;
+    height: 115px; */
+    width: 120px;
+    height: 120px;
     background: #4A90E2;
     border: 1px dashed #4A90E2;
     box-sizing: border-box;
@@ -192,4 +224,50 @@
 .filledLogo{
     text-align: center;
     word-break: break-word;
+}
+
+.logopreviewimg{
+    /* width: 120px;
+    height: 120px; */
+    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: 0px 0px 12px 0px #ddbbbb;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.logoinputdiv{
+    height: 120px;
+    width: 120px;
+    border: 1px dashed #4A90E2;
+    background-color: #FFFFFF;
+    cursor:pointer;  
+    place-items: center;
+    display: grid;
+    border-radius: 12px;
+}
+
+.editPencil{
+    position: absolute;
+    top: 11px;
+    left: 100%;
+    width: 43px;
+    border-radius: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    cursor: pointer;
+    padding: 5px;
+    transform: translate(-50%, -50%);
+    box-shadow: -3px 8px 20px -11px #bdbdbd;
+}
+
+.logopreviewdiv{
+    width: 120px;
+    height: 120px;
+    box-sizing: border-box;
+    display:inline-block;
+    position:relative;
+    border-radius:'12px';
+    object-fit: cover;
 }

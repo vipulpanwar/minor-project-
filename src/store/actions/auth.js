@@ -49,6 +49,7 @@ export const AuthStateChanged = (user)=>{
         token.claims.userType ="company";              
         if(token.claims?.userType === "company")
         {
+            dispatch(GetCompanyProfile());
             dispatch(AuthStateChangedStart(user));
             let profile = await db.collection('company').doc(user.uid).get();
             
@@ -58,7 +59,7 @@ export const AuthStateChanged = (user)=>{
                 dispatch(Logout())
             }
             else
-                dispatch(GetCompanyProfile(profile.data()))
+                dispatch(SetCompanyProfile(profile.data()))
         }
         else
         {
@@ -68,8 +69,12 @@ export const AuthStateChanged = (user)=>{
     }
 }
 
-export const GetCompanyProfile = (profile)=>({
+export const GetCompanyProfile = ()=>({
     type: actionTypes.GET_PROFILE,
+})
+
+export const SetCompanyProfile = (profile)=>({
+    type: actionTypes.SET_PROFILE,
     payload: profile,
 })
 

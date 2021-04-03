@@ -5,6 +5,7 @@ import ErrorBox from './ErrorBox';
 
 import { connect } from "react-redux";
 import {Login as loginAction} from '../../store/actions/auth'
+import { auth } from '../../firebase'
 
 class LoginForm extends Component {
     state = {
@@ -27,7 +28,10 @@ class LoginForm extends Component {
                 },
                 value: "",
               },
-        }
+        },
+        errorMsg: '',
+        showError: false,
+        isLoading: false,
     }
 
     inputHandler = (e, elName)=>{
@@ -46,16 +50,43 @@ class LoginForm extends Component {
     
     onLoginHandler =(e)=>{
         e.preventDefault();
-        this.props.login(this.state.form.email.value, this.state.form.password.value)
+        this.setState({isLoading: true})
+        this.login(this.state.form.email.value, this.state.form.password.value)
+    }
+
+    login = (email, password)=>{
+        auth.signInWithEmailAndPassword(email, password)
+            .then(async user=>{
+                this.setState({isLoading:false})                
+            }
+            )
+            .catch(err=>{
+                // dispatch(LoginFailed(err))
+                let message = ''
+                if(err.code=="auth/wrong-password"){
+                    message = 'The email and password do not match'
+                }
+                else if(err.code=="auth/invalid-email"){
+                    message = "Invalid Email"
+                }
+                else if(err.code=="auth/user-not-found"){
+                    message = "User not found"
+                }
+                else{
+                    message = err.message
+                }
+                this.setState({isLoading:false, showError: true, errorMsg: message})  
+                console.log(err)              
+            })
     }
 
     render()
     {
         return (
             <form>
-                <ErrorBox error={this.props.error?.message}/>
+                {this.state.showError && <ErrorBox error={this.state.errorMsg} />}
                 {this.renderForm()}
-                <Button primary style={{'marginTop': 25}} clicked={this.onLoginHandler} loading={this.props.isLoading}>
+                <Button primary style={{'marginTop': 25}} clicked={this.onLoginHandler} loading={this.state.isLoading}>
                     Login
                 </Button>
             </form>
@@ -65,8 +96,6 @@ class LoginForm extends Component {
 
 const mapStateToProps = (state)=>({
     user : state.auth.user,
-    isLoading : state.auth.isLoginFormLoading, 
-    error: state.auth.loginError,
 })
 
 const mapDispatchToProps = (dispatch) => ({

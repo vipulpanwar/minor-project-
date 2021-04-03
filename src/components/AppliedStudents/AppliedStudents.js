@@ -51,7 +51,7 @@ class AppliedStudents extends Component{
 
         let jd = await db.collection('jobs').doc(this.props.computedMatch.params.jobId).get();
         this.setState({jobsdata: jd.data()});
-
+        
         let res = await axios.get('https://us-central1-oneios.cloudfunctions.net/app/get_applied_count/' + this.props.computedMatch.params.jobId);
 
 

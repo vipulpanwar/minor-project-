@@ -61,7 +61,7 @@ const BottomNav = (props)=> {
                 <img className={styles.Icon} src={JobIcon}/>
                 <span>Jobs</span>
             </Link>
-            <a href="mailto:ensvee@gmail.com">
+            <a href="mailto:support@ensvee.com">
                 <div onMouseEnter={()=>HoverStart(1)} onMouseLeave={HoverEnd} className={styles.NavLink}>
                     <img className={styles.Icon} src={ProfileIcon}/>
                     <span>Help</span>
@@ -73,7 +73,7 @@ const BottomNav = (props)=> {
             </Link>
             <Link to="/new" onMouseEnter={()=>HoverStart(3)} onMouseLeave={HoverEnd} className={styles.NavLink}>
                 <img className={styles.Icon} src={Plus}/>
-                <span>Add Job</span>
+                <span>Post Job</span>
             </Link>
         </div>
         <div className={styles.ActiveMarker} style={{transform: `translate(${markerPos}px)`}}>

@@ -6,8 +6,10 @@ import logoinput from './images/inputlogo.svg'
 import { CreateAccountContext } from './CreateAccountContext'
 import Camera from './images/camera.svg'
 import { Redirect } from 'react-router-dom'
+import Button from '../shared/ui/Button/Button'
 import Resizer from 'react-image-file-resizer'
 import Sidepanel from './Sidepanel'
+import Editimg from './images/editpencil.png'
 // import Success from '../shared/ui/Modal/SuccessModal'
 // import 'firebase/storage'
 
@@ -63,19 +65,24 @@ class StepOne extends Component {
         let imgName
         console.log(e.target.value)
         let img = e.target.value.toLowerCase()
-        if(img.endsWith('.jpg')||img.endsWith('.png')||img.endsWith('.jpeg')){
-            console.log("Theek hai img");
-            imgName = e.target.value.slice(e.target.value.indexOf('C:/fakepath/') + 13);
-            console.log(imgName);
-            // alert(e.target.files[0])
-            // this.compressor(e.target.files[0])
-            let URIimg = await this.resizeFile(e.target.files[0]);
-            let compressedImg = this.dataURIToBlob(URIimg)
-            this.setState({img:compressedImg})
-            this.setState({logoName:imgName})
+        if(e.target.files[0]){
+            if(img.endsWith('.jpg')||img.endsWith('.png')||img.endsWith('.jpeg')){
+                console.log("Theek hai img");
+                imgName = e.target.value.slice(e.target.value.indexOf('C:/fakepath/') + 13);
+                console.log(imgName);
+                // alert(e.target.files[0])
+                // this.compressor(e.target.files[0])
+                let URIimg = await this.resizeFile(e.target.files[0]);
+                let compressedImg = this.dataURIToBlob(URIimg)
+                this.setState({img:compressedImg})
+                this.setState({logoName:imgName})
+            }
+            else{
+                alert("Please upload a jpeg, jpg or png file only");
+            }
         }
         else{
-            alert("Please upload a jpeg, jpg or png file only");
+            this.setState({img:'', logoName:''})
         }
     }
 
@@ -109,17 +116,17 @@ class StepOne extends Component {
                     <br />
                     <div className={styles.companylogodiv}>
                         <label>
-                            {this.state.logoName?<div className={styles.logoName}><div className={styles.filledLogo}><img src={Camera}/><br/>{this.state.logoName}</div></div>:<img className = {styles.leftimage} src={logoinput} />}
+                            {this.state.logoName?<div className={styles.logopreviewdiv}><img className={styles.logopreviewimg} src={URL.createObjectURL(this.state.img)}/><img src={Editimg} className={styles.editPencil}/></div>:<div className={styles.logoinputdiv}><img className = {styles.leftimage} width='90px' height='90px' style={{cursor:'pointer'}} src={logoinput} /></div>}
                             <input className={styles.hide} id="CompanyLogo" type="file" onChange={this.logoinputHandler} accept="image/png, image/jpeg"></input>
                         </label>
                     </div>
                     <form>
-                        <TextInput change={this.nameinputhandler} label="Company Name"/>
-                        <TextInput change={this.typeinputhandler} label="Industry Type"/>
-                        <TextInput change={this.websiteinputhandler} label="Company Website"/>
-                        <TextInput change={this.addinputhandler} label="Company Address"/>
-                        {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<button disabled className={styles.submitButtoninactive}>Next</button>}
-                        {this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName && <button type = "submit" onClick={this.nextPagehandler} className={styles.submitButton}>Next</button>}
+                        <TextInput inline width="100%" change={this.nameinputhandler} label="Company Name"/>
+                        <TextInput inline width="100%" change={this.typeinputhandler} label="Industry Type"/>
+                        <TextInput inline width="100%" change={this.websiteinputhandler} label="Company Website"/>
+                        <TextInput inline width="100%" change={this.addinputhandler} label="Company Address"/>
+                        {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<Button disabled width="150px">Next</Button>}
+                        {this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName && <Button clicked={this.nextPagehandler} primary width="150px">Next</Button>}
                     </form>
                 </div>
             </div>
