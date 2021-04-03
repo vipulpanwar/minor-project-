@@ -22,6 +22,7 @@ class StepOne extends Component {
         website: '',
         logoName:'',
         img: '',
+        websiteError:'',
     }
 
     resizeFile = (file) =>
@@ -98,12 +99,27 @@ class StepOne extends Component {
         return new Blob([ia], { type: mimeString });
       };
 
+    validURL = (str)=>{
+        var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+          '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+          '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+          '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+          '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+          '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return !!pattern.test(str);
+      }
+
     nextPagehandler = (e) =>{
-        //validations
         e.preventDefault();
-        console.log(this.state, "Step One done")
-        this.context.stepOneSubmit(this.state)
-        console.log(this.context.state.form)
+        if(!this.validURL(this.state.website)){
+            // alert("You haven't entered a valid URL");
+            this.setState({websiteError:'Must be a link'})
+        }
+        else{
+            console.log(this.state, "Step One done")
+            this.context.stepOneSubmit(this.state)
+            console.log(this.context.state.form)
+        }
     }
 
     render() {
@@ -123,7 +139,7 @@ class StepOne extends Component {
                     <form>
                         <TextInput inline width="100%" change={this.nameinputhandler} label="Company Name"/>
                         <TextInput inline width="100%" change={this.typeinputhandler} label="Industry Type"/>
-                        <TextInput inline width="100%" change={this.websiteinputhandler} label="Company Website"/>
+                        <TextInput inline width="100%" errors={this.state.websiteError} change={this.websiteinputhandler} label="Company Website"/>
                         <TextInput inline width="100%" change={this.addinputhandler} label="Company Address"/>
                         {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<Button disabled width="150px">Next</Button>}
                         {this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName && <Button clicked={this.nextPagehandler} primary width="150px">Next</Button>}
