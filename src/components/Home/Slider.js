@@ -79,8 +79,7 @@ const cardList = (jobsList)=>{
     <Fragment key={job.id}>
       <Card  className="single-item" job={job}/>
     </Fragment>))
-  list.push(<Card key="new-card" newCard/>);
-  return list;
+  return [<Card key="new-card" newCard/>,...list];
 }
 
 const mapStateToProps = (state)=>({
