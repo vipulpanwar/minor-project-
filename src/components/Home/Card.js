@@ -9,6 +9,7 @@ import Ibutton from '../../assets/icons/ibutton.svg';
 import CardSkeletonLoader from './CardSkeletonLoader';
 import blueNextButton from '../../assets/icons/next-button.svg';
 import moment from 'moment';
+import { CSSTransition } from "react-transition-group";
 
 const style={
   background:`url(${BgImage})`,
@@ -36,24 +37,25 @@ function DetailCard(props){
 const [showHomeInfo, ToggleHomeInfo] = useState(false)
   return(
     <div className={styles.CardContainer}>
-      {props.job.newCount?
-      <div className={styles.NewApplicants}>
-        {props.job.newCount} New Applicants
-      </div>
-      :null}
+      <CSSTransition appear unmountOnExit in={Boolean(props.job.newCount)} timeout={500} 
+      classNames={{enter: styles.NewApplicantsAppear, enterActive: styles.NewApplicantsAppearActive}}>
+        <div className={styles.NewApplicants}>
+          {props.job.newCount} New Applicants
+        </div>
+      </CSSTransition>
       <div className={styles.Card} style={style}>
         <Link to={`jobs/${props.job.id}`}>
-          <div className={[styles.Container, styles.CardContentContainer].join(" ")}>
+          <div className={[styles.Container, styles.CardContentContainer, true?styles.Disabled:null].join(" ")}>
             <div>
               <div className={styles.JobTitleDiv}>
                 <h1 className={styles.JobTitle}>{props.job.title}</h1>
-                <img src={Ibutton} className={styles.IButton} />
+                {/* <img src={Ibutton} className={styles.IButton} /> */}
               </div>
               <p className={styles.JobDetails}>{props.job.type} | {props.job.ctc} | {formatDate(props.job.deadline)}</p>
             </div>
             <p className={styles.StudentsApplied}><span className={styles.StudentsNumber}>{props.job.count || 0}</span> Applicants</p>
             
-            <img src={blueNextButton} style={{ position: "absolute", right: 17, bottom: 2}} />
+            <img src={blueNextButton} style={{ position: "absolute", right: 17, bottom: 20}} />
           </div>
         </Link>
         <div style={{ position: 'absolute' }}>
@@ -68,7 +70,7 @@ const [showHomeInfo, ToggleHomeInfo] = useState(false)
         </div>
         {/* </button> */}
         <Link to={`jobs/${props.job.id}/hired`}>
-          <div className={[styles.Container, styles.SingleContainer].join(" ")}>
+          <div className={[styles.Container, styles.SingleContainer, true?styles.Disabled:null].join(" ")}>
             <span>Hired Students</span>
             <img className={styles.BlueNextButton} src={blueNextButton} />
           </div>
@@ -80,12 +82,14 @@ const [showHomeInfo, ToggleHomeInfo] = useState(false)
 
 const AddNewJobCard = ()=>{
   return(
-    <Link className={[styles.Card, styles.NewCard].join(" ")} to="/new">
-        <div className={styles.NewCardContent}>
-          <div className={styles.Plus}>+</div>
-          <p>Create New Job Posting</p>
-        </div>
-    </Link>
+    <div className={styles.CardContainer}>
+      <Link className={[styles.Card, styles.NewCard].join(" ")} to="/new">
+          <div className={styles.NewCardContent}>
+            <div className={styles.Plus}>+</div>
+            <p>Create New Job Posting</p>
+          </div>
+      </Link>
+    </div>
 
   )
 }

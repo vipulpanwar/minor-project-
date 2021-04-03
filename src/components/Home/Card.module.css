@@ -161,3 +161,12 @@
   transform: translateY(-4px);
   font-weight: 300;
 }
+
+.NewApplicantsAppear{
+  transform: translateY(40px);
+}
+
+.NewApplicantsAppearActive{
+  transform: translateY(-4px);
+  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.24, 1.58);
+}
