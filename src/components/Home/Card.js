@@ -36,11 +36,12 @@ function DetailCard(props){
 const [showHomeInfo, ToggleHomeInfo] = useState(false)
   return(
     <div className={styles.Card} style={style}>
+
     <Link to={`jobs/${props.job.id}`}>
       <div className={[styles.Container,styles.CardContainer].join(" ")}>
         <div className={styles.JobTitleDiv}>
           <h1 className={styles.JobTitle}>{props.job.title}</h1>
-          <img src={Ibutton} className={styles.IButton}/>
+          {/* <img src={Ibutton} className={styles.IButton}/> */}
         </div>
         <p className={styles.JobDetails}>{props.job.type} | {props.job.ctc} | {formatDate(props.job.deadline)}</p>
         <p className={styles.StudentsApplied}>Students Applied</p>
@@ -74,7 +75,7 @@ const AddNewJobCard = ()=>{
 
         <div className={styles.NewCardContent}>
           <div className={styles.Plus}>+</div>
-          <p>Create New Job Posting</p>
+          <p>Create a New Job Posting</p>
         </div>
     </Link>
 

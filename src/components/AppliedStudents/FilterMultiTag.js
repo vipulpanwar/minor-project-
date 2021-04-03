@@ -36,7 +36,7 @@ class FilterMultiTag extends Component{
             <div style={{maxWidth:'55%', float:'left', marginTop:'-4px'}}>
                 {this.mapTags()}
             </div>
-
+            
             <form style={{verticalAlign:'middle'}} ref={this.myref}>
                 <input className='searchTagInput' type="Text" placeholder="Search Tags"/>
                 <button style={{display:'none'}} type="submit" onClick={this.takeInput}>submit</button>

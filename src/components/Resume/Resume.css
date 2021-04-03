@@ -237,6 +237,7 @@ hr{
   font-size: 14px;
   line-height: 16px;
   text-transform: capitalize;
+  word-break: break-word;
 }
 
 .skills-container{

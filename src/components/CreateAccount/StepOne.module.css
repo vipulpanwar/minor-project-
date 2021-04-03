@@ -35,6 +35,15 @@
     gap: 0px 50px;
 }
 
+@media (max-width:1000px) {
+    .formcontainer{
+        grid-template-columns: 1fr;
+    }
+    .rightForm{
+        margin-top:20px;
+    }
+}
+
 .uppercontainer{
     padding: 54px;
     display:block;
@@ -54,7 +63,6 @@
 }
 
 .label{
-    height: 19px;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -70,7 +78,9 @@
     box-sizing: border-box;
     border-radius: 5px;
     margin-top:8px;
-    padding-left: 5px;
+    padding: 12px;
+    font-family: "Ubuntu", 'Segoe UI', 'Roboto', 'Oxygen', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif ;
 }
 
 .inputcontainer{
@@ -115,6 +125,7 @@
     font-size: 14px;
     line-height: 17px;
     color: #4A90E2;
+    cursor:pointer;
 }
 
 .createButton{
@@ -146,8 +157,8 @@
 .logoName{
     /* width: 165px;
     height: 115px; */
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     background: #4A90E2;
     border: 1px dashed #4A90E2;
     box-sizing: border-box;
@@ -216,15 +227,26 @@
 }
 
 .logopreviewimg{
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     box-sizing: border-box;
     border-radius: 12px;
     /* place-items: center; */
     margin-left:auto;
     margin-right:auto;
     border:1px solid #4A90E2;
+    object-fit: cover;
+}
 
+.logoinputdiv{
+    height: 120px;
+    width: 120px;
+    border: 1px dashed #4A90E2;
+    background-color: #FFFFFF;
+    cursor:pointer;  
+    place-items: center;
+    display: grid;
+    border-radius: 12px;
 }
 
 .editPencil{
@@ -236,6 +258,7 @@
     box-sizing: border-box;
     border: 1px dashed #4A90E2;
     background-color: #FFFFFF;
+    cursor:pointer;
 }
 
 .logopreviewdiv{
@@ -243,4 +266,5 @@
     display:inline-block;
     position:relative;
     border-radius:'12px';
+    object-fit: cover;
 }

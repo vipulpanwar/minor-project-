@@ -22,7 +22,7 @@
   border: 0px;
   display: flex;
   color: #4A90E2;
-  width: 40%;
+  min-width: 40%;
   vertical-align: middle;
 }
 

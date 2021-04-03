@@ -73,7 +73,7 @@ const BottomNav = (props)=> {
             </Link>
             <Link to="/new" onMouseEnter={()=>HoverStart(3)} onMouseLeave={HoverEnd} className={styles.NavLink}>
                 <img className={styles.Icon} src={Plus}/>
-                <span>Add Job</span>
+                <span>Post Job</span>
             </Link>
         </div>
         <div className={styles.ActiveMarker} style={{transform: `translate(${markerPos}px)`}}>

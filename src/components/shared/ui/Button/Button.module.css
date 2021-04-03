@@ -23,6 +23,12 @@
     border: none;
 }
 
+.Disabled{
+    color:white;
+    background: #D3D5DB;
+    border: none;
+}
+
 .Button:hover {
     transform: scale(1.01);
     box-shadow: 0px 6px 8px 0px #0001;
