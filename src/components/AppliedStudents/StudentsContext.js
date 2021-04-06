@@ -90,6 +90,7 @@ class StudentsProviderComponent extends Component{
                 this.props.createToast({message:message});
             } catch (error) {
                 this.props.createToast({message:"Something went wrong"});
+                console.log(error)
             }
                             // await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({status:newstatus});
         }
@@ -160,7 +161,7 @@ class StudentsProviderComponent extends Component{
 
     render(){
 
-        let contextData = {state: this.state, updatef: this.updateflag, updatestat: this.updatestatus, filterfunction: this.applyFilterHandler, setSearch: this.setSearch}
+        let contextData = {state: this.state, updatef: this.updateflag, updatestat: this.updatestatus, filterfunction: this.applyFilterHandler, fetchStudents: this.fetchStudents, setSearch: this.setSearch}
     return (
         <StudentsContext.Provider value={contextData}>
             {this.props.children}

@@ -4,6 +4,7 @@ import Button from '../shared/ui/Button/Button';
 import filterIcon from '../../assets/icons/filter.svg';
 import {StudentsContext} from './StudentsContext';
 import { Search } from '../../store/actions/jobs';
+import SearchByTag from './SearchByTag'
 
 class SearchBar extends Component{
 
@@ -15,6 +16,7 @@ class SearchBar extends Component{
     render(){
         return(<div className={styles.SearchRow}>
             <input onInput={this.searchInputHandler} className={styles.SearchInput} type="Text" placeholder="Search by Email"/>
+            <SearchByTag />
             {!this.context.state.showHired && <Button clicked={this.props.filterToggle} width="unset" style={{marginLeft:20, padding:21, borderColor:'#D3D5DB'}}>
                 <img className={styles.Icon} src={filterIcon}></img>
             </Button>}

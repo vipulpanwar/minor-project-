@@ -4,7 +4,7 @@ import styles from './StepOne.module.css'
 import TextInput from './TextInput'
 import logoinput from './images/inputlogo.svg'
 import { CreateAccountContext } from './CreateAccountContext'
-import Camera from './images/camera.svg'
+import redcamera from './images/redcamera.svg'
 import { Redirect } from 'react-router-dom'
 import Button from '../shared/ui/Button/Button'
 import Resizer from 'react-image-file-resizer'
@@ -24,6 +24,7 @@ class StepOne extends Component {
         logoName:'',
         img: '',
         websiteError:'',
+        logoError:false,
     }
 
     resizeFile = (file) =>
@@ -68,7 +69,7 @@ class StepOne extends Component {
         console.log(e.target.value)
         let img = e.target.value.toLowerCase()
         if(e.target.files[0]){
-            if(img.endsWith('.jpg')||img.endsWith('.png')||img.endsWith('.jpeg')||img.endsWith('.svg')){
+            if(img.endsWith('.jpg')||img.endsWith('.png')||img.endsWith('.jpeg')){
                 imgName = e.target.value.slice(e.target.value.indexOf('C:/fakepath/') + 13);
                 console.log(imgName);
                 // alert(e.target.files[0])
@@ -79,7 +80,7 @@ class StepOne extends Component {
                 this.setState({logoName:imgName})
             }
             else{
-                alert("Please upload a jpeg, jpg or png file only");
+                this.setState({logoError: true})
             }
         }
         else{
@@ -132,8 +133,10 @@ class StepOne extends Component {
                     <br />
                     <div className={styles.companylogodiv}>
                         <label>
-                            {this.state.logoName?<div className={styles.logopreviewdiv}><img className={styles.logopreviewimg} src={URL.createObjectURL(this.state.img)}/><img src={Editimg} className={styles.editPencil}/></div>:<div className={styles.logoinputdiv}><img className = {styles.leftimage} width='90px' height='90px' style={{cursor:'pointer'}} src={logoinput} /></div>}
+                            {this.state.logoName?<div className={styles.logopreviewdiv}><img className={styles.logopreviewimg} src={URL.createObjectURL(this.state.img)}/><img src={Editimg} className={styles.editPencil}/></div>:null}
                             <input className={styles.hide} id="CompanyLogo" type="file" onChange={this.logoinputHandler} accept="image/png, image/jpeg"></input>
+                            {this.state.logoError && (!this.state.logoName) && <div style={{backgroundColor: '#ffe7e5', border: '1px dashed #FF6F65'}} className={styles.logoinputdiv}><img className = {styles.leftimage} width='110px' height='110px' style={{cursor:'pointer'}} src={redcamera} /></div>}
+                            {(!this.state.logoError) && (!this.state.logoName) && <div className={styles.logoinputdiv}><img className = {styles.leftimage} width='90px' height='90px' style={{cursor:'pointer'}} src={logoinput} /></div>}
                         </label>
                     </div>
                     <form>
