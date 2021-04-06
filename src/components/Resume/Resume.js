@@ -61,7 +61,7 @@ class Resume extends Component{
                         </div>
                     </CSSTransition>
 
-                    <Profile student={student}/>
+                    <Profile jobid={this.props.match.params.jobId} student={student}/>
 
                     <Skills hardSkills={student.hskills} softSkills={student.sskills} />
                 

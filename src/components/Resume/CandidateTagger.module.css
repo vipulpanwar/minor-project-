@@ -1,6 +1,9 @@
 .outercontainer{
     width:100%;
     padding: 20px 31px 0px 31px;
+    display:grid;
+    grid-gap: 24px;
+    grid-template-columns: 1fr 1fr;
 }
 
 .innercontainer{
@@ -8,8 +11,8 @@
     border-radius: 10px;
     height: 108px;
     padding-left: 13px; 
-    width: 396px;
-    display:inline-block;
+    /* width: 396px; */
+    /* display:inline-block; */
     vertical-align: top;
 }
 
@@ -21,9 +24,10 @@
     box-sizing: border-box;
     border-radius: 10px;
     padding: 16px 26px 22px 26px;
-    display:inline-block;
-    margin-left: 30px;
-    width:376px;
+    /* display:inline-block; */
+    /* margin-left: 30px; */
+    /* width:376px; */
+    /* width: 50%; */
     font-size: 14px;
     line-height: 17px;
     color: #232D4C;
@@ -63,4 +67,6 @@
 
 .buttoncontainer{
     padding:12px 0 22px 0; 
+    display: flex;
+    flex-direction: row;
 }

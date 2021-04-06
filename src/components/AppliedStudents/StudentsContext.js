@@ -82,6 +82,7 @@ class StudentsProviderComponent extends Component{
                 let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
                 let applicantsCopy = [...this.state.applicants]
                 applicantsCopy[index] = updatingstudent;
+                applicantsCopy.splice(index,1);
                 this.setState({applicants:applicantsCopy})
             }).catch(e=>{
                 console.log(e);

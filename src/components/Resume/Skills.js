@@ -10,7 +10,7 @@ export default  (props)=>{
             <div style={props.style} className="skills-section">
               {!props.loading && !props.offcampus && (props.softSkills || props.hardSkills)?
               <div className='skills-heading'>
-                Skills
+                {(Object.keys(props.hardSkills).length !=0||Object.keys(props.softSkills).length !=0) && <p>Skills</p>}
               </div>:null}
               <div className="skills-container">
                 <div>

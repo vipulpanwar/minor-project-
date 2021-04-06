@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import Button from '../shared/ui/Button/Button'
 import { db } from '../../firebase'
 import { SetCompanyProfile } from '../../store/actions/auth';
-import {CreateToast} from '../../store/actions/alert';;
+import { CreateToast } from '../../store/actions/alert';
 
 class Profile extends Component {
     state={
