@@ -31,6 +31,7 @@
   transition: border 0.1s ease-in;
   padding: 18px 16px;
   padding: 11px 16px;
+  /* margin-right:7px; */
 }
 
 .InputElement:focus {

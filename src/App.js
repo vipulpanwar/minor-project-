@@ -18,6 +18,7 @@ import CreateAccount from './components/CreateAccount/CreateAccount';
 import ForgotPassword from './components/Login/ForgotPassword';
 import Alerts from './components/Alerts/Alerts';
 import Toasts from './components/Alerts/Toasts'
+import { CSSTransition } from 'react-transition-group';
 
 function App(props) {
 
@@ -38,7 +39,6 @@ function App(props) {
           <ProtectedRoute path="/createaccount" component={CreateAccount} ignoreVerification  />
           <ProtectedRoute path="/jobs/:jobId/hired" render= {(props)=><AppliedStudentsContainer hired {...props}/>}/>
           <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
-          {/* <ProtectedRoute path="/profile" component= {Profile}/> */}
           <ProtectedRoute matchPath={true} path="/" component={HomeContainer}/>
         </Switch>
       </Router>

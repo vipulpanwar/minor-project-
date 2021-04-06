@@ -64,14 +64,29 @@
     backdrop-filter: blur(44px);
     border-radius: 15px;
     min-height: 50px;
-    padding:17px;
+    padding:15px;
     color: #232d4c;
+    cursor: pointer;
+    border: 2px solid #fff0;  
+    transition: border-color 0.15s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
+
+.Container:hover.Active{
+  background-color:#ffffff8c;
+  /* border-color: #ffffff57;; */
+  box-shadow: 1px 1px 5px #ffffff4f;
+  transition: border-color 0.15s ease-in-out, transform 0.1s ease-in-out,  box-shadow 0.1s ease-in-out background-color 0.1s ease-in-out;
+}
+
+.Container:active.Active{
+  transform:scale(0.98);
+}
+
 
 .SingleContainer{
     display: flex;
     align-items: center;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .SingleContainer span {
@@ -128,6 +143,7 @@
   line-height: 18px;
   color: #232d4c;
   margin-top:8px;
+  transition: opacity 0.15s ease-in-out;
 }
 
 .StudentsNumber {
@@ -170,3 +186,45 @@
   transform: translateY(-4px);
   transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.24, 1.58);
 }
+
+.Loading{
+  background: linear-gradient(90deg,#fff0, #ffffff52, #fff0);
+  background-color: #ffffff42;
+  content-visibility: hidden;
+  height: 30px;
+  border-radius: 5px;
+  background-size: 40px 100%;
+  background-repeat: no-repeat;
+  background-position: -40px 0%;
+  animation: loading 1s ease infinite;
+  width: 50%;
+}
+
+@keyframes loading{
+  to{
+    background-position: right -40px top 0%;
+  }
+}
+
+.Container img,
+.Container span,
+.StudentsApplied {
+  transition: opacity 0.15s ease-in-out;
+}
+
+.Disabled.Container{
+  cursor: default;
+}
+
+.Disabled img{
+  display: none;
+}
+
+.CardContentContainer.Disabled .StudentsApplied{
+  opacity: 0.5;
+}
+
+.Container.Disabled span{
+  opacity: 0.5;
+}
+

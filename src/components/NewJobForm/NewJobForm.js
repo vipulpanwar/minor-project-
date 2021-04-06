@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../shared/ui/Button/Button';
 import styles from './NewJobForm.module.css';
 
-import {TwoColSlide, OneColSlide, QualSlide, Slide2Open} from './Slides';
+import {Slide1,TwoColSlide, OneColSlide, QualSlide, Slide2Open} from './Slides';
 import { v4 as uuidv4 } from 'uuid';
 
 import {db} from '../../firebase';
@@ -17,7 +17,7 @@ class NewJobForm extends React.Component{
         showBack:false,
         open:false,
         form : {
-            step:"1",
+            step:"2-campus",
 
             "1":{
                 "Job Type":{ 
@@ -56,37 +56,66 @@ class NewJobForm extends React.Component{
                 elementConfig:{
                     type:'date'
                 }},
+                "Easy Apply":{
+                    elementConfig:{
+                        name:"easyApply",
+                        options:["Ensvee", "External Website"]
+                    },
+                    value:"Ensvee",
+                    elementType:"radio",
+                    skip:true,
+                },
+                "Link":{
+                    elementConfig:{ name:"link"},
+                    value:"",
+                    elementType:"input",
+                    skip:true,
+                }
             },
             "2-campus":{
                 "Qualifications":{
                     value:[],
                     validation:"required",
                 },
-                "Xth Percentage":{ 
+                "Xth ":{ 
                     value:0, 
                     name:"ssc", 
                     elementConfig:{
                         options:[0,60,70,80,90]
                     },
-                    elementType:"select"
+                    elementType:"dropdown"
                 },
-                "XIIth Percentage":{ 
+                "XIIth ":{ 
                     value:0, 
                     name:"hsc",
                     elementConfig:{
-                        
                         options:[0,60,70,80,90]
                     },
-                    elementType:"select"
+                    elementType:"dropdown"
                 },
-                "Bachelors Percentage":{ 
+                "Diploma":{ 
                     value:0, 
                     elementConfig:{
-                        name:"bachelorsPercentage", 
                         options:[0,60,70,80,90]
                     },
-                    elementType:"select",
+                    elementType:"dropdown",
+                    name:"diploma", 
+                },
+                "Bachelors ":{ 
+                    value:0, 
+                    elementConfig:{
+                        options:[0,60,70,80,90]
+                    },
+                    elementType:"dropdown",
                     name:"bachelors", 
+                },
+                "Masters ":{ 
+                    value:0, 
+                    elementConfig:{
+                        options:[0,60,70,80,90]
+                    },
+                    elementType:"dropdown",
+                    name:"masters", 
                 },
                 
             },
@@ -130,14 +159,16 @@ class NewJobForm extends React.Component{
         }
     }
 
-    nextButtonHandler=(e)=>{
+    nextButtonHandler= async (e)=>{
         let form = {...this.state.form};
         let open = this.state.form["1"]["Job Type"].value =="Off Campus";
         let step = this.state.form.step;
         let stepCtn = Number(step[0]);
+        
+        if(await this.validateSection(step)) return;
 
-        if(this.validateSection(step)) return;
-
+        form = {...this.state.form};
+        
         let nextButton = {...this.state.nextButton};
         const maxSteps = open? 2: 3;
 
@@ -180,7 +211,55 @@ class NewJobForm extends React.Component{
             this.setState({form, nextButton})
         }
     }
+
+    jobTypeInputHandler=(e)=>{
+
+        let step = {...this.state.form["1"]}
+        let easyInput = {...this.state.form["1"]["Easy Apply"]}
+        let linkInput = {...this.state.form["1"]["Link"]};
+        let jobTypeInput = {...this.state.form["1"]["Job Type"]};
+        jobTypeInput.value = e.target.value;
+
+        if(e.target.value == "Off Campus"){
+            easyInput.value ="Ensvee";
+            linkInput.errors = undefined;
+            easyInput.validation = "required";
+        }
+        else{
+            easyInput.value ="Ensvee";
+            linkInput.value = "";
+            easyInput.validation = "";
+            linkInput.validation = ""
+        }
+
+        step["Easy Apply"] = easyInput;
+        step['Link'] = linkInput;
+        step['Job Type'] = jobTypeInput;
+        this.setState({form:{...this.state.form,"1": step}})
+
+    }
     
+    easyApplyInputHandler = (e)=>{
+        let step = {...this.state.form["1"]}
+        let easyInput = {...this.state.form["1"]["Easy Apply"]}
+        let linkInput = {...this.state.form["1"]["Link"]};
+        
+        easyInput.value =  e.target.value;
+        console.log(e.target.value)
+        if(easyInput.value == "External Website"){
+            linkInput.validation = "required link";
+            linkInput.skip = false;
+            linkInput.errors = []
+        }
+        else{
+            linkInput.validation = "";
+            linkInput.skip = true;
+        } 
+
+        step["Easy Apply"] = easyInput;
+        step['Link'] = linkInput;
+        this.setState({form:{...this.state.form,"1": step}})
+    }
 
     inputChangeHandler=(e,step, label)=>{
         let inputState = {...this.state.form[step][label], value: e.target.value};
@@ -193,6 +272,7 @@ class NewJobForm extends React.Component{
         let hasErrors = false;
         let section = {...this.state.form[step]};
 
+        console.log("validation section", step)
         for(let inputKey in section){
             let input = {...section[inputKey]};
             let errors= this.inputValidator(input);
@@ -203,10 +283,12 @@ class NewJobForm extends React.Component{
                 hasErrors = true
         }
 
-        this.setState({form:{...this.state.form, [step]:section}})
-        return hasErrors;
-
+        console.log(section)
+        return new Promise((resolve, reject)=>{
+            this.setState({form:{...this.state.form, [step]:section}},()=>resolve(hasErrors))
+        })
     }
+
 
     inputValidator(input){
         if(!input.validation) return [];
@@ -232,10 +314,7 @@ class NewJobForm extends React.Component{
         if(oldInvited.find((val)=>{
             return val.degree == invited.degree &&
             val.course == invited.course &&
-            val.year == invited.year &&
-            val.college == invited.college &&
-            val.branch == invited.branch
-
+            val.college == invited.college
         })) return;
 
         qualifications.value = [...oldInvited, invited];
@@ -285,13 +364,15 @@ class NewJobForm extends React.Component{
         let edu = {}, percentages={'diploma': createPercentage(0), 'bachelors':createPercentage(0), 'masters':createPercentage(0),'ssc':createPercentage(0), 'hsc':createPercentage(0)};
         let qualSection = form['2-campus'];
         
+        
+
         if(!open){
             
             for(let inputKey in qualSection)
             {
                 if(inputKey=='Qualifications')
                     qualSection[inputKey].value.forEach(invited=>{
-                        edu[`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`] = true;
+                        edu[`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`] = "pending";
                         // edu.push(`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`)
                     })
                 else {
@@ -315,7 +396,7 @@ class NewJobForm extends React.Component{
         }
 
         job['status'] = true
-        job['easy_apply'] = false;
+        job['easy_apply'] = this.state.form['1']['Easy Apply'].value =="Ensvee" ? true : false; 
         job['creatorid'] = this.props.user.uid;
         job['created'] = new Date();
         job['deadline'] = new Date(job['deadline']);
@@ -335,10 +416,10 @@ class NewJobForm extends React.Component{
         let Slide;
         switch(this.state.form.step){
             case "1":
-                Slide = <TwoColSlide step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
+                Slide = <Slide1 easyHandler={this.easyApplyInputHandler} jobHandler={this.jobTypeInputHandler} step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
                 break;    
             case "2-campus":
-                Slide = <QualSlide inviteHandler={this.inviteHandler} deleteInviteHandler={this.deleteInviteHandler}  step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
+                Slide = <QualSlide  inviteHandler={this.inviteHandler} deleteInviteHandler={this.deleteInviteHandler}  step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
                 break;
             case "3-campus":
                 Slide = <OneColSlide step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
@@ -360,30 +441,6 @@ class NewJobForm extends React.Component{
     }
 }
 
-// const OneColSlide = (props)=>{
-//     return (
-//     <div className={styles.Slide}>
-//         {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
-//     </div>)
-// }
-
-// const TwoColSlide = (props)=>{
-//     return  (<div className={[styles.Slide,styles.TwoCol].join(" ")}>
-//         {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
-//     </div>)
-// }
-
-// const QualSlide = (props)=>{
-//     return  (<div className={styles.Slide}>
-//         <QualInput inviteHandler={props.inviteHandler} deleteHandler={props.deleteInviteHandler} label={`${9}. Qualifications`} {...props.inputs['Qualifications']}/>
-//         <div className={styles.Row}>
-//             {Object.keys(props.inputs).map((key, i) => {
-//                 if(key !="Qualifications")
-//                 return <Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${key}`} style={inputStyles} {...props.inputs[key]}/>
-//             })}
-//         </div> 
-//     </div>)
-// }
 
 const createPercentage =(val)=>({
     0 : 0  >= Number(val),

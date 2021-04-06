@@ -112,7 +112,7 @@ class Profile extends Component {
                 <div className={styles.leftcontainer}>
                     <div>
                         <img style={{minHeight:'345px'}} width="100%" src={Background}></img>
-                        <div className={styles.logocontainer}><img width="47px" src={this.props.profile.logo}/></div>
+                        <div className={styles.logocontainer}><img className={styles.logo} src={this.props.profile.logo}/></div>
                     </div>
                     <div className={styles.companyDetails}>
                         <div className={styles.companyName}>

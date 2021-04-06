@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Input.module.css";
+import Dropdown from '../DropDown/Dropdown';
 
 
 export const FloatingInput = ({ inputType, value, label, elementConfig, ...props }) => {
@@ -57,6 +58,9 @@ export const Input = (props)=>{
         {props.elementConfig.options.map(option=><option key={option} value={option}>{option}</option>)}
       </select>
       break;
+    case "dropdown":
+      inputElement = <Dropdown className={styles.InputElement} value={props.value} inputHandler={props.inputHandler} {...props.elementConfig} />;
+      break;
     case "radio":
       inputElement = <div className={styles.RadioBox}>
         {props.elementConfig.options.map(option=><label key={option} className={styles.Option}><input type="radio" onChange={props.inputHandler} name={props.elementConfig.name} checked={option==props.value} value={option}/> {option}</label>)}
@@ -85,7 +89,7 @@ export const Input = (props)=>{
 }
 
 export const InputLabel=(props)=>(
-  <span className={styles.InputLabel}>
+  <span className={styles.InputLabel} style={props.style}>
   <span>{props.label}
     {props?.validation?.includes('required')?<span style={{color:"#FF6565"}}>*</span>:null}
   </span>
