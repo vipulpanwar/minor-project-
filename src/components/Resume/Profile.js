@@ -4,7 +4,7 @@ import './Resume.css';
 import userPlaceholder from '../../assets/images/user_placeholder.jpg';
 import Button from '../shared/ui/Button/Button';
 import { StudentsContext } from '../AppliedStudents/StudentsContext';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { storage } from '../../firebase'
 import { CreateToast } from '../../store/actions/alert';
 import { withRouter } from "react-router";
@@ -12,7 +12,7 @@ import { withRouter } from "react-router";
 class Profile extends Component{
   state = {
     source : userPlaceholder,
-    loading : false
+    loading : 'none',
   }
 
   componentDidMount = async ()=>{
@@ -44,23 +44,25 @@ changeStatus(newStatus){
       [prev,next] = getPrevAndNextStudent (this.props.student?.email, this.context.state.applicants)
     }
 
-    const updatestatus=(hireOrReject)=>{
-      this.setState({loading:true});
-      let link
-      if(next){
-        link = '/jobs/' + this.props.jobid + '/student/' + next; 
-      }
-      else if(prev){
-        link = '/jobs/' + this.props.jobid + '/student/' + prev;
+    const updatestatus = async (hireOrReject)=>{
+      if(this.state.loading=='none'){
+        this.setState({loading:hireOrReject});
+        let link
+        if(next){
+          link = '/jobs/' + this.props.jobid + '/student/' + next; 
+        }
+        else if(prev){
+          link = '/jobs/' + this.props.jobid + '/student/' + prev;
+        }
+        else{
+          link = '/jobs/' + this.props.jobid
+        }
+        await this.context.updatestat(this.props.student.id, hireOrReject, ()=>{this.props.history.replace(link)});
+        this.setState({loading:'none'});
       }
       else{
-        link = '/jobs/' + this.props.jobid
+        this.props.createToast({message: "Please Wait"})
       }
-      this.props.history.replace(link)
-      this.context.updatestat(this.props.student.id, hireOrReject);
-      let message = "Student " + hireOrReject + "!"
-      this.props.createToast({message:message});
-      this.setState({loading:false});
     }
 
     let rejectstyle = {marginRight:"12px", color: "#D0021B", borderColor:"#D0021B"}
@@ -82,8 +84,8 @@ changeStatus(newStatus){
                   {/* <div className="rating-box"><p className='rating-text'><span style={{color:"#898989"}}>Rating:</span> 4.5</p></div> */}
                   <div style={{display:"inline-block", float:"right"}}>
                     {console.log(this.props.student.id)}
-                    {this.props.student.status=="Applied" && <Button width="129px" height="50px" loading={this.state.loading} clicked={()=>{updatestatus("Rejected")}} style={rejectstyle}>Reject</Button>}
-                    {this.props.student.status=="Applied" && <Button width="129px" height="50px" loading={this.state.loading} clicked={()=>{updatestatus("Hired")}} primary={this.props.student.status=="Hired"}>Hire</Button>}
+                    {this.props.student.status=="Applied" && <Button width="129px" height="50px" loading={this.state.loading=="Rejected"} clicked={()=>{updatestatus("Rejected")}} style={rejectstyle}>Reject</Button>}
+                    {this.props.student.status=="Applied" && <Button width="129px" height="50px" loading={this.state.loading=="Hired"} clicked={()=>{updatestatus("Hired")}} primary={this.props.student.status=="Hired"}>Hire</Button>}
                     {this.props.student.status=="Hired" && <Button width="270px" noShadow height="50px" style={{border: 'none', shadow:'none', color:'#57a3c8', backgroundColor:'#e6f3fb'}}>Hired</Button>}
                     {this.props.student.status=="Rejected" && <Button width="270px" noShadow height="50px" style={{border: 'none', shadow:'none', color:'#ff4a4a', backgroundColor:'#ffeeef'}}>Rejected</Button>}
                   </div>

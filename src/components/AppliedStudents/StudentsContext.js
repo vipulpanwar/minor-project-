@@ -1,7 +1,9 @@
 import { render } from '@testing-library/react';
+import { CreateToast } from '../../store/actions/alert';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import React , { createContext, Component, createRef, useState, useEffect, useLayoutEffect} from 'react';
-import {db} from '../../firebase'
+import { db } from '../../firebase'
 export const StudentsContext = createContext();
 
 
@@ -69,26 +71,27 @@ class StudentsProviderComponent extends Component{
         this.setState({applicants:applicantsCopy})
     }
 
-    updatestatus = async (studentId, newstatus)=>{
+    updatestatus = async (studentId, newstatus, callback=()=>{})=>{
         console.log(newstatus);
         let findingstudent = this.state.applicants.find((student)=>{return student.id == studentId});
         if(newstatus!=findingstudent.status){
             console.log(studentId, newstatus);
-
-            await axios.post('https://us-central1-oneios.cloudfunctions.net/app/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:newstatus}).then((res)=>{
-                            // await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({status:newstatus});
+            try {
+                await axios.post('https://us-central1-oneios.cloudfunctions.net/app/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:newstatus})
                 let updatingstudent = {...findingstudent}
                 updatingstudent.status = newstatus;
                 let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
                 let applicantsCopy = [...this.state.applicants]
                 applicantsCopy[index] = updatingstudent;
+                callback();
                 applicantsCopy.splice(index,1);
                 this.setState({applicants:applicantsCopy})
-            }).catch(e=>{
-                console.log(e);
-            });
-
-            
+                let message = "Student " + newstatus + "!"
+                this.props.createToast({message:message});
+            } catch (error) {
+                this.props.createToast({message:"Something went wrong"});
+            }
+                            // await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({status:newstatus});
         }
     }
 
@@ -167,4 +170,8 @@ class StudentsProviderComponent extends Component{
     
 }
 
-export const StudentsProvider = (StudentsProviderComponent);
+const mapDispatchToProps = (dispatch)=>({
+    createToast: (toast)=>dispatch(CreateToast(toast))
+})
+
+export const StudentsProvider = connect(null, mapDispatchToProps)(StudentsProviderComponent);

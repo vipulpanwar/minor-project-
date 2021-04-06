@@ -68,8 +68,7 @@ class StepOne extends Component {
         console.log(e.target.value)
         let img = e.target.value.toLowerCase()
         if(e.target.files[0]){
-            if(img.endsWith('.jpg')||img.endsWith('.png')||img.endsWith('.jpeg')){
-                console.log("Theek hai img");
+            if(img.endsWith('.jpg')||img.endsWith('.png')||img.endsWith('.jpeg')||img.endsWith('.svg')){
                 imgName = e.target.value.slice(e.target.value.indexOf('C:/fakepath/') + 13);
                 console.log(imgName);
                 // alert(e.target.files[0])
