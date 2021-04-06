@@ -15,7 +15,7 @@ class Home extends React.Component{
     render(){
         return(
         <div>
-          <Switch>          
+          <Switch>    
             <Route path="/profile" component={Profile}/>
             <Route path="" >
               <JobList />

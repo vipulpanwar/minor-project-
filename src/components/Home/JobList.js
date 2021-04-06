@@ -12,9 +12,6 @@ import Button from '../../components/shared/ui/Button/Button.js';
 import HomeInfo from './HomeInfo.js';
 import Modal from '../shared/ui/Modal/Modal';
 import Loader from '../shared/ui/Loader/Loader';
-import BottomNav from './BottomNav';
-import {ModalWithHeader} from '../shared/ui/Modal/Modal';
-import NewJobForm from '../NewJobForm/NewJobForm';
 import {db} from '../../firebase';
 import axios from 'axios';
 
@@ -33,19 +30,27 @@ class JobList extends React.Component{
         jobsSnap.forEach(jobDoc=>{
             let job = jobDoc.data();
             job.id = jobDoc.id;
+            job.countLoading = true;
             jobs.push(job);    
           })
-          console.log('test', jobs)
-        await Promise.all(jobs.map( async (job, i)=>{
-          let newJob = job;
+
+        this.setState({jobs, loading:false})
+
+        Promise.all(jobs.map( async (job, i)=>{
+          let newJob = {...job};
           let res = await axios.get('https://us-central1-oneios.cloudfunctions.net/app/get_applied_count/' + job.id);
-          console.log(res.data,"count")
           newJob['newCount'] =  res.data['newCount'];
           newJob['count'] = res.data.count;
-          jobs[i] = newJob;
+          newJob['hiredCount'] = res.data.hired;
+          newJob['countLoading'] = false;
+
+          this.setState((state, props)=>{
+            let jobs = [...state.jobs];
+            jobs[i] = newJob;
+            return {jobs,};
+          })
         }))
-        console.log(jobs);
-        this.setState({jobs, loading:false})
+
     });    
     console.log('Component did mount');
 

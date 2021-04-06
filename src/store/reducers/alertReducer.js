@@ -18,13 +18,13 @@ const reducer = (state = initialState, action)=>{
 
         case actionTypes.CREATE_ALERT:
             let newAlert = {...action.payload, show:true}
-            let alerts = [...state, newAlert]
+            let alerts = [...state.alerts, newAlert]
             return {...state,alerts};
 
         case actionTypes.REMOVE_ALERT:
             let newAlerts= [state.alerts];
             newAlerts.splice(action.payload,1);
-            return {...state,newAlerts};;
+            return {...state, alerts:newAlerts};;
         default:
         return state;
     }
