@@ -10,6 +10,7 @@ import Button from '../shared/ui/Button/Button'
 import Resizer from 'react-image-file-resizer'
 import Sidepanel from './Sidepanel'
 import Editimg from './images/editpencil.png'
+import { Input, InputLabel } from '../shared/ui/Input/Input'
 // import Success from '../shared/ui/Modal/SuccessModal'
 // import 'firebase/storage'
 
@@ -137,10 +138,18 @@ class StepOne extends Component {
                         </label>
                     </div>
                     <form>
-                        <TextInput inline width="100%" change={this.nameinputhandler} label="Company Name"/>
-                        <TextInput inline width="100%" change={this.typeinputhandler} label="Industry Type"/>
-                        <TextInput inline width="100%" errors={this.state.websiteError} change={this.websiteinputhandler} label="Company Website"/>
-                        <TextInput inline width="100%" change={this.addinputhandler} label="Company Address"/>
+                        <div style={{display:'block'}} className={styles.inputcontainer}>
+                            <Input style={{marginBottom:'24px'}} elementType="input" label="Company Name" inputHandler={this.nameinputhandler}></Input>
+                        </div>
+                        <div style={{display:'block'}} className={styles.inputcontainer}>
+                            <Input style={{marginBottom:'24px'}} elementType="input" label="Industry Type" inputHandler={this.typeinputhandler}></Input>
+                        </div>
+                        <div style={{display:'block'}} className={styles.inputcontainer}>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.websiteError} elementType="input" label="Company Website" inputHandler={this.websiteinputhandler}></Input>
+                        </div>
+                        <div style={{display:'block'}} className={styles.inputcontainer}>
+                            <Input style={{marginBottom:'24px'}} elementType="input" label="Company Address" inputHandler={this.addinputhandler}></Input>
+                        </div>
                         {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<Button disabled width="150px">Next</Button>}
                         {this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName && <Button clicked={this.nextPagehandler} primary width="150px">Next</Button>}
                     </form>
