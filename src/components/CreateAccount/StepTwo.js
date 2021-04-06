@@ -6,6 +6,7 @@ import logoinput from './images/inputlogo.svg'
 import { CreateAccountContext } from './CreateAccountContext'
 import Sidepanel from './Sidepanel'
 import Button from '../shared/ui/Button/Button'
+import { Input, InputLabel } from '../shared/ui/Input/Input'
 
 class StepTwo extends Component {
     state={
@@ -118,7 +119,9 @@ class StepTwo extends Component {
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<div key={i} style={{marginTop: '20px'}}><TextInput inline errors={this.state.socialError[i]} inline padding='7px' key={i} change={(e)=>{this.socialinputhandler(i, e)}} width='100%' label="Social Media Link"/></div>)
+            social.push(<div key={i} style={{display:'block'}} className={styles.inputcontainer}>
+                            <Input key={i} errors={this.state.socialError[i]} style={{marginBottom:'24px'}} elementType="input" label="Social Media Link" inputHandler={(e)=>{this.socialinputhandler(i, e)}}></Input>
+                        </div>)
         }
         return (
             <div className={styles.container}>
@@ -128,14 +131,22 @@ class StepTwo extends Component {
                     <form>
                         <div className={styles.formcontainer}>
                             <div className={styles.leftForm}>
-                                <TextInput inline errors={this.state.founded_inError} inline change={(e)=>this.inputHandler('founded_in',e)} width='100%' label="Founded In"/>
-                                <TextInput inline errors={this.state.phoneError} inline change={(e)=>this.inputHandler('phone',e)} padding={'0'} width='100%' label="Contact Number"/>
+                                <div style={{display:'block'}} className={styles.inputcontainer}>
+                                    <Input errors={this.state.founded_inError} style={{marginBottom:'24px'}} elementType="input" label="Founded In" inputHandler={(e)=>this.inputHandler('founded_in',e)}></Input>
+                                </div>
+                                <div style={{display:'block'}} className={styles.inputcontainer}>
+                                    <Input errors={this.state.phoneError} style={{marginBottom:'24px'}} elementType="input" label="Contact Number" inputHandler={(e)=>this.inputHandler('phone',e)}></Input>
+                                </div>
                                 {social}
                                 {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
                             </div>
                             <div className={styles.rightForm}>
-                                <TextInput inline errors={this.state.sizeError} inline change={(e)=>this.inputHandler('size',e)} width='100%' label="Company Size"/>
-                                <TextInput inline textarea width='100%' change={(e)=>this.inputHandler('about',e)} height="131px" label="About" />
+                                <div style={{display:'block'}} className={styles.inputcontainer}>
+                                    <Input errors={this.state.sizeError} style={{marginBottom:'24px'}} elementType="input" label="Company Size" inputHandler={(e)=>this.inputHandler('size',e)}></Input>
+                                </div>
+                                <div style={{display:'block'}} className={styles.inputcontainer}>
+                                    <Input elementConfig={{rows:'6'}} style={{marginBottom:'24px', height:'131px'}} elementType="textarea" label="About" inputHandler={(e)=>this.inputHandler('about',e)}></Input>
+                                </div>
                             </div>
                                 {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone && <Button style={{marginTop:'20px'}} clicked={this.createaccount} primary width="100%">Create Account</Button>}
                                 {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone) && <Button style={{marginTop:'20px'}} disabled width="100%">Create Account</Button>}
