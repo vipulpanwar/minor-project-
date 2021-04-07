@@ -8,7 +8,7 @@ import { CSSTransition } from "react-transition-group";
 const Toast = (props)=>{
         let [show, setShow] =useState(true)
         return (
-            <CSSTransition appear unmountOnExit in={show} timeout={200} onEntered={()=> setTimeout(()=> setShow(false),2500)} classNames={{
+            <CSSTransition appear unmountOnExit in={show} timeout={200} onEntered={()=> setTimeout(()=> setShow(false),2500)} onExited={props.remove} classNames={{
                 enterActive: styles.ToastEnterActive,
                 enter: styles.ToastEnter,
                 exitActive: styles.ToastExitActive,
