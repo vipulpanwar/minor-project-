@@ -66,33 +66,26 @@ function DetailCard(props){
         </div>
       </CSSTransition>
       <div className={styles.Card} style={style}>
-        {/* <Link to={`jobs/${props.job.id}`}> */}
-          <div onClick={()=>goto(`jobs/${props.job.id}`, appliedDisabled)} className={[styles.Container, styles.CardContentContainer, appliedDisabled?styles.Disabled:styles.Active].join(" ")}>
-            <div>
-              <div className={styles.JobTitleDiv}>
-                <h1 className={styles.JobTitle}>{props.job.title}</h1>
-                {/* <img src={Ibutton} className={styles.IButton} /> */}
-              </div>
-              <p className={styles.JobDetails}>{props.job.type} | {props.job.ctc} | {formatDate(props.job.deadline)}</p>
+        <div onClick={()=>goto(`jobs/${props.job.id}`, appliedDisabled)} className={[styles.Container, styles.CardContentContainer, appliedDisabled?styles.Disabled:styles.Active].join(" ")}>
+          <div>
+            <div className={styles.JobTitleDiv}>
+              <h1 className={styles.JobTitle}>{props.job.title}</h1>
+              {/* <img src={Ibutton} className={styles.IButton} /> */}
             </div>
-            <p className={[styles.StudentsApplied, props.job.countLoading?styles.Loading:null].join(" ")}><span className={styles.StudentsNumber}>{props.job.count || 0}</span> Applicants</p>
-            
-            <img src={blueNextButton} style={{ position: "absolute", right: 17, bottom: 20}} />
+            <p className={styles.JobDetails}>{props.job.type} | {props.job.ctc} | {formatDate(props.job.deadline)}</p>
           </div>
-        {/* </Link> */}
-
-        {/* <button> */}
+          <p className={[styles.StudentsApplied, props.job.countLoading?styles.Loading:null].join(" ")}><span className={styles.StudentsNumber}>{props.job.count || 0}</span> Applicants</p>
+          
+          <img src={blueNextButton} style={{ position: "absolute", right: 17, bottom: 20}} />
+        </div>
         <div onClick={() => ToggleHomeInfo(true)} className={[styles.Container, styles.SingleContainer, styles.Active].join(" ")}>
           <span>Job Details</span>
           <img className={styles.BlueNextButton} src={blueNextButton} />
         </div>
-        {/* </button> */}
-        {/* <Link to={`jobs/${props.job.id}/hired`}> */}
-          <div onClick={()=>goto(`jobs/${props.job.id}/hired`, hiredDisabled)} className={[styles.Container, styles.SingleContainer,  hiredDisabled?styles.Disabled:styles.Active].join(" ")}>
-            <span>Hired Students</span>
-            <img className={styles.BlueNextButton} src={blueNextButton} />
-          </div>
-        {/* </Link> */}
+        <div onClick={()=>goto(`jobs/${props.job.id}/hired`, hiredDisabled)} className={[styles.Container, styles.SingleContainer,  hiredDisabled?styles.Disabled:styles.Active].join(" ")}>
+          <span>Hired Students</span>
+          <img className={styles.BlueNextButton} src={blueNextButton} />
+        </div>
       </div>
     </div>
     )
@@ -104,7 +97,7 @@ const AddNewJobCard = ()=>{
       <Link className={[styles.Card, styles.NewCard].join(" ")} to="/new">
           <div className={styles.NewCardContent}>
             <div className={styles.Plus}>+</div>
-            <p>Create New Job Posting</p>
+            <p>Create A New Job Posting</p>
           </div>
       </Link>
     </div>

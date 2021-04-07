@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './Dropdown.module.css'
-import SearchIcon from '../../../../assets/icons/search.svg'
+import SearchIcon from '../../../../assets/icons/search.svg';
+import ExpandMoreIcon from '../../../../assets/icons/expand_more.svg';
 import { CSSTransition } from 'react-transition-group';
 import { Fragment } from 'react';
 
@@ -117,6 +118,7 @@ const Dropdown =(props)=>{
     )
     return (
         <div ref={DropdownRef} className={[props.className, styles.Dropdown].join(" ")} onClick={toggleDropdown} >
+            <img className={styles.MoreIcon} src={ExpandMoreIcon}/>
             {multiSelect ? `${selected.length} Selected`: `${selected}` || "Select"}
             {menu}
         </div>

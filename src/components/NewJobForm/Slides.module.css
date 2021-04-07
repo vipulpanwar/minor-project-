@@ -16,3 +16,15 @@
     gap:10px;
     margin-top:14px;
 }
+
+.SkillSlide {
+    height:400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.SkillImage{
+    height: 200px;
+    width: 200px;
+    margin:auto;
+}

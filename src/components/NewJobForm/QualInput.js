@@ -105,7 +105,7 @@ export default class QualInput extends Component{
             let degreeOptions = this.getDegreeOptions();
             let courseOptions = this.getCourseOptions();
             let branchOptions = this.getBranchOptions();    
-            this.setState({degreeOptions, courseOptions, branchOptions});        
+            this.setState({degreeOptions, courseOptions, branchOptions, degreeValue:"", courseVal:"",branchValue:[], yearValue:[]});        
         });
     }
 
@@ -113,8 +113,8 @@ export default class QualInput extends Component{
         let degree = e.target.value;
         let courseOptions = this.getCourseOptions(degree);
         let branchOptions = this.getBranchOptions("Select");
-        let [branchValue, yearValue] = this.getBranchYearValue();
-        this.setState({degreeValue:degree, courseOptions, courseValue:"", branchOptions:branchOptions, branchValue, yearValue})    
+        // let [branchValue, yearValue] = this.getBranchYearValue();
+        this.setState({degreeValue:degree, courseOptions, courseValue:"", branchOptions:branchOptions, branchValue:[], yearValue:[]})    
     }
 
     courseInputHandler = (e)=>{
@@ -151,10 +151,7 @@ export default class QualInput extends Component{
             year: this.state.yearValue,
             college: this.state.college
         }
-
-        if(!Object.keys(invited).reduce((satisfies, key)=>{
-            return satisfies && invited[key] != "Select";
-        },true))
+        if(!invited.degree || !invited.college || !invited.branch.length || !invited.year.length || !invited.course)
         return;
         
         this.props.inviteHandler(invited)

@@ -1,0 +1,37 @@
+.SkillTextInput{
+    padding: 15px 11px;
+    width: 100%;
+    border:none;
+    outline: none;
+}
+
+.SkillInput{
+    display: flex;
+    border: 1px solid #9196A5;
+    border-radius: 5px;
+    overflow: hidden;
+    align-items: center;
+}
+
+.AddBtn{
+    padding:9px;
+    background: #D3D5DB;
+    border-radius: 5px;
+    margin-right: 7px;
+}
+
+.AddBtn.Active{
+    cursor: pointer;
+    background: #4A90E2;
+}
+
+.AddBtn img{
+    display: block;
+}
+
+.SkillList{
+    display: flex;
+    flex-wrap: wrap;
+    gap:5px;
+    margin: 8px 0;
+}

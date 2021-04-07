@@ -33,13 +33,13 @@ export const FloatingInput = ({ inputType, value, label, elementConfig, ...props
       );
   }
   return (
-    <div className={styles.InputDiv} style={props.style}>
+    <label className={styles.InputDiv} style={props.style}>
       {inputElement}
       <div>
         
       </div>
-      <label className={styles.FloatingInputLabel}>{label}</label>
-    </div>
+      <span className={styles.FloatingInputLabel}>{label}</span>
+    </label>
   );
 };
 

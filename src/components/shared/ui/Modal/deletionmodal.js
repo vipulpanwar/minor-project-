@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './deletionmodal.module.css'
+import styles from './DeletionModal.module.css'
 // import styles from './SuccessModal.module.css'
 import Modal from './Modal'
 import { Link } from 'react-router-dom'

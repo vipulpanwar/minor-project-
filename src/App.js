@@ -18,7 +18,7 @@ import CreateAccount from './components/CreateAccount/CreateAccount';
 import ForgotPassword from './components/Login/ForgotPassword';
 import Alerts from './components/Alerts/Alerts';
 import Toasts from './components/Alerts/Toasts'
-import { CSSTransition } from 'react-transition-group';
+import Modal from './components/shared/ui/Modal/SuccessModal2';
 
 function App(props) {
 
