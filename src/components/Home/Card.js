@@ -55,8 +55,8 @@ function DetailCard(props){
   return(
     <div className={styles.CardContainer}>
       <div style={{ position: 'absolute' }}>
-          <Modal show={showHomeInfo} style={{ maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px", }} closeHandler={() => { ToggleHomeInfo(false) }}>
-            <HomeInfo job={props.job} />
+          <Modal show={showHomeInfo} style={{ maxHeight:'90vh',overflow:'auto',maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px", }} closeHandler={() => { ToggleHomeInfo(false) }}>
+            <HomeInfo  deleteJob={()=>{ props.deleteJob(); ToggleHomeInfo(false)}} job={props.job} />
           </Modal>
       </div>
       <CSSTransition appear unmountOnExit in={Boolean(props.job.newCount)} timeout={500} 

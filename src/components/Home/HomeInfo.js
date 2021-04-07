@@ -3,16 +3,20 @@ import styles from './HomeInfo.module.css';
 import ButtonImage from './images/buttonimage.svg'
 import ThirdBox from './ThirdBox.js'
 import moment from 'moment';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import ConfirmationModal  from '../shared/ui/Modal/deletionmodal';
 
 class homeInfo extends Component{
-formatDate = (timestamp)=>{
-    var t = new Date(1970, 0, 1);
-    let dateTime = t.setSeconds(timestamp.seconds);
-    return moment(dateTime).format('DD MMM\'YY');
-}
+    formatDate = (timestamp)=>{
+        var t = new Date(1970, 0, 1);
+        let dateTime = t.setSeconds(timestamp.seconds);
+        return moment(dateTime).format('DD MMM\'YY');
+    }
 
-  render (){
+    state={
+        showConfirmation:false,
+    }
+    render (){
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -21,12 +25,12 @@ formatDate = (timestamp)=>{
                         <h1 className = {styles.title}>{this.props.job?.title}</h1>
                         <div className = {styles.desc}>{this.props.job?.type} |  {this.props.job?.ctc}  |  {this.formatDate(this.props.job?.deadline)}</div>
                     </div>
-                    <button className = {styles.deletejobBox}>
+                    <button onClick={this.props.deleteJob} className = {styles.deletejobBox}>
                        Delete Job
                     </button>
                     <div className = {styles.appliedBox}>
                         <Link to={`jobs/${this.props.job.id}`}>
-                            <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.appliedStudentsCount || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
+                            <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.count || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
                         </Link>
                     </div>
                     
@@ -62,9 +66,43 @@ formatDate = (timestamp)=>{
             {this.props.job.schedule}
             </div>
         </div>
+        <div className={styles.Qualifications}>
+            <div className = {styles.catTitle}>
+                Qualifications:
+                
+            </div>
+        </div>
         </div>
     )   
   }
 }
+
+const formatQual = (edu)=>{
+    let formatedEdu = [];
+    edu.forEach(qual=>{
+        let [college,degree,course,branch,year] = qual.split('#');
+        let index = formatedEdu.findIndex(fQual=> fQual.course == course && fQual.degree == degree && fQual.college == college);
+        if(index>-1)
+        {
+            if(formatedEdu[index].branch.includes(branch)==false)
+                formatedEdu[index].branch.push(branch);
+            if(formatedEdu[index].year.includes(year)==false)
+                formatedEdu[index].year.push(year);
+
+        }
+        else
+            formatedEdu.push({college, degree, course, branch,year})
+    });
+    return formatedEdu
+}
+
+// const Qualification = ({college, degree, course, branch, year})=>(
+//     <div>
+//         {college}
+//     </div>
+//     <div>
+
+//     </div>
+// )
 
 export default homeInfo;

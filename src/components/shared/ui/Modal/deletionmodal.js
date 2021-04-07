@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './DeletionModal.module.css'
+import styles from './deletionmodal.module.css'
 // import styles from './SuccessModal.module.css'
 import Modal from './Modal'
 import { Link } from 'react-router-dom'
@@ -21,19 +21,19 @@ export default class deletionmodal extends Component {
                 <div className={styles.container}>
                     <img src={TrashCan} style={{width:'60px'}}/>
                     {this.props.title && <div className={styles.title}>{this.props.title}</div>}
+                </div>
                     <div className={styles.buttonsdiv}>
-                        <div className={styles.cancelButton}>
+                        {/* <div className={styles.cancelButton}> */}
                             <button onClick={this.props.cancel} style={{color:'#9196A5'}} className={styles.padder}>
                                 Cancel
                             </button>
-                        </div>
-                        <div className={styles.deleteButton}>
+                        {/* </div> */}
+                        {/* <div className={styles.deleteButton}> */}
                             <button onClick={this.props.delete} style={{color:'#FF5670'}} className={styles.padder}>
                                 Delete
                             </button>
-                        </div>
+                        {/* </div> */}
                     </div>
-                </div>
             </Modal>            
         )
     }

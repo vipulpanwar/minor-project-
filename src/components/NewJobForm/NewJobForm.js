@@ -68,6 +68,7 @@ class NewJobForm extends React.Component{
                 "Link":{
                     elementConfig:{ name:"link"},
                     value:"",
+                    name:"link",
                     elementType:"input",
                     skip:true,
                 }
@@ -304,7 +305,7 @@ class NewJobForm extends React.Component{
             else if (Object.keys(input.value).length == 0)
                 errors.push("Required")
         }
-        if(!errors.length && checks.find(sub=> sub="future") && new Date(input.value) < new Date())
+        if(!errors.length && checks.find(sub=> sub=="future") && new Date(input.value) < new Date())
             errors.push("Date is in past");
         
         return errors;
