@@ -6,6 +6,7 @@ const button = (props) => {
   if (props.primary) classes.push(styles.Primary);
   if (props.loading) classes.push(styles.Loading);
   if (props.disabled) classes.push(styles.Disabled);
+  if (props.looksDisabled) classes.push(styles.Disabled);
   
   return (
     <button

@@ -23,8 +23,13 @@ class StepOne extends Component {
         website: '',
         logoName:'',
         img: '',
-        websiteError:'',
-        logoError:false,
+        error : {
+            websiteError:'',
+            logoError:false,
+            nameError: '',
+            typeError: '',
+            addressError: '',
+        },
     }
 
     resizeFile = (file) =>
@@ -80,7 +85,9 @@ class StepOne extends Component {
                 this.setState({logoName:imgName})
             }
             else{
-                this.setState({logoError: true})
+                let errors = this.state.error
+                errors.logoError = true
+                this.setState({error: errors})
             }
         }
         else{
@@ -114,13 +121,46 @@ class StepOne extends Component {
         e.preventDefault();
         if(!this.validURL(this.state.website)){
             // alert("You haven't entered a valid URL");
-            this.setState({websiteError:'Must be a link'})
+            let error = this.state.error
+            error.websiteError = 'Must be a link'
+            this.setState({error: error})
         }
         else{
             console.log(this.state, "Step One done")
             this.context.stepOneSubmit(this.state)
             console.log(this.context.state.form)
         }
+    }
+
+    requiredHandler = (e) =>{
+        e.preventDefault();
+        console.log("required")
+        let error = {
+            websiteError:'',
+            logoError:false,
+            nameError: '',
+            typeError: '',
+            addressError: '',
+        }
+        if(!this.state.logoName){
+            error.logoError = true
+        }
+        if(!this.state.name){
+            error.nameError = "Required"
+        }
+        if(!this.state.industry_type){
+            error.typeError = "Required"
+        }
+        if(!this.state.website){
+            error.websiteError = "Required"
+        }
+        else if(!this.validURL(this.state.website)){
+            error.websiteError = "Must be a link"
+        }
+        if(!this.state.company_address){
+            error.addressError = "Required"
+        }
+        this.setState({error:error})
     }
 
     render() {
@@ -135,24 +175,24 @@ class StepOne extends Component {
                         <label>
                             {this.state.logoName?<div className={styles.logopreviewdiv}><img className={styles.logopreviewimg} src={URL.createObjectURL(this.state.img)}/><img src={Editimg} className={styles.editPencil}/></div>:null}
                             <input className={styles.hide} id="CompanyLogo" type="file" onChange={this.logoinputHandler} accept="image/png, image/jpeg"></input>
-                            {this.state.logoError && (!this.state.logoName) && <div style={{backgroundColor: '#ffe7e5', border: '1px dashed #FF6F65'}} className={styles.logoinputdiv}><img className = {styles.leftimage} width='110px' height='110px' style={{cursor:'pointer'}} src={redcamera} /></div>}
-                            {(!this.state.logoError) && (!this.state.logoName) && <div className={styles.logoinputdiv}><img className = {styles.leftimage} width='90px' height='90px' style={{cursor:'pointer'}} src={logoinput} /></div>}
+                            {this.state.error.logoError && (!this.state.logoName) && <div style={{backgroundColor: '#ffe7e5', border: '1px dashed #FF6F65'}} className={styles.logoinputdiv}><img className = {styles.leftimage} width='110px' height='110px' style={{cursor:'pointer'}} src={redcamera} /></div>}
+                            {(!this.state.error.logoError) && (!this.state.logoName) && <div className={styles.logoinputdiv}><img className = {styles.leftimage} width='90px' height='90px' style={{cursor:'pointer'}} src={logoinput} /></div>}
                         </label>
                     </div>
                     <form>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input style={{marginBottom:'24px'}} elementType="input" label="Company Name" inputHandler={this.nameinputhandler}></Input>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.error.nameError} elementType="input" label="Company Name" inputHandler={this.nameinputhandler}></Input>
                         </div>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input style={{marginBottom:'24px'}} elementType="input" label="Industry Type" inputHandler={this.typeinputhandler}></Input>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.error.typeError} elementType="input" label="Industry Type" inputHandler={this.typeinputhandler}></Input>
                         </div>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input style={{marginBottom:'24px'}} errors={this.state.websiteError} elementType="input" label="Company Website" inputHandler={this.websiteinputhandler}></Input>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.error.websiteError} elementType="input" label="Company Website" inputHandler={this.websiteinputhandler}></Input>
                         </div>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input style={{marginBottom:'24px'}} elementType="input" label="Company Address" inputHandler={this.addinputhandler}></Input>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.error.addressError} elementType="input" label="Company Address" inputHandler={this.addinputhandler}></Input>
                         </div>
-                        {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<Button disabled width="150px">Next</Button>}
+                        {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<Button looksDisabled clicked={this.requiredHandler} width="150px">Next</Button>}
                         {this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName && <Button clicked={this.nextPagehandler} primary width="150px">Next</Button>}
                     </form>
                 </div>

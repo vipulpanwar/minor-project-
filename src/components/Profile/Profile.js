@@ -150,7 +150,7 @@ class Profile extends Component {
                         {console.log(profile.size, "size")}
                         <TextInput change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
                         <TextInput change={this.phoneChangeHandler} inline width='100%' value={this.state.phone} label="Phone Number"/>
-                        <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" textarea label="About"/>
+                        <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" elementConfig={{rows:'15'}} textarea label="About"/>
                     </div>
                     <div className={styles.rightForm}>
                         <div style={{minHeight:'445px'}}>
