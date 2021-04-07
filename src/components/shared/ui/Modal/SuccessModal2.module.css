@@ -1,0 +1,42 @@
+.CloseBtn{
+    width: 100%;
+    padding:15px;
+    cursor: pointer;
+    border-top: 1px solid #e3e2e2;
+    margin-top:30px;
+    font-family: 'Ubuntu';
+    outline: none;
+}
+
+.CloseBtn:active{
+    background-color: #eee;   
+}
+
+.Container{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+.Tick{
+    display: block;
+    height: 90px;
+    margin:auto;
+    margin-top:45px;
+}
+
+.Title{
+    font-weight: bold;
+    margin-top:11px; 
+    margin-bottom: 4px;
+    font-size: 20px;
+    text-align: center;
+    color:#232D4C;
+}
+
+.Subtitle{
+    font-size: 15px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.191177px;
+    color: #969BA9;
+}

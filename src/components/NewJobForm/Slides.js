@@ -2,7 +2,9 @@ import React from 'react';
 import styles from './Slides.module.css';
 import {Input, InputLabel} from '../shared/ui/Input/Input';
 import SkillInput from '../AppliedStudents/FilterMultiTag';
+import NewSkillInput from '../shared/Skills/SkillInput';
 import QualInput from './QualInput';
+import skillIllus from '../../assets/illustrations/skill_illustration.svg'
 
 const inputStyles={
     'fontSize':14
@@ -59,6 +61,15 @@ export const OneColSlide = (props)=>{
 export const TwoColSlide = (props)=>{
     return  (<div className={[styles.Slide,styles.TwoCol].join(" ")}>
         {Object.keys(props.inputs).map((key, i) =><Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>)}
+    </div>)
+}
+
+export const SkillSlide = (props)=>{
+    
+    return (<div className={[styles.Slide,styles.SkillSlide].join(" ")}>
+        <InputLabel label="Skills" {...props.inputs['Skills']}/>
+        <NewSkillInput value={props.inputs['Skills'].value} inputHandler={(e)=>props.inputHandler(e, props.step, "Skills")}/>
+        {props.inputs['Skills'].value.length===0?<img className={styles.SkillImage} src={skillIllus}/>:null}
     </div>)
 }
 

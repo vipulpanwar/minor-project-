@@ -1,9 +1,9 @@
 import React from 'react';
 import Button from '../shared/ui/Button/Button';
 import styles from './NewJobForm.module.css';
+import {CreateAlert} from '../../store/actions/alert';
 
-import {Slide1,TwoColSlide, OneColSlide, QualSlide, Slide2Open} from './Slides';
-import { v4 as uuidv4 } from 'uuid';
+import {Slide1,TwoColSlide, OneColSlide, QualSlide, Slide2Open, SkillSlide} from './Slides';
 
 import {db} from '../../firebase';
 import {connect} from 'react-redux';
@@ -17,7 +17,7 @@ class NewJobForm extends React.Component{
         showBack:false,
         open:false,
         form : {
-            step:"2-campus",
+            step:"1",
 
             "1":{
                 "Job Type":{ 
@@ -43,7 +43,7 @@ class NewJobForm extends React.Component{
                     name:"type",
                     validation:"required"
                 },
-                "CTC": {value:"", elementType:'input' , 
+                "Salary": {value:"", elementType:'input' , 
                         elementConfig:{type:'text'}, name:"ctc", validation:"required"},
                 "Job Category":{ 
                     value:"Information Technology", 
@@ -52,7 +52,7 @@ class NewJobForm extends React.Component{
                     },
                     elementType:"select",
                     name:'category', validation:"required"},
-                "Deadline":{value:'', elementType:'input', name:'deadline' ,validation:"required",
+                "Deadline":{value:'', elementType:'input', name:'deadline' ,validation:"required future",
                 elementConfig:{
                     type:'date'
                 }},
@@ -68,6 +68,7 @@ class NewJobForm extends React.Component{
                 "Link":{
                     elementConfig:{ name:"link"},
                     value:"",
+                    name:"link",
                     elementType:"input",
                     skip:true,
                 }
@@ -150,12 +151,15 @@ class NewJobForm extends React.Component{
                     name:'desc',
                     validation:"required",
                 },
+            },
+            "3-open":{
                 "Skills":{
                     value:[],
-                    validation: "required",
-                    name:"hskills"
+                    validation:"required",
+                    name:'hskills'
                 }
             }
+
         }
     }
 
@@ -170,7 +174,7 @@ class NewJobForm extends React.Component{
         form = {...this.state.form};
         
         let nextButton = {...this.state.nextButton};
-        const maxSteps = open? 2: 3;
+        const maxSteps = open? 3: 3;
 
         let showBack = true;
 
@@ -247,7 +251,7 @@ class NewJobForm extends React.Component{
         easyInput.value =  e.target.value;
         console.log(e.target.value)
         if(easyInput.value == "External Website"){
-            linkInput.validation = "required link";
+            linkInput.validation = "required url";
             linkInput.skip = false;
             linkInput.errors = []
         }
@@ -301,23 +305,38 @@ class NewJobForm extends React.Component{
             else if (Object.keys(input.value).length == 0)
                 errors.push("Required")
         }
-        
+        if(!errors.length && checks.find(sub=> sub=="future") && new Date(input.value) < new Date())
+            errors.push("Date is in past");
+        if(!errors.length && checks.find(sub=> sub=="url") && this.validURL(input.value))
+            errors.push("Invalid Url");
         return errors;
     }
-
+    validURL=(str)=> {
+        var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+          '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+          '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+          '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+          '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+          '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return !!pattern.test(str);
+      }
+      
     inviteHandler=(invited)=>{
     
         let step = this.state.form.step;
         let qualifications = {...this.state.form[step].Qualifications};
         let oldInvited = [...this.state.form[step].Qualifications.value];
 
-        if(oldInvited.find((val)=>{
+        let index = oldInvited.findIndex((val)=>{
             return val.degree == invited.degree &&
             val.course == invited.course &&
             val.college == invited.college
-        })) return;
+        })
 
-        qualifications.value = [...oldInvited, invited];
+        if(index > -1)
+            oldInvited.splice(index,1)
+
+        qualifications.value = [invited,...oldInvited];
 
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
     }
@@ -340,13 +359,12 @@ class NewJobForm extends React.Component{
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
     }
     
-    
     async createJob(){
         let job ={};
         let form = {...this.state.form};
         let open = this.state.form["1"]["Job Type"].value =="Off Campus";
         job['campus'] = !open;
-        const openSteps = ["1","2-open"], campusSteps= ["1", "2-campus", "3-campus"];
+        const openSteps = ["1","2-open","3-open"], campusSteps= ["1", "2-campus", "3-campus"];
         let steps = open? openSteps : campusSteps;
         
         steps.forEach(sectionKey=>{
@@ -372,7 +390,11 @@ class NewJobForm extends React.Component{
             {
                 if(inputKey=='Qualifications')
                     qualSection[inputKey].value.forEach(invited=>{
-                        edu[`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`] = "pending";
+                        invited.year.forEach(year=>{
+                            invited.branch.forEach(branch=>{
+                                edu[`${invited.college}#${invited.degree}#${invited.course}#${branch}#${year}`] = true;
+                            })
+                        })
                         // edu.push(`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`)
                     })
                 else {
@@ -392,7 +414,7 @@ class NewJobForm extends React.Component{
             })
             job['recipient'] = {}
             job['company'] = this.props.profile.name;
-            Array.from(recipients).forEach(college=> {job['recipient'][college]= false});
+            Array.from(recipients).forEach(college=> {job['recipient'][college]= "pending"});
         }
 
         job['status'] = true
@@ -401,14 +423,14 @@ class NewJobForm extends React.Component{
         job['created'] = new Date();
         job['deadline'] = new Date(job['deadline']);
         job['placed'] = false
-        let uid = uuidv4();
+        let uid = `${Date.now()}`;
         job['uid'] = uid;
 
 
         await db.collection('jobs').doc(uid).set(job);
         await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
         this.props.close();
-        alert("Job Created")
+        this.props.createAlert({code:"success2", title:"Success", subtitle:"Job posted successfully"})
     }
 
 
@@ -422,11 +444,11 @@ class NewJobForm extends React.Component{
                 Slide = <QualSlide  inviteHandler={this.inviteHandler} deleteInviteHandler={this.deleteInviteHandler}  step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
                 break;
             case "3-campus":
+            case "2-open":
                 Slide = <OneColSlide step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
                 break;
-            case "2-open":
-                Slide = <Slide2Open skillInputHandler={this.skillInputHandler} step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>
-                break;
+            case "3-open":
+                Slide = <SkillSlide inputs={this.state.form[this.state.form.step]} step={this.state.form.step} inputHandler={this.inputChangeHandler} />
         }
 
         return(
@@ -454,5 +476,8 @@ const mapStateToProps = (state)=>({
     user: state.auth.user,
     profile: state.auth.profile,
   })
+const mapDispatchToProps = (disptach)=>({
+    createAlert : (alert)=>disptach(CreateAlert(alert))
+})
   
-  export default connect(mapStateToProps, null) (NewJobForm);
+  export default connect(mapStateToProps, mapDispatchToProps) (NewJobForm);

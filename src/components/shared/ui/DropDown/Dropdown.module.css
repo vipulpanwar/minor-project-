@@ -12,6 +12,15 @@
     cursor: pointer;
 }
 
+.MoreIcon{
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+    width: 20px;
+}
+
 .DropdownMenu{
     position: absolute;
     left: 0;

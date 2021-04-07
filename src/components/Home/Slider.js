@@ -62,7 +62,7 @@ class Slider extends React.Component{
               </CSSTransition>
 
               <div className='items-container' ref={this.innerFlexRef}>
-                {cardList(this.props.jobs)}
+                {cardList(this.props.jobs, this.props.deleteJob)}
               </div>
 
               <CSSTransition appear unmountOnExit in={this.state.showRightButton} timeout={100} classNames="button">
@@ -74,10 +74,10 @@ class Slider extends React.Component{
     }
 }
 
-const cardList = (jobsList)=>{
-  let list = jobsList.map(job=>(
+const cardList = (jobsList, deleteJob)=>{
+  let list = jobsList.map((job,i)=>(
     <Fragment key={job.id}>
-      <Card  className="single-item" job={job}/>
+      <Card deleteJob={(e)=>deleteJob(i)} className="single-item" job={job}/>
     </Fragment>))
   return [<Card key="new-card" newCard/>,...list];
 }

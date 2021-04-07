@@ -15,3 +15,8 @@ export const CreateToast= (toast)=>({
     type: actionTypes.CREATE_TOAST,
     payload: toast,
 });
+
+export const RemoveToast= (i)=>({
+    type: actionTypes.REMOVE_TOAST,
+    payload: i,
+});

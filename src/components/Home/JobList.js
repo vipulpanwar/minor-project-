@@ -1,6 +1,7 @@
 import React, { createRef, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Logout as logoutAction} from '../../store/actions/auth';
+import {CreateToast} from '../../store/actions/alert';
 import {FetchAllJobs as FetchJobsAction } from '../../store/actions/jobs';
 import {Route, withRouter} from 'react-router-dom';
 
@@ -14,18 +15,32 @@ import Modal from '../shared/ui/Modal/Modal';
 import Loader from '../shared/ui/Loader/Loader';
 import {db} from '../../firebase';
 import axios from 'axios';
+import ConfirmationModal from '../shared/ui/Modal/deletionmodal';
 
 class JobList extends React.Component{
   state = {
     jobs:[],
     loading:true,
+    showDeleteConfirmation:false,
   }
   
+  closeConfirmation=()=>{
+    this.setState({showDeleteConfirmation:false})
+  }
+
+  deleteJobHandler=(i)=>{
+    this.setState({showDeleteConfirmation:true})
+    this.confirmDelete = async ()=>{
+      await db.collection('jobs').doc(this.state.jobs[i].uid).delete();
+      this.closeConfirmation();
+      this.props.createToast({message:"Job Deleted Successfully", code:"success"});
+    }
+  }
 
   async componentDidMount(){
 
 
-    let unsubscribeJobs = db.collection('jobs').where('creatorid', '==', this.props.user.uid).onSnapshot(async jobsSnap=>{
+    let unsubscribeJobs = db.collection('jobs').where('creatorid', '==', this.props.user.uid).orderBy('uid', 'desc').onSnapshot(async jobsSnap=>{
         let jobs = [];
         jobsSnap.forEach(jobDoc=>{
             let job = jobDoc.data();
@@ -81,8 +96,10 @@ class JobList extends React.Component{
             <div className="central-loader"><Loader/></div>
             : 
             <Fragment>
-              <Slider jobs={this.state.jobs}/>
+              <Slider deleteJob={this.deleteJobHandler} jobs={this.state.jobs}/>
             </Fragment>}
+            <ConfirmationModal cancel={this.closeConfirmation} delete={this.confirmDelete} show={this.state.showDeleteConfirmation} title="Are you sure you want to delete this job?"/>
+
         </div>);
     }
 }
@@ -91,6 +108,7 @@ class JobList extends React.Component{
 const mapDispatchToProps = (dispatch) => ({
     logout : ()=> dispatch(logoutAction()),
     getJobs: ()=> dispatch(FetchJobsAction()),
+    createToast: (toast)=> dispatch(CreateToast(toast))
 })
 
 const mapStateToProps = (state)=>({
