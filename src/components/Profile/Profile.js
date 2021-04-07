@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import Button from '../shared/ui/Button/Button'
 import { db } from '../../firebase'
 import { SetCompanyProfile } from '../../store/actions/auth';
+import {Logout as logoutAction} from '../../store/actions/auth';
 import { CreateToast } from '../../store/actions/alert';
 
 class Profile extends Component {
@@ -26,6 +27,7 @@ class Profile extends Component {
             },
         about: '',
         phone: '',
+        logOutLoading: false,
     }
 
     counter = (e)=>{
@@ -101,6 +103,13 @@ class Profile extends Component {
         this.setState({isLoading:false})
     }
 
+    logout = () =>{
+        this.setState({logOutLoading:true})
+        this.props.logout();
+        this.props.createToast({message:"Logged Out Successfully"}); 
+        this.setState({logOutLoading:false})
+    }
+
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
@@ -130,7 +139,7 @@ class Profile extends Component {
                             </div>
                         </div>
                         <div className={styles.logout}>
-                            <Button clicked={()=>this.props.createToast({message:"Logged Out Successfully"})} width='187px'>Log Out</Button>
+                            <Button loading={this.state.logOutLoading} clicked={()=>this.logout()} width='187px'>Log Out</Button>
                         </div>
                     </div>
                 </div>
@@ -166,6 +175,7 @@ const mapStateToProps = (state)=>({
 })
 
 const mapDispatchToProps = (dispatch)=>({
+    logout : ()=> dispatch(logoutAction()),
     setCompany: (profile)=> dispatch(SetCompanyProfile(profile)),
     createToast: (toast)=>dispatch(CreateToast(toast))
 })
