@@ -45,7 +45,7 @@ const SearchByTag = (props)=> {
     const tagInputHandler = (newTag) => {
         let filters = context.state.filters;
         filters.flag = newTag;
-        alert(newTag)
+        // alert(newTag)
         context.fetchStudents(filters);
     }
 
