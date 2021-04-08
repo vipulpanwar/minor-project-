@@ -5,7 +5,12 @@ import SkillTag from './SkillTag.js'
 import { Fragment } from "react";
 
 export default  (props)=>{
-
+    // const arr = [...myMap].map(([name, value]) => ({ name, value }));
+    // if(props.hskills){
+      // let hskills = Object.keys(props?.hskills);
+      // hskills.sort()
+      // console.log(hskills, "hskills")
+    // }
     return(
             <div style={props.style} className="skills-section">
               {!props.loading && !props.offcampus && (props.softSkills || props.hardSkills)?
