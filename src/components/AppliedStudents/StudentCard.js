@@ -8,6 +8,7 @@ import {withRouter} from 'react-router-dom';
 import Excellent from './images/excellent.svg';
 import Good from './images/good.svg';
 import Average from './images/average.svg';
+import { storage } from '../../firebase'
 import New from './images/new.svg';
 
 
@@ -16,13 +17,12 @@ const StudentCard = (props)=>{
     return(
         // !props.student.loading?
         <div ref={cardRef} className={styles.StudentCard}>
-            {console.log(props, "props")}
             {props.student.flag=="Excellent" && <div className={styles.excellent}><img src={Excellent} alt={props.student.flag}/></div>}
             {props.student.flag=="Good" && <div className={styles.excellent}><img src={Good} alt={props.student.flag}/></div>}
             {props.student.flag=="Average" && <div className={styles.excellent}><img src={Average} alt={props.student.flag}/></div>}
             {props.student.flag=="New" && <div className={styles.excellent}><img src={New} alt={props.student.flag}/></div>}
             <div className={styles.StudentInfo}>
-                <img className={styles.StudentImage} src={ props.student.profilePicture || userPlaceholder}/>
+                <img className={styles.StudentImage} src={userPlaceHolderFinder(props)}/>
                 <StudentData student={props.student}/>
                 
             </div>
@@ -30,6 +30,23 @@ const StudentCard = (props)=>{
         </div>
         // : <h1>Loading...</h1>
         )
+}
+
+const userPlaceHolderFinder = async (props)=>{
+    let userPlaceHolder
+    let profilepicLink = "users/"+ props.student.uid + '/myphoto.png'
+    let src = userPlaceholder
+    try{
+        let url = await storage.ref().child(profilepicLink).getDownloadURL()
+            console.log(url, "url");
+            console.log("image fetched for " + props.student.uid)
+            src = url
+    }
+    catch(error){
+        console.log(error)
+    }
+    userPlaceHolder = src
+    return userPlaceHolder
 }
 
 const getDegree = (student)=>{

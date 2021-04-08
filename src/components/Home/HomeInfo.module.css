@@ -24,6 +24,18 @@
     padding: 19px 22px 25px 17px;
     text-align: left;
     vertical-align: middle;
+    display:grid;
+    grid-template-columns: 1fr 380px;
+}
+
+.buttonsContainer{
+    text-align:center;
+    vertical-align:middle;
+    display: grid;
+    grid-gap:16px;
+    grid-template-columns:150px 1fr;
+    min-width:310px;
+    float:right;
 }
 
 .title{
@@ -31,11 +43,16 @@
     font-weight: bold;
     font-size: 28px;
     line-height: 33px;
+    max-height: 33px;
+    overflow:hidden;
     color: #232D4C;
 }
 
 .titleBox{
-    display:inline-block;
+    display:flex;
+    max-width: 370px;
+    overflow:hidden;
+    flex-direction: column;
 }
 
 .desc{
@@ -46,6 +63,8 @@
     color: #232D4C;
     margin-top: 4px;
     text-transform: capitalize;
+    max-height: 34px;
+    overflow:hidden;
 }    
 
 .appliedBox{
@@ -53,7 +72,7 @@
     height: 35px;
     background: #FFFFFF;
     border-radius: 12px;
-    float: right;
+    /* float: right; */
     margin-top: 10px;
     font-style: normal;
     font-weight: 600;
@@ -68,7 +87,7 @@
     height: 35px;
     background: #FFFFFF;
     border-radius: 12px;
-    float: right;
+    /* float: right; */
     margin-top: 10px;
     font-style: normal;
     font-weight: 600;
@@ -120,10 +139,11 @@
     padding-left: 18px;
     padding-right: 18px;
     vertical-align: top;
+    display:grid;
+    grid-template-columns: 393px 1fr;
 }
 
 .jobdesc{
-    display:inline-block;
     min-height: 221px;
     vertical-align:top;
     padding-left: 18px;

@@ -8,7 +8,7 @@ function ThirdBox(props) {
         <div>
             <div className = {styles.thirdBox}>
                 <MinimumQualifications job={props.job}/>
-                <div style = {{width:"50%", display: "inline-block", verticalAlign: "top"}}>
+                <div style = {{verticalAlign: "top"}}>
                     <div className = {styles.jobdesc}>
                         <div className = {styles.catTitle}>
                             Job Description:
