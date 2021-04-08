@@ -15,19 +15,16 @@ class Profile extends Component{
     loading : 'none',
   }
 
-  componentDidMount = async ()=>{
+  componentDidUpdate = async ()=>{
     let src = ""
     let profilepicLink = "users/"+ this.props.student.uid + '/myphoto.png'
     storage.ref().child(profilepicLink).getDownloadURL().then((url)=>{
       src = url
       console.log(src)
+      if(this.state.source!=src)
       this.setState({source:src})
     })    
   }
-
-changeStatus(newStatus){
-
-}
 
   render(){
     let student = this.props.student;

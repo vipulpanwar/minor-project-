@@ -93,14 +93,14 @@ class Profile extends Component {
         console.log("saving....")
         this.setState({isLoading: true})
         await db.collection('company').doc(this.props.user.uid).update({size:this.state.size, about:this.state.about, social_media: this.state.social_media, phone: this.state.phone})
-        this.setState({changed:false})
         let profile = this.props.profile;
         profile.size = this.state.size
         profile.about = this.state.about
-        profile.socail_media = this.state.social_media
+        profile.social_media = this.state.social_media
         profile.phone = this.state.phone
         this.props.setCompany(profile)
-        this.setState({isLoading:false})
+        this.setState({isLoading:false, changed:false})
+        this.props.createToast({message:"Changes Saved Successfully"});
     }
 
     logout = () =>{
@@ -110,10 +110,23 @@ class Profile extends Component {
         this.setState({logOutLoading:false})
     }
 
+
+    socialRemover = (i,e) =>{
+        e.preventDefault();
+        // console.log(i,e)
+        let social = this.state.social_media
+        social[i] = ''
+        for(let y=i; y<4; y++){
+            social[y]=social[y+1];
+        }
+        social[4] = ''
+        this.setState({social_media: social, count: this.state.count-1, changed:true})
+    }
+
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<TextInput change={(e)=>this.socialchangeHandler(i,e)} inline width='100%' key={i} value={this.state.social_media[i]} label="Social Media Links"/>)
+            social.push(<div key={i+10}><TextInput change={(e)=>this.socialchangeHandler(i,e)} inline width='100%' key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
         }
         let profile = this.props.profile;
         return (

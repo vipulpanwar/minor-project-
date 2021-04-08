@@ -1,5 +1,5 @@
 import React from 'react';
-import {  useEffect, useRef} from 'react';
+import { useState, useEffect, useRef} from 'react';
 import styles from './StudentCard.module.css'
 import userPlaceholder from '../../assets/images/user_placeholder.jpg'
 import Button from '../shared/ui/Button/Button';
@@ -14,6 +14,24 @@ import New from './images/new.svg';
 
 const StudentCard = (props)=>{
     let cardRef = useRef(null);
+    let [PlaceHolder, setPlaceholder] = useState(userPlaceholder);
+    useEffect(() => {
+        userPlaceHolderFinder()
+    }, [])
+
+    const userPlaceHolderFinder = async ()=>{
+        let profilepicLink = "users/"+ props.student.uid + '/myphoto.png'
+        let src
+        try{
+            src = await storage.ref().child(profilepicLink).getDownloadURL()
+            console.log("image fetched for " + props.student.uid)
+            setPlaceholder(src)
+        }
+        catch(error){
+            console.log(error)
+        }   
+    }
+
     return(
         // !props.student.loading?
         <div ref={cardRef} className={styles.StudentCard}>
@@ -22,7 +40,7 @@ const StudentCard = (props)=>{
             {props.student.flag=="Average" && <div className={styles.excellent}><img src={Average} alt={props.student.flag}/></div>}
             {props.student.flag=="New" && <div className={styles.excellent}><img src={New} alt={props.student.flag}/></div>}
             <div className={styles.StudentInfo}>
-                <img className={styles.StudentImage} src={userPlaceHolderFinder(props)}/>
+                <img className={styles.StudentImage} src={PlaceHolder}/>
                 <StudentData student={props.student}/>
                 
             </div>
@@ -30,23 +48,6 @@ const StudentCard = (props)=>{
         </div>
         // : <h1>Loading...</h1>
         )
-}
-
-const userPlaceHolderFinder = async (props)=>{
-    let userPlaceHolder
-    let profilepicLink = "users/"+ props.student.uid + '/myphoto.png'
-    let src = userPlaceholder
-    try{
-        let url = await storage.ref().child(profilepicLink).getDownloadURL()
-            console.log(url, "url");
-            console.log("image fetched for " + props.student.uid)
-            src = url
-    }
-    catch(error){
-        console.log(error)
-    }
-    userPlaceHolder = src
-    return userPlaceHolder
 }
 
 const getDegree = (student)=>{
