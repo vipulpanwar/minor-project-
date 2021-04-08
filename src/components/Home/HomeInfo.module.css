@@ -46,6 +46,8 @@
     max-height: 33px;
     overflow:hidden;
     color: #232D4C;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .titleBox{
@@ -147,6 +149,9 @@
     min-height: 221px;
     vertical-align:top;
     padding-left: 18px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #232D4C;
 }
 
 .descpara{

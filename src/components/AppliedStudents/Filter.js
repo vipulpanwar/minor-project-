@@ -192,7 +192,7 @@ import {db} from '../../firebase'
           {this.props.campus && <FilterTag inputHandler={this?.degreeInputHandler} name="Degree" selected={this.state.degreeValue} options={this.state.degreeOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.courseInputHandler} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.branchInputHandler} name="Branch" selected={this.state.branchValue} options={this.state.branchOptions}/>}
-          {this.props.campus && <FilterTag inputHandler={this?.tagInputHandler} name="Tag" selected={this.state.tagValue} options={this.state.tagOptions} />}
+          {/* {this.props.campus && <FilterTag inputHandler={this?.tagInputHandler} name="Tag" selected={this.state.tagValue} options={this.state.tagOptions} />} */}
           {!this.props.campus && <FilterMultiTag inputHandler={this?.skillsInputHandler} name="Skills" selected={this.state.tagValue} options={this.state.tagOptions} />}
         </div>
         <div className="apply-filter-button-div">
