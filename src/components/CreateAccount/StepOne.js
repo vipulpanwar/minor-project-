@@ -171,7 +171,7 @@ class StepOne extends Component {
                 <div className={styles.rightcontainer}>
                     <p className={styles.tellus}>Tell Us About Your Company</p>
                     <br />
-                    <div className={styles.companylogodiv}>
+                    <div style={{display:'flex'}} className={styles.companylogodiv}>
                         <label>
                             {this.state.logoName?<div className={styles.logopreviewdiv}><img className={styles.logopreviewimg} src={URL.createObjectURL(this.state.img)}/><img src={Editimg} className={styles.editPencil}/></div>:null}
                             <input className={styles.hide} id="CompanyLogo" type="file" onChange={this.logoinputHandler} accept="image/png, image/jpeg"></input>

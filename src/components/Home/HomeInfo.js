@@ -25,15 +25,16 @@ class homeInfo extends Component{
                         <h1 className = {styles.title}>{this.props.job?.title}</h1>
                         <div className = {styles.desc}>{this.props.job?.type} |  {this.props.job?.ctc}  |  {this.formatDate(this.props.job?.deadline)}</div>
                     </div>
-                    <button onClick={this.props.deleteJob} className = {styles.deletejobBox}>
-                       Delete Job
-                    </button>
-                    <div className = {styles.appliedBox}>
-                        <Link to={`jobs/${this.props.job.id}`}>
-                            <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.count || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
-                        </Link>
-                    </div>
-                    
+                    <div className = {styles.buttonsContainer}>
+                        <button onClick={this.props.deleteJob} className = {styles.deletejobBox}>
+                        Delete Job
+                        </button>
+                        <div className = {styles.appliedBox}>
+                            <Link to={`jobs/${this.props.job.id}`}>
+                                <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.count || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
+                            </Link>
+                        </div>
+                    </div>     
                 </div>
             </div>
             <div className = {styles.secondaryBox}>
