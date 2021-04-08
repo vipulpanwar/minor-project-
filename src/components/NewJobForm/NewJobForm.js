@@ -307,7 +307,7 @@ class NewJobForm extends React.Component{
         }
         if(!errors.length && checks.find(sub=> sub=="future") && new Date(input.value) < new Date())
             errors.push("Date is in past");
-        if(!errors.length && checks.find(sub=> sub=="url") && this.validURL(input.value))
+        if(!errors.length && checks.find(sub=> sub=="url") && !this.validURL(input.value))
             errors.push("Invalid Url");
         return errors;
     }

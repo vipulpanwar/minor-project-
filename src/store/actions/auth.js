@@ -55,7 +55,7 @@ export const AuthStateChanged = (user)=>{
             
             if(profile.data()?.verified == false)
             {
-                dispatch(CreateAlert({subtitle:'Your profile verification is under process, kindly wait for 24 hours.',title:"Profile Created", mode:'success'}))
+                dispatch(CreateAlert({subtitle:'Your profile verification is under process, kindly wait for 24 hours.',title:"Profile Created", code:'success'}))
                 dispatch(Logout())
             }
             else
