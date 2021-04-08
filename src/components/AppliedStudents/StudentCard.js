@@ -14,23 +14,28 @@ import New from './images/new.svg';
 
 const StudentCard = (props)=>{
     let cardRef = useRef(null);
-    let [PlaceHolder, setPlaceholder] = useState(userPlaceholder);
-    useEffect(() => {
-        userPlaceHolderFinder()
-    }, [])
+    // let [PlaceHolder, setPlaceholder] = useState(userPlaceholder);
+    // useEffect(() => {
+    //     userPlaceHolderFinder()
+    // }, [])
 
-    const userPlaceHolderFinder = async ()=>{
-        let profilepicLink = "users/"+ props.student.uid + '/myphoto.png'
-        let src
-        try{
-            src = await storage.ref().child(profilepicLink).getDownloadURL()
-            console.log("image fetched for " + props.student.uid)
-            setPlaceholder(src)
-        }
-        catch(error){
-            console.log(error)
-        }   
+    // const userPlaceHolderFinder = async ()=>{
+    //     let profilepicLink = "users/"+ props.student.uid + '/myphoto.png'
+    //     let src
+    //     try{
+    //         src = await storage.ref().child(profilepicLink).getDownloadURL()
+    //         console.log("image fetched for " + props.student.uid)
+    //         setPlaceholder(src)
+    //     }
+    //     catch(error){
+    //         console.log(error)
+    //     }   
+    // }
+    let PlaceHolder = userPlaceholder
+    if(props.student.profilePic!="Placeholder"){
+        PlaceHolder = props.student.profilePic
     }
+
 
     return(
         // !props.student.loading?

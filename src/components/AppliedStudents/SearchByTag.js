@@ -53,21 +53,21 @@ const SearchByTag = (props)=> {
 
     return (<div className={styles.BottomNav}>
         <div className={styles.NavLinks}>
-            <div onClick={()=>tagInputHandler('All')} onMouseEnter={()=>HoverStart(0)} onMouseLeave={HoverEnd} className={`${styles.NavLink}`}>
+            <div onClick={()=>tagInputHandler('All')} className={`${styles.NavLink}`}>
                 {/* <img className={styles.Icon} src={JobIcon}/> */}
-                <span>All</span>
+                {activeLink == 0?<span style={{color:'#fff'}}>All</span>:<span>All</span>}
             </div>
-                <div onClick={()=>tagInputHandler('Excellent')} onMouseEnter={()=>HoverStart(1)} onMouseLeave={HoverEnd} className={styles.NavLink}>
+                <div onClick={()=>tagInputHandler('Excellent')} className={styles.NavLink}>
                     {/* <img className={styles.Icon} src={ProfileIcon}/> */}
-                    <span>Excellent</span>
+                    {activeLink == 1?<span style={{color:'#fff'}}>Excellent</span>:<span>Excellent</span>}
                 </div>
-            <div onClick={()=>tagInputHandler('Good')} onMouseEnter={()=>HoverStart(2)} onMouseLeave={HoverEnd} className={styles.NavLink}>
+            <div onClick={()=>tagInputHandler('Good')} className={styles.NavLink}>
                 {/* <img className={styles.Icon} src={ProfileIcon}/> */}
-                <span>Good</span>
+                {activeLink == 2?<span style={{color:'#fff'}}>Good</span>:<span>Good</span>}
             </div>
-            <div onClick={()=>tagInputHandler('Average')} onMouseEnter={()=>HoverStart(3)} onMouseLeave={HoverEnd} className={styles.NavLink}>
+            <div onClick={()=>tagInputHandler('Average')} className={styles.NavLink}>
                 {/* <img className={styles.Icon} src={Plus}/> */}
-                <span>Average</span>
+                {activeLink == 3?<span style={{color:'#fff'}}>Average</span>:<span>Average</span>}
             </div>
         </div>
         <div className={styles.ActiveMarker} style={{transform: `translate(${markerPos}px)`}}>

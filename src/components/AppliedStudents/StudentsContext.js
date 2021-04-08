@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import React , { createContext, Component, createRef, useState, useEffect, useLayoutEffect} from 'react';
 import { db } from '../../firebase'
+import userPlaceholder from '../../assets/images/user_placeholder.jpg';
+import { storage } from '../../firebase'
 export const StudentsContext = createContext();
 
 
@@ -132,19 +134,58 @@ class StudentsProviderComponent extends Component{
             console.log(studentDocslist, "studoclist");
             studentDocslist.forEach(applicantsDoc=>{
                 let applicant = applicantsDoc.data();
+                console.log("Skills", applicant.hskills, applicant.sskills)
+                // let hskills = new Map([...applicant.hskills].sort())
+                // let hskills = new Map([...applicant.hskills.entries()].sort());
+                // let hskills = Object.keys(applicant.hskills).sort(function(a,b) { return applicant.hskills[a] - applicant.hskills[b]; });
+                // console.log("sorted skills", hskills)
+                applicant.hskills = this.skillSorter(applicant.hskills)
+                applicant.sskills = this.skillSorter(applicant.sskills)
                 applicant.id= applicantsDoc.id;
+                applicant.profilePic = userPlaceholder
                 applicants.push(applicant);
                 console.log(applicant);
             });
-            this.setState({hasMore: (applicants.length==10)});
             if(moreStudents){
-                this.setState({applicants:[...this.state.applicants, ...applicants], studentLoading:false})
+                this.setState({applicants:[...this.state.applicants, ...applicants], studentLoading:false, hasMore: (applicants.length==10)},()=>this.getImages(applicants))
             }
             else{
-                this.setState({applicants: applicants, studentLoading: false});
-            }    
-            this.setState({studentLoading: false});
+                this.setState({applicants: applicants, studentLoading: false, hasMore: (applicants.length==10)},()=>this.getImages(applicants));
+            }
+            // this.setState({studentLoading: false});
             console.log(applicants, "applicants renewed")
+    }
+
+    skillSorter = (propskills) =>{
+        let skills = Object.keys(propskills);
+        let skillMap = {}
+        skills.sort()
+        skills.forEach((skill)=>{
+            skillMap[skill] = true
+        })
+        console.log(skillMap)
+        return skillMap
+    }
+
+    getImages = async (applicants) =>{
+        applicants.forEach(async applicant=>{
+            let src = ""
+            let profilepicLink = "users/"+ applicant.uid + '/myphoto.png'
+            try{
+                src = await storage.ref().child(profilepicLink).getDownloadURL()
+                applicant.profilePic = src
+                console.log(applicant.profilePic)
+                let index = this.state.applicants.findIndex((app)=>app.uid==applicant.uid);
+                let fetchedApplicant = {...this.state.applicants[index]}
+                fetchedApplicant.profilePic = src
+                let applicantsCopy = [...this.state.applicants]
+                applicantsCopy[index] = fetchedApplicant
+                this.setState({applicants: applicantsCopy})
+            }
+            catch(error){
+                console.log(error)
+            }
+        })
     }
 
     applyFilterHandler = (filters, options)=>{

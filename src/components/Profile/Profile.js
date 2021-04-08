@@ -126,7 +126,7 @@ class Profile extends Component {
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<div key={i+10}><TextInput change={(e)=>this.socialchangeHandler(i,e)} inline width='100%' key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
+            social.push(<div key={i+10}><TextInput change={(e)=>this.socialchangeHandler(i,e)} inline width='100%' key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button style={{display:'none'}} key={i+20} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
         }
         let profile = this.props.profile;
         return (
