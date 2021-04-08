@@ -58,7 +58,7 @@ class CreateAccountProviderComponent extends Component{
         try{
             await db.collection("company").doc(this.props.user.uid).set(updater);
             this.props.logout();
-            this.props.createAlert({subtitle:'Your profile verification is under process. Kindly wait for 24 hours.', title:"Profile Created", mode:'success'})
+            this.props.createAlert({subtitle:'Your profile verification is under process. Kindly wait for 24 hours.', title:"Profile Created", code:'success'})
         }
         catch(error) {
             console.error("Error adding document: ", error);

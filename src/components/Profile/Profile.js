@@ -124,6 +124,16 @@ class Profile extends Component {
         this.setState({social_media: social, count: this.state.count-1, changed:true})
     }
 
+    getExternalLink=(link)=>{
+        let newLink ="";
+        if(!link.startsWith("https://") && !link.startsWith("http://"))
+            newLink = 'http://'+link;
+        else 
+            newLink = link;
+
+        return newLink;
+    }
+
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
@@ -147,7 +157,7 @@ class Profile extends Component {
                         </div>
                         <div className={styles.otherDetails}>
                             <img src={Website}/>
-                            <a className={styles.link} target="_blank" rel="noopener noreferrer" href={profile.website}> <div className={styles.website}>{profile.website}</div></a>
+                            <a className={styles.link}  href={this.getExternalLink(profile.website)}> <div className={styles.website}>{profile.website}</div></a>
                             <div className={styles.address}>
                                 <img src={Location}/> <div className={styles.location}> {profile.company_address}</div>
                             </div>
