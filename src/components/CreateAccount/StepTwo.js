@@ -146,11 +146,29 @@ class StepTwo extends Component {
         }
     }
 
+    socialRemover = (i,e) =>{
+        e.preventDefault();
+        console.log(i,e)
+        let form = this.state.form
+        // form.social_media[i] = ''
+        for(let y=i; y<4; y++){
+            form.social_media[y]=form.social_media[y+1];
+        }
+        form.social_media[4] = ''
+        // let form = this.state.form
+        // form.social_media = social
+        console.log(form, "form")
+        this.setState({form: form, count: this.state.count-1})
+    }
+
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<div key={i} style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input key={i} errors={this.state.error.socialError[i]} style={{marginBottom:'24px'}} elementType="input" label="Social Media Link" inputHandler={(e)=>{this.socialinputhandler(i, e)}}></Input>
+            social.push(<div key={i} style={{display:'block'}}>
+                            <div className={styles.socialContainer}> 
+                                <Input key={i} errors={this.state.error.socialError[i]} elementType="input" label="Social Media Link" inputHandler={(e)=>{this.socialinputhandler(i, e)}}></Input>
+                                {this.state.count!=1&&<button key={i+10} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}
+                            </div>
                         </div>)
         }
         return (

@@ -11,6 +11,7 @@ import { db } from '../../firebase'
 import { SetCompanyProfile } from '../../store/actions/auth';
 import {Logout as logoutAction} from '../../store/actions/auth';
 import { CreateToast } from '../../store/actions/alert';
+import SuccessModal from '../shared/ui/Modal/SuccessModal';
 
 class Profile extends Component {
     state={
@@ -126,7 +127,7 @@ class Profile extends Component {
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<div key={i+10}><TextInput change={(e)=>this.socialchangeHandler(i,e)} inline width='100%' key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button style={{display:'none'}} key={i+20} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
+            social.push(<div className={styles.socialContainer} key={i+10}><TextInput width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
         }
         let profile = this.props.profile;
         return (
@@ -146,7 +147,7 @@ class Profile extends Component {
                         </div>
                         <div className={styles.otherDetails}>
                             <img src={Website}/>
-                            <a className={styles.link} href={profile.website}> <div className={styles.website}>{profile.website}</div></a>
+                            <a className={styles.link} target="_blank" rel="noopener noreferrer" href={profile.website}> <div className={styles.website}>{profile.website}</div></a>
                             <div className={styles.address}>
                                 <img src={Location}/> <div className={styles.location}> {profile.company_address}</div>
                             </div>
@@ -156,11 +157,11 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
+                <SuccessModal />
                 <div className={styles.rightcontainer}>
                 <div className={styles.title}>Edit Company Details</div>
                 <div className={styles.gridBox}>
                     <div className={styles.leftForm}>
-                        {console.log(profile.size, "size")}
                         <TextInput change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
                         <TextInput change={this.phoneChangeHandler} inline width='100%' value={this.state.phone} label="Phone Number"/>
                         <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" elementConfig={{rows:'15'}} textarea label="About"/>

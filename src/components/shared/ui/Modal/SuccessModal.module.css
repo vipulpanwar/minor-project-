@@ -17,7 +17,8 @@
     line-height: 135.2%;
     text-align: center;
     color: #000000;
-    padding-top: 14px;
+    /* padding-top: 14px; */
+    padding: 14px 20px 14px 20px;
 }
 
 .button{

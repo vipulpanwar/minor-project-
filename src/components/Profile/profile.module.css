@@ -20,6 +20,11 @@
     object-fit: cover;
 }
 
+.socialContainer{
+    display:grid;
+    grid-template-columns: 1fr 20px;
+}
+
 .rightcontainer{
     /* width: 72vw; */
     display:flex;
