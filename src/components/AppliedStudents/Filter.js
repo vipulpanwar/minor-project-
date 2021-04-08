@@ -98,7 +98,7 @@ import {db} from '../../firebase'
 
   getCourseOptions=(selectedDegree)=>{
     if(selectedDegree!='All'){
-      let coursesDocs = this.state.selectedCollegeData.edu.[selectedDegree]
+      let coursesDocs = this.state.selectedCollegeData.edu[selectedDegree]
       let coursesOptions = Object.keys(coursesDocs)
       coursesOptions.unshift('All')
       console.log(coursesOptions, "collegeData")
@@ -111,7 +111,7 @@ import {db} from '../../firebase'
 
   getBranchOptions=(selectedCourse)=>{
     if(selectedCourse!='All'){
-      let courseDocs = this.state.coursesDocs.[selectedCourse];
+      let courseDocs = this.state.coursesDocs[selectedCourse];
       let branches = ['All']
       courseDocs.forEach(branch=>{
         branches.push(branch)
