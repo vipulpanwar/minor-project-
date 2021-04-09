@@ -137,7 +137,7 @@ class Profile extends Component {
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<div className={styles.socialContainer} key={i+10}><TextInput width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
+            social.push(<div className={styles.socialContainer} key={i+10}><TextInput width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
         }
         let profile = this.props.profile;
         return (
