@@ -23,7 +23,7 @@ const CourseItem = (props)=>{
             <p className={styles.TileTitle}>{props.course.college}</p>
             <p className={styles.TileSub}>{years} Year | {props.course.degree} | {props.course.course} | {branches} </p>
         </div>
-        <button onClick={props.deleteHandler} className={styles.Delete}><img src={TrashIcon}/></button>
+        {!props.course.fromDb?<button onClick={props.deleteHandler} className={styles.Delete}><img src={TrashIcon}/></button>:null}
     </div>)
 
 }

@@ -311,6 +311,7 @@ class NewJobForm extends React.Component{
             errors.push("Invalid Url");
         return errors;
     }
+
     validURL=(str)=> {
         var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
           '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -457,7 +458,6 @@ class NewJobForm extends React.Component{
                 <div className={styles.ButtonTray}>
                     {this.state.showBack?<Button clicked={this.backButtonHandler} style={{width:"unset"}}>Go Back</Button>:null}
                     <Button clicked={this.nextButtonHandler} style={{width:"unset"}} primary>{this.state.nextButton.text}</Button>
-
                 </div>
             </div>)
     }
