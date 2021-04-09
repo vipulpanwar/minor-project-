@@ -157,7 +157,7 @@ class Profile extends Component {
                         </div>
                         <div className={styles.otherDetails}>
                             <img src={Website}/>
-                            <a className={styles.link}  href={this.getExternalLink(profile.website)}> <div className={styles.website}>{profile.website}</div></a>
+                            <a className={styles.link} target="_blank" rel="noopener noreferrer" href={this.getExternalLink(profile.website)}> <div className={styles.website}>{profile.website}</div></a>
                             <div className={styles.address}>
                                 <img src={Location}/> <div className={styles.location}> {profile.company_address}</div>
                             </div>

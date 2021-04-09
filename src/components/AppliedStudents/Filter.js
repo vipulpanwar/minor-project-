@@ -44,24 +44,25 @@ import {db} from '../../firebase'
         branchValue : this.context.state.filters.field,
         tagValue : this.context.state.filters.flag,
         collegeValue : this.context.state.filters.collegeid,
+        selectedCollegeData : this.context.state.filters.selectedCollegeData,
 
-        degreeOptions: options.degreeOptions,
-        branchOptions: options.branchOptions,
-        collegeOptions: options.collegeOptions,
-        courseOptions: options.courseOptions,
+        degreeOptions: [...options.degreeOptions],
+        branchOptions: [...options.branchOptions],
+        collegeOptions: [...options.collegeOptions],
+        courseOptions: [...options.courseOptions],
       })
-      let colleges = []
-      let collegesDocs = await db.collection('clginfo').get();
-      collegesDocs.forEach(collegeDoc=>{
-        let college = collegeDoc.data();
-        college.id = collegeDoc.id;
-        colleges.push(college);
-        console.log(college);
-    });
-    this.setState({
-      collegeData: colleges
-    })
-    this.getCollegeOptions()
+      // let colleges = []
+    //   let collegesDocs = await db.collection('clginfo').get();
+    //   collegesDocs.forEach(collegeDoc=>{
+    //     let college = collegeDoc.data();
+    //     college.id = collegeDoc.id;
+    //     colleges.push(college);
+    //     console.log(college);
+    // });
+    // this.setState({
+    //   collegeData: colleges
+    // })
+    // this.getCollegeOptions()
   }
 
   componentDidUpdate(){
@@ -78,21 +79,14 @@ import {db} from '../../firebase'
     this.setState({collegeOptions: collegeOptions})
   }
 
-  getDegreeOptions=(selectedCol)=>{
+  getDegreeOptions= async (selectedCol)=>{
     if(selectedCol!="All"){
-      let collegeDocs = this.state.collegeData
-      let college = {}
-      collegeDocs.forEach(collegeData=>{
-        if(collegeData.id==selectedCol){
-          college = collegeData;
-          // break;
-          return 0;
-        }
-      });
+      let college = await this.context.getDegrees(selectedCol)
       let degrees = Object.keys(college.edu)
       degrees.unshift('All')
       this.setState({degreeOptions: degrees, selectedCollegeData: college})
       console.log(degrees, 'degrees')
+      // console.log(college, "College in filters")
     }
   }
 
@@ -111,7 +105,8 @@ import {db} from '../../firebase'
 
   getBranchOptions=(selectedCourse)=>{
     if(selectedCourse!='All'){
-      let courseDocs = this.state.coursesDocs[selectedCourse];
+
+      let courseDocs = this.state.selectedCollegeData.edu[this.state.degreeValue][selectedCourse]
       let branches = ['All']
       courseDocs.forEach(branch=>{
         branches.push(branch)
@@ -171,7 +166,8 @@ import {db} from '../../firebase'
       field: this.state.branchValue,
       flag: this.state.tagValue,
       collegeid: this.state.collegeValue,
-      skillValue :this.state.skillValue
+      skillValue :this.state.skillValue,
+      selectedCollegeData :this.state.selectedCollegeData,
     }
     let options = { 
         degreeOptions: this.state.degreeOptions,
@@ -180,6 +176,7 @@ import {db} from '../../firebase'
         collegeOptions: this.state.collegeOptions,
     }
     this.context.filterfunction(filters, options)
+    this.props.closeHandler()
   }
 
   render (){

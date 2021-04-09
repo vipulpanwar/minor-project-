@@ -21,12 +21,13 @@ class StudentsProviderComponent extends Component{
                     flag: 'All',
                     collegeid: 'All',
                     skillValue: [],
+                    selectedCollegeData: undefined,     
         },
         options: {  degreeOptions: ['All'],
                     courseOptions: ['All'],
                     branchOptions: ['All'],
                     collegeOptions: ['All'],
-        },        
+        },
         searchValue: '',
         showHired:false,
     }
@@ -36,6 +37,7 @@ class StudentsProviderComponent extends Component{
         if(this.props.hired){
             this.setState({showHired:true})
         }
+        this.getCollegeList();
         this.fetchStudents(this.state.filters, false, this.props.hired)
     }
 
@@ -111,7 +113,7 @@ class StudentsProviderComponent extends Component{
                 query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Hired').limit(10);
             }
             for (let filterKey in filters){
-                if(filters[filterKey]!='All' && filters[filterKey]!=''){
+                if(filters[filterKey]!='All' && filters[filterKey]!='' && filterKey!='selectedCollegeData'){
                     if(filterKey=="course"||filterKey=="field"){
                         query = query.where(`edu.${filters.degree}.${filterKey}`, '==', filters[filterKey])
                     }
@@ -167,6 +169,24 @@ class StudentsProviderComponent extends Component{
         return skillMap
     }
 
+    getCollegeList = async () =>{
+        let colleges = []
+        let collegesDocs = await db.collection('suggestion').get();
+        collegesDocs.forEach(collegeDoc=>{
+            let college = collegeDoc.data();
+            // college.id = collegeDoc.id;
+            colleges.push(college);
+            console.log(college);
+    });
+    let collegeNames = colleges[0].name
+    console.log(collegeNames, "colleges")
+    collegeNames.unshift("All")
+    let options = {...this.state.options}
+    options.collegeOptions = collegeNames
+    console.log(options, "Options")
+    this.setState({options: options})
+    }
+
     getImages = async (applicants) =>{
         applicants.forEach(async applicant=>{
             let src = ""
@@ -188,6 +208,15 @@ class StudentsProviderComponent extends Component{
         })
     }
 
+    getDegrees = async (college)=>{
+        // let collegeDat
+        console.log("getting data for ", college)
+        let collegeDocs = await db.collection('clginfo').doc(college).get();
+        // console.log(collegeDat, "dat")
+        // console.log(collegeDocs.data(), "College Data")
+        return collegeDocs.data()
+    }
+
     applyFilterHandler = (filters, options)=>{
         console.log("filter Input Taker Called");
         if(this.state.filters!=filters){
@@ -202,7 +231,7 @@ class StudentsProviderComponent extends Component{
 
     render(){
 
-        let contextData = {state: this.state, updatef: this.updateflag, updatestat: this.updatestatus, filterfunction: this.applyFilterHandler, fetchStudents: this.fetchStudents, setSearch: this.setSearch}
+        let contextData = {state: this.state, updatef: this.updateflag, updatestat: this.updatestatus, filterfunction: this.applyFilterHandler, fetchStudents: this.fetchStudents, setSearch: this.setSearch, getDegrees: this.getDegrees}
     return (
         <StudentsContext.Provider value={contextData}>
             {this.props.children}
