@@ -52,10 +52,10 @@ class homeInfo extends Component{
                     <div className = {styles.catTitle}>Interview Location:</div>
                     <div className = {styles.cat}>{this.props.job.job_loc}</div>
                 </div>
-                <div className = {styles.catBox}>
+                {/* <div className = {styles.catBox}>
                     <div className = {styles.catTitle}>Who Can Apply:</div>
                     <div className = {styles.cat}>{this.props.job.placed?"All":"Unplaced"}</div>
-                </div>
+                </div> */}
             </div>
         </div>
         <ThirdBox job={this.props.job}/>

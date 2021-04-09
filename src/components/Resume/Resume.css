@@ -47,7 +47,7 @@ hr{
 .resume-container{
   /* width: 886px; */
   /* height: 400px; */
-  /* padding-bottom: 100px; */
+  padding-bottom: 1px;
   background-color: #FFFFFF;
   box-shadow: 0px 26px 24px -20px rgba(0, 0, 0, 0.25);
   border-radius:  0px 0px 14px 14px;
