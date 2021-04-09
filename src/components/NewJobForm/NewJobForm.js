@@ -423,7 +423,7 @@ class NewJobForm extends React.Component{
         job['created'] = new Date();
         job['deadline'] = new Date(job['deadline']);
         job['placed'] = false
-        let uid = `${Date.now()}`;
+        let uid = `${9999999999999999 - Date.now()}`;
         job['uid'] = uid;
 
 

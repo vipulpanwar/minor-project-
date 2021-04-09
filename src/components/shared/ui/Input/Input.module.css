@@ -129,6 +129,7 @@
   color: #959595;
   background-color: transparent;
   transform: translateY(24px) scale(1.25);
+  cursor: text;
 }
 
 .InputElement:focus {

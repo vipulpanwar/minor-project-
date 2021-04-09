@@ -40,7 +40,7 @@ class JobList extends React.Component{
   async componentDidMount(){
 
 
-    let unsubscribeJobs = db.collection('jobs').where('creatorid', '==', this.props.user.uid).orderBy('uid', 'desc').onSnapshot(async jobsSnap=>{
+    let unsubscribeJobs = db.collection('jobs').where('creatorid', '==', this.props.user.uid).onSnapshot(async jobsSnap=>{
         let jobs = [];
         jobsSnap.forEach(jobDoc=>{
             let job = jobDoc.data();
