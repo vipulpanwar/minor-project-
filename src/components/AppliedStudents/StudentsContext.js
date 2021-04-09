@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import React , { createContext, Component, createRef, useState, useEffect, useLayoutEffect} from 'react';
 import { db } from '../../firebase'
+import userPlaceholder from '../../assets/images/user_placeholder.jpg';
+import { storage } from '../../firebase'
 export const StudentsContext = createContext();
 
 
@@ -19,12 +21,13 @@ class StudentsProviderComponent extends Component{
                     flag: 'All',
                     collegeid: 'All',
                     skillValue: [],
+                    selectedCollegeData: undefined,     
         },
         options: {  degreeOptions: ['All'],
                     courseOptions: ['All'],
                     branchOptions: ['All'],
                     collegeOptions: ['All'],
-        },        
+        },
         searchValue: '',
         showHired:false,
     }
@@ -34,6 +37,7 @@ class StudentsProviderComponent extends Component{
         if(this.props.hired){
             this.setState({showHired:true})
         }
+        this.getCollegeList();
         this.fetchStudents(this.state.filters, false, this.props.hired)
     }
 
@@ -109,7 +113,7 @@ class StudentsProviderComponent extends Component{
                 query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Hired').limit(10);
             }
             for (let filterKey in filters){
-                if(filters[filterKey]!='All' && filters[filterKey]!=''){
+                if(filters[filterKey]!='All' && filters[filterKey]!='' && filterKey!='selectedCollegeData'){
                     if(filterKey=="course"||filterKey=="field"){
                         query = query.where(`edu.${filters.degree}.${filterKey}`, '==', filters[filterKey])
                     }
@@ -132,19 +136,85 @@ class StudentsProviderComponent extends Component{
             console.log(studentDocslist, "studoclist");
             studentDocslist.forEach(applicantsDoc=>{
                 let applicant = applicantsDoc.data();
+                console.log("Skills", applicant.hskills, applicant.sskills)
+                // let hskills = new Map([...applicant.hskills].sort())
+                // let hskills = new Map([...applicant.hskills.entries()].sort());
+                // let hskills = Object.keys(applicant.hskills).sort(function(a,b) { return applicant.hskills[a] - applicant.hskills[b]; });
+                // console.log("sorted skills", hskills)
+                applicant.hskills = this.skillSorter(applicant.hskills)
+                applicant.sskills = this.skillSorter(applicant.sskills)
                 applicant.id= applicantsDoc.id;
+                applicant.profilePic = userPlaceholder
                 applicants.push(applicant);
                 console.log(applicant);
             });
-            this.setState({hasMore: (applicants.length==10)});
             if(moreStudents){
-                this.setState({applicants:[...this.state.applicants, ...applicants], studentLoading:false})
+                this.setState({applicants:[...this.state.applicants, ...applicants], studentLoading:false, hasMore: (applicants.length==10)},()=>this.getImages(applicants))
             }
             else{
-                this.setState({applicants: applicants, studentLoading: false});
-            }    
-            this.setState({studentLoading: false});
+                this.setState({applicants: applicants, studentLoading: false, hasMore: (applicants.length==10)},()=>this.getImages(applicants));
+            }
+            // this.setState({studentLoading: false});
             console.log(applicants, "applicants renewed")
+    }
+
+    skillSorter = (propskills) =>{
+        let skills = Object.keys(propskills);
+        let skillMap = {}
+        skills.sort()
+        skills.forEach((skill)=>{
+            skillMap[skill] = true
+        })
+        console.log(skillMap)
+        return skillMap
+    }
+
+    getCollegeList = async () =>{
+        let colleges = []
+        let collegesDocs = await db.collection('suggestion').get();
+        collegesDocs.forEach(collegeDoc=>{
+            let college = collegeDoc.data();
+            // college.id = collegeDoc.id;
+            colleges.push(college);
+            console.log(college);
+    });
+    let collegeNames = colleges[0].name
+    console.log(collegeNames, "colleges")
+    collegeNames.unshift("All")
+    let options = {...this.state.options}
+    options.collegeOptions = collegeNames
+    console.log(options, "Options")
+    this.setState({options: options})
+    }
+
+    getImages = async (applicants) =>{
+        applicants.forEach(async applicant=>{
+            let src = ""
+            let profilepicLink = "users/"+ applicant.uid + '/myphoto.png'
+            try{
+                src = await storage.ref().child(profilepicLink).getDownloadURL()
+                applicant.profilePic = src
+                console.log(applicant.profilePic)
+                let index = this.state.applicants.findIndex((app)=>app.uid==applicant.uid);
+                let fetchedApplicant = {...this.state.applicants[index]}
+                fetchedApplicant.profilePic = src
+                let applicantsCopy = [...this.state.applicants]
+                applicantsCopy[index] = fetchedApplicant
+                this.setState({applicants: applicantsCopy})
+            }
+            catch(error){
+                console.log(error)
+            }
+        })
+    }
+
+    getDegrees = async (college)=>{
+        // let collegeDat
+        console.log("getting data for ", college)
+        let collegeDocs = await db.collection('clginfo').doc(college).get();
+        // console.log(collegeDat, "dat")
+        // console.log(collegeDocs.data(), "College Data")
+        return collegeDocs.data()
     }
 
     applyFilterHandler = (filters, options)=>{
@@ -161,7 +231,7 @@ class StudentsProviderComponent extends Component{
 
     render(){
 
-        let contextData = {state: this.state, updatef: this.updateflag, updatestat: this.updatestatus, filterfunction: this.applyFilterHandler, fetchStudents: this.fetchStudents, setSearch: this.setSearch}
+        let contextData = {state: this.state, updatef: this.updateflag, updatestat: this.updatestatus, filterfunction: this.applyFilterHandler, fetchStudents: this.fetchStudents, setSearch: this.setSearch, getDegrees: this.getDegrees}
     return (
         <StudentsContext.Provider value={contextData}>
             {this.props.children}

@@ -35,7 +35,10 @@ class AppliedStudents extends Component{
         countLoading: true,
     }
     modalCloseHandler = ()=>{
-        this.props.history.push("/jobs/" + this.props.computedMatch.params.jobId)
+        if(this.props.hired)
+            this.props.history.push("/jobs/" + this.props.computedMatch.params.jobId +'/hired')
+        else
+            this.props.history.push("/jobs/" + this.props.computedMatch.params.jobId)
     }
     toggleFilterHandler = ()=>{
         this.setState((prevState)=>({

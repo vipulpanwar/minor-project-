@@ -5,6 +5,7 @@ import ThirdBox from './ThirdBox.js'
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import ConfirmationModal  from '../shared/ui/Modal/deletionmodal';
+import Button from '../shared/ui/Button/Button';
 
 class homeInfo extends Component{
     formatDate = (timestamp)=>{
@@ -25,15 +26,16 @@ class homeInfo extends Component{
                         <h1 className = {styles.title}>{this.props.job?.title}</h1>
                         <div className = {styles.desc}>{this.props.job?.type} |  {this.props.job?.ctc}  |  {this.formatDate(this.props.job?.deadline)}</div>
                     </div>
-                    <button onClick={this.props.deleteJob} className = {styles.deletejobBox}>
-                       Delete Job
-                    </button>
-                    <div className = {styles.appliedBox}>
-                        <Link to={`jobs/${this.props.job.id}`}>
-                            <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.count || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
-                        </Link>
-                    </div>
-                    
+                    <div className = {styles.buttonsContainer}>
+                        <button onClick={this.props.deleteJob} className = {styles.deletejobBox}>
+                        Delete Job
+                        </button>
+                        <div className = {styles.appliedBox}>
+                            <Link to={`jobs/${this.props.job.id}`}>
+                                <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.count || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
+                            </Link>
+                        </div>
+                    </div>     
                 </div>
             </div>
             <div className = {styles.secondaryBox}>
@@ -66,43 +68,39 @@ class homeInfo extends Component{
             {this.props.job.schedule}
             </div>
         </div>
+        {this.props.job.edu?
         <div className={styles.Qualifications}>
             <div className = {styles.catTitle}>
                 Qualifications:
-                
             </div>
-        </div>
+            {this.props.qualifications.map((qual,i)=> <Qualification {...qual} key={i} />)}
+            <Button clicked={this.props.sendInvites} style={{fontSize:14, padding:'9px 19px', width:'unset'}}>
+                Send Invites To More Colleges
+            </Button>
+        </div>:null}
         </div>
     )   
   }
 }
 
-const formatQual = (edu)=>{
-    let formatedEdu = [];
-    edu.forEach(qual=>{
-        let [college,degree,course,branch,year] = qual.split('#');
-        let index = formatedEdu.findIndex(fQual=> fQual.course == course && fQual.degree == degree && fQual.college == college);
-        if(index>-1)
-        {
-            if(formatedEdu[index].branch.includes(branch)==false)
-                formatedEdu[index].branch.push(branch);
-            if(formatedEdu[index].year.includes(year)==false)
-                formatedEdu[index].year.push(year);
 
-        }
-        else
-            formatedEdu.push({college, degree, course, branch,year})
-    });
-    return formatedEdu
+const Qualification= ({college, degree, course, branch, year})=>{
+
+    let Branches = branch.reduce((str, curBranch)=> str + curBranch + ', ', '');
+    let Years = year.reduce((str, curYear)=> str + curYear + ', ', '');
+    Years=Years.slice(0, Years.length -2)
+    Branches=Branches.slice(0, Branches.length -2)
+
+
+    return(
+        <div className={styles.Qual}>
+            <div className={styles.College}>
+                {college}
+            </div>
+            <div className={styles.CourseList}>
+                {Years} Year | {degree} | {course} | {Branches}
+            </div>
+        </div>)
 }
-
-// const Qualification = ({college, degree, course, branch, year})=>(
-//     <div>
-//         {college}
-//     </div>
-//     <div>
-
-//     </div>
-// )
 
 export default homeInfo;

@@ -1,4 +1,3 @@
-import { act } from "@testing-library/react";
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
@@ -25,6 +24,12 @@ const reducer = (state = initialState, action)=>{
             let newAlerts= [state.alerts];
             newAlerts.splice(action.payload,1);
             return {...state, alerts:newAlerts};;
+        
+        case actionTypes.REMOVE_TOAST:
+            let newToasts =[...state.toasts];
+            newToasts.splice(action.payload,1);
+            return {...state, toasts:newToasts};
+    
         default:
         return state;
     }

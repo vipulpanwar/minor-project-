@@ -262,6 +262,11 @@
     box-shadow: -3px 8px 20px -11px #bdbdbd;
 }
 
+.socialContainer{
+    display:grid;
+    grid-template-columns: 1fr 20px;
+}
+
 .logopreviewdiv{
     width: 120px;
     height: 120px;

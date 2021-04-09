@@ -1,5 +1,5 @@
 import React from 'react';
-import {  useEffect, useRef} from 'react';
+import { useState, useEffect, useRef} from 'react';
 import styles from './StudentCard.module.css'
 import userPlaceholder from '../../assets/images/user_placeholder.jpg'
 import Button from '../shared/ui/Button/Button';
@@ -8,21 +8,44 @@ import {withRouter} from 'react-router-dom';
 import Excellent from './images/excellent.svg';
 import Good from './images/good.svg';
 import Average from './images/average.svg';
+import { storage } from '../../firebase'
 import New from './images/new.svg';
 
 
 const StudentCard = (props)=>{
     let cardRef = useRef(null);
+    // let [PlaceHolder, setPlaceholder] = useState(userPlaceholder);
+    // useEffect(() => {
+    //     userPlaceHolderFinder()
+    // }, [])
+
+    // const userPlaceHolderFinder = async ()=>{
+    //     let profilepicLink = "users/"+ props.student.uid + '/myphoto.png'
+    //     let src
+    //     try{
+    //         src = await storage.ref().child(profilepicLink).getDownloadURL()
+    //         console.log("image fetched for " + props.student.uid)
+    //         setPlaceholder(src)
+    //     }
+    //     catch(error){
+    //         console.log(error)
+    //     }   
+    // }
+    let PlaceHolder = userPlaceholder
+    if(props.student.profilePic!="Placeholder"){
+        PlaceHolder = props.student.profilePic
+    }
+
+
     return(
         // !props.student.loading?
         <div ref={cardRef} className={styles.StudentCard}>
-            {console.log(props, "props")}
             {props.student.flag=="Excellent" && <div className={styles.excellent}><img src={Excellent} alt={props.student.flag}/></div>}
             {props.student.flag=="Good" && <div className={styles.excellent}><img src={Good} alt={props.student.flag}/></div>}
             {props.student.flag=="Average" && <div className={styles.excellent}><img src={Average} alt={props.student.flag}/></div>}
             {props.student.flag=="New" && <div className={styles.excellent}><img src={New} alt={props.student.flag}/></div>}
             <div className={styles.StudentInfo}>
-                <img className={styles.StudentImage} src={ props.student.profilePicture || userPlaceholder}/>
+                <img className={styles.StudentImage} src={PlaceHolder}/>
                 <StudentData student={props.student}/>
                 
             </div>

@@ -307,10 +307,11 @@ class NewJobForm extends React.Component{
         }
         if(!errors.length && checks.find(sub=> sub=="future") && new Date(input.value) < new Date())
             errors.push("Date is in past");
-        if(!errors.length && checks.find(sub=> sub=="url") && this.validURL(input.value))
+        if(!errors.length && checks.find(sub=> sub=="url") && !this.validURL(input.value))
             errors.push("Invalid Url");
         return errors;
     }
+
     validURL=(str)=> {
         var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
           '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -457,7 +458,6 @@ class NewJobForm extends React.Component{
                 <div className={styles.ButtonTray}>
                     {this.state.showBack?<Button clicked={this.backButtonHandler} style={{width:"unset"}}>Go Back</Button>:null}
                     <Button clicked={this.nextButtonHandler} style={{width:"unset"}} primary>{this.state.nextButton.text}</Button>
-
                 </div>
             </div>)
     }

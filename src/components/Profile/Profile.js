@@ -9,7 +9,9 @@ import {connect} from 'react-redux';
 import Button from '../shared/ui/Button/Button'
 import { db } from '../../firebase'
 import { SetCompanyProfile } from '../../store/actions/auth';
+import {Logout as logoutAction} from '../../store/actions/auth';
 import { CreateToast } from '../../store/actions/alert';
+import SuccessModal from '../shared/ui/Modal/SuccessModal';
 
 class Profile extends Component {
     state={
@@ -26,6 +28,7 @@ class Profile extends Component {
             },
         about: '',
         phone: '',
+        logOutLoading: false,
     }
 
     counter = (e)=>{
@@ -91,20 +94,50 @@ class Profile extends Component {
         console.log("saving....")
         this.setState({isLoading: true})
         await db.collection('company').doc(this.props.user.uid).update({size:this.state.size, about:this.state.about, social_media: this.state.social_media, phone: this.state.phone})
-        this.setState({changed:false})
         let profile = this.props.profile;
         profile.size = this.state.size
         profile.about = this.state.about
-        profile.socail_media = this.state.social_media
+        profile.social_media = this.state.social_media
         profile.phone = this.state.phone
         this.props.setCompany(profile)
-        this.setState({isLoading:false})
+        this.setState({isLoading:false, changed:false})
+        this.props.createToast({message:"Changes Saved Successfully"});
+    }
+
+    logout = () =>{
+        this.setState({logOutLoading:true})
+        this.props.logout();
+        this.props.createToast({message:"Logged Out Successfully"}); 
+        this.setState({logOutLoading:false})
+    }
+
+
+    socialRemover = (i,e) =>{
+        e.preventDefault();
+        // console.log(i,e)
+        let social = this.state.social_media
+        social[i] = ''
+        for(let y=i; y<4; y++){
+            social[y]=social[y+1];
+        }
+        social[4] = ''
+        this.setState({social_media: social, count: this.state.count-1, changed:true})
+    }
+
+    getExternalLink=(link)=>{
+        let newLink ="";
+        if(!link.startsWith("https://") && !link.startsWith("http://"))
+            newLink = 'http://'+link;
+        else 
+            newLink = link;
+
+        return newLink;
     }
 
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<TextInput change={(e)=>this.socialchangeHandler(i,e)} inline width='100%' key={i} value={this.state.social_media[i]} label="Social Media Links"/>)
+            social.push(<div className={styles.socialContainer} key={i+10}><TextInput width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
         }
         let profile = this.props.profile;
         return (
@@ -124,24 +157,24 @@ class Profile extends Component {
                         </div>
                         <div className={styles.otherDetails}>
                             <img src={Website}/>
-                            <a className={styles.link} href={profile.website}> <div className={styles.website}>{profile.website}</div></a>
+                            <a className={styles.link} target="_blank" rel="noopener noreferrer" href={this.getExternalLink(profile.website)}> <div className={styles.website}>{profile.website}</div></a>
                             <div className={styles.address}>
                                 <img src={Location}/> <div className={styles.location}> {profile.company_address}</div>
                             </div>
                         </div>
                         <div className={styles.logout}>
-                            <Button clicked={()=>this.props.createToast({message:"Logged Out Successfully"})} width='187px'>Log Out</Button>
+                            <Button loading={this.state.logOutLoading} clicked={()=>this.logout()} width='187px'>Log Out</Button>
                         </div>
                     </div>
                 </div>
+                <SuccessModal />
                 <div className={styles.rightcontainer}>
                 <div className={styles.title}>Edit Company Details</div>
                 <div className={styles.gridBox}>
                     <div className={styles.leftForm}>
-                        {console.log(profile.size, "size")}
                         <TextInput change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
                         <TextInput change={this.phoneChangeHandler} inline width='100%' value={this.state.phone} label="Phone Number"/>
-                        <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" textarea label="About"/>
+                        <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" elementConfig={{rows:'15'}} textarea label="About"/>
                     </div>
                     <div className={styles.rightForm}>
                         <div style={{minHeight:'445px'}}>
@@ -166,6 +199,7 @@ const mapStateToProps = (state)=>({
 })
 
 const mapDispatchToProps = (dispatch)=>({
+    logout : ()=> dispatch(logoutAction()),
     setCompany: (profile)=> dispatch(SetCompanyProfile(profile)),
     createToast: (toast)=>dispatch(CreateToast(toast))
 })

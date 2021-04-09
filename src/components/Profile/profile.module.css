@@ -20,6 +20,11 @@
     object-fit: cover;
 }
 
+.socialContainer{
+    display:grid;
+    grid-template-columns: 1fr 20px;
+}
+
 .rightcontainer{
     /* width: 72vw; */
     display:flex;
@@ -151,4 +156,5 @@
     font-size: 14px;
     line-height: 17px;
     color: #4A90E2;
+    cursor:pointer;
 }

@@ -11,23 +11,9 @@ import { withRouter } from "react-router";
 
 class Profile extends Component{
   state = {
-    source : userPlaceholder,
     loading : 'none',
   }
 
-  componentDidMount = async ()=>{
-    let src = ""
-    let profilepicLink = "users/"+ this.props.student.uid + '/myphoto.png'
-    storage.ref().child(profilepicLink).getDownloadURL().then((url)=>{
-      src = url
-      console.log(src)
-      this.setState({source:src})
-    })    
-  }
-
-changeStatus(newStatus){
-
-}
 
   render(){
     let student = this.props.student;
@@ -72,7 +58,7 @@ changeStatus(newStatus){
             <div className="profile-container">
               {console.log(this.context.state, "context")}
               <div className="profilepic">
-              <img className='profileimg' src={this.state.source} alt="Image not found"/>
+              <img className='profileimg' src={this.props.student.profilePic} alt="Image not found"/>
               </div>
               <div className="applicant-info">
                 <p className="applicant-name">{student.name}</p>

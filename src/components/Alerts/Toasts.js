@@ -2,6 +2,7 @@ import React, {Component, useState} from 'react';
 import {connect} from 'react-redux';
 import styles from './Toasts.module.css';
 import cross from '../../assets/icons/cross.svg';
+import {RemoveToast} from '../../store/actions/alert';
 
 import { CSSTransition } from "react-transition-group";
 
@@ -28,7 +29,7 @@ const Toast = (props)=>{
 class Toasts extends Component{
     render(){
         return(<div className={styles.ToastContainer}>
-            {this.props.toasts.map((toast,i)=> <Toast key={i} message={toast.message} remove={()=> this.removeToasts(i)}/>)}
+            {this.props.toasts.map((toast,i)=> <Toast key={i} message={toast.message} remove={()=> this.props.removeToast(i)}/>)}
         </div>)
     }
 }
@@ -38,5 +39,9 @@ const mapStateToProps = (state)=>({
     toasts:state.alerts.toasts,
 })
 
+const mapDispatchToProps = (dispatch)=>({
+    removeToast:(i)=>dispatch(RemoveToast(i))
+})
 
-export default connect(mapStateToProps,null)(Toasts)
+
+export default connect(mapStateToProps,mapDispatchToProps)(Toasts)
