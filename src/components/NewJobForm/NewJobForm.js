@@ -414,10 +414,10 @@ class NewJobForm extends React.Component{
                 recipients.add(college);
             })
             job['recipient'] = {}
-            job['company'] = this.props.profile.name;
+            
             Array.from(recipients).forEach(college=> {job['recipient'][college]= "pending"});
         }
-
+        job['company'] = this.props.profile.name;
         job['status'] = true
         job['easy_apply'] = this.state.form['1']['Easy Apply'].value =="Ensvee" ? true : false; 
         job['creatorid'] = this.props.user.uid;
