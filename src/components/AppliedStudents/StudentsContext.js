@@ -107,10 +107,10 @@ class StudentsProviderComponent extends Component{
 
     fetchStudents = async (filters, moreStudents = false, showHired= false)=>{
             let applicants = []
-            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Applied').limit(10);
+            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Applied').limit(20);
             console.log(this.props.hired, "showHired")
             if(this.props.hired){
-                query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Hired').limit(10);
+                query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', 'Hired').limit(20);
             }
             for (let filterKey in filters){
                 if(filters[filterKey]!='All' && filters[filterKey]!='' && filterKey!='selectedCollegeData'){
@@ -150,10 +150,10 @@ class StudentsProviderComponent extends Component{
                 console.log(applicant);
             });
             if(moreStudents){
-                this.setState({applicants:[...this.state.applicants, ...applicants], studentLoading:false, hasMore: (applicants.length==10)},()=>this.getImages(applicants))
+                this.setState({applicants:[...this.state.applicants, ...applicants], studentLoading:false, hasMore: (applicants.length==20)},()=>this.getImages(applicants))
             }
             else{
-                this.setState({applicants: applicants, studentLoading: false, hasMore: (applicants.length==10)},()=>this.getImages(applicants));
+                this.setState({applicants: applicants, studentLoading: false, hasMore: (applicants.length==20)},()=>this.getImages(applicants));
             }
             // this.setState({studentLoading: false});
             console.log(applicants, "applicants renewed")

@@ -64,7 +64,13 @@ class AppliedStudents extends Component{
         //     countdata.push(job);
         //     console.log(job);
         // });
-
+        if(res.data.newCount)
+        db.collection('jobs').doc(this.props.computedMatch.params.jobId).collection('count').doc(this.props.computedMatch.params.jobId).update({newCount: 0}).then(()=>{
+            console.log("new count reseted")
+        })
+        else{
+            console.log("New Count Already 0")
+        }
         this.setState({countdata: res.data});
         this.setState({countLoading:false})
     }

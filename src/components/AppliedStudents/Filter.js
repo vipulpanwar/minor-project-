@@ -186,7 +186,7 @@ import { Fragment } from 'react';
     console.log('Filter render');
     return (<div className="filter-container">
         Filters
-        <button className='close-filters-button' onClick={this.props.closeHandler}> <img src={X} /> </button>
+        <button className='close-filters-button' onClick={this.props.closeHandler}> <img src={X} width="10px" /> </button>
         <div>
           {this.props.campus && <FilterTag inputHandler={this?.collegeInputHandler} name="College" selected={this.state.collegeValue} options={this.state.collegeOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.degreeInputHandler} name="Degree" selected={this.state.degreeValue} options={this.state.degreeOptions}/>}

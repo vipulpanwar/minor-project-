@@ -27,10 +27,12 @@
 }
 
 .close-filters-button{
-  display: inline-block;
+  /* display: inline-block; */
   float: right;
   position: relative;
   left: 2px;
+  padding:5px;
+  cursor:pointer;
 }
 
 .filter-tag-container{
