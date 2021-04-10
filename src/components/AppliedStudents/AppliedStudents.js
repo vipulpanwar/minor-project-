@@ -15,7 +15,7 @@ import StudentsCard from './StudentCard';
 import axios from 'axios';
 
 const modalStyle = {
-    maxWidth: 886,
+    maxWidth: 1100,
     margin:'150px 0',
     top:0,
     borderRadius:14,

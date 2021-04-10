@@ -51,9 +51,9 @@ export default class MinimumQualifications extends Component {
                 <div className={styles.Title}>
                     Minimum Qualifications
                 </div>
-                <div className={styles.gridBox}>
-                    {this.props.job.campus && QualificationsRenderer}
-                </div>
+                {this.props.job.campus && <div className={this.props.job.campus?styles.gridBox:null}>
+                    {QualificationsRenderer}
+                </div>}
                 {!this.props.job.campus && <Skills softSkills = {sskills} hardSkills = {hskills} offcampus style={{padding:0, margin:0}}/>}
             </div>
         )

@@ -77,10 +77,11 @@ hr{
 .applicant-info{
   position: relative;
   /* top: 5px; */
-  display: inline-block;
+  /* display: inline-block; */
   margin-left: 32px;
   margin-top: 31px;
-  width: 620px;
+  width: 900px;
+  padding-right: 31px;
   vertical-align: top;
 }
 
@@ -253,7 +254,7 @@ hr{
   display: inline-block;
   overflow: hidden;
   box-sizing: border-box;
-  width: 50%;;
+  width: 50%;
 }
 
 .section-container{
@@ -339,6 +340,7 @@ hr{
   display: inline-block;
   margin-left: 10px;
   width: 300px;
+  vertical-align: top;
 }
 
 .project-title{
@@ -382,12 +384,12 @@ hr{
   display: inline-block;
   margin-left: 14px;
   padding: 2px 6px 2px 6px;
-  position: relative;
-  top: -10px;
 }
 
 .title-date-div{
   display: inline-block;
+  vertical-align: top;
+  padding-top:2px;
 }
 
 .visit-text{
