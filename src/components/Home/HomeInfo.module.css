@@ -82,6 +82,7 @@
     line-height: 17px;
     color: #0075FF;
     vertical-align:middle;
+    cursor:pointer;
 }
 
 .deletejobBox{
@@ -98,6 +99,7 @@
     color: #FF5670;
     vertical-align:middle;
     margin-left:16px;
+    cursor:pointer;
 }
 
 .secondaryBox{

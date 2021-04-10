@@ -11,6 +11,7 @@ import {InputLabel} from '../shared/ui/Input/Input';
 import {StudentsContext} from './StudentsContext';
 import {db} from '../../firebase'
 import { Fragment } from 'react';
+import { CreateToast } from '../../store/actions/alert';
 
  class Filter extends Component{
 
@@ -159,7 +160,13 @@ import { Fragment } from 'react';
   }
 
   skillsInputHandler = (e)=>{
-    this.setState({skillValue : e.target.value});
+    if(this.state.skillValue.length>9){
+      this.props.CreateToast({message:"You can search for more than 10 skills"})
+    }
+    else
+    {
+      this.setState({skillValue : e.target.value});
+    }
   }
 
   applyFiltersHandler = (e)=>{
@@ -209,4 +216,8 @@ import { Fragment } from 'react';
 
 Filter.contextType = StudentsContext;
 
-export default Filter;
+const mapDispatchToProps = (dispatch)=>({
+  createToast: (toast)=>dispatch(CreateToast(toast))
+})
+
+export default connect(null, mapDispatchToProps)(Filter)

@@ -32,7 +32,7 @@ class homeInfo extends Component{
                         </button>
                         <div className = {styles.appliedBox}>
                             <Link to={`jobs/${this.props.job.id}`}>
-                                <span style={{display:'inline-block', marginRight: '11px'}}>{this.props.job?.count || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
+                                <span style={{display:'inline-block', marginRight: '11px', color:'#0075FF'}}>{this.props.job?.count || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
                             </Link>
                         </div>
                     </div>     
