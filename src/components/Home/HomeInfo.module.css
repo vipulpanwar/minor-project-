@@ -105,7 +105,7 @@
 }
 
 .categoryBox{
-    width: 804px;
+    max-width: 804px;
     height: 69px;
     background: #F4F4F6;
     border-radius: 8px;
@@ -152,12 +152,15 @@
     font-size: 14px;
     line-height: 17px;
     color: #232D4C;
+    word-break: break-word;
 }
 
 .descpara{
     font-size: 14px;
     line-height: 17px;
+    word-break: break-word;
     color: #232D4C;
+    padding-right: 20px;
 }
 
 .list{
