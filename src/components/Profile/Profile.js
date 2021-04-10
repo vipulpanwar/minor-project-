@@ -29,6 +29,9 @@ class Profile extends Component {
         about: '',
         phone: '',
         logOutLoading: false,
+        phoneError: '',
+        socialError: {},
+        sizeError: '',
     }
 
     counter = (e)=>{
@@ -90,7 +93,53 @@ class Profile extends Component {
         }
     }
 
+    validURL = (str)=>{
+        var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+          '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+          '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+          '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+          '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+          '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return !!pattern.test(str);
+    }
+
+    validate = () =>{
+        let sizeError = ''
+        let phoneError = ''
+        let flag=0
+        if(isNaN(this.state.size)){
+            flag=1
+            // this.setState({sizeError:'Must be a number'})
+            sizeError = 'Must be a number'
+        }
+        if(isNaN(this.state.phone)){
+            flag=1
+            // this.setState({phoneError:'Must be a number'})
+            phoneError = 'Must be a number'
+        }
+        let socialError = {
+            0:'',
+            1:'',
+            2:'',
+            3:'',
+            4:'',
+        }
+        for(let i=0;i<this.state.count;i++){
+            if(this.state.social_media[i]){
+                if(!this.validURL(this.state.social_media[i])){
+                    flag=1
+                    socialError[i] = 'Must be a link'
+                }
+            }
+        }
+        this.setState({socialError:socialError, phoneError: phoneError, sizeError: sizeError})
+        if(flag==0){
+            this.savechangesHandler()
+        }
+    }
+
     savechangesHandler = async ()=>{
+        // this.validate()
         console.log("saving....")
         this.setState({isLoading: true})
         await db.collection('company').doc(this.props.user.uid).update({size:this.state.size, about:this.state.about, social_media: this.state.social_media, phone: this.state.phone})
@@ -137,7 +186,7 @@ class Profile extends Component {
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<div className={styles.socialContainer} key={i+10}><TextInput width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
+            social.push(<div className={styles.socialContainer} key={i+10}><TextInput errors={this.state.socialError[i]} width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
         }
         let profile = this.props.profile;
         return (
@@ -172,8 +221,8 @@ class Profile extends Component {
                 <div className={styles.title}>Edit Company Details</div>
                 <div className={styles.gridBox}>
                     <div className={styles.leftForm}>
-                        <TextInput change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
-                        <TextInput change={this.phoneChangeHandler} inline width='100%' value={this.state.phone} label="Phone Number"/>
+                        <TextInput errors={this.state.sizeError} change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
+                        <TextInput errors={this.state.phoneError} change={this.phoneChangeHandler} inline width='100%' value={this.state.phone} label="Phone Number"/>
                         <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" elementConfig={{rows:'15'}} textarea label="About"/>
                     </div>
                     <div className={styles.rightForm}>
@@ -184,7 +233,7 @@ class Profile extends Component {
                             {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
                         </div>
                         {/* {!this.state.changed &&<Button width='373px' disabled>Save Changes</Button>} */}
-                        <Button loading={this.state.isLoading} clicked={this.savechangesHandler} disabled={!this.state.changed} primary={this.state.changed}>Save Changes</Button>
+                        <Button loading={this.state.isLoading} clicked={this.validate} disabled={!this.state.changed} primary={this.state.changed}>Save Changes</Button>
                     </div>
                 </div>
                 </div>

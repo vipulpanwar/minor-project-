@@ -12,7 +12,7 @@ class StudentList extends Component{
         <div className={styles.StudentListContainer}>
             {/* { this.props.jobLoading?<Loader color="#232d4c"/>: */}           
             <div className={styles.StudentList}>
-            {mapStudentListToCards(this.context.state.applicants)}
+            {mapStudentListToCards(this.context.state.applicants, this.props)}
             { this.context.state.studentLoading ? mapLoadingStudentList() : null }
             {/* { this.context.state.newStudentsLoading ? mapLoadingStudentList() : null } */}
             </div>
@@ -21,8 +21,8 @@ class StudentList extends Component{
 }
 StudentList.contextType = StudentsContext;
 
-const mapStudentListToCards = (studentList)=>{
-    return studentList.map((student, i)=><StudentCard loaded={true} key={i} student={student}/>)
+const mapStudentListToCards = (studentList, props)=>{
+    return studentList.map((student, i)=>{if(i<props.count.newCount){student.flag='New'} return<StudentCard loaded={true} key={i} student={student}/>})
 }
 
 const mapLoadingStudentList = ()=>{
