@@ -27,9 +27,9 @@ class homeInfo extends Component{
                         <div className = {styles.desc}>{this.props.job?.type} |  {this.props.job?.ctc}  |  {this.formatDate(this.props.job?.deadline)}</div>
                     </div>
                     <div className = {styles.buttonsContainer}>
-                        <button onClick={this.props.deleteJob} className = {styles.deletejobBox}>
+                        {/* <button onClick={this.props.deleteJob} className = {styles.deletejobBox}>
                         Delete Job
-                        </button>
+                        </button> */}
                         <div className = {styles.appliedBox}>
                             <Link to={`jobs/${this.props.job.id}`}>
                                 <span style={{display:'inline-block', marginRight: '11px', color:'#0075FF'}}>{this.props.job?.count || 0} Students Applied </span><img style = {{display:'inline-block'}} src = {ButtonImage}></img>
@@ -46,11 +46,11 @@ class homeInfo extends Component{
                 </div>
                 <div className = {styles.catBox}>
                     <div className = {styles.catTitle}>Job Location:</div>
-                    <div className = {styles.cat}>{this.props.job.drive_loc}</div>
+                    <div className = {styles.cat}>{this.props.job.job_loc}</div>
                 </div>
                 <div className = {styles.catBox}>
                     <div className = {styles.catTitle}>Interview Location:</div>
-                    <div className = {styles.cat}>{this.props.job.job_loc}</div>
+                    <div className = {styles.cat}>{this.props.job.drive_loc}</div>
                 </div>
                 {/* <div className = {styles.catBox}>
                     <div className = {styles.catTitle}>Who Can Apply:</div>
@@ -74,9 +74,9 @@ class homeInfo extends Component{
                 Qualifications:
             </div>
             {this.props.qualifications.map((qual,i)=> <Qualification {...qual} key={i} />)}
-            <Button clicked={this.props.sendInvites} style={{fontSize:14, padding:'9px 19px', width:'unset'}}>
+            {/* <Button clicked={this.props.sendInvites} style={{fontSize:14, padding:'9px 19px', width:'unset'}}>
                 Send Invites To More Colleges
-            </Button>
+            </Button> */}
         </div>:null}
         </div>
     )   

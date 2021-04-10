@@ -166,7 +166,7 @@ class InviteCollegeForm extends Component{
     render(){
         return(
         <Fragment>
-            <TopBar title="Send Invite To More Colleges"/>
+            <TopBar title="Send Invite To More Colleges" close={this.props.close}/>
             <div className={styles.Slide}>
                 <QualInput inviteHandler={this.inviteHandler} deleteHandler={this.deleteInviteHandler} label={`${1}. Qualifications`} {...this.state.form['Qualifications']}/>
             </div>

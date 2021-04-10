@@ -59,9 +59,8 @@ function DetailCard(props){
       <div style={{ position: 'absolute' }}>
           <Modal show={showHomeInfo} style={{ maxHeight:'90vh',overflow:'auto',maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px", }} closeHandler={() => { ToggleHomeInfo(false) }}>
             {/* <HomeInfo qualifications={formatQual(props.job.edu)  deleteJob={()=>{ props.deleteJob(); ToggleHomeInfo(false)}} job={props.job} /> */}
-            { showInviteModal 
-            ? <InviteCollgeForm goBack={()=>setShowInviteModal(false)} close={()=>{ ToggleHomeInfo(false); setShowInviteModal(false)}} job={props.job} qualifications={formatQual(props.job.edu)}/>
-            : <HomeInfo qualifications={formatQual(props.job.edu)} sendInvites={()=>setShowInviteModal(true)}  deleteJob={()=>{ props.deleteJob(); ToggleHomeInfo(false)}} job={props.job} />}
+            {/* <InviteCollgeForm goBack={()=>setShowInviteModal(false)} close={()=>{ ToggleHomeInfo(false); setShowInviteModal(false)}} job={props.job} qualifications={formatQual(props.job.edu)}/> */}
+            <HomeInfo qualifications={formatQual(props.job.edu)} sendInvites={()=>setShowInviteModal(true)}  deleteJob={()=>{ props.deleteJob(); ToggleHomeInfo(false)}} job={props.job} />
           </Modal>
       </div>
       <CSSTransition appear unmountOnExit in={Boolean(props.job.newCount)} timeout={500} 

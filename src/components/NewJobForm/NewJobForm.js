@@ -14,6 +14,7 @@ class NewJobForm extends React.Component{
             text:"Next",
             icon:"",
         },
+        loading:false,
         showBack:false,
         open:false,
         form : {
@@ -48,9 +49,34 @@ class NewJobForm extends React.Component{
                 "Job Category":{ 
                     value:"Information Technology", 
                     elementConfig:{
-                        options:["Information Technology", "Human Resources", "Mazdoori"]
+                        options:[
+                        "Aerospace",
+                        "Transport",
+                        "Information Technology",
+                        "Telecommunication",
+                        "Human Resources" ,
+                        "Agriculture",
+                        "Construction",
+                        "Education and Edtech",
+                        "Pharmaceutical" ,
+                        "Food" ,
+                        "Health Care",
+                        "Hospitality" ,
+                        "Entertainment" ,
+                        "Media and News" ,
+                        "Energy" ,
+                        "Manufacturing" ,
+                        "Mining",
+                        "Sales and Marketing",
+                        "Operations",
+                        "Finance and Accounting",
+                        "Legal",
+                        "Production and Inventory",
+                        "Research and Development",
+                        "Purchase",
+                        "Administration"]
                     },
-                    elementType:"select",
+                    elementType:"dropdown",
                     name:'category', validation:"required"},
                 "Deadline":{value:'', elementType:'input', name:'deadline' ,validation:"required future",
                 elementConfig:{
@@ -127,6 +153,7 @@ class NewJobForm extends React.Component{
                     elementConfig:{ rows:5},
                     name:'schedule',
                     validation:"required",
+                    limit:1000,
                 },
                 "Job Description":{
                     value:"",
@@ -134,6 +161,7 @@ class NewJobForm extends React.Component{
                     elementConfig:{ rows:10},
                     name:'desc',
                     validation:"required",
+                    limit:4000,
                 }
             },
             "2-open":{
@@ -143,6 +171,7 @@ class NewJobForm extends React.Component{
                     elementConfig:{ rows:5},
                     name:'schedule',
                     validation:"required",
+                    limit:1000,
                 },
                 "Job Description":{
                     value:"",
@@ -150,6 +179,7 @@ class NewJobForm extends React.Component{
                     elementConfig:{ rows:10},
                     name:'desc',
                     validation:"required",
+                    limit:4000
                 },
             },
             "3-open":{
@@ -267,7 +297,10 @@ class NewJobForm extends React.Component{
 
     inputChangeHandler=(e,step, label)=>{
         let inputState = {...this.state.form[step][label], value: e.target.value};
-
+        if( e.target.value.length > inputState.limit)
+        {
+            inputState.value = inputState.value.slice(0, inputState.limit)
+        }
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], [label]:inputState}}})
         console.log(e.target.value, label, step)
     }
@@ -361,6 +394,8 @@ class NewJobForm extends React.Component{
     }
     
     async createJob(){
+
+        if(this.state.loading) return;
         let job ={};
         let form = {...this.state.form};
         let open = this.state.form["1"]["Job Type"].value =="Off Campus";
@@ -427,9 +462,10 @@ class NewJobForm extends React.Component{
         let uid = `${9999999999999999 - Date.now()}`;
         job['uid'] = uid;
 
-
+        this.setState({loading:true});
         await db.collection('jobs').doc(uid).set(job);
         await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
+        this.setState({loading:false});
         this.props.close();
         this.props.createAlert({code:"success2", title:"Success", subtitle:"Job posted successfully"})
     }
@@ -457,7 +493,7 @@ class NewJobForm extends React.Component{
                 {Slide}
                 <div className={styles.ButtonTray}>
                     {this.state.showBack?<Button clicked={this.backButtonHandler} style={{width:"unset"}}>Go Back</Button>:null}
-                    <Button clicked={this.nextButtonHandler} style={{width:"unset"}} primary>{this.state.nextButton.text}</Button>
+                    <Button loading={this.state.loading} clicked={this.nextButtonHandler} style={{width:"unset"}} primary>{this.state.nextButton.text}</Button>
                 </div>
             </div>)
     }
