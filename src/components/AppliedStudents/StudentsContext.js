@@ -118,7 +118,8 @@ class StudentsProviderComponent extends Component{
                         query = query.where(`edu.${filters.degree}.${filterKey}`, '==', filters[filterKey])
                     }
                     else if(filterKey=="skillValue"){
-                        query = query.where('skillKey', 'array-contains-any', filters[filterKey])
+                        query = query.where('skillkey', 'array-contains-any', filters[filterKey])
+                        console.log(filters[filterKey])
                     }
                     else{
                         query = query.where(filterKey, '==', filters[filterKey])

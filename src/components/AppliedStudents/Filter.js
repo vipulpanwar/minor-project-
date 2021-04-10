@@ -6,8 +6,11 @@ import FilterMultiTag from './FilterMultiTag.js';
 import Button from '../shared/ui/Button/Button.js';
 import {connect} from 'react-redux';
 import { ApplyFilters as ApplyFiltersAction} from '../../store/actions/jobs';
+import SkillInput from '../shared/Skills/SkillInput';
+import {InputLabel} from '../shared/ui/Input/Input';
 import {StudentsContext} from './StudentsContext';
 import {db} from '../../firebase'
+import { Fragment } from 'react';
 
  class Filter extends Component{
 
@@ -45,7 +48,7 @@ import {db} from '../../firebase'
         tagValue : this.context.state.filters.flag,
         collegeValue : this.context.state.filters.collegeid,
         selectedCollegeData : this.context.state.filters.selectedCollegeData,
-
+        skillValue: this.context.state.filters.skillValue,
         degreeOptions: [...options.degreeOptions],
         branchOptions: [...options.branchOptions],
         collegeOptions: [...options.collegeOptions],
@@ -155,8 +158,8 @@ import {db} from '../../firebase'
     }
   }
 
-  skillsInputHandler = (skills)=>{
-    this.setState({skillValue : skills});
+  skillsInputHandler = (e)=>{
+    this.setState({skillValue : e.target.value});
   }
 
   applyFiltersHandler = (e)=>{
@@ -190,7 +193,12 @@ import {db} from '../../firebase'
           {this.props.campus && <FilterTag inputHandler={this?.courseInputHandler} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.branchInputHandler} name="Branch" selected={this.state.branchValue} options={this.state.branchOptions}/>}
           {/* {this.props.campus && <FilterTag inputHandler={this?.tagInputHandler} name="Tag" selected={this.state.tagValue} options={this.state.tagOptions} />} */}
-          {!this.props.campus && <FilterMultiTag inputHandler={this?.skillsInputHandler} name="Skills" selected={this.state.tagValue} options={this.state.tagOptions} />}
+          {/* {!this.props.campus && <FilterMultiTag inputHandler={this?.skillsInputHandler} name="Skills" selected={this.state.tagValue} options={this.state.tagOptions} />} */}
+          
+          {!this.props.campus && <Fragment>
+              <InputLabel label="Skills" style={{fontSize:14, marginTop:20}}/>
+              <SkillInput value={this.state.skillValue} inputHandler={this.skillsInputHandler} />
+            </Fragment>}
         </div>
         <div className="apply-filter-button-div">
           <Button clicked={this.applyFiltersHandler} primary="Primary" className="apply-filters-button" width="135px" height="50px" style={{fontSize: '14px', fontWeight: '300', letterSpacing: '-0.01em', lineHeight: '17px'}}>Apply Filters</Button>
