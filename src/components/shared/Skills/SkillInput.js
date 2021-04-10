@@ -8,14 +8,14 @@ const SkillInput = (props)=>{
     let skills = props.value;
 
     const setSkills= (newSkills)=>{
-        props.inputHandler({target:{value:newSkills}})
+        props.inputHandler({target:{ value: newSkills }})
     }
 
     const submitHandler = (e)=>{
         e.preventDefault();
         if(!inputVal) return
         let newSkills = new Set(skills);
-        newSkills.add(inputVal);
+        newSkills.add(inputVal.toLowerCase());
         setSkills(Array.from(newSkills));
         setInputVal("")
     }

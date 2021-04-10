@@ -161,7 +161,7 @@ import { CreateToast } from '../../store/actions/alert';
 
   skillsInputHandler = (e)=>{
     if(this.state.skillValue.length>9){
-      this.props.CreateToast({message:"You can search for more than 10 skills"})
+      this.props.createToast({ message: "You can search for more than 10 skills"})
     }
     else
     {
