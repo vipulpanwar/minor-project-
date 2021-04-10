@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styles from './profile.module.css'
 import TextInput from '../CreateAccount/TextInput'
-import Background from './images/backgroundimg.svg'
+import Background from './images/backgroundimg.jpg'
 import Website from './images/website.svg'
 import Location from './images/location.svg'
 import { v4 as uuidv4 } from 'uuid';
@@ -186,7 +186,7 @@ class Profile extends Component {
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<div className={styles.socialContainer} key={i+10}><TextInput errors={this.state.socialError[i]} width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1&&<button key={i+20} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
+            social.push(<div className={styles.socialContainer} key={i+10}><TextInput errors={this.state.socialError[i]} width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1 && 0 && <button key={i+20} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
         }
         let profile = this.props.profile;
         return (

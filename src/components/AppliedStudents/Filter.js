@@ -160,7 +160,7 @@ import { CreateToast } from '../../store/actions/alert';
   }
 
   skillsInputHandler = (e)=>{
-    if(this.state.skillValue.length>9){
+    if(e.target.value.length>9){
       this.props.createToast({message:"You can't search for more than 10 skills"})
     }
     else
@@ -194,7 +194,7 @@ import { CreateToast } from '../../store/actions/alert';
     return (<div className="filter-container">
         Filters
         <button className='close-filters-button' onClick={this.props.closeHandler}> <img src={X} width="10px" /> </button>
-        <div>
+        <div className={this.props.campus?'filter-gridBox':null}>
           {this.props.campus && <FilterTag inputHandler={this?.collegeInputHandler} name="College" selected={this.state.collegeValue} options={this.state.collegeOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.degreeInputHandler} name="Degree" selected={this.state.degreeValue} options={this.state.degreeOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.courseInputHandler} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>}
