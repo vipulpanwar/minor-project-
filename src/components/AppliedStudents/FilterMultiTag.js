@@ -1,24 +1,39 @@
 import React, {Component, createRef} from 'react';
 import SkillTag from '../Resume/SkillTag';
+import { CreateToast } from '../../store/actions/alert';
+import { connect } from 'react-redux';
 import './Filter.css';
 
 class FilterMultiTag extends Component{
     takeInput = (e)=>{
         e.preventDefault();
-        let newSkills = this.state.skills;
-        console.log(e.target.parentElement[0].value);
-        newSkills.push(e.target.parentElement[0].value.toLowerCase());
+        if(!this.state.takeInput) {
+            this.props.createToast({message:"Can not search for more than 10 tags at a time", code:"success2"});
+        }
+        else{
+            let newSkills = this.state.skills;
+            console.log(e.target.parentElement[0].value);
+            if(!newSkills.includes(e.target.parentElement[0].value.toLowerCase())){
+                newSkills.push(e.target.parentElement[0].value.toLowerCase());
+                let takeInput = true
+                if(newSkills.length>9){
+                    takeInput = false
+                }
+                this.setState({skills:newSkills, takeInput:takeInput})
+                console.log("state updated");
+                this.props.inputHandler(newSkills);
+            }
+        }
         e.target.parentElement[0].value=''
-        this.setState({skills:newSkills})
-        console.log("state updated");
-        this.props.inputHandler(newSkills);
     }
 
     tagRemover = (tag)=>{
         let array = this.state.skills
         array.splice(array.indexOf(tag), 1);
         console.log(array.indexOf(tag), tag)
-        this.setState({skills:array});
+        let takeInput = this.state.takeInput
+        if(!takeInput) takeInput = true
+        this.setState({skills:array, takeInput: takeInput});
     }
 
     mapTags = ()=>{
@@ -26,7 +41,8 @@ class FilterMultiTag extends Component{
     }
 
     state = {
-        skills : []
+        skills : [],
+        takeInput: true,
     }
 
     render(){
@@ -46,4 +62,8 @@ class FilterMultiTag extends Component{
 }
 }
 
-export default FilterMultiTag
+const mapDispatchToProps = (dispatch)=>({
+    createToast: (toast)=>dispatch(CreateToast(toast))
+})
+
+export default connect(null, mapDispatchToProps)(FilterMultiTag)
