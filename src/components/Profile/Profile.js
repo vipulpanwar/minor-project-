@@ -107,15 +107,15 @@ class Profile extends Component {
         let sizeError = ''
         let phoneError = ''
         let flag=0
-        if(isNaN(this.state.size)){
-            flag=1
-            // this.setState({sizeError:'Must be a number'})
-            sizeError = 'Must be a number'
-        }
         if(isNaN(this.state.phone)){
             flag=1
             // this.setState({phoneError:'Must be a number'})
             phoneError = 'Must be a number'
+        }
+        if(isNaN(this.state.size)){
+            flag=1
+            // this.setState({sizeError:'Must be a number'})
+            sizeError = 'Must be a number'
         }
         let socialError = {
             0:'',
@@ -186,7 +186,7 @@ class Profile extends Component {
     render() {
         let social = [];
         for(let i=0;i<this.state.count; i++){
-            social.push(<div className={styles.socialContainer} key={i+10}><TextInput errors={this.state.socialError[i]} width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{this.state.count!=1 && false && <button key={i+20} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
+            social.push(<div className={styles.socialContainer} key={i+10}><TextInput errors={this.state.socialError[i]} width="100%" inline change={(e)=>this.socialchangeHandler(i,e)} key={i} value={this.state.social_media[i]} label="Social Media Links"/>{false && this.state.count!=1 && <button key={i+20} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}</div>)
         }
         let profile = this.props.profile;
         return (

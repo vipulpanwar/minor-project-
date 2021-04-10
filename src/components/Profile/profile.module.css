@@ -22,7 +22,7 @@
 
 .socialContainer{
     display:grid;
-    grid-template-columns: 1fr 20px;
+    /* grid-template-columns: 1fr 20px; */
 }
 
 .rightcontainer{
