@@ -173,10 +173,21 @@
 .Qualifications{
     margin-top:20px;
     padding: 0 20px;
+    margin-bottom: 20px;
 }
 
+.Qual{
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
 .College{
+    font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    color: #232D4C;
+    margin-bottom: 2px;
+}
+
+.CourseList{
+    font-size: 14px;
+    line-height: 140.2%;
 }

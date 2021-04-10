@@ -10,6 +10,7 @@ import CardSkeletonLoader from './CardSkeletonLoader';
 import blueNextButton from '../../assets/icons/next-button.svg';
 import moment from 'moment';
 import { CSSTransition } from "react-transition-group";
+import InviteCollgeForm from './InviteCollege';
 
 const style={
   background:`url(${BgImage})`,
@@ -38,6 +39,7 @@ const LoadingCard = () => (
 function DetailCard(props){
 
   const [showHomeInfo, ToggleHomeInfo] = useState(false);
+  const [showInviteModal, setShowInviteModal] = useState(false);
   let job = props.job;
   let history = useHistory();
   const goto = (url, disabled)=>{
@@ -56,7 +58,10 @@ function DetailCard(props){
     <div className={styles.CardContainer}>
       <div style={{ position: 'absolute' }}>
           <Modal show={showHomeInfo} style={{ maxHeight:'90vh',overflow:'auto',maxWidth: 840, background: "#FFFFFF", boxShadow: "0px 26px 24px -20px rgba(0, 0, 0, 0.25)", borderRadius: "14px", }} closeHandler={() => { ToggleHomeInfo(false) }}>
-            <HomeInfo  deleteJob={()=>{ props.deleteJob(); ToggleHomeInfo(false)}} job={props.job} />
+            {/* <HomeInfo qualifications={formatQual(props.job.edu)  deleteJob={()=>{ props.deleteJob(); ToggleHomeInfo(false)}} job={props.job} /> */}
+            { showInviteModal 
+            ? <InviteCollgeForm goBack={()=>setShowInviteModal(false)} close={()=>{ ToggleHomeInfo(false); setShowInviteModal(false)}} job={props.job} qualifications={formatQual(props.job.edu)}/>
+            : <HomeInfo qualifications={formatQual(props.job.edu)} sendInvites={()=>setShowInviteModal(true)}  deleteJob={()=>{ props.deleteJob(); ToggleHomeInfo(false)}} job={props.job} />}
           </Modal>
       </div>
       <CSSTransition appear unmountOnExit in={Boolean(props.job.newCount)} timeout={500} 
@@ -109,6 +114,25 @@ const formatDate = (timestamp)=>{
   var t = new Date(1970, 0, 1);
   let dateTime = t.setSeconds(timestamp.seconds);
   return moment(dateTime).format('DD MMM\'YY');
+}
+
+const formatQual = (edu)=>{
+  let formatedEdu = [];
+  if(!edu) return null;
+ Object.keys(edu).forEach(qual=>{
+      let [college,degree,course,branch,year] = qual.split('#');
+      let index = formatedEdu.findIndex(fQual=> fQual.course == course && fQual.degree == degree && fQual.college == college);
+      if(index>-1)
+      {
+          if(formatedEdu[index].branch.includes(branch)==false)
+              formatedEdu[index].branch.push(branch);
+          if(formatedEdu[index].year.includes(year)==false)
+              formatedEdu[index].year.push(year);
+      }
+      else
+          formatedEdu.push({college, degree, course, branch:[branch], year:[year]})
+  });
+  return formatedEdu
 }
 
 export default Card;

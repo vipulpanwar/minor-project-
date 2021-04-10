@@ -89,7 +89,7 @@ const mapAccomplishmentToInfo = (accomplishment)=>{
 const formatDate = (timestamp)=>{
   var t = new Date(1970, 0, 1);
   let dateTime = t.setSeconds(timestamp.seconds);
-  if(timestamp.seconds==4102425000)
+  if(timestamp == null || timestamp.seconds==4102425000)
     return "Present";
   else
     // return moment(dateTime).format('Do MMM YYYY')

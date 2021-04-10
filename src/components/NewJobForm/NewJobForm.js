@@ -311,6 +311,7 @@ class NewJobForm extends React.Component{
             errors.push("Invalid Url");
         return errors;
     }
+
     validURL=(str)=> {
         var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
           '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -413,17 +414,17 @@ class NewJobForm extends React.Component{
                 recipients.add(college);
             })
             job['recipient'] = {}
-            job['company'] = this.props.profile.name;
+            
             Array.from(recipients).forEach(college=> {job['recipient'][college]= "pending"});
         }
-
+        job['company'] = this.props.profile.name;
         job['status'] = true
         job['easy_apply'] = this.state.form['1']['Easy Apply'].value =="Ensvee" ? true : false; 
         job['creatorid'] = this.props.user.uid;
         job['created'] = new Date();
         job['deadline'] = new Date(job['deadline']);
         job['placed'] = false
-        let uid = `${Date.now()}`;
+        let uid = `${9999999999999999 - Date.now()}`;
         job['uid'] = uid;
 
 
@@ -457,7 +458,6 @@ class NewJobForm extends React.Component{
                 <div className={styles.ButtonTray}>
                     {this.state.showBack?<Button clicked={this.backButtonHandler} style={{width:"unset"}}>Go Back</Button>:null}
                     <Button clicked={this.nextButtonHandler} style={{width:"unset"}} primary>{this.state.nextButton.text}</Button>
-
                 </div>
             </div>)
     }
