@@ -13,11 +13,11 @@ export default (props)=>{
     return(
       <div className="section-section">
             <div className="project">
-                {(props.type=="Experience")?<div className="experience-pic"><img className="experience-img" src={ExperiencePic} /></div>:null}
-                {(props.type=="Education")?<div className="education-pic"><img className="education-img" src={EducationPic} /></div>:null}
-                {(props.type=="Projects")?<div className="project-pic"><img className="project-img" src={ProjectPic}  /></div>:null}
-                {(props.type=="Accomplishments")?<div className="accomplishments-pic"><img className="project-img" src={AccomplishmentsPic}  /></div>:null}
-                {(props.type=="Courses")?<div className="courses-pic"><img className="project-img" src={CoursesPic}  /></div>:null}
+                {(props.type=="Experience")?<div className="experience-pic"><img width="22px" className="experience-img" src={ExperiencePic} /></div>:null}
+                {(props.type=="Education")?<div className="education-pic"><img width="25px" className="education-img" src={EducationPic} /></div>:null}
+                {(props.type=="Projects")?<div className="project-pic"><img width="20px" className="project-img" src={ProjectPic}  /></div>:null}
+                {(props.type=="Accomplishments")?<div className="accomplishments-pic"><img width="15px" className="course-img" src={AccomplishmentsPic}  /></div>:null}
+                {(props.type=="Courses")?<div className="courses-pic"><img width="18px" className="course-img" src={CoursesPic}  /></div>:null}
               <div className="project-name">
                 <div className="title-date-div">
                   <p className="project-title">{props.info.title}</p>

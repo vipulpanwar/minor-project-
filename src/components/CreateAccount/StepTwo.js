@@ -76,6 +76,7 @@ class StepTwo extends Component {
         if(this.state.loading)
         {
             this.props.createToast({message:'Please Wait'})
+            console.log("waiting")
         }    
         else
         {

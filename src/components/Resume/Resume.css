@@ -255,6 +255,7 @@ hr{
   overflow: hidden;
   box-sizing: border-box;
   width: 50%;
+  vertical-align: top;
 }
 
 .section-container{
@@ -265,8 +266,8 @@ hr{
   /* font-family: SF Pro Display; */
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 16px;
+  line-height: 18.5px;
   letter-spacing: -0.01em;
   color: #9196A5;
   padding-bottom: 5px;
@@ -278,8 +279,8 @@ hr{
 }
 
 .project-pic{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background: #daf7f0;
   /* opacity: 0.2; */
   border-radius: 4px;
@@ -287,8 +288,8 @@ hr{
 }
 
 .courses-pic{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background: #fdedd3;
   /* opacity: 0.2; */
   border-radius: 4px;
@@ -296,8 +297,8 @@ hr{
 }
 
 .accomplishments-pic{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background: #e1edfa;
   /* opacity: 0.2; */
   border-radius: 4px;
@@ -305,8 +306,8 @@ hr{
 }
 
 .education-pic{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background: #ffe9e9;
   /* opacity: 0.2; */
   border-radius: 4px;
@@ -314,16 +315,20 @@ hr{
 }
 
 .experience-pic{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background: #ead2ff;
   /* opacity: 0.2; */
   border-radius: 4px;
   display: inline-block;
 }
 
+.course-img{
+  margin: 5px 0px 7px 9px;
+}
+
 .project-img{
-  margin: 7px 8.19px 7px 8px;
+  margin: 6px 0 0 7px;
 }
 
 .education-img{
@@ -331,7 +336,8 @@ hr{
 }
 
 .experience-img{
-  margin: 9.5px;
+  /* margin: 9.5px; */
+  margin: 6px 0 0 7px;
 }
 
 .project-name{
@@ -339,7 +345,7 @@ hr{
   top: -2px;
   display: inline-block;
   margin-left: 10px;
-  width: 300px;
+  width: 90%;
   vertical-align: top;
 }
 
@@ -347,10 +353,10 @@ hr{
 /* font-family: SF Pro Display; */
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 16px;
+  line-height: 18.5px;
   color: #000000;
-  max-width: 230px;
+  /* max-width: 230px; */
   overflow-wrap: break-word;
 }
 
@@ -358,19 +364,19 @@ hr{
   /* font-family: SF Pro Display; */
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 15px;
+  line-height: 17.5px;
   color: #969BA9;
   text-transform: capitalize;
-  max-width: 300px;
+  /* max-width: 300px; */
 }
 
 .project-description{
   /* font-family: SF Pro Display; */
-  font-style: italic;
+  /* font-style: italic; */
   font-weight: normal;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 14px;
+  line-height: 20.88px;
   text-transform: lowercase;
   margin-top:8px;
   color: #9196A5;
