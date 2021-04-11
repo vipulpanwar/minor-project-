@@ -22,7 +22,7 @@ class StudentList extends Component{
 StudentList.contextType = StudentsContext;
 
 const mapStudentListToCards = (studentList, props)=>{
-    return studentList.map((student, i)=>{if(i<props.count.newCount){student.flag='New'} return<StudentCard loaded={true} key={i} student={student}/>})
+    return studentList.map((student, i)=>{if(i<props.count.newCount&&student.flag=='new'){student.flag='New'} return<StudentCard loaded={true} key={i} student={student}/>})
 }
 
 const mapLoadingStudentList = ()=>{

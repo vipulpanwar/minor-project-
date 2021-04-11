@@ -29,6 +29,7 @@ import { CreateToast } from '../../store/actions/alert';
     tagValue: 'All',
 
     collegeOptions:['All', this.props.job.recipient ? Object.keys(this.props.job.recipient):null],
+    collegeOptions: ['All'],
     collegeValue: 'All',
 
     skillValue:[],
@@ -52,7 +53,7 @@ import { CreateToast } from '../../store/actions/alert';
         skillValue: this.context.state.filters.skillValue,
         degreeOptions: [...options.degreeOptions],
         branchOptions: [...options.branchOptions],
-        // collegeOptions: [...options.collegeOptions],
+        collegeOptions: [...options.collegeOptions],
         courseOptions: [...options.courseOptions],
       })
       // let colleges = []

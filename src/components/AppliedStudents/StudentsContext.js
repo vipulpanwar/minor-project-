@@ -65,14 +65,25 @@ class StudentsProviderComponent extends Component{
         if(newflag==findingstudent.flag){
             return 0
         }
-        await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({flag:newflag});
-        console.log(newflag);
-        let updatingstudent = {...findingstudent}
-        updatingstudent.flag = newflag;
-        let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
-        let applicantsCopy = [...this.state.applicants]
-        applicantsCopy[index] = updatingstudent;
-        this.setState({applicants:applicantsCopy})
+        else{
+            try{
+                await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({flag:newflag});
+                console.log(newflag);
+                let updatingstudent = {...findingstudent}
+                updatingstudent.flag = newflag;
+                let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
+                let applicantsCopy = [...this.state.applicants]
+                console.log(applicantsCopy, "applicantsCopy")
+                console.log(index, "index")
+                applicantsCopy[index] = updatingstudent;
+                console.log(applicantsCopy, "New Copy")
+                this.setState({applicants:applicantsCopy})
+            }
+            catch(error){
+                console.log(error)
+                this.props.createToast({message:"Something Went Wrong"})
+            }
+        }   
     }
 
     updatestatus = async (studentId, newstatus, callback=()=>{})=>{
