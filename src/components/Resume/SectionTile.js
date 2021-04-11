@@ -13,6 +13,7 @@ export default (props)=>{
     return(
       <div className="section-section">
             <div className="project">
+              <div className="project-name-flexbox">
                 {(props.type=="Experience")?<div className="experience-pic"><img width="22px" className="experience-img" src={ExperiencePic} /></div>:null}
                 {(props.type=="Education")?<div className="education-pic"><img width="25px" className="education-img" src={EducationPic} /></div>:null}
                 {(props.type=="Projects")?<div className="project-pic"><img width="20px" className="project-img" src={ProjectPic}  /></div>:null}
@@ -27,6 +28,7 @@ export default (props)=>{
                   </p>
                 </div>
                 {props.info.link ? <a href={props.info.link} className="visit-link-button"><span className="visit-text">Visit Link</span></a> : null}
+              </div>
               </div>
               {
                 props.info.description ?
