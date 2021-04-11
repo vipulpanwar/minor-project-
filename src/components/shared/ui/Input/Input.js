@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Input.module.css";
 import Dropdown from '../DropDown/Dropdown';
-
+import {auth} from '../../../../firebase';
 
 export const FloatingInput = ({ inputType, value, label, elementConfig, ...props }) => {
   let inputElement = "";

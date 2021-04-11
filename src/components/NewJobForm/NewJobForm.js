@@ -1,12 +1,13 @@
 import React from 'react';
 import Button from '../shared/ui/Button/Button';
 import styles from './NewJobForm.module.css';
-import {CreateAlert} from '../../store/actions/alert';
+import {CreateAlert, CreateToast} from '../../store/actions/alert';
 
 import {Slide1,TwoColSlide, OneColSlide, QualSlide, Slide2Open, SkillSlide} from './Slides';
 
-import {db} from '../../firebase';
+import {auth, db} from '../../firebase';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 class NewJobForm extends React.Component{
     state = {
@@ -479,11 +480,21 @@ class NewJobForm extends React.Component{
         job['uid'] = uid;
 
         this.setState({loading:true});
-        await db.collection('jobs').doc(uid).set(job);
-        await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
-        this.setState({loading:false});
+        try{
+            await db.collection('jobs').doc(uid).set(job);
+            await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
+            
+            let token= await auth.currentUser.getIdToken();
+            await axios.post("https://us-central1-oneios.cloudfunctions.net/app/job_created/",{token, id: uid});
+    
+            this.setState({loading:false});
+            this.props.createAlert({code:"success2", title:"Success", subtitle:"Job posted successfully"})
+        }
+        catch(error){
+            console.log(error);
+            this.props.createToast({code:"failure", message:"Something went wrong while creating a job posting"})
+        }
         this.props.close();
-        this.props.createAlert({code:"success2", title:"Success", subtitle:"Job posted successfully"})
     }
 
 
@@ -529,7 +540,8 @@ const mapStateToProps = (state)=>({
     profile: state.auth.profile,
   })
 const mapDispatchToProps = (disptach)=>({
-    createAlert : (alert)=>disptach(CreateAlert(alert))
+    createAlert : (alert)=>disptach(CreateAlert(alert)),
+    createToast : (toast)=>disptach(CreateToast(toast)),
 })
   
   export default connect(mapStateToProps, mapDispatchToProps) (NewJobForm);
