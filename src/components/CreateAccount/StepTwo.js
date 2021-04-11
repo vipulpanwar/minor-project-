@@ -5,11 +5,14 @@ import TextInput from './TextInput'
 import logoinput from './images/inputlogo.svg'
 import { CreateAccountContext } from './CreateAccountContext'
 import Sidepanel from './Sidepanel'
+import { CreateToast } from '../../store/actions/alert';
+import {connect} from 'react-redux';
 import Button from '../shared/ui/Button/Button'
 import { Input, InputLabel } from '../shared/ui/Input/Input'
 
 class StepTwo extends Component {
     state={
+        loading:false,
         count:1,
         form: {
             founded_in: '',
@@ -70,82 +73,90 @@ class StepTwo extends Component {
 
     createaccount =(e)=>{
         e.preventDefault();
-        let error = {sizeError:'',
-            founded_inError:'',
-            phoneError:'',
-            socialError:{
+        if(this.state.loading)
+        {
+            this.props.createToast({message:'Please Wait'})
+        }    
+        else
+        {
+            this.setState({loading:true})
+            let error = {sizeError:'',
+                founded_inError:'',
+                phoneError:'',
+                socialError:{
+                    0:'',
+                    1:'',
+                    2:'',
+                    3:'',
+                    4:'',
+                }
+            }
+            // this.setState({error:error})
+            let flag=0;
+            if(!this.state.form.size){
+                flag = 1
+                error.sizeError = "Required"
+            }
+            else if(isNaN(this.state.form.size)){
+                // alert("size must be a number")
+                flag=1
+                // this.setState({sizeError: "Must be a number"})
+                error.sizeError = "Must be a number"
+            }
+            if(!this.state.form.founded_in){
+                flag=1
+                error.founded_inError = "Required"
+            }
+            else if(isNaN(this.state.form.founded_in)){
+                // alert("Foundation Year must be a number");
+                flag=1
+                // this.setState({founded_inError: "Must be a number"})
+                error.founded_inError = "Must be a number"
+
+            }
+
+            if(!this.state.form.phone){
+                flag=1
+                error.phoneError = "Required"
+            }
+            else if(isNaN(this.state.form.phone)){
+                // alert("Phone number must be a number");
+                flag=1
+                // this.setState({phoneError: "Must be a number"})
+                error.phoneError = "Must be a number"
+            }else if(this.state.phone>10000000000000){
+                flag = 1
+                error.phoneError = 'Must be a number less than 13 digits'
+            }
+            let socialerror={
                 0:'',
                 1:'',
                 2:'',
                 3:'',
                 4:'',
             }
-        }
-        // this.setState({error:error})
-        let flag=0;
-        if(!this.state.form.size){
-            flag = 1
-            error.sizeError = "Required"
-        }
-        else if(isNaN(this.state.form.size)){
-            // alert("size must be a number")
-            flag=1
-            // this.setState({sizeError: "Must be a number"})
-            error.sizeError = "Must be a number"
-        }
-        if(!this.state.form.founded_in){
-            flag=1
-            error.founded_inError = "Required"
-        }
-        else if(isNaN(this.state.form.founded_in)){
-            // alert("Foundation Year must be a number");
-            flag=1
-            // this.setState({founded_inError: "Must be a number"})
-            error.founded_inError = "Must be a number"
-
-        }
-
-        if(!this.state.form.phone){
-            flag=1
-            error.phoneError = "Required"
-        }
-        else if(isNaN(this.state.form.phone)){
-            // alert("Phone number must be a number");
-            flag=1
-            // this.setState({phoneError: "Must be a number"})
-            error.phoneError = "Must be a number"
-        }else if(this.state.phone>10000000000000){
-            flag = 1
-            error.phoneError = 'Must be a number less than 13 digits'
-        }
-        let socialerror={
-            0:'',
-            1:'',
-            2:'',
-            3:'',
-            4:'',
-        }
-        for(let i=0;i<this.state.count;i++){
-            if(this.state.form.social_media[i]){
-                if(!this.validURL(this.state.form.social_media[i])){
-                    socialerror[i] = "Must be a link"
+            for(let i=0;i<this.state.count;i++){
+                if(this.state.form.social_media[i]){
+                    if(!this.validURL(this.state.form.social_media[i])){
+                        socialerror[i] = "Must be a link"
+                    }
                 }
             }
-        }
 
-        if(!this.state.form.about){
-            flag=1
-            error.aboutError = "Required"
-        }
-        // this.setState({socialError: socialerror})
-        error.socialError = socialerror
-        if(flag==0){
-            console.log(this.state.form, "final form")
-            let form = this.state.form
-            this.context.stepTwoHandler(form)
-        }
-        else{
-            this.setState({error:error})
+            if(!this.state.form.about){
+                flag=1
+                error.aboutError = "Required"
+            }
+            // this.setState({socialError: socialerror})
+            error.socialError = socialerror
+            if(flag==0){
+                console.log(this.state.form, "final form")
+                let form = this.state.form
+                this.context.stepTwoHandler(form)
+            }
+            else{
+                this.setState({error:error})
+            }
         }
     }
 
@@ -199,7 +210,7 @@ class StepTwo extends Component {
                                     <Input errors={this.state.error.aboutError} elementConfig={{rows:'6'}} style={{marginBottom:'24px', height:'131px'}} limit="1000" placeholder="Tell Us About Your Company" elementType="textarea" label="About" inputHandler={(e)=>this.inputHandler('about',e)}></Input>
                                 </div>
                             </div>
-                                {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone && <Button style={{marginTop:'20px'}} clicked={this.createaccount} primary width="100%">Create Account</Button>}
+                                {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone && <Button style={{marginTop:'20px'}} loading={this.state.loading} clicked={this.createaccount} primary width="100%">Create Account</Button>}
                                 {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone) && <Button style={{marginTop:'20px'}} looksDisabled clicked={this.createaccount} width="100%">Create Account</Button>}
                         </div>
                     </form>
@@ -211,4 +222,9 @@ class StepTwo extends Component {
 
 StepTwo.contextType = CreateAccountContext;
 
-export default StepTwo
+
+const mapDispatchToProps = (dispatch)=>({
+    createToast: (toast)=>dispatch(CreateToast(toast))
+})
+
+export default connect(null, mapDispatchToProps)(StepTwo)
