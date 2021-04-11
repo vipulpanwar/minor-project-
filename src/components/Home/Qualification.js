@@ -15,7 +15,7 @@ export default class Qualification extends Component {
                     {(this.props.degree=="bachelors" || this.props.degree=='phd') && <img src={bachelors} style={{float:'left', paddingRight:'14px'}}/>}
                     {(this.props.degree=="masters"|| this.props.degree=='hsc' ) && <img src={masters} style={{float:'left', paddingRight:'14px'}}/>}
                     <div className={styles.degreeContainer}>
-                        <div className={styles.degreeTitle}>{this.props.degree}</div>
+                        {this.props.degree=="ssc"||this.props.degree=="hsc" ?<div className={styles.degreeTitleCap}>{this.props.degree}</div>:<div className={styles.degreeTitle}>{this.props.degree}</div>}
                         <div className={styles.percent}>{this.props.percent}%</div>
                     </div>
                 </div>

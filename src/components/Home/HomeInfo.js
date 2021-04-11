@@ -39,45 +39,45 @@ class homeInfo extends Component{
                 </div>
             </div>
             <div className = {styles.secondaryBox}>
-            <div className = {styles.categoryBox}>
-                <div className = {styles.catBox}>
-                    <div className = {styles.catTitle}>Job Category:</div>
-                    <div className = {styles.cat}>{this.props.job.category}</div>
+                <div className = {styles.categoryBox}>
+                    <div className = {styles.catBox}>
+                        <div className = {styles.catTitle}>Job Category:</div>
+                        <div className = {styles.cat}>{this.props.job.category}</div>
+                    </div>
+                    <div className = {styles.catBox}>
+                        <div className = {styles.catTitle}>Job Location:</div>
+                        <div className = {styles.cat}>{this.props.job.job_loc}</div>
+                    </div>
+                    <div className = {styles.catBox}>
+                        <div className = {styles.catTitle}>Interview Location:</div>
+                        <div className = {styles.cat}>{this.props.job.drive_loc}</div>
+                    </div>
+                    {/* <div className = {styles.catBox}>
+                        <div className = {styles.catTitle}>Who Can Apply:</div>
+                        <div className = {styles.cat}>{this.props.job.placed?"All":"Unplaced"}</div>
+                    </div> */}
                 </div>
-                <div className = {styles.catBox}>
-                    <div className = {styles.catTitle}>Job Location:</div>
-                    <div className = {styles.cat}>{this.props.job.job_loc}</div>
+            </div>
+            <ThirdBox job={this.props.job}/>
+            <div style = {{paddingLeft:"18px", paddingTop:"18px"}}>
+                <div className = {styles.catTitle}>
+                    Schedule:
                 </div>
-                <div className = {styles.catBox}>
-                    <div className = {styles.catTitle}>Interview Location:</div>
-                    <div className = {styles.cat}>{this.props.job.drive_loc}</div>
+                <div className = {styles.descpara}>
+                {/* 11:00 AM - Apptitude    |    12:00 PM - GD    |    5:00 PM - PI */}
+                {this.props.job.schedule}
                 </div>
-                {/* <div className = {styles.catBox}>
-                    <div className = {styles.catTitle}>Who Can Apply:</div>
-                    <div className = {styles.cat}>{this.props.job.placed?"All":"Unplaced"}</div>
-                </div> */}
             </div>
-        </div>
-        <ThirdBox job={this.props.job}/>
-        <div style = {{paddingLeft:"18px", paddingTop:"18px"}}>
-            <div className = {styles.catTitle}>
-                Schedule:
-            </div>
-            <div className = {styles.descpara}>
-            {/* 11:00 AM - Apptitude    |    12:00 PM - GD    |    5:00 PM - PI */}
-            {this.props.job.schedule}
-            </div>
-        </div>
-        {this.props.job.edu?
-        <div className={styles.Qualifications}>
-            <div className = {styles.catTitle}>
-                Qualifications:
-            </div>
-            {this.props.qualifications.map((qual,i)=> <Qualification {...qual} key={i} />)}
-            {/* <Button clicked={this.props.sendInvites} style={{fontSize:14, padding:'9px 19px', width:'unset'}}>
-                Send Invites To More Colleges
-            </Button> */}
-        </div>:null}
+            {this.props.job.edu?
+            <div className={styles.Qualifications}>
+                <div className = {styles.catTitle}>
+                    Qualifications:
+                </div>
+                {this.props.qualifications.map((qual,i)=> <Qualification {...qual} key={i} />)}
+                {/* <Button clicked={this.props.sendInvites} style={{fontSize:14, padding:'9px 19px', width:'unset'}}>
+                    Send Invites To More Colleges
+                </Button> */}
+            </div>:null}
         </div>
     )   
   }

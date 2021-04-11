@@ -108,16 +108,16 @@
 
 .categoryBox{
     max-width: 804px;
-    height: 69px;
+    /* height: 69px; */
     background: #F4F4F6;
     border-radius: 8px;
     padding: 14px 16px 14px 16px;
     text-align: left;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .catTitle{
-    height: 17px;
     font-size: 14px;
     line-height: 17px;
     color: #232D4C;
@@ -127,7 +127,7 @@
 
 .catBox{
     margin-right: 57px;
-    display:inline-block;
+    /* display:inline-block; */
 }
 
 .cat{

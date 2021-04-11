@@ -19,8 +19,8 @@ export default class TextInput extends Component {
         return (
             <div className={styles.inputcontainer} style={divstyle}>
                 {/* <p className={styles.label}><InputLabel label={this.props.label} /></p> */}
-                {!this.props.textarea && <Input elementType="input" elementConfig={this.props.elementConfig} label={this.props.label} style={styling} errors={this.props.errors} inputHandler={(e)=>this.props.change(e)} value={this.props.value}></Input>}
-                {this.props.textarea && <Input elementType="textarea" elementConfig={this.props.elementConfig} label={this.props.label} errors={this.props.errors} textarea style={styling} inputHandler={(e)=>this.props.change(e)} value={this.props.value}></Input>}
+                {!this.props.textarea && <Input limit={this.props.limit} placeholder={this.props.placeholder} elementType="input" elementConfig={this.props.elementConfig} label={this.props.label} style={styling} errors={this.props.errors} inputHandler={(e)=>this.props.change(e)} value={this.props.value}></Input>}
+                {this.props.textarea && <Input limit={this.props.limit} placeholder={this.props.placeholder} elementType="textarea" elementConfig={this.props.elementConfig} label={this.props.label} errors={this.props.errors} textarea style={styling} inputHandler={(e)=>this.props.change(e)} value={this.props.value}></Input>}
             </div>
         )
     }

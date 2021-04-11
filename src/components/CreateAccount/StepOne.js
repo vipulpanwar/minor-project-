@@ -181,16 +181,16 @@ class StepOne extends Component {
                     </div>
                     <form>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input style={{marginBottom:'24px'}} errors={this.state.error.nameError} elementType="input" label="Company Name" inputHandler={this.nameinputhandler}></Input>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.error.nameError} limit="200" elementType="input" label="Company Name" inputHandler={this.nameinputhandler}></Input>
                         </div>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input style={{marginBottom:'24px'}} errors={this.state.error.typeError} elementType="input" label="Industry Type" inputHandler={this.typeinputhandler}></Input>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.error.typeError} limit="200" elementType="input" label="Industry Type" inputHandler={this.typeinputhandler}></Input>
                         </div>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
                             <Input style={{marginBottom:'24px'}} errors={this.state.error.websiteError} elementType="input" label="Company Website" inputHandler={this.websiteinputhandler}></Input>
                         </div>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input style={{marginBottom:'24px'}} errors={this.state.error.addressError} elementType="input" label="Company Address" inputHandler={this.addinputhandler}></Input>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.error.addressError} limit="400" elementType="input" label="Company Address" inputHandler={this.addinputhandler}></Input>
                         </div>
                         {!(this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName) &&<Button looksDisabled clicked={this.requiredHandler} width="150px">Next</Button>}
                         {this.state.name && this.state.industry_type && this.state.website && this.state.company_address && this.state.logoName && <Button clicked={this.nextPagehandler} primary width="150px">Next</Button>}

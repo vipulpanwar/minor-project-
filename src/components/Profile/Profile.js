@@ -222,24 +222,23 @@ class Profile extends Component {
                 </div>
                 <SuccessModal />
                 <div className={styles.rightcontainer}>
-                <div className={styles.title}>Edit Company Details</div>
-                <div className={styles.gridBox}>
-                    <div className={styles.leftForm}>
-                        <TextInput errors={this.state.sizeError} change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>
-                        <TextInput errors={this.state.phoneError} change={this.phoneChangeHandler} inline width='100%' value={this.state.phone} label="Phone Number"/>
-                        <TextInput change={this.aboutChangeHandler} inline width='100%' value={this.state.about} height="290px" elementConfig={{rows:'15'}} textarea label="About"/>
-                    </div>
-                    <div className={styles.rightForm}>
-                        <div style={{minHeight:'445px'}}>
-                            {social}
-                            {/* <TextInput inline width='100%' label="Social Media Links"/> */}
-                            {this.socailrender}
-                            {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
+                    <div className={styles.title}>Edit Company Details</div>
+                    <div className={styles.gridBox}>
+                        <div className={styles.leftForm}>
+                            <TextInput errors={this.state.sizeError} limit="200" change={this.sizeChangeHandler} inline width='100%' value={this.state.size} label="Company Size"/>                                <TextInput errors={this.state.phoneError} limit="200" change={this.phoneChangeHandler} inline width='100%' value={this.state.phone} label="Phone Number"/>
+                            <TextInput change={this.aboutChangeHandler} limit="1000" inline width='100%' value={this.state.about} height="290px" placeholder="Tell Us About Your Company" elementConfig={{rows:'15'}} textarea label="About"/>
                         </div>
-                        {/* {!this.state.changed &&<Button width='373px' disabled>Save Changes</Button>} */}
-                        <Button loading={this.state.isLoading} clicked={this.validate} disabled={!this.state.changed} primary={this.state.changed}>Save Changes</Button>
+                        <div className={styles.rightForm}>
+                            <div style={{minHeight:'445px'}}>
+                                {social}
+                                {/* <TextInput inline width='100%' label="Social Media Links"/> */}
+                                {this.socailrender}
+                                {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
+                            </div>
+                            {/* {!this.state.changed &&<Button width='373px' disabled>Save Changes</Button>} */}
+                            <Button loading={this.state.isLoading} clicked={this.validate} disabled={!this.state.changed} primary={this.state.changed}>Save Changes</Button>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         )
