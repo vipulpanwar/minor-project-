@@ -28,7 +28,7 @@ import { CreateToast } from '../../store/actions/alert';
     tagOptions:['All', 'New', 'Excellent', 'Good', 'Average'],
     tagValue: 'All',
 
-    collegeOptions:['All'],
+    collegeOptions:['All', this.props.job.recipient ? Object.keys(this.props.job.recipient):null],
     collegeValue: 'All',
 
     skillValue:[],
@@ -52,7 +52,7 @@ import { CreateToast } from '../../store/actions/alert';
         skillValue: this.context.state.filters.skillValue,
         degreeOptions: [...options.degreeOptions],
         branchOptions: [...options.branchOptions],
-        collegeOptions: [...options.collegeOptions],
+        // collegeOptions: [...options.collegeOptions],
         courseOptions: [...options.courseOptions],
       })
       // let colleges = []
@@ -208,7 +208,7 @@ import { CreateToast } from '../../store/actions/alert';
             </Fragment>}
         </div>
         <div className="apply-filter-button-div">
-          <Button clicked={this.applyFiltersHandler} primary="Primary" className="apply-filters-button" width="135px" height="50px" style={{fontSize: '14px', fontWeight: '300', letterSpacing: '-0.01em', lineHeight: '17px'}}>Apply Filters</Button>
+          <Button clicked={this.applyFiltersHandler} primary="Primary" className="apply-filters-button" width="unset" height="50px" style={{fontSize: '14px', fontWeight: '300', letterSpacing: '-0.01em', lineHeight: '17px'}}>Apply Filters</Button>
         </div>
     </div>)
   }

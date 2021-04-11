@@ -11,6 +11,7 @@ export const Login = (email, password)=>{
         dispatch(LoginStart())
         auth.signInWithEmailAndPassword(email, password)
             .then(async user=>{
+                
                 let token = await auth.currentUser.getIdTokenResult();
                 token.claims.userType = "company";    
                 if(token.claims?.userType === "company")
@@ -49,6 +50,7 @@ export const AuthStateChanged = (user)=>{
         token.claims.userType ="company";              
         if(token.claims?.userType === "company")
         {
+            console.log(await auth.currentUser.getIdToken())
             dispatch(GetCompanyProfile());
             dispatch(AuthStateChangedStart(user));
             let profile = await db.collection('company').doc(user.uid).get();

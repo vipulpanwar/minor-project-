@@ -1,6 +1,7 @@
 import React, {useEffect,useLayoutEffect, useState} from 'react';
 import styles from './BottomNav.module.css';
 import JobIcon from '../../assets/icons/job.svg';
+import HelpIcon from '../../assets/icons/question.svg'
 import ProfileIcon from '../../assets/icons/profile-icon.svg';
 import Plus from '../../assets/icons/plus.svg';
 import {Link, useLocation} from 'react-router-dom';
@@ -63,7 +64,7 @@ const BottomNav = (props)=> {
             </Link>
             <a href="mailto:support@ensvee.com">
                 <div onMouseEnter={()=>HoverStart(1)} onMouseLeave={HoverEnd} className={styles.NavLink}>
-                    <img className={styles.Icon} src={ProfileIcon}/>
+                    <img className={styles.Icon} src={HelpIcon}/>
                     <span>Help</span>
                 </div>
             </a>

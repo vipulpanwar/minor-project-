@@ -98,7 +98,7 @@ class AppliedStudents extends Component{
                 {this.state.countLoading? null :
                 <Fragment>
                     <Modal show={this.state.showFilters} style={Modalstyling} closeHandler={this.toggleFilterHandler}>
-                        <Filters campus={this.state.jobsdata.campus} closeHandler={this.toggleFilterHandler} />
+                        <Filters job={this.state.jobsdata} campus={this.state.jobsdata.campus} closeHandler={this.toggleFilterHandler} />
                     </Modal>
 
                     <Route path={`${this.props.path}/student/:studentId`}  >

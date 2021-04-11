@@ -7,7 +7,7 @@ import QualInput from './QualInput';
 import skillIllus from '../../assets/illustrations/skill_illustration.svg'
 
 const inputStyles={
-    'fontSize':14
+    'fontSize':14,
 }
 
 const linkStyles ={
@@ -45,7 +45,7 @@ export const Slide1 = (props)=>{
                         return <Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>})}
                 </div>
                 <div style={{display:'grid','gridTemplateColumns': 'auto 1fr', gap:20, paddingRight:114}}>
-                    {props.inputs['Job Type'].value=="Off Campus"?<Input label="9. Recive applications by" style={inputStyles} inputHandler={props.easyHandler} {...easyApplyInput}/>:null}
+                    {props.inputs['Job Type'].value=="Off Campus"?<Input label="9. Recive applications at" style={inputStyles} inputHandler={props.easyHandler} {...easyApplyInput}/>:null}
                     {easyApplyInput.value=="External Website"?<Input style={linkStyles} inputHandler={(e)=>props.inputHandler(e,props.step, "Link")} {...linkInput} />:null}
                 </div>
             </div>
@@ -67,16 +67,18 @@ export const TwoColSlide = (props)=>{
 export const SkillSlide = (props)=>{
     
     return (<div className={[styles.Slide,styles.SkillSlide].join(" ")}>
-        <InputLabel label="Skills" {...props.inputs['Skills']}/>
+        <InputLabel label="Skills Required" {...props.inputs['Skills']}/>
+        <p className={styles.SkillsDesc}>We use these skills to find potential candidates for the job</p>
         <NewSkillInput value={props.inputs['Skills'].value} inputHandler={(e)=>props.inputHandler(e, props.step, "Skills")}/>
         {props.inputs['Skills'].value.length===0?<img className={styles.SkillImage} src={skillIllus}/>:null}
+
     </div>)
 }
 
 export const QualSlide = (props)=>{
     return  (<div className={styles.Slide}>
         <QualInput inviteHandler={props.inviteHandler} deleteHandler={props.deleteInviteHandler} label={`${9}. Qualifications`} {...props.inputs['Qualifications']}/>
-        <InputLabel style={{marginTop:20, marginBottom:0}} label="Minimum Percentages"/>
+        <InputLabel style={{marginTop:20, marginBottom:0}} label="Minimum Percentage Required"/>
         <div className={styles.Row}>
             {Object.keys(props.inputs).map((key, i) => {
                 if(key !="Qualifications")

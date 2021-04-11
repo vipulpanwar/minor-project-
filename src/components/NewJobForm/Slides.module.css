@@ -28,3 +28,11 @@
     width: 200px;
     margin:auto;
 }
+
+.SkillsDesc{
+    color: #232D4C;
+    opacity: 0.5;
+    font-size: 14px;
+    margin-top: -7px;
+    margin-bottom: 14px;
+}

@@ -28,7 +28,7 @@ export default class QualInput extends Component{
         yearValue:[],
         edu:{},
 
-        college:'usict',
+        college:'',
     }
 
     componentDidMount(){(async()=>{
@@ -93,7 +93,7 @@ export default class QualInput extends Component{
         console.log("college Changed", college)
         if(college)
         {
-            let collegeDocList = await db.collection('clginfo').where('name', '==', college)
+            let collegeDocList = await db.collection('clginfo').where('collegeid', '==', college)
                 .where('verified', '==', true).get();
             if(!collegeDocList.empty){
                 console.log(collegeDocList)
@@ -105,7 +105,7 @@ export default class QualInput extends Component{
             let degreeOptions = this.getDegreeOptions();
             let courseOptions = this.getCourseOptions();
             let branchOptions = this.getBranchOptions();    
-            this.setState({degreeOptions, courseOptions, branchOptions, degreeValue:"", courseVal:"",branchValue:[], yearValue:[]});        
+            this.setState({college:e.target.value, degreeOptions, courseOptions, branchOptions, degreeValue:"", courseValue:"",branchValue:[], yearValue:[]});        
         });
     }
 

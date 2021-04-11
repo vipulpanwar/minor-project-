@@ -179,6 +179,7 @@ class StudentsProviderComponent extends Component{
             colleges.push(college);
             console.log(college);
     });
+    
     let collegeNames = colleges[0].name
     console.log(collegeNames, "colleges")
     collegeNames.unshift("All")

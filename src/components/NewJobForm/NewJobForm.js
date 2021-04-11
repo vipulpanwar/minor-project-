@@ -25,15 +25,27 @@ class NewJobForm extends React.Component{
                     value:"On Campus", 
                     elementConfig:{
                         name:"position", 
-                        options:["On Campus", "Off Campus"]
+                        options:["Campus", "Off Campus"]
                     },
                     elementType:"radio",
                     skip:true,
                     validation:"required"
                 },
-                "Job Position":{value:"", elementType:"input" , name:'title', validation:"required"},
-                "Job Location": {value:"", elementType:"input", name:'job_loc', validation:"required"},
-                "Interview Location":{ value:"", elementType:"input", name:'drive_loc', validation:"required"},
+                "Job Position":{value:"", elementType:"input" , name:'title', 
+                    elementConfig:{
+                        placeholder:"eg. Software Developer"
+                    },
+                    validation:"required", limit:50},
+                "Job Location": {value:"", elementType:"input", name:'job_loc',limit:20, validation:"required",
+                    elementConfig:{
+                        placeholder:"Enter city name"
+                    }
+                },
+                "Interview Location":{ value:"", elementType:"input", name:'drive_loc', validation:"required", limit:100,
+                    elementConfig:{
+                        placeholder:"Enter complete address"
+                    }    
+                },
                 "Employment Type":{ 
                     value:"", 
                     elementConfig:{
@@ -45,7 +57,11 @@ class NewJobForm extends React.Component{
                     validation:"required"
                 },
                 "Salary": {value:"", elementType:'input' , 
-                        elementConfig:{type:'text'}, name:"ctc", validation:"required"},
+                        elementConfig:{type:'text', placeholder: " eg. 10 LPA, 50K per month"}, 
+                        name:"ctc",
+                        validation:"required",
+                        limit:30
+                    },
                 "Job Category":{ 
                     value:"Information Technology", 
                     elementConfig:{
@@ -78,7 +94,7 @@ class NewJobForm extends React.Component{
                     },
                     elementType:"dropdown",
                     name:'category', validation:"required"},
-                "Deadline":{value:'', elementType:'input', name:'deadline' ,validation:"required future",
+                "Apply Before":{value:'', elementType:'input', name:'deadline' ,validation:"required future",
                 elementConfig:{
                     type:'date'
                 }},
@@ -297,10 +313,10 @@ class NewJobForm extends React.Component{
 
     inputChangeHandler=(e,step, label)=>{
         let inputState = {...this.state.form[step][label], value: e.target.value};
-        if( e.target.value.length > inputState.limit)
-        {
-            inputState.value = inputState.value.slice(0, inputState.limit)
-        }
+        // if( e.target.value.length > inputState.limit)
+        // {
+        //     inputState.value = inputState.value.slice(0, inputState.limit)
+        // }
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], [label]:inputState}}})
         console.log(e.target.value, label, step)
     }
@@ -339,7 +355,7 @@ class NewJobForm extends React.Component{
                 errors.push("Required")
         }
         if(!errors.length && checks.find(sub=> sub=="future") && new Date(input.value) < new Date())
-            errors.push("Date is in past");
+            errors.push("Date must be in future");
         if(!errors.length && checks.find(sub=> sub=="url") && !this.validURL(input.value))
             errors.push("Invalid Url");
         return errors;

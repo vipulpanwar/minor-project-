@@ -43,27 +43,38 @@ export const FloatingInput = ({ inputType, value, label, elementConfig, ...props
   );
 };
 
+const ProcessInput= (e, limit)=>{
+  if( limit && e.target.value.length > limit)
+      e.target.value = e.target.value.slice(0, limit)
+  return e;
+}
 
 export const Input = (props)=>{
+
+  const inputChangeHandler=(e)=>{
+    const newE = ProcessInput(e, props.limit);
+    props.inputHandler(e);
+  }
+
   let inputElement;
   switch(props.elementType){
     case "input":
-      inputElement = <input  className={styles.InputElement} value={props.value} onChange={props.inputHandler} {...props.elementConfig}/>
+      inputElement = <input  className={styles.InputElement} value={props.value} onChange={inputChangeHandler} {...props.elementConfig}/>
       break;
     case "textarea":
-      inputElement = <textarea  className={styles.InputElement} value={props.value} onChange={props.inputHandler} {...props.elementConfig}></textarea>
+      inputElement = <textarea  className={styles.InputElement} value={props.value} onChange={inputChangeHandler} {...props.elementConfig}></textarea>
       break;
     case "select":
-      inputElement = <select className={styles.InputElement} value={props.value} onChange={props.inputHandler}>
+      inputElement = <select className={styles.InputElement} value={props.value} onChange={inputChangeHandler}>
         {props.elementConfig.options.map(option=><option key={option} value={option}>{option}</option>)}
       </select>
       break;
     case "dropdown":
-      inputElement = <Dropdown className={styles.InputElement} value={props.value} inputHandler={props.inputHandler} {...props.elementConfig} />;
+      inputElement = <Dropdown className={styles.InputElement} value={props.value} inputHandler={inputChangeHandler} {...props.elementConfig} />;
       break;
     case "radio":
       inputElement = <div className={styles.RadioBox}>
-        {props.elementConfig.options.map(option=><label key={option} className={styles.Option}><input type="radio" onChange={props.inputHandler} name={props.elementConfig.name} checked={option==props.value} value={option}/> {option}</label>)}
+        {props.elementConfig.options.map(option=><label key={option} className={styles.Option}><input type="radio" onChange={inputChangeHandler} name={props.elementConfig.name} checked={option==props.value} value={option}/> {option}</label>)}
       </div>
       break;
   }
