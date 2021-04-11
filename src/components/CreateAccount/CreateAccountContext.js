@@ -3,6 +3,8 @@ import {db} from '../../firebase'
 import { storage } from '../../firebase'
 import {CreateAlert} from '../../store/actions/alert';
 import {Logout} from '../../store/actions/auth';
+import axios from 'axios';
+import {auth} from '../../firebase';
 
 import {connect} from 'react-redux';
 export const CreateAccountContext = createContext();
@@ -57,6 +59,8 @@ class CreateAccountProviderComponent extends Component{
         console.log(updater, "updater")
         try{
             await db.collection("company").doc(this.props.user.uid).set(updater);
+            let token= await auth.currentUser.getIdToken();
+            await axios.post("https://us-central1-oneios.cloudfunctions.net/app/company_created/",{token});
             this.props.logout();
             this.props.createAlert({subtitle:'Your profile verification is under process. Kindly wait for 24 hours.', title:"Profile Created", code:'success'})
         }
