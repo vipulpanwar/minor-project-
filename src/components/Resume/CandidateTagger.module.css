@@ -9,7 +9,7 @@
 .innercontainer{
     background: #F4F4F6;
     border-radius: 10px;
-    height: 108px;
+    /* height: 108px; */
     padding-left: 13px; 
     /* width: 396px; */
     /* display:inline-block; */
@@ -18,7 +18,7 @@
 
 .contactContainer{
     vertical-align: top;
-    height: 108px;
+    /* height: 108px; */
     background: #FFFFFF;
     border: 1px solid #D3D5DB;
     box-sizing: border-box;

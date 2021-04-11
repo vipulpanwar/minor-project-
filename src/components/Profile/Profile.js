@@ -112,6 +112,10 @@ class Profile extends Component {
             // this.setState({phoneError:'Must be a number'})
             phoneError = 'Must be a number'
         }
+        else if(this.state.phone>10000000000000){
+            flag = 1
+            phoneError = 'Must be a number less than 13 digits'
+        }
         if(isNaN(this.state.size)){
             flag=1
             // this.setState({sizeError:'Must be a number'})

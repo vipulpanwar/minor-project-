@@ -62,7 +62,7 @@ class Profile extends Component{
               </div>
               <div className="applicant-info">
                 <p className="applicant-name">{student.name}</p>
-                <p className="applicant-details">{degree ? `${degree?.field}- ${degree?.course}` :null} {(degree && student.city)? "| ":""} {student.city}</p>
+                <p className="applicant-details">{degree ? `${degree?.year} ${degree?.field} ${degree?.course}` :null} {(degree && student.city)? " | ":""} {student.city}</p>
                 <p className="applicant-bio">
                   {student.about}
                 </p>
