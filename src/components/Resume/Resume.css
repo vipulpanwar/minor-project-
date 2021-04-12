@@ -237,8 +237,8 @@ hr{
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 18px;
   text-transform: capitalize;
   word-break: break-word;
 }
@@ -252,17 +252,14 @@ hr{
 }
 
 .section-section{
-  padding: 0 10 0 10;
-  display: inline-block;
-  overflow: hidden;
-  box-sizing: border-box;
-  width: 50%;
-  vertical-align: top;
-  margin-bottom: 10px;
+  padding-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
 }
 
 .section-container{
-  padding: 28px 18px 28px 48px;
+  padding: 28px 48px 28px 48px;
 }
 
 .section-title{
@@ -279,82 +276,33 @@ hr{
 .project{
   display: inline-block;
   vertical-align: top;
-  padding: 5px 15px 15px 0;
-}
-
-.project-pic{
-  width: 35px;
-  height: 35px;
-  background: #daf7f0;
-  /* opacity: 0.2; */
-  border-radius: 4px;
-  display: inline-block;
-}
-
-.courses-pic{
-  width: 35px;
-  height: 35px;
-  background: #fdedd3;
-  /* opacity: 0.2; */
-  border-radius: 4px;
-  display: inline-block;
-}
-
-.accomplishments-pic{
-  width: 35px;
-  height: 35px;
-  background: #e1edfa;
-  /* opacity: 0.2; */
-  border-radius: 4px;
-  display: inline-block;
-}
-
-.education-pic{
-  width: 35px;
-  height: 35px;
-  background: #ffe9e9;
-  /* opacity: 0.2; */
-  border-radius: 4px;
-  display: inline-block;
+  /* padding: 5px 15px 15px 0; */
 }
 
 .experience-pic{
-  width: 35px;
-  height: 35px;
-  background: #ead2ff;
-  /* opacity: 0.2; */
+  /* width: 35px;
+  height: 35px; */  /* opacity: 0.2; */
   border-radius: 4px;
   display: inline-block;
-}
-
-.course-img{
-  margin: 5px 0px 7px 9px;
-}
-
-.project-img{
-  margin: 6px 0 0 7px;
-}
-
-.education-img{
-  margin: 7px 8.19px 7px 5px;
-}
-
-.experience-img{
-  /* margin: 9.5px; */
-  margin: 6px 0 0 7px;
+  align-items: flex-start;
+  padding: 5px;
 }
 
 .project-name-flexbox{
   display:flex;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .project-name{
   position: relative;
   top: -2px;
-  display: inline-block;
-  margin-left: 10px;
+  /* display: inline-block; */
+  /* margin-left: 10px; */
   /* width: 60%; */
   vertical-align: top;
+  align-items: flex-start;
+  word-break: break-all;
 }
 
 .project-title{

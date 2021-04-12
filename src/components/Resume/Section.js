@@ -9,7 +9,9 @@ export default  (props)=>{
               <hr />
             <div className="section-container">
               <p className="section-title"> {props.type=='Accomplishments'?'Awards':props.type} </p>
-              { props.data? mapDataToSectionTile(props.data, props.type) : null     }
+              <div className="section-section">
+                { props.data? mapDataToSectionTile(props.data, props.type) : null     }
+              </div>
             </div>
             </div>
     )
