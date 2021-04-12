@@ -35,13 +35,13 @@ class CandidateTagger extends Component{
             <br />
             <div className= {style.buttoncontainer}>
             <a onClick={ExcellentMaker}>
-                <Button width="115px" primary={this.props.student.flag?.toLowerCase()=="excellent"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Excellent</Button>
+                <Button primary={this.props.student.flag?.toLowerCase()=="excellent"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Excellent</Button>
             </a>
             <a onClick={GoodMaker}>
-                <Button width="90px" primary={this.props.student.flag?.toLowerCase()=="good"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Good</Button>
+                <Button primary={this.props.student.flag?.toLowerCase()=="good"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Good</Button>
             </a>
             <a onClick={AverageMaker}>
-                <Button width="109px" primary={this.props.student.flag?.toLowerCase()=="average"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Average</Button>
+                <Button primary={this.props.student.flag?.toLowerCase()=="average"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Average</Button>
             </a>
             </div>
         </div>

@@ -1,25 +1,24 @@
 import React, {Fragment} from 'react';
 import './Resume.css';
 
-import ExperiencePic from './images/ExperiencePic.svg';
-import CoursesPic from './images/CoursesPic.svg';
-import EducationPic from './images/EducationPic.svg';
-import AccomplishmentsPic from './images/AccomplishmentsPic.svg';
-import ProjectPic from './images/projectpic.svg';
+import ExperiencePic from './images/MaskGroup-4.svg';
+import CoursesPic from './images/MaskGroup-2.svg';
+import EducationPic from './images/MaskGroup-1.svg';
+import AccomplishmentsPic from './images/MaskGroup-3.svg';
+import ProjectPic from './images/MaskGroup.svg';
 
 
 
 export default (props)=>{
 
     return(
-      <div className="section-section">
             <div className="project">
               <div className="project-name-flexbox">
-                {(props.type=="Experience")?<div className="experience-pic"><img width="22px" className="experience-img" src={ExperiencePic} /></div>:null}
-                {(props.type=="Education")?<div className="education-pic"><img width="25px" className="education-img" src={EducationPic} /></div>:null}
-                {(props.type=="Projects")?<div className="project-pic"><img width="20px" className="project-img" src={ProjectPic}  /></div>:null}
-                {(props.type=="Accomplishments")?<div className="accomplishments-pic"><img width="15px" className="course-img" src={AccomplishmentsPic}  /></div>:null}
-                {(props.type=="Courses")?<div className="courses-pic"><img width="18px" className="course-img" src={CoursesPic}  /></div>:null}
+                {(props.type=="Experience")?<div style={{backgroundColor: '#ead2ff'}} className="experience-pic"><img style={{display:'block'}} width="25px" src={ExperiencePic} /></div>:null}
+                {(props.type=="Education")?<div style={{backgroundColor: '#ffe9e9'}} className="experience-pic"><img width="25px" style={{display:'block'}} src={EducationPic} /></div>:null}
+                {(props.type=="Projects")?<div style={{backgroundColor: '#daf7f0'}} className="experience-pic"><img width="25px" style={{display:'block'}} src={ProjectPic}  /></div>:null}
+                {(props.type=="Accomplishments")?<div style={{backgroundColor: '#e1edfa'}} className="experience-pic"><img width="25px" style={{display:'block'}} src={AccomplishmentsPic}  /></div>:null}
+                {(props.type=="Courses")?<div style={{backgroundColor: '#fdedd3'}} className="experience-pic"><img width="25px" style={{display:'block'}} src={CoursesPic}  /></div>:null}
               <div className="project-name">
                 <div className="title-date-div">
                   <p className="project-title">{props.info.title}</p>
@@ -37,7 +36,6 @@ export default (props)=>{
                     {props.info.description}
                   </div>
                 : null }
-            </div>
             </div>
     )
 }
