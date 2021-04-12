@@ -10,6 +10,7 @@ import ProjectPic from './images/projectpic.svg';
 
 
 export default (props)=>{
+
     return(
       <div className="section-section">
             <div className="project">
@@ -27,7 +28,7 @@ export default (props)=>{
                     { props.info.subTitle2 ? <span>{props.info.subTitle2}</span> : null }
                   </p>
                 </div>
-                {props.info.link ? <a href={props.info.link} className="visit-link-button"><span className="visit-text">Visit Link</span></a> : null}
+                {props.info.link ? <a href={`${ !props.info.link.startsWith('http') ?'http://' :""}${props.info.link}`} target="_blank" className="visit-link-button"><span className="visit-text">Visit Link</span></a> : null}
               </div>
               </div>
               {

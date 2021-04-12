@@ -32,10 +32,17 @@
     vertical-align: top;
     height: 100vh;
     overflow-y: auto;
-    padding-bottom: 100px;
+    /* padding-bottom: 100px; */
     /* padding-right: 44px; */
     background: radial-gradient(166.67% 269.75% at 85.98% 167.57%, #DCE8F6 0%, #FFFFFF 100%);
 }
+.rightcontainer:after {
+    content: "";
+    display: block;
+    height: 100px;
+    flex-shrink: 0;
+    width: 100%;
+  }
 
 .title{
     display:inline-block;
