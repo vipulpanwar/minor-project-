@@ -91,7 +91,9 @@ class NewJobForm extends React.Component{
                         "Production and Inventory",
                         "Research and Development",
                         "Purchase",
-                        "Administration"]
+                        "Administration",
+                        "Other"
+                        ]
                     },
                     elementType:"dropdown",
                     name:'category', validation:"required"},
@@ -206,7 +208,6 @@ class NewJobForm extends React.Component{
                     name:'hskills'
                 }
             }
-
         }
     }
 

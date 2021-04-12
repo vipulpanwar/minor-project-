@@ -45,7 +45,7 @@ export const Slide1 = (props)=>{
                         return <Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${i+1}. ${key}`} {...props.inputs[key]} style={inputStyles}/>})}
                 </div>
                 <div style={{display:'grid','gridTemplateColumns': 'auto 1fr', gap:20, paddingRight:114}}>
-                    {props.inputs['Job Type'].value=="Off Campus"?<Input label="9. Recive applications at" style={inputStyles} inputHandler={props.easyHandler} {...easyApplyInput}/>:null}
+                    {props.inputs['Job Type'].value=="Off Campus"?<Input label="9. Recieve applications at" style={inputStyles} inputHandler={props.easyHandler} {...easyApplyInput}/>:null}
                     {easyApplyInput.value=="External Website"?<Input style={linkStyles} inputHandler={(e)=>props.inputHandler(e,props.step, "Link")} {...linkInput} />:null}
                 </div>
             </div>

@@ -181,7 +181,7 @@ class StepOne extends Component {
                     </div>
                     <form>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
-                            <Input style={{marginBottom:'24px'}} errors={this.state.error.nameError} limit="200" elementType="input" label="Company Name" inputHandler={this.nameinputhandler}></Input>
+                            <Input style={{marginBottom:'24px'}} errors={this.state.error.nameError} limit="50" elementType="input" label="Company Name" inputHandler={this.nameinputhandler}></Input>
                         </div>
                         <div style={{display:'block'}} className={styles.inputcontainer}>
                             <Input style={{marginBottom:'24px'}} errors={this.state.error.typeError} limit="200" elementType="input" label="Industry Type" inputHandler={this.typeinputhandler}></Input>

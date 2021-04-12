@@ -1,4 +1,5 @@
 import React from 'react';
+import {Input} from '../shared/ui/Input/Input';
 import './Filter.css';
 
 export default (props)=>{
@@ -8,10 +9,11 @@ export default (props)=>{
   }
 
     return (<div className="filter-tag-container">
-        {props.name}
-        <select value={props.selected} onChange={props.inputHandler} className="filter-input-field">
+        {/* {props.name} */}
+        <Input label={props.name} value={props.value} elementConfig={{options:props.options}} elementType="dropdown" inputHandler={props.inputHandler} c/>
+        {/* <select value={props.selected} onChange={props.inputHandler} className="filter-input-field">
           {renderOptions()}
-        </select>
+        </select> */}
     </div>)
 }
 

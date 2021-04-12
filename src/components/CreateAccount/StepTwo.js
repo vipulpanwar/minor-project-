@@ -195,7 +195,7 @@ class StepTwo extends Component {
                         <div className={styles.formcontainer}>
                             <div className={styles.leftForm}>
                                 <div style={{display:'block'}} className={styles.inputcontainer}>
-                                    <Input errors={this.state.error.founded_inError} style={{marginBottom:'24px'}} limit="200" elementType="input" label="Founded In" inputHandler={(e)=>this.inputHandler('founded_in',e)}></Input>
+                                    <Input errors={this.state.error.founded_inError} style={{marginBottom:'24px'}} limit="200"  elementConfig={{placeholder:"Year"}}  elementType="input" label="Founded In" inputHandler={(e)=>this.inputHandler('founded_in',e)}></Input>
                                 </div>
                                 <div style={{display:'block'}} className={styles.inputcontainer}>
                                     <Input errors={this.state.error.phoneError} style={{marginBottom:'24px'}} limit="200" elementType="input" label="Contact Number" inputHandler={(e)=>this.inputHandler('phone',e)}></Input>
@@ -205,7 +205,7 @@ class StepTwo extends Component {
                             </div>
                             <div className={styles.rightForm}>
                                 <div style={{display:'block'}} className={styles.inputcontainer}>
-                                    <Input errors={this.state.error.sizeError} style={{marginBottom:'24px'}} limit="200" elementType="input" label="Company Size" inputHandler={(e)=>this.inputHandler('size',e)}></Input>
+                                    <Input errors={this.state.error.sizeError} style={{marginBottom:'24px'}} limit="200" elementConfig={{placeholder:"Number of employees"}} elementType="input" label="Company Size" inputHandler={(e)=>this.inputHandler('size',e)}></Input>
                                 </div>
                                 <div style={{display:'block'}} className={styles.inputcontainer}>
                                     <Input errors={this.state.error.aboutError} elementConfig={{rows:'6'}} style={{marginBottom:'24px', height:'131px'}} limit="1000" placeholder="Tell Us About Your Company" elementType="textarea" label="About" inputHandler={(e)=>this.inputHandler('about',e)}></Input>
