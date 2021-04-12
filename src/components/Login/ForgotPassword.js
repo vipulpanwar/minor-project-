@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styles from './forgot.module.css'
 import ForgotForm from './ForgotForm';
 import logo from '../../assets/images/ensvee-logo.svg';
-import ForgotImage from './images/forgotimage.svg'
+import ForgotImage from './images/forgotimage.png'
 
 export default class ForgotPassword extends Component {
     render() {
