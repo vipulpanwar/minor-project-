@@ -358,8 +358,6 @@ line-height: 1em;
 }
 
 @media print {
-  /* @page { size: landscape; } */
-
   .hideOnPrint, .top-bar, .candididateTaggerDiv {
     display:none;
   }

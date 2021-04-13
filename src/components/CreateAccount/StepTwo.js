@@ -182,7 +182,7 @@ class StepTwo extends Component {
             social.push(<div key={i} style={{display:'block'}}>
                             <div className={styles.socialContainer}> 
                                 <Input key={i} errors={this.state.error.socialError[i]} elementType="input" label="Social Media Link" inputHandler={(e)=>{this.socialinputhandler(i, e)}}></Input>
-                                {this.state.count!=1&&0&&<button key={i+10} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}
+                                {0 && this.state.count!=1&&<button key={i+10} style={{display:'none'}} onClick={(e)=>{this.socialRemover(i,e)}}>-</button>}
                             </div>
                         </div>)
         }
