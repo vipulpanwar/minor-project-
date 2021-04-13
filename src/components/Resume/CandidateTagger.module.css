@@ -73,11 +73,20 @@
     gap:16px;
 }
 
+.printOnly{
+    display: none;
+}
+
 @media print {
-    .innercontainer{
+    .innercontainer, .contactContainer{
       display:none;
+    }
+    .printOnly{
+        display: block;
+        text-transform: lowercase;
     }
     .outercontainer{
         grid-template-columns: 1fr;
+        text-align: center;
     }
   }

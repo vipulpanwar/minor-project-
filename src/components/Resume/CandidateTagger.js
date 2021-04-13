@@ -60,6 +60,9 @@ class CandidateTagger extends Component{
                 </div>
             </div>
         </div>
+        <div className={style.printOnly}>
+            {this.props.student.email} • {this.props.student.phone}
+        </div>
     </div>
       )
   }

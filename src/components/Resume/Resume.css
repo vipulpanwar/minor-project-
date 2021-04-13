@@ -359,7 +359,7 @@ line-height: 1em;
 
 
 /* Print Stuff */
-.nobreakOnPrint *{
+.nobreakOnPrint{
   page-break-inside: avoid;
   break-inside: avoid;
 }
@@ -381,5 +381,28 @@ line-height: 1em;
 
   .resume-container{
     box-shadow: none
+  }
+
+  .section-title{
+    font-size: 20px;
+    /* font-weight: 600; */
+  }
+
+  .project-title{
+    font-weight: 400;
+    /* font-size: 14px; */
+  }
+
+  .project-description{
+    font-size: 13px;
+  }
+
+  .section-container{
+    padding-top: 0;
+    padding-bottom: 70px;
+  }
+
+  .section-section{
+    grid-gap: 20px;
   }
 }
