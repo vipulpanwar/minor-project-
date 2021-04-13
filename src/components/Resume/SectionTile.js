@@ -12,7 +12,7 @@ import ProjectPic from './images/MaskGroup.svg';
 export default (props)=>{
 
     return(
-            <div className="project">
+            <div className="project nobreakOnPrint" style={{breakInside:"avoid"}}>
               <div className="project-name-flexbox">
                 {(props.type=="Experience")?<div style={{backgroundColor: '#ead2ff'}} className="experience-pic"><img style={{display:'block'}} width="25px" src={ExperiencePic} /></div>:null}
                 {(props.type=="Education")?<div style={{backgroundColor: '#ffe9e9'}} className="experience-pic"><img width="25px" style={{display:'block'}} src={EducationPic} /></div>:null}
@@ -28,7 +28,7 @@ export default (props)=>{
                   </p>
                 </div>
                 <span className="hideOnPrint">
-                {props.info.link ? <a href={`${ !props.info.link.startsWith('http') ?'http://' :""}${props.info.link}`} target="_blank" className="hideOnPrint visit-link-button"><span className="hideOnPrint visit-text">Visit Link</span></a> : null}
+                {props.info.link ? <a href={`${ !props.info.link.startsWith('http') ?'http://' :""}${props.info.link}`} target="_blank" className="visit-link-button"><span className="visit-text">Visit Link</span></a> : null}
                 </span>
               </div>
               </div>

@@ -357,6 +357,23 @@ line-height: 1em;
   margin-left: 13px;
 }
 
+
+/* Print Stuff */
+.nobreakOnPrint *{
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.dontBreakAfter{
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+.dontBreakBefore{
+  page-break-before: avoid;
+  break-before: avoid;
+}
+
 @media print {
   .hideOnPrint, .top-bar, .candididateTaggerDiv {
     display:none;
@@ -364,17 +381,5 @@ line-height: 1em;
 
   .resume-container{
     box-shadow: none
-  }
-
-  .nobreakOnPrint{
-    page-break-inside: avoid;
-  }
-
-  .dontBreakAfter{
-    page-break-after: avoid;
-  }
-
-  .dontBreakBefore{
-    page-break-before: avoid;
   }
 }
