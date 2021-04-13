@@ -3,6 +3,8 @@ import React from 'react';
 import './Resume.css';
 import SkillTag from './SkillTag.js'
 import { Fragment } from "react";
+import Button from '../shared/ui/Button/Button';
+let rejectstyle = {marginRight:"12px", color: "#D0021B", borderColor:"#D0021B"}
 
 export default  (props)=>{
     // const arr = [...myMap].map(([name, value]) => ({ name, value }));
@@ -13,12 +15,12 @@ export default  (props)=>{
     // }
     return(
             <div style={props.style} className="skills-section">
+
               {!props.loading && !props.offcampus && (props.softSkills || props.hardSkills)?
               <div className='skills-heading'>
                 {(Object.keys(props.hardSkills).length !=0||Object.keys(props.softSkills).length !=0) && <p>Skills</p>}
               </div>:null}
               <div className="skills-container">
-                <div>
                 {props.loading ?
                   <Fragment>
                     <SkillTag skill="" level="loading"/>
@@ -31,9 +33,7 @@ export default  (props)=>{
 
                       { props.hardSkills && mapSkillToSkillTags(props.hardSkills)}
                       { props.softSkills && mapSkillToSkillTags(props.softSkills)}
-                </div>
-              </div>
-              
+              </div>       
             </div>
     )
 }

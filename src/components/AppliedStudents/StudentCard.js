@@ -49,7 +49,7 @@ const StudentCard = (props)=>{
                 <StudentData student={props.student}/>
                 
             </div>
-            <Skills  oneLiner="oneLiner" style={{margin:0, padding:0}} hardSkills={props.student.hskills} softSkills={props.student.sskills}/>
+            <Skills  oneLiner="oneLiner" style={{margin:0, marginRight:18, padding:0}} hardSkills={props.student.hskills} softSkills={props.student.sskills}/>
         </div>
         // : <h1>Loading...</h1>
         )

@@ -49,7 +49,7 @@ export default class MinimumQualifications extends Component {
         return (
             <div className={styles.container}>
                 <div className={styles.Title}>
-                    Minimum Qualifications
+                    {this.props.job.campus?"Minimum Percentages Required": "Skills Required"}
                 </div>
                 {this.props.job.campus && <div className={this.props.job.campus?styles.gridBox:null}>
                     {QualificationsRenderer}

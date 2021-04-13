@@ -99,6 +99,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 20px;
+  position: relative;
 }
 
 .JobTitleDiv{
@@ -153,6 +154,9 @@
   color: #4a90e2;
 }
 
+.Loading .StudentsNumber{
+  color: transparent;
+}
 .BlueNextButton {
   /* position: absolute;
   width: 9px;
@@ -194,6 +198,7 @@
   content-visibility: hidden;
   height: 30px;
   border-radius: 5px;
+  color:transparent;
   background-size: 40px 100%;
   background-repeat: no-repeat;
   background-position: -40px 0%;
