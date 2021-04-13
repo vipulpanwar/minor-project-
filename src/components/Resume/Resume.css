@@ -285,6 +285,14 @@ hr{
   .nobreakOnPrint{
     page-break-inside: avoid;
   }
+
+  .dontBreakAfter{
+    page-break-after: avoid;
+  }
+
+  .dontBreakBefore{
+    page-break-before: avoid;
+  }
 }
 
 .project-title{

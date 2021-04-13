@@ -5,11 +5,11 @@ import moment from 'moment';
 
 export default  (props)=>{
     return(
-          <div>
-              <hr />
+          <div className="">
+              <hr className="dontBreakAfter"/>
             <div className="section-container">
-              <p className="section-title"> {props.type=='Accomplishments'?'Awards':props.type} </p>
-              <div className="nobreakOnPrint section-section">
+              <p className="section-title  dontBreakAfter dontBreakBefore"> {props.type=='Accomplishments'?'Awards':props.type} </p>
+              <div className="nobreakOnPrint dontBreakBefore section-section">
                 { props.data? mapDataToSectionTile(props.data, props.type) : null     }
               </div>
             </div>
