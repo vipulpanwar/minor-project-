@@ -10,7 +10,7 @@ export default  (props)=>{
     let [windowWidth, setWindowWidth] =useState(window.innerWidth);
 
 
-    useLayoutEffect(()=>{
+    useEffect(()=>{
              window.addEventListener('resize',e=>{
             // console.log('resize')
             if(windowWidth != window.innerWidth)
@@ -22,7 +22,7 @@ export default  (props)=>{
         }
 
     },[]);
-    useLayoutEffect(()=>{
+    useEffect(()=>{
         // console.log("run");
         let count=0;
         let bottom = compactSkillsRef.current.getBoundingClientRect().bottom;
@@ -48,7 +48,7 @@ export default  (props)=>{
     return(
             <div style={props.style} className="skills-section">
               {!props.loading && (props.softSkills || props.hardSkills) ? <div className='skills-heading'>Skills</div> : null}
-              <div className="skills-container">
+              <div className="skills-container" style={{flexWrap:"nowrap"}}>
                 <div ref={compactSkillsRef} className="compact-skills">
                     {props.loading ?
                     <Fragment>

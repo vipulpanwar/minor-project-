@@ -25,9 +25,9 @@ class Profile extends Component{
       }
     }
 
-    let prev, next 
+    let prev, next;
     if(student != undefined){
-      [prev,next] = getPrevAndNextStudent (this.props.student?.email, this.context.state.applicants)
+      [prev,next] = getPrevAndNextStudent(this.props.student?.email, this.context.state.applicants)
     }
 
     const updatestatus = async (hireOrReject)=>{

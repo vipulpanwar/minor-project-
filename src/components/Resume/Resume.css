@@ -51,85 +51,56 @@ hr{
   background-color: #FFFFFF;
   box-shadow: 0px 26px 24px -20px rgba(0, 0, 0, 0.25);
   border-radius:  0px 0px 14px 14px;
+  text-transform: capitalize;
 }
 
 .profilepic{
-  margin-top: 31px;
-  margin-left: 31px;
   width: 160px;
   height: 154px;
   box-shadow: 0px 22px 20px -13px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
-  display: inline-block;
-  vertical-align: top;
   overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 40px;
 }
 
 .profileimg{
-  margin: 0;
-  padding: 0;
+  display: block;
   width: 160px;
   height: 154px;
-  overflow: hidden;
   object-fit: cover;
   object-fit: center;
 }
 
 .applicant-info{
-  position: relative;
-  /* top: 5px; */
-  /* display: inline-block; */
-  margin-left: 32px;
-  margin-top: 31px;
-  width: 900px;
-  padding-right: 31px;
-  vertical-align: top;
+  width: 100%;
 }
 
 .profile-container{
   display: flex;
+  margin: 0px 40px;
+  gap: 30px;
+  margin-top: 50px;
 }
 
 .applicant-name{
-  position: relative;
-  /* width: 193px; */
-  height: 33px;
-  /* left: 223px; */
-  /* top: 90px; */
-  /* font-family: SF Pro Display; */
-  font-style: normal;
+
   font-weight: bold;
   font-size: 28px;
-  line-height: 33px;
   color: #232D4C;
-  margin: 1px;
 }
 
 .applicant-details{
-  position: relative;
-  /* top:125px; */
-  /* left:223px; */
-/* font-family: SF Pro Display; */
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
+  margin-top: -4px;
   color: #232D4C;
-  margin: 1px;
 }
 
 .applicant-bio{
-  position: relative;
-/* height: 34px; */
-  /* left: 223px; */
-  /* top: 145px; */
-  /* font-family: SF Pro Display; */
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
+  margin-top: 10px;
   color: #9196A5;
-  margin: 1px;
+  line-height: 1.3em;
+  font-weight: 300;
+  
 }
 
 .rating-box{
@@ -208,35 +179,26 @@ hr{
 
 .skills-heading{
   /* font-family: SF Pro Display; */
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 16px;
   color: #9196A5;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .skills-section{
-  margin-left: 31px;
-  padding-top: 32px;
-  margin-bottom: 26px;
+  margin:50px 40px;
+  margin-top: 0px;
 }
 
+
 .skillBox{
-  /* height: 23px; */
-  border-radius: 4px;
+  border-radius: 5px;
   display: inline-block;
-  padding: 4px 11px 4px 11px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-  border-radius: 4px;
+  padding: 7px 18px;
+  font-weight: 300;
+  flex-shrink: 0;
 }
 
 .skillText{
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-weight: normal;
   font-size: 16px;
   line-height: 18px;
   text-transform: capitalize;
@@ -245,9 +207,14 @@ hr{
 
 .skills-container{
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px 5px;
 }
 .compact-skills{
   height: 34px;
+  display: flex;
+  gap:5px;
+  flex-wrap: wrap;
   overflow: hidden;
 }
 
@@ -259,7 +226,7 @@ hr{
 }
 
 .section-container{
-  padding: 28px 48px 28px 48px;
+  padding: 50px 60px 60px;
 }
 
 .section-title{
@@ -285,24 +252,23 @@ hr{
   border-radius: 4px;
   display: inline-block;
   align-items: flex-start;
-  padding: 5px;
+  padding: 8px;
 }
 
 .project-name-flexbox{
   display:flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
 }
 
 .project-name{
   position: relative;
   top: -2px;
-  /* display: inline-block; */
-  /* margin-left: 10px; */
-  /* width: 60%; */
-  vertical-align: top;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
   align-items: flex-start;
-  word-break: break-all;
+  word-break: break-word
 }
 
 .project-title{
@@ -317,25 +283,22 @@ hr{
 }
 
 .project-date{
-  /* font-family: SF Pro Display; */
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 17.5px;
+
+  font-weight: 500;
+  line-height: 20px;
+  font-size: 14px;
   color: #969BA9;
   text-transform: capitalize;
-  /* max-width: 300px; */
+  margin-top: 3px;
+
 }
 
 .project-description{
-  /* font-family: SF Pro Display; */
-  /* font-style: italic; */
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 20.88px;
-  text-transform: lowercase;
-  margin-top:8px;
+  font-size: 15px;
+  line-height: 20px;
+  margin-top: 10px;
   color: #9196A5;
+  font-weight: 300;
 }
 
 .visit-link-button{
@@ -345,8 +308,7 @@ hr{
   border-radius: 4px;
   display: inline-block;
   margin-left: 14px;
-  padding: 2px 6px 2px 6px;
-  vertical-align: top;
+  padding: 6px 10px;
 }
 
 .title-date-div{
@@ -356,14 +318,12 @@ hr{
 }
 
 .visit-text{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 10px;
-line-height: 12px;
-/* identical to box height */
+
+display: block;
+font-size: 14px;
 letter-spacing: -0.01em;
 color: #4A90E2;
+line-height: 1em;
 }
 
 .gold{
