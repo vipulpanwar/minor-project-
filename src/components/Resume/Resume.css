@@ -281,6 +281,10 @@ hr{
   .resume-container{
     box-shadow: none
   }
+
+  .nobreakOnPrint{
+    page-break-inside: avoid;
+  }
 }
 
 .project-title{
