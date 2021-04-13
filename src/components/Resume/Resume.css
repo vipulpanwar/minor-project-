@@ -271,30 +271,6 @@ hr{
   word-break: break-word
 }
 
-@media print {
-  /* @page { size: landscape; } */
-
-  .hideOnPrint, .top-bar, .candididateTaggerDiv {
-    display:none;
-  }
-
-  .resume-container{
-    box-shadow: none
-  }
-
-  .nobreakOnPrint{
-    page-break-inside: avoid;
-  }
-
-  .dontBreakAfter{
-    page-break-after: avoid;
-  }
-
-  .dontBreakBefore{
-    page-break-before: avoid;
-  }
-}
-
 .project-title{
 /* font-family: SF Pro Display; */
   font-style: normal;
@@ -379,4 +355,28 @@ line-height: 1em;
 
 .tagRemoverButton{
   margin-left: 13px;
+}
+
+@media print {
+  /* @page { size: landscape; } */
+
+  .hideOnPrint, .top-bar, .candididateTaggerDiv {
+    display:none;
+  }
+
+  .resume-container{
+    box-shadow: none
+  }
+
+  .nobreakOnPrint{
+    page-break-inside: avoid;
+  }
+
+  .dontBreakAfter{
+    page-break-after: avoid;
+  }
+
+  .dontBreakBefore{
+    page-break-before: avoid;
+  }
 }
