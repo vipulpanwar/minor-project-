@@ -66,7 +66,7 @@ class Profile extends Component{
                 <p className="applicant-bio">
                   {student.about}
                 </p>
-                <div style={{paddingTop:"20px"}}>
+                <div className='hideOnPrint' style={{paddingTop:"20px"}}>
                   {/* <div className="rating-box"><p className='rating-text'><span style={{color:"#898989"}}>Rating:</span> 4.5</p></div> */}
                   <div style={{display:"inline-block", float:"right"}}>
                     {console.log(this.props.student.id)}

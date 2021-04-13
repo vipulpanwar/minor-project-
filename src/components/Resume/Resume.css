@@ -305,6 +305,18 @@ hr{
   word-break: break-all;
 }
 
+@media print {
+  /* @page { size: landscape; } */
+
+  .hideOnPrint, .top-bar, .candididateTaggerDiv {
+    display:none;
+  }
+
+  .resume-container{
+    box-shadow: none
+  }
+}
+
 .project-title{
 /* font-family: SF Pro Display; */
   font-style: normal;

@@ -14,9 +14,11 @@ import {withRouter, Link} from 'react-router-dom';
 import { Fragment } from "react";
 import { StudentsContext } from '../AppliedStudents/StudentsContext';
 import { CSSTransition } from "react-transition-group";
+import ReactToPrint from 'react-to-print';
+import Button from '../shared/ui/Button/Button'
 
 
-class Resume extends Component{
+class Resume extends React.PureComponent{
     state = {
         student : undefined,
     }
@@ -39,14 +41,14 @@ class Resume extends Component{
         }
         return(
 
-            <div>
+            <div ref={el => (this.componentRef = el)}>
                 {!this.state.student?<h1>Loading...</h1>: 
                 <Fragment>
                     <TopBar close={this.props.close} />
                     <div className="resume-container">
                     <CandidateTagger student={student}/>
                     <CSSTransition appear unmountOnExit in={Boolean(next)} timeout={100}>
-                        <div className='next-button-container'>
+                        <div className='next-button-container hideOnPrint'>
                             <Link className="next-button" to={`/jobs/${this.props.match.params.jobId}/student/${next}`}>
                                 <img src={NextArrow} />
                             </Link>
@@ -54,12 +56,21 @@ class Resume extends Component{
                     </CSSTransition>
 
                     <CSSTransition appear unmountOnExit in={Boolean(prev)} timeout={100} >
-                        <div className='prev-button-container'>
+                        <div className='prev-button-container hideOnPrint'>
                             <Link className="prev-button" to={`/jobs/${this.props.match.params.jobId}/student/${prev}`}>
                                 <img src={NextArrow} />
                             </Link>
                         </div>
                     </CSSTransition>
+
+                    <ReactToPrint
+                    trigger={() => {
+                        // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                        // to the root node of the returned component as it will be overwritten.
+                        return <div className="hideOnPrint" style={{padding:'20px'}}><Button width="150px" href="#">Download</Button></div>;
+                    }}
+                    content={() => this.componentRef}
+                    />
 
                     <Profile jobid={this.props.match.params.jobId} student={student}/>
 

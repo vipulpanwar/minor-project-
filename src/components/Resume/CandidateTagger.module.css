@@ -72,3 +72,12 @@
     flex-direction: row;
     gap:16px;
 }
+
+@media print {
+    .innercontainer{
+      display:none;
+    }
+    .outercontainer{
+        grid-template-columns: 1fr;
+    }
+  }
