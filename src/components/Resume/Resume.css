@@ -133,6 +133,16 @@ hr{
     height: 100%;
     min-width: 10px;
 }
+
+.download-button-container{
+  position: absolute;
+  /* top: 0; */
+  height: 100%;
+  /* cursor:pointer; */
+  right: -40px;
+  min-width: 10px;
+}
+
 .prev-button-container{
   position: absolute;
     top: 0;
@@ -167,6 +177,21 @@ hr{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.downloadButton{
+  position: sticky;
+  width: 80px;
+  height: 80px;
+  top: 80%;
+  /* background: #27272D; */
+  /* border: 1px solid #FFFFFF; */
+  /* box-shadow: 0px 7px 23px rgb(0 0 0 / 25%); */
+  border-radius: 100%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  cursor:pointer;
 }
 
 .prev-button img {
@@ -357,7 +382,6 @@ line-height: 1em;
   margin-left: 13px;
 }
 
-
 /* Print Stuff */
 .nobreakOnPrint{
   page-break-inside: avoid;
@@ -398,6 +422,10 @@ line-height: 1em;
     font-size: 13px;
   }
 
+  .skillText{
+    font-size: 14px;
+  }
+
   .section-container{
     padding-top: 0;
     padding-bottom: 70px;
@@ -405,5 +433,9 @@ line-height: 1em;
 
   .section-section{
     grid-gap: 20px;
+  }
+
+  .skillBox{
+    padding: 7px 12px;
   }
 }

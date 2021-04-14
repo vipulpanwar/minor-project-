@@ -15,6 +15,7 @@ import { Fragment } from "react";
 import { StudentsContext } from '../AppliedStudents/StudentsContext';
 import { CSSTransition } from "react-transition-group";
 import ReactToPrint from 'react-to-print';
+import Download from './images/download.svg'
 import Button from '../shared/ui/Button/Button'
 
 
@@ -40,7 +41,17 @@ class Resume extends React.PureComponent{
             [prev,next] = getPrevAndNextStudent (this.state.student?.email, this.context.state.applicants)
         }
         return(
-
+            <div>
+            <div className="download-button-container hideOnPrint">
+            <ReactToPrint
+                trigger={() => {
+                    // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                    // to the root node of the returned component as it will be overwritten.
+                    return <img className="downloadButton" width="80px" src={Download} />;
+                }}
+                content={() => this.componentRef}
+            />
+            </div>
             <div ref={el => (this.componentRef = el)}>
                 {!this.state.student?<h1>Loading...</h1>: 
                 <Fragment>
@@ -63,15 +74,6 @@ class Resume extends React.PureComponent{
                         </div>
                     </CSSTransition>
 
-                    <ReactToPrint
-                    trigger={() => {
-                        // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-                        // to the root node of the returned component as it will be overwritten.
-                        return <div className="hideOnPrint" style={{padding:'20px'}}><Button width="150px" href="#">Download</Button></div>;
-                    }}
-                    content={() => this.componentRef}
-                    />
-
                     <Profile jobid={this.props.match.params.jobId} student={student}/>
 
                     <Skills hardSkills={student.hskills} softSkills={student.sskills} />
@@ -88,6 +90,7 @@ class Resume extends React.PureComponent{
                     </div>
                 </Fragment>
                 }
+            </div>
             </div>
         )
     }
