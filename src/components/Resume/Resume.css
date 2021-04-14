@@ -192,15 +192,13 @@ hr{
   justify-content: center;
   align-items: center; */
   cursor:pointer;
+  z-index: 2;
 }
 
 .prev-button img {
   transform: rotate(180deg);
   flex-grow: 0;
 }
-
-
-
 
 .skills-heading{
   /* font-family: SF Pro Display; */
@@ -370,7 +368,6 @@ line-height: 1em;
   border: 1px solid #D4D5DA;
   color: #000;
 }
-
 
 .loading{
   height: 23px;
