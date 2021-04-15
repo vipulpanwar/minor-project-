@@ -27,9 +27,7 @@ export default (props)=>{
                     { props.info.subTitle2 ? <span>{props.info.subTitle2}</span> : null }
                   </p>
                 </div>
-                <span className="hideOnPrint">
-                {props.info.link ? <a href={`${ !props.info.link.startsWith('http') ?'http://' :""}${props.info.link}`} target="_blank" className="visit-link-button"><span className="visit-text">Visit Link</span></a> : null}
-                </span>
+                {props.info.link ? <a href={`${ !props.info.link.startsWith('http') ?'http://' :""}${props.info.link}`} target="_blank" className="visit-link-button hideOnPrint"><span className="visit-text">Visit Link</span></a> : null}
               </div>
               </div>
               {

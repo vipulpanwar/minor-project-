@@ -280,7 +280,7 @@ hr{
 
 .project-name-flexbox{
   display:flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
 }
 
@@ -291,7 +291,8 @@ hr{
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
-  word-break: break-word
+  word-break: break-word;
+  word-break: break-all;
 }
 
 .project-title{
@@ -303,6 +304,7 @@ hr{
   color: #000000;
   /* max-width: 230px; */
   overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .project-date{
@@ -313,7 +315,8 @@ hr{
   color: #969BA9;
   text-transform: capitalize;
   margin-top: 3px;
-
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .project-description{
@@ -322,6 +325,9 @@ hr{
   margin-top: 10px;
   color: #9196A5;
   font-weight: 300;
+  overflow-wrap: break-word;
+  word-break: break-all;
+
 }
 
 .visit-link-button{
@@ -332,6 +338,7 @@ hr{
   display: inline-block;
   margin-left: 14px;
   padding: 6px 10px;
+  flex-shrink: 0;
 }
 
 .title-date-div{
@@ -432,11 +439,18 @@ line-height: 1em;
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
+    color: #000
+  }
+
+  .project-title{
+    font-weight: 500;
+    font-size: 14px;
   }
 
   .project-description{
     font-size: 10px;
     line-height: 11px;
+    color: #000;
   }
 
   /* .skillText{
