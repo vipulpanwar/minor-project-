@@ -379,9 +379,14 @@ line-height: 1em;
   margin-left: 13px;
 }
 
+.project-pic{
+  width:25px;
+}
+
 /* Print Stuff */
 
 .contact-container{
+  padding-top:8px;
   display:none;
 }
 
@@ -414,31 +419,43 @@ line-height: 1em;
   }
 
   .section-title{
-    font-size: 21px;
+    font-size: 18px;
     color:#4A90E2;
     /* font-weight: 600; */
   }
 
-  .project-title{
+  .project-pic{
+    width: 15px;
+  }
+
+  .project-title, .project-date, .skillText{
     font-weight: 400;
-    /* font-size: 14px; */
+    font-size: 12px;
+    line-height: 14px;
   }
 
   .project-description{
-    font-size: 13px;
+    font-size: 10px;
+    line-height: 11px;
   }
 
-  .skillText{
-    font-size: 14px;
-  }
+  /* .skillText{
+    font-size: 12px;
+  } */
 
   .section-container{
     padding-top: 0;
-    padding-bottom: 70px;
+    padding-bottom: 40px;
+  }
+
+  .applicant-bio{
+    margin:0
   }
 
   .section-section{
-    grid-gap: 20px;
+    /* grid-gap: 20px 10px; */
+    row-gap: 10px;
+    column-gap: 100px;
   }
 
   .skillBox{

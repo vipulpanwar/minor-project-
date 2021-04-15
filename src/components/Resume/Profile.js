@@ -9,6 +9,8 @@ import { StudentsContext } from '../AppliedStudents/StudentsContext';
 import { connect } from 'react-redux';
 import { CreateToast } from '../../store/actions/alert';
 import { withRouter } from "react-router";
+import ReactToPrint from 'react-to-print';
+import Download from './images/download.svg'
 
 class Profile extends Component{
   state = {
@@ -52,7 +54,7 @@ class Profile extends Component{
       }
     }
 
-    let rejectstyle = {marginRight:"12px", color: "#D0021B", borderColor:"#D0021B"}
+    let rejectstyle = {color: "#D0021B", borderColor:"#D0021B"}
     
     
     return(
@@ -68,7 +70,7 @@ class Profile extends Component{
                   {student.about}
                 </p>
                 <div className="contact-container">
-                  <div>
+                  <div style={{fontSize:'14px', fontWeight:'300'}}>
                     Contact
                     <div style={{display:'flex', gap:"16px"}}>
                       <div className={style.numberdiv}>
@@ -88,12 +90,20 @@ class Profile extends Component{
                 </div>
                 <div className='hideOnPrint' style={{paddingTop:"20px"}}>
                   {/* <div className="rating-box"><p className='rating-text'><span style={{color:"#898989"}}>Rating:</span> 4.5</p></div> */}
-                  <div style={{display:"inline-block", float:"right"}}>
+                  <div style={{display:"flex", float:"right", gap:'12px'}}>
                     {console.log(this.props.student.id)}
                     {this.props.student.status=="Applied" && <Button width="129px" height="50px" loading={this.state.loading=="Rejected"} clicked={()=>{updatestatus("Rejected")}} style={rejectstyle}>Reject</Button>}
                     {this.props.student.status=="Applied" && <Button width="129px" height="50px" loading={this.state.loading=="Hired"} clicked={()=>{updatestatus("Hired")}} primary={this.props.student.status=="Hired"}>Hire</Button>}
                     {this.props.student.status=="Hired" && <Button width="270px" noShadow height="50px" style={{border: 'none', shadow:'none', color:'#57a3c8', backgroundColor:'#e6f3fb'}}>Hired</Button>}
                     {this.props.student.status=="Rejected" && <Button width="270px" noShadow height="50px" style={{border: 'none', shadow:'none', color:'#ff4a4a', backgroundColor:'#ffeeef'}}>Rejected</Button>}
+                    <ReactToPrint
+                    trigger={() => {
+                        // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                        // to the root node of the returned component as it will be overwritten.
+                        return <a><Button style={{borderRadius:'100%', padding:'0',width:'58px', height:'58px', backgroundColor:'#dbe9f9', border:'#dbe9f9', display:'grid', placeItems:'center'}}><img height="25.5px" src={Download}></img></Button></a>;
+                    }}
+                    content={() => this.props.refer}
+                    />
                   </div>
                 </div>
               </div>

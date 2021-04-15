@@ -139,6 +139,7 @@ class StepTwo extends Component {
             for(let i=0;i<this.state.count;i++){
                 if(this.state.form.social_media[i]){
                     if(!this.validURL(this.state.form.social_media[i])){
+                        flag=1
                         socialerror[i] = "Must be a link"
                     }
                 }

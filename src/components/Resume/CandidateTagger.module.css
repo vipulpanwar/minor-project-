@@ -89,4 +89,7 @@
         grid-template-columns: 1fr;
         text-align: right;
     }
+    .numberDiv{
+        padding-top:0;
+    }
   }
