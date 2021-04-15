@@ -43,7 +43,7 @@ import { CreateToast } from '../../store/actions/alert';
 
   async componentDidMount(){
     let options = this.context.state.options
-    let collegeOptions = this.props.job.recipient ? Object.keys(this.props.job.recipient):[]
+    let collegeOptions = this.props.job.recipient ? Object.keys(this.props.job.recipient):[];
       this.setState({
         degreeValue : this.context.state.filters.degree,
         courseValue : this.context.state.filters.course,
@@ -57,7 +57,8 @@ import { CreateToast } from '../../store/actions/alert';
         collegeOptions:["All", ...collegeOptions],
         courseOptions: [...options.courseOptions],
       })
-      // let colleges = []
+    
+    // let colleges = []
     //   let collegesDocs = await db.collection('clginfo').get();
     //   collegesDocs.forEach(collegeDoc=>{
     //     let college = collegeDoc.data();
@@ -72,7 +73,7 @@ import { CreateToast } from '../../store/actions/alert';
   }
 
   componentDidUpdate(){
-    
+
   }
 
   getCollegeOptions=()=>{

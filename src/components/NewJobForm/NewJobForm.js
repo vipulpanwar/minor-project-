@@ -23,7 +23,7 @@ class NewJobForm extends React.Component{
 
             "1":{
                 "Job Type":{ 
-                    value:"On Campus", 
+                    value:"Campus", 
                     elementConfig:{
                         name:"position", 
                         options:["Campus", "Off Campus"]
@@ -475,25 +475,29 @@ class NewJobForm extends React.Component{
         job['easy_apply'] = this.state.form['1']['Easy Apply'].value =="Ensvee" ? true : false; 
         job['creatorid'] = this.props.user.uid;
         job['created'] = new Date();
-        job['deadline'] = new Date(job['deadline']);
+        job['deadline'] = new Date(job['deadline'] + " 00:00:00");
         job['placed'] = false
         let uid = `${9999999999999999 - Date.now()}`;
         job['uid'] = uid;
 
+        
+
         this.setState({loading:true});
         try{
-            await db.collection('jobs').doc(uid).set(job);
-            await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
+            // await db.collection('jobs').doc(uid).set(job);
+            // await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
             
             let token= await auth.currentUser.getIdToken();
-            await axios.post("https://us-central1-oneios.cloudfunctions.net/app/job_created/",{token, id: uid});
+            await axios.post("https://us-central1-oneios.cloudfunctions.net/app/create_job/",{token, job});
+            // await axios.post("http://localhost:5001/oneios/us-central1/app/create_job/",{token, job});
+
     
             this.setState({loading:false});
             this.props.createAlert({code:"success2", title:"Success", subtitle:"Job posted successfully"})
         }
         catch(error){
             console.log(error);
-            this.props.createToast({code:"failure", message:"Something went wrong while creating a job posting"})
+            this.props.createToast({code:"failure", message:"Something went wrong while posting job"})
         }
         this.props.close();
     }
