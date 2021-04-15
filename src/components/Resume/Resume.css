@@ -380,6 +380,11 @@ line-height: 1em;
 }
 
 /* Print Stuff */
+
+.contact-container{
+  display:none;
+}
+
 .nobreakOnPrint{
   page-break-inside: avoid;
   break-inside: avoid;
@@ -396,6 +401,10 @@ line-height: 1em;
 }
 
 @media print {
+  .contact-container{
+    display: block;
+  }
+
   .hideOnPrint, .top-bar, .candididateTaggerDiv {
     display:none;
   }

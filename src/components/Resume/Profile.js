@@ -1,11 +1,12 @@
 import { Component } from "react";
 import React from 'react';
+import style from './CandidateTagger.module.css';
+import Phone from './images/phone.svg'
+import Email from './images/email.svg'
 import './Resume.css';
-import userPlaceholder from '../../assets/images/user_placeholder.jpg';
 import Button from '../shared/ui/Button/Button';
 import { StudentsContext } from '../AppliedStudents/StudentsContext';
 import { connect } from 'react-redux';
-import { storage } from '../../firebase'
 import { CreateToast } from '../../store/actions/alert';
 import { withRouter } from "react-router";
 
@@ -66,6 +67,25 @@ class Profile extends Component{
                 <p className="applicant-bio">
                   {student.about}
                 </p>
+                <div className="contact-container">
+                  <div>
+                    Contact
+                    <div style={{display:'flex', gap:"16px"}}>
+                      <div className={style.numberdiv}>
+                          <img src={Phone}/>
+                          <div className={style.number}>
+                              {this.props.student.phone}
+                          </div>
+                      </div>
+                      <div className={style.numberdiv}>
+                          <img src={Email}/>
+                          <div className={style.number}>
+                              {this.props.student.email}
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className='hideOnPrint' style={{paddingTop:"20px"}}>
                   {/* <div className="rating-box"><p className='rating-text'><span style={{color:"#898989"}}>Rating:</span> 4.5</p></div> */}
                   <div style={{display:"inline-block", float:"right"}}>

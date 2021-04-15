@@ -119,17 +119,23 @@ class StepOne extends Component {
 
     nextPagehandler = (e) =>{
         e.preventDefault();
+        let error = {
+            websiteError:'',
+            logoError:false,
+            nameError: '',
+            typeError: '',
+            addressError: '',
+        }
         if(!this.validURL(this.state.website)){
             // alert("You haven't entered a valid URL");
-            let error = this.state.error
             error.websiteError = 'Must be a link'
-            this.setState({error: error})
         }
         else{
             console.log(this.state, "Step One done")
             this.context.stepOneSubmit(this.state)
             console.log(this.context.state.form)
         }
+        this.setState({error: error})
     }
 
     requiredHandler = (e) =>{
