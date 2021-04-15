@@ -27,7 +27,7 @@ export default (props)=>{
                     { props.info.subTitle2 ? <span>{props.info.subTitle2}</span> : null }
                   </p>
                 </div>
-                <span className="hideOnPrint">
+                <span className="hideOnPrint" style={{'flexShrink':0}}>
                 {props.info.link ? <a href={`${ !props.info.link.startsWith('http') ?'http://' :""}${props.info.link}`} target="_blank" className="visit-link-button"><span className="visit-text">Visit Link</span></a> : null}
                 </span>
               </div>
