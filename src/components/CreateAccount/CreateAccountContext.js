@@ -60,7 +60,7 @@ class CreateAccountProviderComponent extends Component{
         try{
             await db.collection("company").doc(this.props.user.uid).set(updater);
             let token= await auth.currentUser.getIdToken();
-            await axios.post("https://us-central1-oneios.cloudfunctions.net/app/company_created/",{token});
+            axios.post("https://us-central1-oneios.cloudfunctions.net/app/company_created/",{token});
             this.props.logout();
             this.props.createAlert({subtitle:'Your profile verification is under process. Kindly wait for 24 hours.', title:"Profile Created", code:'success'})
         }

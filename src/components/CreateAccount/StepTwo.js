@@ -71,7 +71,7 @@ class StepTwo extends Component {
         return !!pattern.test(str);
     }
 
-    createaccount =(e)=>{
+    createaccount = async (e)=>{
         e.preventDefault();
         if(this.state.loading)
         {
@@ -148,7 +148,7 @@ class StepTwo extends Component {
             if(flag==0){
                 console.log(this.state.form, "final form")
                 let form = this.state.form
-                this.context.stepTwoHandler(form)
+                await this.context.stepTwoHandler(form)
             }
             else{
                 this.setState({error:error})
@@ -208,7 +208,7 @@ class StepTwo extends Component {
                                 </div>
                             </div>
                                 {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone && <Button style={{marginTop:'20px'}} loading={this.state.loading} clicked={this.createaccount} primary width="100%">Create Account</Button>}
-                                {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone) && <Button style={{marginTop:'20px'}} looksDisabled clicked={this.createaccount} width="100%">Create Account</Button>}
+                                {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone) && <Button style={{marginTop:'20px'}} loading={this.state.loading} looksDisabled clicked={this.createaccount} width="100%">Create Account</Button>}
                         </div>
                     </form>
                 </div>
