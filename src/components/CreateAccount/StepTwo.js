@@ -71,7 +71,7 @@ class StepTwo extends Component {
         return !!pattern.test(str);
     }
 
-    createaccount =(e)=>{
+    createaccount = async (e)=>{
         e.preventDefault();
         if(this.state.loading)
         {
@@ -97,12 +97,6 @@ class StepTwo extends Component {
             if(!this.state.form.size){
                 flag = 1
                 error.sizeError = "Required"
-            }
-            else if(isNaN(this.state.form.size)){
-                // alert("size must be a number")
-                flag=1
-                // this.setState({sizeError: "Must be a number"})
-                error.sizeError = "Must be a number"
             }
             if(!this.state.form.founded_in){
                 flag=1
@@ -154,7 +148,7 @@ class StepTwo extends Component {
             if(flag==0){
                 console.log(this.state.form, "final form")
                 let form = this.state.form
-                this.context.stepTwoHandler(form)
+                await this.context.stepTwoHandler(form)
             }
             else{
                 this.setState({error:error})
@@ -203,7 +197,7 @@ class StepTwo extends Component {
                                     <Input errors={this.state.error.phoneError} style={{marginBottom:'24px'}} limit="200" elementType="input" label="Contact Number" inputHandler={(e)=>this.inputHandler('phone',e)}></Input>
                                 </div>
                                 {social}
-                                {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
+                                {this.state.count<5 && <button type="button" className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
                             </div>
                             <div className={styles.rightForm}>
                                 <div style={{display:'block'}} className={styles.inputcontainer}>
@@ -214,7 +208,7 @@ class StepTwo extends Component {
                                 </div>
                             </div>
                                 {this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone && <Button style={{marginTop:'20px'}} loading={this.state.loading} clicked={this.createaccount} primary width="100%">Create Account</Button>}
-                                {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone) && <Button style={{marginTop:'20px'}} looksDisabled clicked={this.createaccount} width="100%">Create Account</Button>}
+                                {!(this.state.form.founded_in && this.state.form.size && this.state.form.about && this.state.form.phone) && <Button style={{marginTop:'20px'}} loading={this.state.loading} looksDisabled clicked={this.createaccount} width="100%">Create Account</Button>}
                         </div>
                     </form>
                 </div>
