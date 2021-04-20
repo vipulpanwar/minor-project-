@@ -488,7 +488,7 @@ class NewJobForm extends React.Component{
             // await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
             
             let token= await auth.currentUser.getIdToken();
-            await axios.post("https://us-central1-oneios.cloudfunctions.net/app/create_job/",{token, job});
+            await axios.post("https://asia-south1-ensveeproduction.cloudfunctions.net/app/create_job/",{token, job});
             // await axios.post("http://localhost:5001/oneios/us-central1/app/create_job/",{token, job});
 
     
