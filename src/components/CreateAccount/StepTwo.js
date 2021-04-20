@@ -98,12 +98,6 @@ class StepTwo extends Component {
                 flag = 1
                 error.sizeError = "Required"
             }
-            else if(isNaN(this.state.form.size)){
-                // alert("size must be a number")
-                flag=1
-                // this.setState({sizeError: "Must be a number"})
-                error.sizeError = "Must be a number"
-            }
             if(!this.state.form.founded_in){
                 flag=1
                 error.founded_inError = "Required"
@@ -203,7 +197,7 @@ class StepTwo extends Component {
                                     <Input errors={this.state.error.phoneError} style={{marginBottom:'24px'}} limit="200" elementType="input" label="Contact Number" inputHandler={(e)=>this.inputHandler('phone',e)}></Input>
                                 </div>
                                 {social}
-                                {this.state.count<5 && <button className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
+                                {this.state.count<5 && <button type="button" className={styles.nooutline} onClick={this.counter}><p className = {styles.addmore}>+Add More Social Media Links</p></button>}
                             </div>
                             <div className={styles.rightForm}>
                                 <div style={{display:'block'}} className={styles.inputcontainer}>
