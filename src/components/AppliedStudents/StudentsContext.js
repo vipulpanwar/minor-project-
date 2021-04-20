@@ -92,7 +92,7 @@ class StudentsProviderComponent extends Component{
         if(newstatus!=findingstudent.status){
             console.log(studentId, newstatus);
             try {
-                await axios.post('https://us-central1-oneios.cloudfunctions.net/app/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:newstatus})
+                await axios.post('https://asia-south1-ensveeproduction.cloudfunctions.net/app/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:newstatus})
                 let updatingstudent = {...findingstudent}
                 updatingstudent.status = newstatus;
                 let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
