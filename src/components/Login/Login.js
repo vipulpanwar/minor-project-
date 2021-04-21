@@ -4,6 +4,7 @@ import logo from '../../assets/images/ensvee-logo.svg';
 import shapes from '../../assets/shapes/login-shapes.svg';
 import styles from './Login.module.css';
 import {connect } from 'react-redux';
+import Partners from './Partners';
 import { Redirect, Link } from 'react-router-dom';
 
 
@@ -25,6 +26,7 @@ class Login extends Component{
                     </div>
                 </div>
                 <div className={styles.IllustrationSide}>
+                    <Partners/>
                     <img src={shapes} className={styles.LoginShapes}/>
                 </div>
             </div>

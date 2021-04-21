@@ -222,12 +222,10 @@ class StudentsProviderComponent extends Component{
     }
 
     getDegrees = async (college)=>{
-        // let collegeDat
+
         console.log("getting data for ", college)
-        let collegeDocs = await db.collection('clginfo').doc(college).get();
-        // console.log(collegeDat, "dat")
-        // console.log(collegeDocs.data(), "College Data")
-        return collegeDocs.data()
+        let collegeDoc = (await db.collection('clginfo').where('collegeid','==', college).get()).docs[0];
+        return collegeDoc? collegeDoc.data() : {edu:{}}
     }
 
     applyFilterHandler = (filters, options)=>{

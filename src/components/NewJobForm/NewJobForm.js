@@ -3,9 +3,9 @@ import Button from '../shared/ui/Button/Button';
 import styles from './NewJobForm.module.css';
 import {CreateAlert, CreateToast} from '../../store/actions/alert';
 
-import {Slide1,TwoColSlide, OneColSlide, QualSlide, Slide2Open, SkillSlide} from './Slides';
+import {Slide1, OneColSlide, QualSlide, SkillSlide} from './Slides';
 
-import {auth, db} from '../../firebase';
+import {auth} from '../../firebase';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
@@ -479,7 +479,9 @@ class NewJobForm extends React.Component{
         job['placed'] = false
         let uid = `${9999999999999999 - Date.now()}`;
         job['uid'] = uid;
-
+        if(job['link'] && !job['link'].startsWith('http')){
+            job['link'] = 'http://' + job['link'];
+        }
         
 
         this.setState({loading:true});
