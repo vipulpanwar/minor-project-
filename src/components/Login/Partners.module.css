@@ -1,0 +1,91 @@
+.PartnersModal{
+    position: absolute;
+    width: 60%;
+    max-width: 600px;
+    height: 80vh;
+    top: 50%;
+    left: 50%;
+    background-color: white;
+    background: #FFFFFF;
+    box-shadow: 24px 24px 33px -10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    transform: translate(-40%, -50%);
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.TopBar{
+    background-color: #232D4C;
+    padding : 16px;
+    color:white;
+    display: flex;
+    gap:20px;
+    align-items: baseline;
+}
+
+.DotContainer{
+    display: flex;
+    gap:6px;
+}
+
+.DotContainer span{
+    height: 8px;
+    width: 8px;
+    border-radius: 5px;
+    background: white;
+}
+
+.DotContainer :nth-child(2){
+    opacity: 0.66;
+}
+
+.DotContainer :nth-child(3){
+    opacity: 0.33;
+}
+
+.PartnersContent{
+    height: calc((100% - 56px)/2);
+    padding: 20px 40px;
+    padding-top: 1px;
+}
+
+
+.PartnersGrid{
+    max-height: calc(100% - 64px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap:20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.PartnerTitle{
+    padding: 20px 0px;
+}
+
+.PartnerTile{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.PartnerTile span{
+    font-size: 14px;
+    line-height: 1.1em;
+    font-weight: 300;
+    margin-top: 10px;
+    display: block;
+    color: #5c5c5c;
+    height: 20px;
+}
+
+.Logo{
+    max-height:90px;
+    display: block;
+    margin: auto;
+    object-fit: contain;
+}

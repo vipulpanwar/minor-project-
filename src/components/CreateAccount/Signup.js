@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import LoginForm from './LoginForm';
+import Partners from '../Login/Partners';
 import logo from '../../assets/images/ensvee-logo.svg';
 import shapes from '../../assets/shapes/login-shapes.svg';
 import styles from '../Login/Login.module.css';
@@ -24,6 +25,7 @@ class Signup extends Component{
                     </div>
                 </div>
                 <div className={styles.IllustrationSide}>
+                    <Partners/>
                     <img src={shapes} className={styles.LoginShapes}/>
                 </div>
             </div>
