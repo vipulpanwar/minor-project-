@@ -52,7 +52,7 @@ const Partners = (props)=>{
             <p className={styles.PartnerTitle}>Our Top Recruiters</p>
             <div className={styles.PartnersGrid}>
                 <PartnerTile name="Trell" src={trell}/>
-                <PartnerTile name="TPaytm" src={paytm}/>
+                <PartnerTile name="Paytm" src={paytm}/>
                 <PartnerTile name="Byjus" src={byjus}/>
                 <PartnerTile name="Vedantu" src={vedantu}/>
                 {/* <PartnerTile name="Guru Tegh Bahadur Institute of Technology" src={gtbit}/>

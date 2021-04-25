@@ -1,8 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TopBar from './TopBar';
 import styles from './Modal.module.css';
 
 const Modal = ({show, children, style, closeHandler,...props})=>{
+   const [drag, setDrag] = useState(false)
+
+    const mouseDownHandler= (e)=>{
+        setDrag(false)
+    }
+
+    const mouseMoveHandler = (e)=>{
+        setDrag(true)
+    }
+
+    const mouseUpHandler = (e)=>{
+        if(!drag)
+        closeHandler();
+    }
+
+
     useEffect(()=>{
         if(show)
         document.body.style.overflow = "hidden";
@@ -16,8 +32,8 @@ const Modal = ({show, children, style, closeHandler,...props})=>{
     if(show)
         return (
             <div>
-                <div className={styles.Overlay} onClick={closeHandler}></div>
-                <div className={styles.ModalContainer} onClick={closeHandler}>
+                <div className={styles.Overlay} onMouseDown={mouseDownHandler} onMouseMove={mouseMoveHandler} onMouseUp={mouseUpHandler}></div>
+                <div className={styles.ModalContainer} onMouseDown={mouseDownHandler} onMouseMove={mouseMoveHandler} onMouseUp={mouseUpHandler}>
                     <div onClick={e=>e.stopPropagation()} className={[styles.Modal, styles.NewScrollBar].join(' ')} style={style}>
                         {children}
                     </div>
