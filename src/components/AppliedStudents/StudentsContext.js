@@ -42,7 +42,7 @@ class StudentsProviderComponent extends Component{
     }
 
     endOfPageHandler = ()=>{
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        if ((window.innerHeight + window.scrollY) + 50 >= document.body.offsetHeight) {
             console.log("end of page")
             if(!this.state.studentLoading && !this.state.studentLoading && this.state.hasMore){
                 console.log(this.state.applicants.length!=this.props.count.count);
