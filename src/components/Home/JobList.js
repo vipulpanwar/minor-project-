@@ -54,6 +54,7 @@ class JobList extends React.Component{
         Promise.all(jobs.map( async (job, i)=>{
           let newJob = {...job};
           let res = await axios.get('https://asia-south1-ensveeproduction.cloudfunctions.net/app/get_applied_count/' + job.id);
+          // let res = await axios.get('https://us-central1-oneios.cloudfunctions.net/app/get_applied_count/' + job.id);
           newJob['newCount'] =  res.data['newCount'];
           newJob['count'] = res.data.count;
           newJob['hiredCount'] = res.data.hired;

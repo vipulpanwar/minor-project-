@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import TopBar from './TopBar';
 import styles from './Modal.module.css';
 
 const Modal = ({show, children, style, closeHandler,...props})=>{
-   const [drag, setDrag] = useState(false)
-
-    const mouseDownHandler= (e)=>{
-        setDrag(false)
+    const [drag, setDrag] = useState(false)
+    const modalContainerRef = useRef(null);
+    const mouseDownHandler= (event)=>{
+        console.log(event, event.clientX >= document.documentElement.offsetWidth, event.clientX , document.documentElement.offsetWidth );
+        if(event.clientX >= modalContainerRef.current.scrollWidth)
+        // alert('vertical scrollbar clicked');
+        setDrag(true)
+        else
+            setDrag(false);
     }
 
     const mouseMoveHandler = (e)=>{
@@ -33,8 +38,8 @@ const Modal = ({show, children, style, closeHandler,...props})=>{
         return (
             <div>
                 <div className={styles.Overlay} onMouseDown={mouseDownHandler} onMouseMove={mouseMoveHandler} onMouseUp={mouseUpHandler}></div>
-                <div className={styles.ModalContainer} onMouseDown={mouseDownHandler} onMouseMove={mouseMoveHandler} onMouseUp={mouseUpHandler}>
-                    <div onClick={e=>e.stopPropagation()} className={[styles.Modal, styles.NewScrollBar].join(' ')} style={style}>
+                <div className={styles.ModalContainer} ref={modalContainerRef} onMouseDown={mouseDownHandler} onMouseMove={mouseMoveHandler} onMouseUp={mouseUpHandler}>
+                    <div onMouseUp={e=>e.stopPropagation()} className={[styles.Modal, styles.NewScrollBar].join(' ')} style={style}>
                         {children}
                     </div>
                 </div>

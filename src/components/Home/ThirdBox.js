@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import styles from './HomeInfo.module.css';
 import tbr from './image.svg';
-import MinimumQualifications from './MinimumQualifications'
+import MinimumQualifications from './MinimumQualifications';
 
 function ThirdBox(props) {
     return (
@@ -13,7 +13,7 @@ function ThirdBox(props) {
                         <div className = {styles.catTitle}>
                             Job Description:
                         </div>
-                        {props.job.desc}
+                        {props.job.desc.split("\n").map((line , i)=> (<Fragment key={i}>{line}<br/></Fragment>))}
                     </div>
                 </div>
             </div>

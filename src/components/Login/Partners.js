@@ -35,30 +35,30 @@ const Partners = (props)=>{
             <h4>Partners</h4>
         </div>
         <div className={styles.PartnersContent}>
-            <p className={styles.PartnerTitle}>50+ Partnered Colleges </p>
+            <p className={styles.PartnerTitle}>50+ Partner Colleges </p>
             <div className={styles.PartnersGrid}>
-                <PartnerTile name="University School of Studies" src={uss}/>
-                <PartnerTile name="Trinity Institute of Professional Studies" src={tips}/>
                 <PartnerTile name="Ramjas College" src={ramjas}/>
                 <PartnerTile name="St. Stephen College" src={stephen}/>
-                {/* <PartnerTile name="Guru Tegh Bahadur Institute of Technology" src={gtbit}/>
-                <PartnerTile name="Maharaja Surajmal Institute of Technology" src={msit}/>
+                <PartnerTile name="University School of Studies" src={uss}/>
+
                 <PartnerTile name="Maharaja Agrasen Institute Of Technology" src={mait}/>
-                <PartnerTile name="St. Stephen College" src={stephen}/> */}
+                <PartnerTile name="Maharaja Surajmal Institute of Technology" src={msit}/>
+                <PartnerTile name="Trinity Institute of Professional Studies" src={tips}/>
+                {/* <PartnerTile name="Guru Tegh Bahadur Institute of Technology" src={gtbit}/> */}
+                
+                {/* <PartnerTile name="St. Stephen College" src={adgitm}/> */}
             </div>
         </div>
             
         <div className={styles.PartnersContent}>
             <p className={styles.PartnerTitle}>Our Top Recruiters</p>
             <div className={styles.PartnersGrid}>
-                <PartnerTile name="Trell" src={trell}/>
                 <PartnerTile name="Paytm" src={paytm}/>
                 <PartnerTile name="Byjus" src={byjus}/>
+                <PartnerTile name="Trell" src={trell}/>
                 <PartnerTile name="Vedantu" src={vedantu}/>
-                {/* <PartnerTile name="Guru Tegh Bahadur Institute of Technology" src={gtbit}/>
-                <PartnerTile name="Maharaja Surajmal Institute of Technology" src={msit}/>
-                <PartnerTile name="Maharaja Agrasen Institute Of Technology" src={mait}/>
-                <PartnerTile name="St. Stephen College" src={stephen}/> */}
+                <PartnerTile name="Planetspark" src={planetspark}/>
+                <PartnerTile name="Doubt Nut" src={doubtnut}/>
             </div>
         </div>
     </div>)

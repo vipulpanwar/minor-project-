@@ -6,6 +6,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import ConfirmationModal  from '../shared/ui/Modal/deletionmodal';
 import Button from '../shared/ui/Button/Button';
+import { Fragment } from 'react';
 
 class homeInfo extends Component{
     formatDate = (timestamp)=>{
@@ -65,7 +66,7 @@ class homeInfo extends Component{
                 </div>
                 <div className = {styles.descpara}>
                 {/* 11:00 AM - Apptitude    |    12:00 PM - GD    |    5:00 PM - PI */}
-                {this.props.job.schedule}
+                {this.props.job.schedule.split("\n").map((line , i)=> (<Fragment key={i}>{line}<br/></Fragment>))}
                 </div>
             </div>
             {this.props.job.edu?

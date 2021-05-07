@@ -16,6 +16,7 @@
     "compress.js": "^1.1.2",
     "firebase": "^8.2.7",
     "jquery": "^3.5.1",
+    "js-file-download": "^0.4.12",
     "moment": "^2.29.1",
     "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
