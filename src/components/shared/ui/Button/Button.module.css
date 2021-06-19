@@ -27,6 +27,7 @@
     color:white;
     background: #D3D5DB;
     border: none;
+    cursor: default;
 }
 
 .Button:hover {
@@ -39,6 +40,10 @@
     transform: scale(0.99);
 }
 
+.Button.Disabled:hover{
+    transform: none;;
+    box-shadow: none;
+}
 
 .Loading{
     cursor: default;

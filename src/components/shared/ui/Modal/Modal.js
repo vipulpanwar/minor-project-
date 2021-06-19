@@ -2,38 +2,38 @@ import React, { useEffect, useRef, useState } from 'react';
 import TopBar from './TopBar';
 import styles from './Modal.module.css';
 
-const Modal = ({show, children, style, closeHandler,...props})=>{
-    const [drag, setDrag] = useState(false)
+const Modal = ({show, children, style, closeHandler, ...props})=>{
+    // const [drag, setDrag] = useState(false)
+    let drag = false;
     const modalContainerRef = useRef(null);
     const mouseDownHandler= (event)=>{
-        console.log(event, event.clientX >= document.documentElement.offsetWidth, event.clientX , document.documentElement.offsetWidth );
         if(event.clientX >= modalContainerRef.current.scrollWidth)
-        // alert('vertical scrollbar clicked');
-        setDrag(true)
+            drag = true;
         else
-            setDrag(false);
+            drag = false;
     }
 
     const mouseMoveHandler = (e)=>{
-        setDrag(true)
+        drag=true;
     }
 
     const mouseUpHandler = (e)=>{
         if(!drag)
-        closeHandler();
+            closeHandler();
     }
 
 
     useEffect(()=>{
+        // console.log("show", show)
         if(show)
-        document.body.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
         else
-        document.body.style.overflow = "";
+            document.body.style.overflow = "";
     return ()=>{
-        console.log('cleanup')
+        // console.log('cleanup')
             document.body.style.overflow = "";
         }
-    },  [])
+    })
     if(show)
         return (
             <div>

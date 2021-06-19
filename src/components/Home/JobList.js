@@ -13,7 +13,7 @@ import Button from '../../components/shared/ui/Button/Button.js';
 import HomeInfo from './HomeInfo.js';
 import Modal from '../shared/ui/Modal/Modal';
 import Loader from '../shared/ui/Loader/Loader';
-import {db} from '../../firebase';
+import {cloudFnURL, db} from '../../firebase';
 import axios from 'axios';
 import ConfirmationModal from '../shared/ui/Modal/deletionmodal';
 
@@ -53,8 +53,8 @@ class JobList extends React.Component{
 
         Promise.all(jobs.map( async (job, i)=>{
           let newJob = {...job};
-          let res = await axios.get('https://asia-south1-ensveeproduction.cloudfunctions.net/app/get_applied_count/' + job.id);
-          // let res = await axios.get('https://us-central1-oneios.cloudfunctions.net/app/get_applied_count/' + job.id);
+          // let res = await axios.get('https://asia-south1-ensveeproduction.cloudfunctions.net/app/get_applied_count/' + job.id);
+          let res = await axios.get( cloudFnURL + '/get_applied_count/' + job.id);
           newJob['newCount'] =  res.data['newCount'];
           newJob['count'] = res.data.count;
           newJob['hiredCount'] = res.data.hired;

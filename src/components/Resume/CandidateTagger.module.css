@@ -8,12 +8,11 @@
 
 .innercontainer{
     background: #F4F4F6;
-    border-radius: 10px;
-    /* height: 108px; */
+    padding-top:10px;
     padding-left: 13px; 
     padding-right: 13px;
-    /* width: 396px; */
-    /* display:inline-block; */
+    
+    border-radius: 10px;
     vertical-align: top;
 }
 
@@ -32,6 +31,17 @@
     font-size: 14px;
     line-height: 17px;
     color: #232D4C;
+}
+
+.contactContainer.Loading{
+    background: #f4f4f4;
+    color:transparent;
+    border:none;
+}
+
+.contactContainer.Loading img,
+.contactContainer.Loading .number{
+    opacity: 0;
 }
 
 .candidatetaggertext{
@@ -59,6 +69,8 @@
 }
 
 
+
+
 .spantext{
     font-weight: 500;
     font-size: 16px;
@@ -76,6 +88,9 @@
 .printOnly{
     display: none;
 }
+
+
+
 
 @media print {
     .innercontainer, .contactContainer{

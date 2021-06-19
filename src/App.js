@@ -12,6 +12,7 @@ import HomeContainer  from "./components/Home/home";
 import LoginContainer  from "./components/Login/Login";
 import Signup from "./components/CreateAccount/Signup";
 import AppliedStudentsContainer from './components/AppliedStudents/AppliedStudents';
+import StandaloneResumeContainer from './components/AppliedStudents/StandaloneResumeContainer';
 import ProtectedRoute from './components/shared/ProtectedRoute/ProtectedRoute';
 import AppLoading from './components/shared/AppLoader/AppLoader';
 import CreateAccount from './components/CreateAccount/CreateAccount';
@@ -38,6 +39,7 @@ function App(props) {
           <Route path="/forgotpassword" component={ForgotPassword} />
           <ProtectedRoute path="/createaccount" component={CreateAccount} ignoreVerification  />
           <ProtectedRoute path="/jobs/:jobId/hired" render= {(props)=><AppliedStudentsContainer hired {...props}/>}/>
+          <ProtectedRoute path="/jobs/:jobId/v2/resume/:studentId" component= {StandaloneResumeContainer}/>
           <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
           <ProtectedRoute matchPath={true} path="/" component={HomeContainer}/>
         </Switch>

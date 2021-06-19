@@ -1,0 +1,365 @@
+import { CreateToast } from '../../store/actions/alert';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import React , { createContext, Component} from 'react';
+import { cloudFnURL, db } from '../../firebase'
+import userPlaceholder from '../../assets/images/user_placeholder.jpg';
+import { storage } from '../../firebase'
+export const StudentsContext = createContext();
+
+
+class StudentsProviderComponent extends Component{
+    state = {
+        applicants: [],
+        studentLoading: true,
+        filters: {  degree: 'All',
+                    course: 'All',
+                    field: 'All',
+                    flag: 'All',
+                    collegeid: 'All',
+                    skillValue: [],
+                    selectedCollegeData: undefined,     
+        },
+        options: {  degreeOptions: ['All'],
+                    courseOptions: ['All'],
+                    branchOptions: ['All'],
+                    collegeOptions: ['All'],
+        },
+        searchValue: '',
+        showHired: this.props.hired,
+        hasMore : true,
+    }
+
+    componentDidMount (){
+        if(this.props.hired) this.setState({showHired:true})
+        
+        this.getCollegeList();
+        // if(this.props.fetchOnMount)
+            this.fetchStudents(this.state.filters, false, this.props.hired)
+    }
+
+    componentWillMount(){
+        window.addEventListener('scroll', this.endOfPageHandler);
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.endOfPageHandler);
+    }
+
+
+    endOfPageHandler = ()=>{
+        if ((window.innerHeight + window.scrollY) + 50 >= document.body.offsetHeight) {
+            console.log("end of page")
+            if(!this.state.studentLoading && this.state.hasMore){
+                console.log(this.state.applicants.length!=this.props.count.count);
+                this.setState({studentLoading:true})
+                this.fetchStudents(this.state.filters, true)
+            }
+        }
+    }
+
+    updateflag = async (studentId, newflag)=>{
+ 
+        let findingstudent = this.state.applicants.find((student)=>{return student.id == studentId});
+        if(newflag==findingstudent.flag) return 0;
+        
+      
+        try{
+            await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({flag:newflag});
+            let updatingstudent = {...findingstudent}
+            updatingstudent.flag = newflag;
+
+            let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
+            let applicantsCopy = [...this.state.applicants]
+
+            applicantsCopy[index] = updatingstudent;
+            this.setState({applicants:applicantsCopy})
+        }
+        catch(error){
+            console.log(error)
+            this.props.createToast({message:"Something Went Wrong"})
+        }
+        
+    }
+
+    updatestatus = async (studentId, newstatus, callback=()=>{})=>{
+
+        let student = this.state.applicants.find((student)=>{return student.id == studentId});
+        if(newstatus!=student.status){
+            console.log(studentId, newstatus);
+            try {
+                
+                await axios.post( cloudFnURL + '/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:newstatus})
+                // await axios.post('https://us-central1-oneios.cloudfunctions.net/app/change_applicant_status/', {'applicantId':studentId, jobId:this.props.jobId, status:newstatus})
+                let updatedStudent = {...student}
+                let index = this.state.applicants.findIndex((student)=>{return student.id == studentId});
+                let applicantsCopy = [...this.state.applicants]
+                updatedStudent.status = newstatus; 
+                updatedStudent.resumeMessage = {
+                    message: newstatus== 'Hired' ? "This applicant has been hired and will be moved to hired." : "This applicant has been rejected and will be removed from the list.",
+                    type:newstatus
+                }
+                applicantsCopy[index] = updatedStudent;
+
+                callback();
+                this.setState({applicants:applicantsCopy})
+                let message = "Student " + newstatus + "!"
+                this.props.createToast({message:message});
+            } catch (error) {
+                this.props.createToast({message:"Something went wrong"});
+                console.log(error)
+            }
+                            // await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(studentId).update({status:newstatus});
+        }
+    }
+
+    setSearch = (search)=>{
+        let emails = {email:search}
+        this.fetchStudents(emails);
+    }
+
+    mapFiltersToQuery =(query, filters = this.state.filters)=>{
+        for (let filterKey in filters){
+            if(!filters[filterKey] || filters[filterKey]?.length===0) continue;
+            if(filterKey == 'selectedCollegeData') continue;
+
+
+            switch(filters[filterKey]){
+                case 'All':
+                case '':
+                case 'selectedCollegeData':
+                    break;
+                
+                case 'course':
+                case 'field':
+                    query = query.where(`edu.${filters.degree}.${filterKey}`, '==', filters[filterKey]);
+                    break;
+                
+                case 'skillValue':
+                    query = query.where('skillkey', 'array-contains-any', filters[filterKey]);
+                    break;
+                
+                default:
+                    query = query.where(filterKey, '==', filters[filterKey])
+                    break;
+
+            }
+            console.log(filters[filterKey], 'filters')
+        }
+        return query;
+    }
+
+    mapApplicantDocsToObj=(snapshot)=>{
+        let applicants = [];
+        snapshot.forEach(applicantDoc=>{
+            let applicant = applicantDoc.data();
+            applicant.hskills = this.skillSorter(applicant.hskills)
+            applicant.sskills = this.skillSorter(applicant.sskills)
+            applicant.id= applicantDoc.id;
+            applicant.profilePic = userPlaceholder;
+            applicant.doc = applicantDoc
+            applicants.push(applicant);
+            // console.log(applicant);
+        });
+        return applicants;
+    }
+
+    fetchStudents = async (filters= this.state.filters, moreStudents=false, showHired= false, fetchLimit=20)=>{
+        const status = this.props.hired ? "Hired" : "Applied"
+        let applicants = [];
+        let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').limit(fetchLimit);
+
+        query = query.where('status', '==', status);
+        query = this.mapFiltersToQuery(query, filters)
+
+        if(moreStudents){
+            let studentsLength= this.state.applicants.length;
+            let lastStudent = this.state.applicants[studentsLength - 1]
+            let lastStudentDoc = await db.collection('jobs').doc(this.props.jobId).collection('applicants').doc(lastStudent.id).get();
+            query = query.startAfter(lastStudentDoc)
+        }
+
+        let studentDocslist = await query.get();
+        console.log(studentDocslist, "studoclist");
+
+        applicants = this.mapApplicantDocsToObj(studentDocslist);
+
+        if(moreStudents)
+            applicants = [...this.state.applicants, ...applicants];
+
+        this.setState({applicants: applicants, studentLoading: false, hasMore: (applicants.length==fetchLimit)},()=>this.getImages(applicants));
+    
+        console.log(applicants, "applicants renewed")
+    }
+ 
+    fetchAStudent = async (email)=>(
+        new Promise(async(resolve, reject)=>{
+            const status = this.props.hired ? "Hired" : "Applied";
+            let change = false, newApplicants = [];
+            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', status).limit(1);
+            query = this.mapFiltersToQuery(query);
+
+            const applicantIndex = this.state.applicants.findIndex(applicant=> applicant.email == email);
+            let applicant = this.state.applicants.find(applicant=> applicant.email == email);
+            let afterApplicant =  this.state.applicants[applicantIndex + 1];
+
+            if(!applicant){
+                let snapshot = (await query.where("email", '==', email).get());
+                applicant = this.mapApplicantDocsToObj(snapshot)[0];
+                if(applicant)
+                newApplicants.push(applicant);
+            }
+
+            if(!afterApplicant){
+                let appDoc = applicant.doc;
+                let snapshot = (await query.startAfter(appDoc).limit(1).get());
+                afterApplicant = this.mapApplicantDocsToObj(snapshot)[0];
+                if(afterApplicant)
+                newApplicants.push(afterApplicant);
+            }
+
+            
+            
+            if(newApplicants.length)
+                this.setState((prev)=>{
+                    let applicants = [...prev.applicants, ...newApplicants];
+                    return {applicants :applicants.sort((a,b)=> Number(a.id) - Number(b.id))}
+                }, ()=>{
+                    // this.getImages([applicant])
+                    resolve(applicant);
+                })
+            else resolve(applicant);
+        })
+        
+    )
+
+    fetchNextStudent = async (email)=>(
+        new Promise(async(resolve, reject)=>{
+            const status = this.props.hired ? "Hired" : "Applied";
+            let change = false;
+            let query =  db.collection('jobs').doc(this.props.jobId).collection('applicants').where('status', '==', status).limit(1);
+            query = this.mapFiltersToQuery(query);
+
+            const applicantIndex = this.state.applicants.findIndex(applicant=> applicant.email == email);
+            let applicant = this.state.applicants.find(applicant=> applicant.email == email);
+            let afterApplicant =  this.state.applicants[applicantIndex + 1];
+
+            if(!applicant){
+                let snapshot = (await query.where("email", '==', email).get());
+                applicant = this.mapApplicantDocsToObj(snapshot)[0];
+                if(applicant) change = true;
+                if(!applicant) return console.log('NO STUDENT');
+            }
+
+            if(!afterApplicant){
+                let appDoc = applicant.doc;
+                let snapshot = (await query.startAfter(appDoc).limit(1).get());
+                afterApplicant = this.mapApplicantDocsToObj(snapshot)[0];
+            }
+            
+            
+            this.setState((prev)=>{
+                let applicants = [...prev.applicants];
+                if(applicant) applicants.push(applicant);
+                if(afterApplicant) applicants.push(afterApplicant);
+                return {applicants :applicants.sort((a,b)=> Number(a.id) - Number(b.id))}
+            }, ()=>{
+                this.getImages([applicant])
+                resolve(applicant);
+            })
+        })
+        
+    )
+
+    skillSorter = (propskills) =>{
+        let skills = Object.keys(propskills);
+        let skillMap = {}
+        skills.sort()
+        skills.forEach((skill)=>{
+            skillMap[skill] = true
+        })
+        return skillMap
+    }
+
+    getCollegeList = async () =>{
+        let colleges = []
+        let collegesDocs = await db.collection('suggestion').get();
+        collegesDocs.forEach(collegeDoc=>{
+            let college = collegeDoc.data();
+            // college.id = collegeDoc.id;
+            colleges.push(college);
+            console.log(college);
+        });
+    
+        let collegeNames = colleges[0].name
+        console.log(collegeNames, "colleges")
+        collegeNames.unshift("All")
+        let options = {...this.state.options}
+        options.collegeOptions = collegeNames
+        console.log(options, "Options")
+        this.setState({options: options})
+    }
+
+    getImages = async (applicants) =>{
+        applicants.forEach(async applicant=>{
+            let src = ""
+            let profilepicLink = "users/"+ applicant.uid + '/myphoto.png'
+            try{
+                src = await storage.ref().child(profilepicLink).getDownloadURL()
+                applicant.profilePic = src
+                console.log(applicant.profilePic)
+                let index = this.state.applicants.findIndex((app)=>app.uid==applicant.uid);
+                let fetchedApplicant = {...this.state.applicants[index]}
+                fetchedApplicant.profilePic = src
+                let applicantsCopy = [...this.state.applicants]
+                applicantsCopy[index] = fetchedApplicant
+                this.setState({applicants: applicantsCopy})
+            }
+            catch(error){
+                console.log(error)
+            }
+        })
+    }
+
+    getDegrees = async (college)=>{
+        console.log("getting data for ", college)
+        let collegeDoc = (await db.collection('clginfo').where('collegeid','==', college).get()).docs[0];
+        return collegeDoc? collegeDoc.data() : {edu:{}}
+    }
+
+    applyFilterHandler = (filters, options)=>{
+        console.log("filter Input Taker Called");
+        if(this.state.filters!=filters){
+            this.setState({filters:filters, options:options})
+            console.log(filters, "filters")
+            this.fetchStudents(filters);
+        }
+        else{
+            console.log("same filters")
+        }
+    }
+
+    render(){
+        let contextData = {
+            state: this.state, 
+            updateFlag: this.updateflag, 
+            updateStatus: this.updatestatus, 
+            filterfunction: this.applyFilterHandler, 
+            fetchStudents: this.fetchStudents, 
+            setSearch: this.setSearch, 
+            getDegrees: this.getDegrees,
+            fetchAStudent: this.fetchAStudent 
+        }
+    return (
+        <StudentsContext.Provider value={contextData}>
+            {this.props.children}
+        </StudentsContext.Provider>)
+    }
+    
+}
+
+const mapDispatchToProps = (dispatch)=>({
+    createToast: (toast)=>dispatch(CreateToast(toast))
+})
+
+export const StudentsProvider = connect(null, mapDispatchToProps)(StudentsProviderComponent);

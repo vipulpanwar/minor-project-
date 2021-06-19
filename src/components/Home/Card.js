@@ -120,6 +120,8 @@ const formatQual = (edu)=>{
   if(!edu) return null;
  Object.keys(edu).forEach(qual=>{
       let [college,degree,course,branch,year] = qual.split('#');
+      if(!year)
+        return
       let index = formatedEdu.findIndex(fQual=> fQual.course == course && fQual.degree == degree && fQual.college == college);
       if(index>-1)
       {

@@ -11,6 +11,7 @@
     border-radius: 12px;
     width: 106px;
     height: 103px;
+    overflow: hidden;
     object-fit: cover;
 }
 
@@ -68,7 +69,6 @@
 
 .SkillList li 
 {
-    
     background: #FFD666;
     border-radius: 4px;
     padding: 3px 11px;

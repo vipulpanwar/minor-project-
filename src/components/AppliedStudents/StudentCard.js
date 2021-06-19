@@ -10,44 +10,22 @@ import Good from './images/good.svg';
 import Average from './images/average.svg';
 import { storage } from '../../firebase'
 import New from './images/new.svg';
+import ProfilePicture from '../Resume/ProfilePicture';
 
 
 const StudentCard = (props)=>{
-    let cardRef = useRef(null);
-    // let [PlaceHolder, setPlaceholder] = useState(userPlaceholder);
-    // useEffect(() => {
-    //     userPlaceHolderFinder()
-    // }, [])
-
-    // const userPlaceHolderFinder = async ()=>{
-    //     let profilepicLink = "users/"+ props.student.uid + '/myphoto.png'
-    //     let src
-    //     try{
-    //         src = await storage.ref().child(profilepicLink).getDownloadURL()
-    //         console.log("image fetched for " + props.student.uid)
-    //         setPlaceholder(src)
-    //     }
-    //     catch(error){
-    //         console.log(error)
-    //     }   
-    // }
-    let PlaceHolder = userPlaceholder
-    if(props.student.profilePic!="Placeholder"){
-        PlaceHolder = props.student.profilePic
-    }
-
 
     return(
         // !props.student.loading?
-        <div ref={cardRef} className={styles.StudentCard}>
+        <div  className={styles.StudentCard}>
             {props.student.flag=="Excellent" && <div className={styles.excellent}><img src={Excellent} alt={props.student.flag}/></div>}
             {props.student.flag=="Good" && <div className={styles.excellent}><img src={Good} alt={props.student.flag}/></div>}
             {props.student.flag=="Average" && <div className={styles.excellent}><img src={Average} alt={props.student.flag}/></div>}
             {props.student.flag=="New" && <div className={styles.excellent}><img src={New} alt={props.student.flag}/></div>}
             <div className={styles.StudentInfo}>
-                <img className={styles.StudentImage} src={PlaceHolder}/>
+                <ProfilePicture className={styles.StudentImage} uid={props.student.uid} />
+                {/* <img className={styles.StudentImage} src={PlaceHolder}/> */}
                 <StudentData student={props.student}/>
-                
             </div>
             <Skills  oneLiner="oneLiner" style={{margin:0, marginRight:18, padding:0}} hardSkills={props.student.hskills} softSkills={props.student.sskills}/>
         </div>

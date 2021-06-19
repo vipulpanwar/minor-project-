@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import StudentCard from './StudentCard';
 import styles from './StudentList.module.css';
-import {StudentsContext} from './StudentsContext';
+import {StudentsContext} from './StudentsContext.js';
 import Loader from '../shared/ui/Loader/Loader';
 import {LoadingStudentCard} from './StudentCard';
 
@@ -22,7 +22,11 @@ class StudentList extends Component{
 StudentList.contextType = StudentsContext;
 
 const mapStudentListToCards = (studentList, props)=>{
-    return studentList.map((student, i)=>{if(i<props.count.newCount&&student.flag=='new'){student.flag='New'} return<StudentCard loaded={true} key={i} student={student}/>})
+    return studentList.map((student, i)=>{
+        if ( i < props.count?.newCount&&student.flag=='new')
+            student.flag='New' 
+            return <StudentCard loaded={true} key={i} student={student}/>
+        })
 }
 
 const mapLoadingStudentList = ()=>{

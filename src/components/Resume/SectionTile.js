@@ -12,7 +12,7 @@ import ProjectPic from './images/MaskGroup.svg';
 export default (props)=>{
 
     return(
-            <div className="project">
+            <div className= { `project ${props.loading ? 'Loading' : null}`}>
               <div className="project-name-flexbox nobreakOnPrint">
                 {(props.type=="Experience")?<div style={{backgroundColor: '#ead2ff'}} className="experience-pic"><img style={{display:'block'}} className='project-pic' src={ExperiencePic} /></div>:null}
                 {(props.type=="Education")?<div style={{backgroundColor: '#ffe9e9'}} className="experience-pic"><img className='project-pic' style={{display:'block'}} src={EducationPic} /></div>:null}
@@ -21,8 +21,8 @@ export default (props)=>{
                 {(props.type=="Courses")?<div style={{backgroundColor: '#fdedd3'}} className="experience-pic"><img className='project-pic' style={{display:'block'}} src={CoursesPic}  /></div>:null}
               <div className="project-name nobreakOnPrint">
                 <div className="title-date-div nobreakOnPrint">
-                  <p className="project-title nobreakOnPrint">{props.info.title}</p>
-                  <p className="project-date nobreakOnPrint"> 
+                  <p className="project-title nobreakOnPrint" >{props.info.title}</p>
+                  <p className="project-date nobreakOnPrint" > 
                     { props.info.subTitle ? <span>{props.info.subTitle}</span> : null }
                     { props.info.subTitle2 ? <span>{props.info.subTitle2}</span> : null }
                   </p>

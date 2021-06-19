@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import './Filter.css';
 import X from '../../assets/icons/x.svg';
 import FilterTag from './FilterTag.js';
-import FilterMultiTag from './FilterMultiTag.js';
 import Button from '../shared/ui/Button/Button.js';
 import {connect} from 'react-redux';
-import { ApplyFilters as ApplyFiltersAction} from '../../store/actions/jobs';
 import SkillInput from '../shared/Skills/SkillInput';
 import {InputLabel} from '../shared/ui/Input/Input';
-import {StudentsContext} from './StudentsContext';
+import {StudentsContext} from './StudentsContext.js';
 import {db} from '../../firebase'
 import { Fragment } from 'react';
 import { CreateToast } from '../../store/actions/alert';
+import { call } from 'file-loader';
 
  class Filter extends Component{
 
@@ -42,21 +41,31 @@ import { CreateToast } from '../../store/actions/alert';
   }
 
   async componentDidMount(){
-    let options = this.context.state.options
+    // let options = this.context.state.options
     let collegeOptions = this.props.job.recipient ? Object.keys(this.props.job.recipient):[];
-      this.setState({
-        degreeValue : this.context.state.filters.degree,
-        courseValue : this.context.state.filters.course,
-        branchValue : this.context.state.filters.field,
-        tagValue : this.context.state.filters.flag,
-        collegeValue : this.context.state.filters.collegeid,
-        selectedCollegeData : this.context.state.filters.selectedCollegeData,
-        skillValue: this.context.state.filters.skillValue,
-        degreeOptions: [...options.degreeOptions],
-        branchOptions: [...options.branchOptions],
-        collegeOptions:["All", ...collegeOptions],
-        courseOptions: [...options.courseOptions],
-      })
+
+    this.getCollegeData(this.context.state.filters.collegeid, ()=>{
+      this.getDegreeOptions(this.context.state.filters.collegeid)
+      this.getCourseOptions(this.context.state.filters.degree)
+      this.getBranchOptions(this.context.state.filters.course)
+    })
+    
+    this.setState({
+      degreeValue : this.context.state.filters.degree,
+      courseValue : this.context.state.filters.course,
+      branchValue : this.context.state.filters.field,
+      // tagValue : this.context.state.filters.flag,
+      collegeValue : this.context.state.filters.collegeid,
+      // selectedCollegeData : this.context.state.filters.selectedCollegeData,
+      skillValue: this.context.state.filters.skills,
+      // branchOptions: [...options.branchOptions],
+      collegeOptions:["All", ...collegeOptions],
+      // degreeOptions: [...options.degreeOptions],
+      // courseOptions: [...options.courseOptions],
+    })
+
+    
+    
     
     // let colleges = []
     //   let collegesDocs = await db.collection('clginfo').get();
@@ -76,20 +85,22 @@ import { CreateToast } from '../../store/actions/alert';
 
   }
 
-  getCollegeOptions=()=>{
-    let collegeOptions = ['All'];
-    console.log(this.state.collegeData, "coldat")
-    this.state.collegeData.forEach(college=>{
-      collegeOptions.push(college.id);
-      console.log(collegeOptions);
-    });
-    this.setState({collegeOptions: collegeOptions})
+  getCollegeData= async (college, callback=()=>{}) =>{
+    if(college !='All'){
+      let collegeDoc = (await db.collection('clginfo').where('collegeid','==', college).get()).docs[0];
+      this.setState({selectedCollegeData: collegeDoc.data()}, callback)
+    }
   }
 
+  getDegrees = async (college)=>{
+    let collegeDoc = (await db.collection('clginfo').where('collegeid','==', college).get()).docs[0];
+    return collegeDoc? collegeDoc.data() : {edu:{}}
+}
+
   getDegreeOptions= async (selectedCol)=>{
-    if(selectedCol!="All"){
-      let college = await this.context.getDegrees(selectedCol)
-      let degrees = Object.keys(college.edu)
+    if(selectedCol!="All") {
+      let college = await this.getDegrees(selectedCol);
+      let degrees = Object.keys(college.edu);
       degrees.unshift('All')
       this.setState({degreeOptions: degrees, selectedCollegeData: college})
       console.log(degrees, 'degrees')
@@ -163,7 +174,7 @@ import { CreateToast } from '../../store/actions/alert';
   }
 
   skillsInputHandler = (e)=>{
-    if(e.target.value.length>9){
+    if(e.target.value.length > 9){
       this.props.createToast({message:"You can't search for more than 10 skills"})
     }
     else
@@ -174,21 +185,16 @@ import { CreateToast } from '../../store/actions/alert';
 
   applyFiltersHandler = (e)=>{
     let filters = {
+      ...this.context.state.filters,
       degree: this.state.degreeValue,
       course: this.state.courseValue,
       field: this.state.branchValue,
-      flag: this.state.tagValue,
       collegeid: this.state.collegeValue,
-      skillValue :this.state.skillValue,
-      selectedCollegeData :this.state.selectedCollegeData,
+      skills :this.state.skillValue,
+      
     }
-    let options = { 
-        degreeOptions: this.state.degreeOptions,
-        courseOptions: this.state.courseOptions,
-        branchOptions: this.state.branchOptions,
-        collegeOptions: this.state.collegeOptions,
-    }
-    this.context.filterfunction(filters, options)
+    
+    this.context.setFilters(filters)
     this.props.closeHandler()
   }
 
@@ -202,8 +208,6 @@ import { CreateToast } from '../../store/actions/alert';
           {this.props.campus && <FilterTag inputHandler={this?.degreeInputHandler} value={this.state.degreeValue} name="Degree" selected={this.state.degreeValue} options={this.state.degreeOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.courseInputHandler} value={this.state.courseValue} name="Course" selected={this.state.courseValue} options={this.state.courseOptions}/>}
           {this.props.campus && <FilterTag inputHandler={this?.branchInputHandler} value={this.state.branchValue} name="Branch" selected={this.state.branchValue} options={this.state.branchOptions}/>}
-          {/* {this.props.campus && <FilterTag inputHandler={this?.tagInputHandler} name="Tag" selected={this.state.tagValue} options={this.state.tagOptions} />} */}
-          {/* {!this.props.campus && <FilterMultiTag inputHandler={this?.skillsInputHandler} name="Skills" selected={this.state.tagValue} options={this.state.tagOptions} />} */}
           
           {!this.props.campus && <Fragment>
               <InputLabel label="Skills" style={{fontSize:14, marginTop:20}}/>

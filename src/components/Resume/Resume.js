@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import './Resume.css';
 
 import TopBar from './TopBar.js';
@@ -8,103 +8,76 @@ import Skills from './Skills.js';
 import Section from './Section.js';
 import CandidateTagger from './CandidateTagger.js';
 
-import {connect} from 'react-redux';
-import {FetchStudent as getStudentAction} from '../../store/actions/jobs';
-import {withRouter, Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { Fragment } from "react";
-import { StudentsContext } from '../AppliedStudents/StudentsContext';
+
 import { CSSTransition } from "react-transition-group";
-import ReactToPrint from 'react-to-print';
-import Download from './images/download.svg'
+import ResumeMessage from "./ResumeMessage";
 
-class Resume extends React.PureComponent{
-    state = {
-        student : undefined,
-    }
-    async componentDidMount(){
-        let selectedstudent = this.context.state.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
-        this.setState({student: selectedstudent});
-    }
-    componentDidUpdate(){
-        let selectedstudent = this.context.state.applicants.find((stud)=> this.props.match.params.studentId === stud.email)
-        if((this.state.student.email!=this.props.match.params.studentId)||(this.state.student.flag!=selectedstudent.flag)||((this.state.student.status!=selectedstudent.status))){
-            this.setState({student: selectedstudent});
+const loadingResume ={
+    edu: {
+        bachelors: {
+            field: "ramdi baazi",
+            course :"test course",
+            clg_board:"sfsjlks",
+            year: 2002
         }
-    }
-
-    render (){
-        let student = this.state.student;
-        let prev, next 
-        if(student != undefined){
-            [prev,next] = getPrevAndNextStudent (this.state.student?.email, this.context.state.applicants)
+    },
+    name:"TEST NAME",
+    degree:"Test",
+    about: "kslkdjfslkdjflksj sfn lksfn dlk dl jfkljfkgldjf glkdjflgdjf  lkgdjflkg  jdlkfgjldkfjg ldkflg fjkdflk gdjlkfjldkf ldkf jgldfj ld fjl djflgdj flgjfl  kslkdjfslkdjflksj sfn lksfn dlk dl jfkljfkgldjf glkdjflgdjf  lkgdjflkg  jdlkfgjldkfjg ldkflg fjkdflk gdjlkfjldkf ldkf jgldfj ld fjl djflgdj flgjfl kslkdjfslkdjflksj sfn lksfn dlk dl jfkljfkgldjf glkdjflgdjf  lkgdjflkg  jdlkfgjldkfjg ldkflg fjkdflk gdjlkfjldkf ldkf jgldfj ld fjl djflgdj flgjfl ",
+    phone: "sdksl",
+    email: "test",
+    hskills:{},
+    sskills: {},
+    exp :{
+        "1": {
+            title:"test title",
+            desc : "test desc skd slk dj slkdjlksjdkflsj lk slkjdlsjdlk sld sl d\n test desc skd slk dj slkdjlksjdkflsj lk slkjdlsjdlk sld sl d"
         }
-        return(
-            <div>
-            <div ref={el => (this.componentRef = el)}>
-                {!this.state.student?<h1>Loading...</h1>: 
-                <Fragment>
-                    <TopBar close={this.props.close} />
-                    <div className="resume-container">
-                    <CandidateTagger student={student}/>
-                    <CSSTransition appear unmountOnExit in={Boolean(next)} timeout={100}>
-                        <div className='next-button-container hideOnPrint'>
-                            <Link className="next-button" to={`/jobs/${this.props.match.params.jobId}/student/${next}`}>
-                                <img src={NextArrow} />
-                            </Link>
-                        </div>
-                    </CSSTransition>
+    },
+    loading:true
+}
 
-                    <CSSTransition appear unmountOnExit in={Boolean(prev)} timeout={100} >
-                        <div className='prev-button-container hideOnPrint'>
-                            <Link className="prev-button" to={`/jobs/${this.props.match.params.jobId}/student/${prev}`}>
-                                <img src={NextArrow} />
-                            </Link>
-                        </div>
-                    </CSSTransition>
+const Resume = (props) => {
+    const student = props.student ? props.student : loadingResume;
+    const componentRef = useRef(null);
 
-                    <Profile refer= {this.componentRef} jobid={this.props.match.params.jobId} student={student}/>
+    let prev = props.prev, next = props.next;
+    let loading = !Object.keys(student);
 
-                    <Skills hardSkills={student.hskills} softSkills={student.sskills} />
-                
-                    {Object.keys(student.exp).length !=0 && <Section type="Experience" data={student.exp}/>}
-                    
-                    {Object.keys(student.project).length !=0 && <Section type="Projects" data={student.project}/>}
-                    
-                    {Object.keys(student.edu).length !=0 && <Section type="Education" data={student.edu} />}
-                
-                    {Object.keys(student.course).length !=0 && <Section type="Courses" data={student.course}/>}
-            
-                    {Object.keys(student.accomp).length !=0 && <Section type="Accomplishments" data={student.accomp}/>}
+    return(
+        <div ref={componentRef}>
+            <Fragment>
+                <div className="resume-container">
+                <ResumeMessage {...student?.resumeMessage}/>
+                <CandidateTagger updateFlag={props.updateFlag} student={student}/>
+                <CSSTransition unmountOnExit appear classNames='side-button' in={Boolean(next)} timeout={100}>
+                    <div className='next-button-container hideOnPrint'>
+                        <Link className="button next-button" to={props.next || ""}>
+                            <img src={NextArrow} />
+                        </Link>
                     </div>
-                </Fragment>
-                }
-            </div>
-            </div>
-        )
-    }
+                </CSSTransition>
+
+                <CSSTransition unmountOnExit appear classNames="side-button" in={Boolean(prev)} timeout={100} >
+                    <div className='prev-button-container hideOnPrint'>
+                        <Link className=" button prev-button" to={props.prev || ""}>
+                            <img src={NextArrow} />
+                        </Link>
+                    </div>
+                </CSSTransition>
+                <Profile refer={componentRef} updateStatus={props.updateStatus} student={student}/>
+                <Skills hardSkills={student.hskills} softSkills={student.sskills} loading={student.loading} />
+                { Object.keys(student.exp).length !=0 && <Section type="Experience" data={student.exp} loading={student.loading}/>}
+                { loading && Object.keys(student.project).length !=0 && <Section type="Projects" data={student.project}/>}
+                { loading && Object.keys(student.edu).length !=0 && <Section type="Education" data={student.edu} />}
+                { loading && Object.keys(student.course).length !=0 && <Section type="Courses" data={student.course}/>}
+                { loading && Object.keys(student.accomp).length !=0 && <Section type="Accomplishments" data={student.accomp}/>}
+                </div>
+            </Fragment>
+        </div>
+    )
 } 
 
-const getPrevAndNextStudent = (email, students)=>{
-    let index= students.findIndex(student=> student.email == email);
-    let prev, next;
-    if( index > 0)
-        prev = students[index - 1]?.email;
-    if( index < students.length)
-        next = students[index + 1]?.email;
-
-    return [prev, next]
-}
-
-const mapDispatchToProps = (dispatch)=>({
-    getStudent: (email)=>dispatch(getStudentAction(email))
-})
-
-const mapStateToProps = (state, ownProps)=>{ 
-    let student = state.jobs.appliedStudents.find(stud=> stud.email== ownProps.match.params.studentId)
-    return {
-        student: student
-    }
-}
-Resume.contextType = StudentsContext;
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Resume))
+export default Resume;

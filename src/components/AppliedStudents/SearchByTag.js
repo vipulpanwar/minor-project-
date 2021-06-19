@@ -1,5 +1,5 @@
 import styles from './tagsearch.module.css'
-import { StudentsContext } from "./StudentsContext";
+import { StudentsContext } from "./StudentsContext.js";
 import React, {Component, useContext, useEffect,useLayoutEffect, useState} from 'react';
 
 const SearchByTag = (props)=> {
@@ -15,10 +15,11 @@ const SearchByTag = (props)=> {
     if(currentFlag=='Average') activeLink = 3 
 
     const tagInputHandler = (newTag) => {
-        let filters = context.state.filters;
+        let filters = {...context.state.filters};
         filters.flag = newTag;
         // alert(newTag)
-        context.fetchStudents(filters);
+        context.setFilters(filters);
+        // context.fetchBulk(filters);
     }
 
     useEffect(()=>{

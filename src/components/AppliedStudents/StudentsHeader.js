@@ -4,9 +4,9 @@ import logo from '../../assets/images/ensvee-logo-white.svg';
 import backIcon from '../../assets/icons/back.svg';
 import SearchBar from './SearchBar';
 import {Link} from 'react-router-dom'
-import { StudentsContext } from "./StudentsContext";
+import { StudentsContext } from "./StudentsContext.js";
 import Kebab, {KebabOption as Option} from '../shared/ui/KebabMenu/KebabMenu';
-import {auth} from '../../firebase';
+import {apiURL, auth} from '../../firebase';
 import axios from 'axios';
 import { CreateToast } from '../../store/actions/alert';
 import {connect} from 'react-redux';
@@ -18,7 +18,7 @@ class Studentsheader extends Component{
      downloadXlsHandler= async()=>{
         this.props.createToast({message:'Downloading Xlsx...'})
         let token = await auth.currentUser.getIdToken();
-        let res = await axios.get(`https://api.ensvee.com/jobs/${this.props.jobId}/download_xls`, {
+        let res = await axios.get(`${apiURL}/jobs/${this.props.jobId}/download_xls`, {
             headers:{token},
             responseType: 'arraybuffer',
         })
@@ -27,19 +27,19 @@ class Studentsheader extends Component{
 
     render(){
     return(<header className={[styles.StudentsHeader, this.props.loading?styles.Loading :null].join(" ") }>
-        <Kebab style={{position:'absolute', right:52}}>
+        {/* <Kebab style={{position:'absolute', right:52}}>
             <Option clicked={this.downloadXlsHandler}>Download Xls</Option>
-        </Kebab>
+        </Kebab> */}
         <Link to="/" className={styles.BackButton}><img src={backIcon}></img></Link>
         <Link to="/" ><img src={logo} className={styles.Logo}></img></Link>
-        <h2 className={styles.Title}> {!this.context.state.showHired?`${this.props.counts.count || 0} Students Applied`:`${this.props.counts.hired} Students Hired`}</h2>
+        <h2 className={styles.Title}> {!this.props.showHired?`${this.props.counts?.count || 0} Students Applied`:`${this.props.counts?.hired || 0} Students Hired`}</h2>
         <h4 className={styles.SubTitle}>{this.props.subTitle}</h4>
-        <SearchBar filterToggle= {this.props.filterToggle}/>
+        <SearchBar showHired={this.props.showHired} filterToggle= {this.props.filterToggle} downloadXls={this.downloadXlsHandler}/>
     </header>)
     }
 }
 
-Studentsheader.contextType = StudentsContext
+// Studentsheader.contextType = StudentsContext
 
 
 const mapDispatchToProps = (dispatch)=>({

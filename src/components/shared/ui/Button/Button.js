@@ -8,9 +8,11 @@ const button = (props) => {
   if (props.disabled) classes.push(styles.Disabled);
   if (props.looksDisabled) classes.push(styles.Disabled);
   
+
+
   return (
     <button
-      onClick={props.clicked}
+      onClick={(e)=> props.disabled? null:props.clicked(e)}
       className={classes.join(" ")}
       style={{ width: props.width, ...props.style }}
       disabled={props.disabled}

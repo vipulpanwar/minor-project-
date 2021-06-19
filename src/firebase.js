@@ -7,10 +7,11 @@ import "firebase/firestore";
 import 'firebase/storage';
 
 
-let mode = "PROD";
-let firebaseConfig;
+export const mode = "TEST";
+let firebaseConfig, apiURL, cloudFnURL, storageURL;
 
-if(mode =="TEST")
+if( mode =="TEST" )
+{
   firebaseConfig = {
     apiKey: "AIzaSyCs0UYaGPtNYF8zBovv_2Cf9CCKG1bBSXQ",
     authDomain: "oneios.firebaseapp.com",
@@ -20,6 +21,10 @@ if(mode =="TEST")
     appId: "1:45895614087:web:1cff5752c619a3752bc222",
     measurementId: "G-LXPKZQ7PQ4"
   };
+  apiURL = "http://test.api.ensvee.com"
+  cloudFnURL = "https://us-central1-oneios.cloudfunctions.net/app";
+  storageURL = "https://firebasestorage.googleapis.com/v0/b/oneios.appspot.com/o/";
+}
 //   firebaseConfig = {
 //       apiKey: "AIzaSyBCKOMTrDv-Bci19nLP612gcTCIdlCdYXQ",
 //       authDomain: "ensveetest.firebaseapp.com",
@@ -29,7 +34,7 @@ if(mode =="TEST")
 //       appId: "1:79896177397:web:a1a5afbfc32942b5e7f3bc",
 //       measurementId: "G-ZY4YQ578X7"
 //     };
-else
+else{
   firebaseConfig = {
     apiKey: "AIzaSyCR0VMmyYOghmzn7q8WXDXw78Ynq0aUFjo",
     authDomain: "ensveeproduction.firebaseapp.com",
@@ -39,15 +44,21 @@ else
     appId: "1:974330689207:web:df46e2feba1f9ae87b3f32",
     measurementId: "G-MM1DFY5X2V"
   };
+  apiURL = "https://api.ensvee.com"
+  cloudFnURL = "https://ap-south1-ensveeproduction.cloudfunctions.net/app";
+  storageURL = "https://firebasestorage.googleapis.com/v0/b/ensveeproduction.appspot.com/o/";
+}
+
 // Initialize Firebase
 console.log("mode ", mode)
 firebase.initializeApp(firebaseConfig);
-// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 firebase.analytics();
+
 export const auth= firebase.auth();
 export const storage = firebase.storage();
 export const db = firebase.firestore();
+export {apiURL, cloudFnURL, storageURL} ;
 console.log("Firebase inited");
-auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
 
 export default firebase;

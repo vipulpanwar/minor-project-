@@ -11,7 +11,10 @@ import { Redirect, Link } from 'react-router-dom';
 class Login extends Component{
     render(){
         if(this.props.isAuthenticated)
-        return <Redirect to="/"/>
+        {
+            const from = this.props.location.state.from || { from: { pathname: "/" }}
+            this.props.history.push(from)
+        }
 
         return(
             <div className={styles.LoginGrid}>

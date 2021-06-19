@@ -5,7 +5,7 @@ import {CreateAlert, CreateToast} from '../../store/actions/alert';
 
 import {Slide1, OneColSlide, QualSlide, SkillSlide} from './Slides';
 
-import {auth} from '../../firebase';
+import {auth, cloudFnURL} from '../../firebase';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
@@ -446,6 +446,7 @@ class NewJobForm extends React.Component{
                     qualSection[inputKey].value.forEach(invited=>{
                         invited.year.forEach(year=>{
                             invited.branch.forEach(branch=>{
+                                edu[`${invited.college}#${invited.degree}#${invited.course}#${year}`] = true;
                                 edu[`${invited.college}#${invited.degree}#${invited.course}#${branch}#${year}`] = true;
                             })
                         })
@@ -490,7 +491,9 @@ class NewJobForm extends React.Component{
             // await db.collection('jobs').doc(uid).collection('count').doc(uid).set({count:0, newCount:0,hired:0, rejected:0, lastCheck: new Date()})
             
             let token= await auth.currentUser.getIdToken();
-            await axios.post("https://asia-south1-ensveeproduction.cloudfunctions.net/app/create_job/",{token, job});
+            // await axios.post("https://asia-south1-ensveeproduction.cloudfunctions.net/app/create_job/",{token, job});
+            await axios.post( cloudFnURL + "/create_job/",{token, job});
+
             // await axios.post("http://localhost:5001/oneios/us-central1/app/create_job/",{token, job});
 
     

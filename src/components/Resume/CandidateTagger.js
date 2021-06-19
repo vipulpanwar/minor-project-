@@ -1,51 +1,37 @@
 import React from "react";
 import {Component} from "react"; 
 import style from './CandidateTagger.module.css';
-import firebase from "../../firebase";
 import Button from "../shared/ui/Button/Button";
-import db from '../../firebase';
-import { StudentsContext } from '../AppliedStudents/StudentsContext';
 import Phone from './images/phone.svg'
 import Email from './images/email.svg'
 
+const buttonStyle = {
+    padding:"14px 26px 14px 26px", 
+    marginRight:"16px"
+}
 
 class CandidateTagger extends Component{
 
+    GoodMaker = () => this.pusher("Good");        
+    ExcellentMaker = () => this.pusher("Excellent");
+    AverageMaker = () => this.pusher("Average");
+    
+    pusher = (newflag) => this.props.updateFlag(newflag)
+
     render(){
-        const GoodMaker = () =>{
-            pusher("Good");
-        }
-        
-        
-        const ExcellentMaker = () =>{
-            pusher("Excellent");
-        }
-        
-        const AverageMaker = () =>{
-            pusher("Average");
-        }
-        
-        const pusher = (newflag) =>{
-            this.context.updatef(this.props.student.id, newflag)
-        }
+      
+
       return(
         <div className = {style.outercontainer}>
         <div className = {style.innercontainer}>
-            <p className = {style.candidatetaggertext}><br/>Tag Candidate</p>
-            <br />
+            <p className = {style.candidatetaggertext}>Tag Candidate</p>
             <div className= {style.buttoncontainer}>
-            <a onClick={ExcellentMaker}>
-                <Button primary={this.props.student.flag?.toLowerCase()=="excellent"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Excellent</Button>
-            </a>
-            <a onClick={GoodMaker}>
-                <Button primary={this.props.student.flag?.toLowerCase()=="good"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Good</Button>
-            </a>
-            <a onClick={AverageMaker}>
-                <Button primary={this.props.student.flag?.toLowerCase()=="average"} style={{padding:"14px 26px 14px 26px", marginRight:"16px"}}>Average</Button>
-            </a>
+                <Button disabled={this.props.student.loading} clicked={this.ExcellentMaker} primary={this.props.student.flag?.toLowerCase()=="excellent"} style={buttonStyle}>Excellent</Button>
+                <Button disabled={this.props.student.loading} clicked={this.GoodMaker} primary={this.props.student.flag?.toLowerCase()=="good"} style={buttonStyle}>Good</Button>
+                <Button disabled={this.props.student.loading} clicked={this.AverageMaker} primary={this.props.student.flag?.toLowerCase()=="average"} style={buttonStyle}>Average</Button>
             </div>
         </div>
-        <div className={style.contactContainer}>
+        <div className={ [style.contactContainer, this.props.student.loading?style.Loading: null].join(" ")}>
             Contact
             <div className={style.numberdiv}>
                 <img src={Phone}/>
@@ -64,8 +50,5 @@ class CandidateTagger extends Component{
       )
   }
 }
-
-CandidateTagger.contextType = StudentsContext;
-
 
 export default CandidateTagger

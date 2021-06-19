@@ -10,7 +10,7 @@ export default  (props)=>{
             <div className="section-container">
               <p className="section-title  dontBreakAfter dontBreakBefore"> {props.type=='Accomplishments'?'Awards':props.type} </p>
               <div className="dontBreakBefore section-section">
-                { props.data? mapDataToSectionTile(props.data, props.type) : null     }
+                { props.data? mapDataToSectionTile(props.data, props.type, props.loading) : null     }
               </div>
             </div>
             </div>
@@ -19,7 +19,7 @@ export default  (props)=>{
 
 
 
-const mapDataToSectionTile = (data, type)=>{
+const mapDataToSectionTile = (data, type, loading)=>{
   let Info;
   switch(type){
     case 'Experience':
@@ -38,7 +38,7 @@ const mapDataToSectionTile = (data, type)=>{
       Info = mapStudentToInfo(data);
       break;
   }
-  return Object.keys(Info).map( (key ,i )=>(<SectionTile type={type} key={i} info={Info[key]}/>))
+  return Object.keys(Info).map( (key, i)=>(<SectionTile loading={loading} type={type} key={i} info={Info[key]}/>))
 }
 
 const mapStudentToInfo = (student)=>{

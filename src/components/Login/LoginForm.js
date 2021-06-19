@@ -5,7 +5,8 @@ import ErrorBox from './ErrorBox';
 
 import { connect } from "react-redux";
 import {Login as loginAction} from '../../store/actions/auth'
-import { auth } from '../../firebase'
+import { auth } from '../../firebase';
+import {withRouter} from 'react-router-dom';
 
 class LoginForm extends Component {
     state = {
@@ -56,7 +57,7 @@ class LoginForm extends Component {
 
     login = (email, password)=>{
         auth.signInWithEmailAndPassword(email, password)
-            .then(async user=>{
+            .then( user=>{
                 this.setState({isLoading:false})                
             }
             )

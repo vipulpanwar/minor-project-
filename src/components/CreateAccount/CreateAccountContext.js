@@ -1,5 +1,5 @@
-import React , { createContext, Component, createRef, useCallBack, useRef, useState, useEffect, useLayoutEffect} from 'react';
-import {db} from '../../firebase'
+import React , { createContext, Component} from 'react';
+import {cloudFnURL, db} from '../../firebase'
 import { storage } from '../../firebase'
 import {CreateAlert} from '../../store/actions/alert';
 import {Logout} from '../../store/actions/auth';
@@ -60,8 +60,8 @@ class CreateAccountProviderComponent extends Component{
         try{
             await db.collection("company").doc(this.props.user.uid).set(updater);
             let token= await auth.currentUser.getIdToken();
-            axios.post("https://asia-south1-ensveeproduction.cloudfunctions.net/app/company_created/",{token});
-            // axios.post("https://us-central1-oneios.cloudfunctions.net/app/company_created/",{token});
+            // axios.post("https://asia-w1-ensveeproduction.cloudfunctions.net/app/company_created/",{token});
+            axios.post( cloudFnURL + "/company_created/", {token});
             this.props.logout();
             this.props.createAlert({subtitle:'Your profile verification is under process. Kindly wait for 24 hours.', title:"Profile Created", code:'success'})
         }

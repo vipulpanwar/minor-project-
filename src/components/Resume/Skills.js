@@ -3,8 +3,6 @@ import React from 'react';
 import './Resume.css';
 import SkillTag from './SkillTag.js'
 import { Fragment } from "react";
-import Button from '../shared/ui/Button/Button';
-let rejectstyle = {marginRight:"12px", color: "#D0021B", borderColor:"#D0021B"}
 
 export default  (props)=>{
     // const arr = [...myMap].map(([name, value]) => ({ name, value }));
