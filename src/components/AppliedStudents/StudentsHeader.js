@@ -6,10 +6,12 @@ import SearchBar from './SearchBar';
 import {Link} from 'react-router-dom'
 import { StudentsContext } from "./StudentsContext.js";
 import Kebab, {KebabOption as Option} from '../shared/ui/KebabMenu/KebabMenu';
+import Button from "../shared/ui/Button/Button";
 import {apiURL, auth} from '../../firebase';
 import axios from 'axios';
 import { CreateToast } from '../../store/actions/alert';
 import {connect} from 'react-redux';
+import { withRouter } from "react-router";
 const FileDownload = require('js-file-download');
 
 
@@ -25,11 +27,22 @@ class Studentsheader extends Component{
         FileDownload(res.data, `${this.props.subTitle}_students_data.xlsx`)
     }
 
+    goToHired = ()=>{
+        this.props.history.push(`/jobs/${this.props.jobId}/hired`);
+    }
+    goToApplied = ()=>{
+        this.props.history.push(`/jobs/${this.props.jobId}`);
+    }
+
     render(){
     return(<header className={[styles.StudentsHeader, this.props.loading?styles.Loading :null].join(" ") }>
         {/* <Kebab style={{position:'absolute', right:52}}>
             <Option clicked={this.downloadXlsHandler}>Download Xls</Option>
         </Kebab> */}
+        <div className={styles.RightButtonTray}>
+            <Button clicked={this.props.showHired? this.goToApplied : this.goToHired} className={styles.TopRightButton}>{this.props.showHired?"Applicants": "Hired Applicants"}</Button>
+            <Button clicked={this.downloadXlsHandler} className={styles.TopRightButton}>Download Xls</Button>
+        </div>
         <Link to="/" className={styles.BackButton}><img src={backIcon}></img></Link>
         <Link to="/" ><img src={logo} className={styles.Logo}></img></Link>
         <h2 className={styles.Title}> {!this.props.showHired?`${this.props.counts?.count || 0} Students Applied`:`${this.props.counts?.hired || 0} Students Hired`}</h2>
@@ -47,5 +60,5 @@ const mapDispatchToProps = (dispatch)=>({
   })
 
 
-export default connect(null, mapDispatchToProps) (Studentsheader)
+export default connect(null, mapDispatchToProps) (withRouter(Studentsheader))
 

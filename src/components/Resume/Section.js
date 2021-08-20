@@ -47,7 +47,7 @@ const mapStudentToInfo = (student)=>{
   for(degrees in student){
     education[degrees] = {
       'title': `${[degrees]} - ${student[degrees].percent}%`,
-      'subTitle': `${student[degrees].clg_board} ${student[degrees].course? ' • ': null} ${student[degrees].course} ${student[degrees].field? ' • ': null} ${student[degrees].field} • ${student[degrees].year}`
+      'subTitle': `${student[degrees].clg_board} ${student[degrees].course? ' • ': ""} ${student[degrees].course} ${student[degrees].field? ' • ': ""} ${student[degrees].field} • ${student[degrees].year}`
     }
   }
 

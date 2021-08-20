@@ -60,7 +60,7 @@ class StudentsProviderComponent extends Component {
                 let applicantsCopy = [...this.state.applicants]
                 updatedStudent.status = newstatus; 
                 updatedStudent.resumeMessage = {
-                    message: newstatus== 'Hired' ? "This applicant has been hired and will be moved to hired." : "This applicant has been rejected and will be removed from the list.",
+                    message: newstatus== 'Hired' ? "This applicant has been hired" : "This applicant has been rejected and will be removed from the list.",
                     type:newstatus
                 }
                 applicantsCopy[index] = updatedStudent;
@@ -87,7 +87,7 @@ class StudentsProviderComponent extends Component {
         this.fetchBulk(filters);    
     }
 
-    fetchBulk = async (filters= this.state.filters, more=false, limit=2)=>{
+    fetchBulk = async (filters= this.state.filters, more=false, limit=10)=>{
         
         this.setState({studentLoading:true});
         if(!more)

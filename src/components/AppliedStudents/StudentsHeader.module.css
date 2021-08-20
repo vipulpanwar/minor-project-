@@ -49,3 +49,19 @@
     position: absolute;
     left: 50px;
 }
+
+.RightButtonTray{
+    position: absolute;
+    right: 50px;
+    display: flex;
+    gap:8px;
+}
+
+.TopRightButton{
+    border:1px solid white;
+    background: transparent;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    white-space: nowrap;
+}

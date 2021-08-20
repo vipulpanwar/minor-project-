@@ -10,9 +10,13 @@ import SearchByTag from './SearchByTag'
 
 class SearchBar extends Component{
 
+
     searchInputHandler=(e)=>{
         let search = e.target.value;
-        this.context.setSearch(search);
+        clearTimeout(this.timer)
+        this.timer = setTimeout(()=>{
+            this.context.setSearch(search);
+        },1000)
     }
 
     render(){
@@ -22,9 +26,9 @@ class SearchBar extends Component{
             {!this.props.showHired && <Button clicked={this.props.filterToggle} width="unset" style={{marginLeft:20, padding:21, borderColor:'#D3D5DB'}}>
                 <img className={styles.Icon} src={filterIcon}></img>
             </Button>}
-            <Button clicked={this.props.downloadXls} width="unset" style={{marginLeft:10, padding:"0px 22px", borderColor:'#D3D5DB'}}>
+            {/* <Button clicked={this.props.downloadXls} width="unset" style={{marginLeft:10, padding:"0px 22px", borderColor:'#D3D5DB'}}>
                 <img className={styles.Icon} src={downloadIcon}/>
-            </Button>
+            </Button> */}
         </div>)
     }
 }

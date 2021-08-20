@@ -30,7 +30,7 @@ const SkillInput = (props)=>{
                 <button className={[styles.AddBtn,inputVal?styles.Active:null].join(" ")}><img src={RoundedPlus}/></button>
             </form>
             <div className={styles.SkillList}>
-                {skills.map((skill, i)=><Skill skill={skill} key={i} crossClicked={()=>removeSkill(skill)}/>)}
+                {skills.map((skill, i)=><Skill size={14} skill={skill} key={i} crossClicked={()=>removeSkill(skill)}/>)}
             </div>
 
         </div>

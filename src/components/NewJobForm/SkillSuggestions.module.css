@@ -1,0 +1,25 @@
+.SuggestionContainer{
+    height: 100px;
+    overflow: auto;
+    margin-bottom: 5px;
+}
+
+.SuggestionTitle{
+    margin-top: -10px;
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+
+.Skill{
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.SkillNotSelected{
+    background: #eee;
+}
+
+.SkillSelected{
+    background: #D3D5DB;
+}

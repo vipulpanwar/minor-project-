@@ -1,0 +1,77 @@
+.QualPresets{
+    max-width: 400px;
+    margin: auto;
+    width: 100%;
+    margin-top:30px;
+}
+
+.PresetHeader {
+    font-size: 14px;
+    color:#AAAAAA;
+}
+
+.Preset{
+    width: 100%;
+    cursor: pointer;
+    background: #e9e9e9;
+    border-radius: 4px;
+    padding: 18px 22px;
+    transition: background-color 0.1s ease-in-out;
+    margin-bottom: 10px;
+
+}
+
+.Preset .Title {
+    color: #4A90E2;
+    font-weight: 500;
+}
+
+.Preset .Subtitle {
+    color : #919191;
+    font-size: 14px;
+    margin-top: -4px
+}
+
+.Preset:hover {
+    background-color: #DEF2FB;
+}
+
+.Preset:active {
+    background-color: #D0ECF9;
+}
+
+.PresetSelected {
+    background: #4A90E2;
+}
+.PresetSelected .Title{
+    color: white
+}
+
+.PresetSelected .Subtitle{
+    color: rgba(255, 255, 255, 0.59);
+}
+
+.PresetSelected:hover{
+    background: #6AA3E7;
+}
+
+
+.PresetList {
+    overflow: auto;
+    height: 300px;
+    padding-right: 10px;
+}
+
+
+.NoPresets {
+    height: 100%;
+    width: 100%;
+    background: #f7f7f7;
+    border-radius: 4px;
+    color: #aaaa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}

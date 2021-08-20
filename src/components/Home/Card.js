@@ -119,19 +119,24 @@ const formatQual = (edu)=>{
   let formatedEdu = [];
   if(!edu) return null;
  Object.keys(edu).forEach(qual=>{
-      let [college,degree,course,branch,year] = qual.split('#');
-      if(!year)
-        return
+      
+      if(qual.split('#').length !== 4)
+       return;
+      
+
+      let [college,degree,course,year] = qual.split('#');
+
+  
       let index = formatedEdu.findIndex(fQual=> fQual.course == course && fQual.degree == degree && fQual.college == college);
       if(index>-1)
       {
-          if(formatedEdu[index].branch.includes(branch)==false)
-              formatedEdu[index].branch.push(branch);
+          // if(formatedEdu[index].branch.includes(branch)==false)
+          //     formatedEdu[index].branch.push(branch);
           if(formatedEdu[index].year.includes(year)==false)
               formatedEdu[index].year.push(year);
       }
       else
-          formatedEdu.push({college, degree, course, branch:[branch], year:[year]})
+          formatedEdu.push({college, degree, course, year:[year]})
   });
   return formatedEdu
 }

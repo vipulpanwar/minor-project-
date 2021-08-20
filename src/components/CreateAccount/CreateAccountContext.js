@@ -51,7 +51,7 @@ class CreateAccountProviderComponent extends Component{
             updater.social_media =data.social_media
             updater.verified=false
             updater.useremail = this.props.user.email
-            
+            updater.createdAt = new Date();
         let url = await this.imgUploader(this.state.img)
         updater.logo = url
         // console.log(url.['[PromiseResult]'])

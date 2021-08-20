@@ -10,9 +10,10 @@ import { Redirect, Link } from 'react-router-dom';
 
 class Login extends Component{
     render(){
+
         if(this.props.isAuthenticated)
         {
-            const from = this.props.location.state.from || { from: { pathname: "/" }}
+            const from = this.props.location?.state?.from || { pathname: "/" }
             this.props.history.push(from)
         }
 

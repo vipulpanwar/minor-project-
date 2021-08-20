@@ -4,8 +4,6 @@ import ButtonImage from './images/buttonimage.svg'
 import ThirdBox from './ThirdBox.js'
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import ConfirmationModal  from '../shared/ui/Modal/deletionmodal';
-import Button from '../shared/ui/Button/Button';
 import { Fragment } from 'react';
 
 class homeInfo extends Component{
@@ -87,10 +85,10 @@ class homeInfo extends Component{
 
 const Qualification= ({college, degree, course, branch, year})=>{
 
-    let Branches = branch.reduce((str, curBranch)=> str + curBranch + ', ', '');
+    // let Branches = branch.reduce((str, curBranch)=> str + curBranch + ', ', '');
     let Years = year.reduce((str, curYear)=> str + curYear + ', ', '');
     Years=Years.slice(0, Years.length -2)
-    Branches=Branches.slice(0, Branches.length -2)
+    // Branches=Branches.slice(0, Branches.length -2)
 
 
     return(
@@ -99,7 +97,7 @@ const Qualification= ({college, degree, course, branch, year})=>{
                 {college}
             </div>
             <div className={styles.CourseList}>
-                {Years} Year | {degree} | {course} | {Branches}
+                {Years} Year | {degree} | {course} {/*Branches*/}
             </div>
         </div>)
 }

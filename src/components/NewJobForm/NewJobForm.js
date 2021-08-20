@@ -3,7 +3,7 @@ import Button from '../shared/ui/Button/Button';
 import styles from './NewJobForm.module.css';
 import {CreateAlert, CreateToast} from '../../store/actions/alert';
 
-import {Slide1, OneColSlide, QualSlide, SkillSlide} from './Slides';
+import {Slide1, OneColSlide, QualSlide, SkillSlide, PresetSlide} from './Slides';
 
 import {auth, cloudFnURL} from '../../firebase';
 import {connect} from 'react-redux';
@@ -118,7 +118,10 @@ class NewJobForm extends React.Component{
                     skip:true,
                 }
             },
-            "2-campus":{
+            "2-campus": {
+
+            },
+            "3-campus":{
                 "Qualifications":{
                     value:[],
                     validation:"required",
@@ -165,7 +168,8 @@ class NewJobForm extends React.Component{
                 },
                 
             },
-            "3-campus":{
+   
+            "4-campus":{
                 "Schedule":{
                     value:"",
                     elementType:"textarea",
@@ -183,6 +187,7 @@ class NewJobForm extends React.Component{
                     limit:4000,
                 }
             },
+            
             "2-open":{
                 "Schedule":{
                     value:"",
@@ -222,7 +227,7 @@ class NewJobForm extends React.Component{
         form = {...this.state.form};
         
         let nextButton = {...this.state.nextButton};
-        const maxSteps = open? 3: 3;
+        const maxSteps = open? 3: 4;
 
         let showBack = true;
 
@@ -370,12 +375,13 @@ class NewJobForm extends React.Component{
           '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
           '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
           '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-        return !!pattern.test(str);
+
+        return !!pattern.test(str) || true;
       }
       
     inviteHandler=(invited)=>{
     
-        let step = this.state.form.step;
+        let step = "3-campus";
         let qualifications = {...this.state.form[step].Qualifications};
         let oldInvited = [...this.state.form[step].Qualifications.value];
 
@@ -389,6 +395,38 @@ class NewJobForm extends React.Component{
             oldInvited.splice(index,1)
 
         qualifications.value = [invited,...oldInvited];
+
+        this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
+    }
+
+    addPreset = (presetArr)=>{
+        let step = "3-campus";
+        let qualifications = {...this.state.form[step].Qualifications};
+        qualifications.value = [];
+
+        presetArr.forEach(preset=>{
+            preset.qualifications.forEach(invited=>{
+                let oldInvited = qualifications.value;
+
+                let index = oldInvited.findIndex((val)=>{
+                    return val.degree == invited.degree &&
+                    val.course == invited.course &&
+                    val.college == invited.college
+                })
+                
+                console.log("old ", this.state.form[step].Qualifications.value)
+                
+                if(index > -1)
+                {
+                    let old = oldInvited.splice(index,1)[0]
+                    // console.log(old)
+                    invited.year = Array.from(new Set([ ...invited.year, ...old.year]));
+                }
+
+                qualifications.value = [invited,...oldInvited];
+                // console.log("invited", invited, "oldInvited", oldInvited);
+            })
+        })
 
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
     }
@@ -411,6 +449,13 @@ class NewJobForm extends React.Component{
         this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
     }
     
+    setQualificationValue=(value)=>{
+        let step = "3-campus";
+        let qualifications = {...this.state.form[step].Qualifications};
+        qualifications.value = value;
+        this.setState({form:{...this.state.form, [step]:{...this.state.form[step], Qualifications:qualifications}}});
+    }
+
     async createJob(){
 
         if(this.state.loading) return;
@@ -418,13 +463,13 @@ class NewJobForm extends React.Component{
         let form = {...this.state.form};
         let open = this.state.form["1"]["Job Type"].value =="Off Campus";
         job['campus'] = !open;
-        const openSteps = ["1","2-open","3-open"], campusSteps= ["1", "2-campus", "3-campus"];
+        const openSteps = ["1","2-open","3-open"], campusSteps= ["1", "3-campus", "4-campus"];
         let steps = open? openSteps : campusSteps;
         
         steps.forEach(sectionKey=>{
             console.log(sectionKey);
             let section = form[sectionKey];
-            if(sectionKey == "2-campus") return;
+            if(sectionKey == "3-campus") return;
 
             for(let inputKey in section){
                 let input = section[inputKey];
@@ -434,7 +479,7 @@ class NewJobForm extends React.Component{
         });
 
         let edu = {}, percentages={'diploma': createPercentage(0), 'bachelors':createPercentage(0), 'masters':createPercentage(0),'ssc':createPercentage(0), 'hsc':createPercentage(0)};
-        let qualSection = form['2-campus'];
+        let qualSection = form['3-campus'];
         
         
 
@@ -445,10 +490,10 @@ class NewJobForm extends React.Component{
                 if(inputKey=='Qualifications')
                     qualSection[inputKey].value.forEach(invited=>{
                         invited.year.forEach(year=>{
-                            invited.branch.forEach(branch=>{
-                                edu[`${invited.college}#${invited.degree}#${invited.course}#${year}`] = true;
-                                edu[`${invited.college}#${invited.degree}#${invited.course}#${branch}#${year}`] = true;
-                            })
+                            edu[`${invited.college}#${invited.degree}#${invited.course}#${year}`] = true;
+                            // invited.branch.forEach(branch=>{
+                            //     edu[`${invited.college}#${invited.degree}#${invited.course}#${branch}#${year}`] = true;
+                            // })
                         })
                         // edu.push(`${invited.college}#${invited.degree}#${invited.course}#${invited.branch}#${invited.year}`)
                     })
@@ -476,7 +521,7 @@ class NewJobForm extends React.Component{
         job['easy_apply'] = this.state.form['1']['Easy Apply'].value =="Ensvee" ? true : false; 
         job['creatorid'] = this.props.user.uid;
         job['created'] = new Date();
-        job['deadline'] = new Date(job['deadline'] + " 00:00:00");
+        job['deadline'] = new Date(job['deadline'] + " 23:59:59");
         job['placed'] = false
         let uid = `${9999999999999999 - Date.now()}`;
         job['uid'] = uid;
@@ -514,10 +559,16 @@ class NewJobForm extends React.Component{
             case "1":
                 Slide = <Slide1 easyHandler={this.easyApplyInputHandler} jobHandler={this.jobTypeInputHandler} step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
                 break;    
+            
             case "2-campus":
+                Slide =  <PresetSlide addPreset={this.addPreset} setQual={this.setQualificationValue}  step={this.state.form.step} />;
+                break;
+            
+            case "3-campus": 
                 Slide = <QualSlide  inviteHandler={this.inviteHandler} deleteInviteHandler={this.deleteInviteHandler}  step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
                 break;
-            case "3-campus":
+
+            case "4-campus":
             case "2-open":
                 Slide = <OneColSlide step={this.state.form.step} inputs={this.state.form[this.state.form.step]} inputHandler={this.inputChangeHandler}/>;
                 break;

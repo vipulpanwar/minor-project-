@@ -41,10 +41,10 @@ const loadingResume ={
 
 const Resume = (props) => {
     const student = props.student ? props.student : loadingResume;
-    const componentRef = useRef(null);
+    let componentRef = useRef(null);
 
     let prev = props.prev, next = props.next;
-    let loading = !Object.keys(student);
+    let loading = student.loading;
 
     return(
         <div ref={componentRef}>
@@ -70,10 +70,10 @@ const Resume = (props) => {
                 <Profile refer={componentRef} updateStatus={props.updateStatus} student={student}/>
                 <Skills hardSkills={student.hskills} softSkills={student.sskills} loading={student.loading} />
                 { Object.keys(student.exp).length !=0 && <Section type="Experience" data={student.exp} loading={student.loading}/>}
-                { loading && Object.keys(student.project).length !=0 && <Section type="Projects" data={student.project}/>}
-                { loading && Object.keys(student.edu).length !=0 && <Section type="Education" data={student.edu} />}
-                { loading && Object.keys(student.course).length !=0 && <Section type="Courses" data={student.course}/>}
-                { loading && Object.keys(student.accomp).length !=0 && <Section type="Accomplishments" data={student.accomp}/>}
+                { !loading && Object.keys(student.project).length !=0 && <Section type="Projects" data={student.project}/>}
+                { !loading && Object.keys(student.edu).length !=0 && <Section type="Education" data={student.edu} />}
+                { !loading && Object.keys(student.course).length !=0 && <Section type="Courses" data={student.course}/>}
+                { !loading && Object.keys(student.accomp).length !=0 && <Section type="Accomplishments" data={student.accomp}/>}
                 </div>
             </Fragment>
         </div>

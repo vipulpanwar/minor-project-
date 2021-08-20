@@ -29,6 +29,7 @@ export default class QualInput extends Component{
         edu:{},
 
         college:'',
+        invitedCourses: []
     }
 
     componentDidMount(){(async()=>{
@@ -38,9 +39,9 @@ export default class QualInput extends Component{
 
         let degreeOptions = this.getDegreeOptions();
         let courseOptions = this.getCourseOptions();
-        let branchOptions = this.getBranchOptions();
+        // let branchOptions = this.getBranchOptions();
 
-        this.setState({collegeOptions ,degreeOptions, courseOptions, branchOptions});
+        this.setState({collegeOptions ,degreeOptions, courseOptions});
     })();}
 
 
@@ -104,38 +105,49 @@ export default class QualInput extends Component{
         this.setState({edu, collegeValue: college},()=>{
             let degreeOptions = this.getDegreeOptions();
             let courseOptions = this.getCourseOptions();
-            let branchOptions = this.getBranchOptions();    
-            this.setState({college:e.target.value, degreeOptions, courseOptions, branchOptions, degreeValue:"", courseValue:"",branchValue:[], yearValue:[]});        
+            // let branchOptions = this.getBranchOptions();    
+            this.setState({college:e.target.value, degreeOptions, courseOptions, degreeValue:"", courseValue:"", yearValue:[]});        
         });
     }
 
     degreeInputHandler = (e)=>{
         let degree = e.target.value;
         let courseOptions = this.getCourseOptions(degree);
-        let branchOptions = this.getBranchOptions("Select");
+        // let branchOptions = this.getBranchOptions("Select");
         // let [branchValue, yearValue] = this.getBranchYearValue();
-        this.setState({degreeValue:degree, courseOptions, courseValue:"", branchOptions:branchOptions, branchValue:[], yearValue:[]})    
+        // let yearValue = this.getYearValue();
+        this.setState({degreeValue:degree, courseOptions, courseValue:"",  yearValue:[]})    
     }
 
     courseInputHandler = (e)=>{
         let course = e.target.value;
-        let branchOptions = this.getBranchOptions(course);
-        let [branchValue, yearValue] = this.getBranchYearValue(course);
-        this.setState({courseValue:course, branchOptions, branchValue, yearValue})       
+        // let branchOptions = this.getBranchOptions(course);
+        // let [branchValue, yearValue] = this.getBranchYearValue(course);
+        let yearValue = this.getYearValue(course);
+        this.setState({courseValue:course,  yearValue})       
     }
 
-    branchInputHandler = (e)=>{
-        let branch = e.target.value;
-        this.setState({branchValue:branch})    
-    }
+    // branchInputHandler = (e)=>{
+    //     let branch = e.target.value;
+    //     this.setState({branchValue:branch})    
+    // }
 
-    getBranchYearValue=(courseVal)=>{
+    // getBranchYearValue=(courseVal)=>{
+    //     let degree = this.state.degreeValue;
+    //     let course = courseVal|| this.state.courseValue;
+    //     let selected = this.props.value;
+    //     let selectedCourse = selected.find(sel=> sel.course== course && sel.degree == degree && sel.college == this.state.college);
+    //     console.log(selectedCourse, "selected Course", this.props.value)
+    //     return [selectedCourse?.branch || [], selectedCourse?.year || []]
+    // }
+
+    getYearValue=(courseVal)=>{
         let degree = this.state.degreeValue;
         let course = courseVal|| this.state.courseValue;
         let selected = this.props.value;
         let selectedCourse = selected.find(sel=> sel.course== course && sel.degree == degree && sel.college == this.state.college);
-        console.log(selectedCourse, "selected Course", this.props.value)
-        return [selectedCourse?.branch || [], selectedCourse?.year || []]
+        // console.log(selectedCourse, "selected Course", this.props.value)
+        return selectedCourse?.year || []
     }
 
     inputHandler=(key, value)=>{
@@ -147,11 +159,11 @@ export default class QualInput extends Component{
         let invited = {
             degree: this.state.degreeValue,
             course: this.state.courseValue,
-            branch: this.state.branchValue,
+            // branch: this.state.branchValue,
             year: this.state.yearValue,
             college: this.state.college
         }
-        if(!invited.degree || !invited.college || !invited.branch.length || !invited.year.length || !invited.course)
+        if(!invited.degree || !invited.college || !invited.year.length || !invited.course)
         return;
         
         this.props.inviteHandler(invited)
@@ -168,7 +180,7 @@ export default class QualInput extends Component{
                     <div className={styles.FirstRow}>
                         <Input value={this.state.degreeValue} label="Degree" elementType="dropdown" inputHandler={this.degreeInputHandler} elementConfig={{options:this.state.degreeOptions}} style={inputStyles}/>   
                         <Input value={this.state.courseValue} label="Course" elementType="dropdown" inputHandler={this.courseInputHandler} elementConfig={{options:this.state.courseOptions}} style={inputStyles}/>   
-                        <Input value={this.state.branchValue} label="Branch" elementType="dropdown" inputHandler={this.branchInputHandler} elementConfig={{options:this.state.branchOptions, multi:true}} style={inputStyles}/> 
+                        {/* <Input value={this.state.branchValue} label="Branch" elementType="dropdown" inputHandler={this.branchInputHandler} elementConfig={{options:this.state.branchOptions, multi:true}} style={inputStyles}/>  */}
                         <Input value={this.state.yearValue} label="Graduation Year" elementType="dropdown" inputHandler={(e)=>this.inputHandler('yearValue', e.target.value)} elementConfig={{options:["2020","2021","2022","2023","2024","2025"], multi:true}} style={inputStyles}/>     
                     </div>   
                     <Button clicked={this.inviteHandler} style={{width:"unset", marginBottom:40}} clicked={this.inviteHandler} primary>invite</Button>

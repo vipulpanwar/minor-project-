@@ -86,12 +86,11 @@ class Profile extends Component{
                         // to the root node of the returned component as it will be overwritten.
                         return <a><Button style={{borderRadius:'100%', padding:'0',width:'58px', height:'58px', backgroundColor:'#dbe9f9', border:'#dbe9f9', display:'grid', placeItems:'center'}}><img height="25.5px" src={Download}></img></Button></a>;
                     }}
-                    content={() => this.props.refer}
+                    content={() => this.props.refer.current}
                     />
                   </div>
                 </div>
               </div>
-              
             </div>
     )
 }

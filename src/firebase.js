@@ -7,7 +7,7 @@ import "firebase/firestore";
 import 'firebase/storage';
 
 
-export const mode = "TEST";
+export const mode = "PROD";
 let firebaseConfig, apiURL, cloudFnURL, storageURL;
 
 if( mode =="TEST" )
@@ -21,7 +21,9 @@ if( mode =="TEST" )
     appId: "1:45895614087:web:1cff5752c619a3752bc222",
     measurementId: "G-LXPKZQ7PQ4"
   };
-  apiURL = "http://test.api.ensvee.com"
+  apiURL = "https://test.api.ensvee.com"
+  // apiURL = "http://localhost:8000"
+
   cloudFnURL = "https://us-central1-oneios.cloudfunctions.net/app";
   storageURL = "https://firebasestorage.googleapis.com/v0/b/oneios.appspot.com/o/";
 }
@@ -34,7 +36,7 @@ if( mode =="TEST" )
 //       appId: "1:79896177397:web:a1a5afbfc32942b5e7f3bc",
 //       measurementId: "G-ZY4YQ578X7"
 //     };
-else{
+else {
   firebaseConfig = {
     apiKey: "AIzaSyCR0VMmyYOghmzn7q8WXDXw78Ynq0aUFjo",
     authDomain: "ensveeproduction.firebaseapp.com",
@@ -45,7 +47,9 @@ else{
     measurementId: "G-MM1DFY5X2V"
   };
   apiURL = "https://api.ensvee.com"
-  cloudFnURL = "https://ap-south1-ensveeproduction.cloudfunctions.net/app";
+  // apiURL = "http://localhost:8000"
+
+  cloudFnURL = "https://asia-south1-ensveeproduction.cloudfunctions.net/app";
   storageURL = "https://firebasestorage.googleapis.com/v0/b/ensveeproduction.appspot.com/o/";
 }
 

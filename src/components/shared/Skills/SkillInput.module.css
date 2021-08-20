@@ -34,4 +34,6 @@
     flex-wrap: wrap;
     gap:5px;
     margin: 8px 0;
+    max-height: 100px;
+    overflow: auto;
 }

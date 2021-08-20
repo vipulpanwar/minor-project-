@@ -25,11 +25,14 @@ class CandidateTagger extends Component{
         <div className = {style.outercontainer}>
         <div className = {style.innercontainer}>
             <p className = {style.candidatetaggertext}>Tag Candidate</p>
+            {this.props.updateFlag?
             <div className= {style.buttoncontainer}>
+                
                 <Button disabled={this.props.student.loading} clicked={this.ExcellentMaker} primary={this.props.student.flag?.toLowerCase()=="excellent"} style={buttonStyle}>Excellent</Button>
                 <Button disabled={this.props.student.loading} clicked={this.GoodMaker} primary={this.props.student.flag?.toLowerCase()=="good"} style={buttonStyle}>Good</Button>
                 <Button disabled={this.props.student.loading} clicked={this.AverageMaker} primary={this.props.student.flag?.toLowerCase()=="average"} style={buttonStyle}>Average</Button>
             </div>
+            :null}
         </div>
         <div className={ [style.contactContainer, this.props.student.loading?style.Loading: null].join(" ")}>
             Contact

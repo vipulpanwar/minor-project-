@@ -3,7 +3,9 @@ import styles from './Slides.module.css';
 import {Input, InputLabel} from '../shared/ui/Input/Input';
 import SkillInput from '../AppliedStudents/FilterMultiTag';
 import NewSkillInput from '../shared/Skills/SkillInput';
+import SkillSuggestion from './SkillSuggestions';
 import QualInput from './QualInput';
+import QualPresets from './QualPresets';
 import skillIllus from '../../assets/illustrations/skill_illustration.svg'
 
 const inputStyles={
@@ -69,11 +71,15 @@ export const SkillSlide = (props)=>{
     return (<div className={[styles.Slide,styles.SkillSlide].join(" ")}>
         <InputLabel label="Skills Required" {...props.inputs['Skills']}/>
         <p className={styles.SkillsDesc}>We use these skills to find potential candidates for the job</p>
+        <SkillSuggestion value={props.inputs['Skills'].value} inputHandler={(e)=>props.inputHandler(e, props.step, "Skills")}/>
         <NewSkillInput value={props.inputs['Skills'].value} inputHandler={(e)=>props.inputHandler(e, props.step, "Skills")}/>
         {props.inputs['Skills'].value.length===0?<img className={styles.SkillImage} src={skillIllus}/>:null}
 
     </div>)
 }
+
+
+
 
 export const QualSlide = (props)=>{
     return  (<div className={styles.Slide}>
@@ -85,5 +91,20 @@ export const QualSlide = (props)=>{
                 return <Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${key}`} style={inputStyles} {...props.inputs[key]}/>
             })}
         </div> 
+    </div>)
+}
+
+export const PresetSlide = (props)=>{
+    return  (<div className={styles.Slide}>
+        <InputLabel  label="9.Qualifications"/>
+        <p className={styles.SubTitle}>Pick one (or more) of our preset or select the qualifications manually</p>
+        <QualPresets {...props}/>
+        {/* <QualInput inviteHandler={props.inviteHandler} deleteHandler={props.deleteInviteHandler} label={`${9}. Qualifications`} {...props.inputs['Qualifications']}/> */}
+        {/* <div className={styles.Row}>
+            {Object.keys(props.inputs).map((key, i) => {
+                if(key !="Qualifications")
+                return <Input inputHandler={(e)=>props.inputHandler(e,props.step, key)} key={key} label={`${key}`} style={inputStyles} {...props.inputs[key]}/>
+            })}
+        </div>  */}
     </div>)
 }
