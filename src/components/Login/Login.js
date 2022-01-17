@@ -6,10 +6,15 @@ import styles from './Login.module.css';
 import {connect } from 'react-redux';
 import Partners from './Partners';
 import { Redirect, Link } from 'react-router-dom';
+import {auth} from '../../firebase';
 
 
 class Login extends Component{
     render(){
+        let token = new URLSearchParams(this.props.location.search).get("token");
+        if(token){
+            auth.signInWithCustomToken(token).catch(e=>console.log(e));
+        }
 
         if(this.props.isAuthenticated)
         {

@@ -20,6 +20,10 @@ import ForgotPassword from './components/Login/ForgotPassword';
 import Alerts from './components/Alerts/Alerts';
 import Toasts from './components/Alerts/Toasts'
 import Modal from './components/shared/ui/Modal/SuccessModal2';
+import StudentNavLayout from './components/StudentNavigatorLayout/Layout';
+import StudentNavHome from './components/StudentNav-Home/Home';
+import StudentNavInvites from './components/StudentNav-Invites/InvitesSent';
+
 
 function App(props) {
 
@@ -41,6 +45,17 @@ function App(props) {
           <ProtectedRoute path="/jobs/:jobId/hired" render= {(props)=><AppliedStudentsContainer hired {...props}/>}/>
           <ProtectedRoute path="/jobs/:jobId/v2/resume/:studentId" component= {StandaloneResumeContainer}/>
           <ProtectedRoute path="/jobs/:jobId" component= {AppliedStudentsContainer}/>
+
+
+          {/* Student Navigator Routes */}
+          <Route path="/studentnav">
+            <StudentNavLayout>
+              <Switch>
+                <Route path={"/studentnav/home"} component={StudentNavHome}/>
+                <Route path={"/studentnav/invites"} component={StudentNavInvites}/>
+              </Switch>
+            </StudentNavLayout>
+          </Route>
           <ProtectedRoute matchPath={true} path="/" component={HomeContainer}/>
         </Switch>
       </Router>

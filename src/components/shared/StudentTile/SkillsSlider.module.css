@@ -1,0 +1,83 @@
+.Skill{
+    padding: 8px 16px;
+    border-radius: 30px;
+    color:#E0E0E0;
+    white-space: nowrap;
+    background: linear-gradient(320.09deg, #1E2024 11.25%, #393F44 80.07%);
+}
+
+.SliderContent {
+    display: flex;
+    gap:15px;
+    position: absolute;
+    top: 0;
+    transition: transform 0.3s ease-out;
+}
+
+.ContentWraper{
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+    padding-top: 40px;
+}
+
+.RightVisible .ContentWraper::after,
+.LeftVisible .ContentWraper::before
+{
+    position: absolute;
+    right: 0;
+    top: 0;    
+    content: "";
+    width: 100px;
+    height: 100%;
+    background: linear-gradient(270.73deg, #2D3038 31.24%, rgba(118, 119, 121, 0) 100% );
+    border-radius: 0px 20px 20px 0px;
+}
+
+.LeftVisible .ContentWraper::before{
+    left: 0;
+    z-index: 1;
+    right: unset;
+    background: linear-gradient(90deg, #202328 31.24%, rgb(0 63 190 / 0%) 100% );
+    border-radius: 20px 0px 0px 20px;
+}
+
+.SkillsSlider {
+    margin-top: 30px;
+    /* padding-top: 40px; */
+    position: relative;
+}
+
+.RightBtn,
+.LeftBtn
+{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    background: linear-gradient(306.8deg, #1E2024 16.34%, #393F44 85.69%);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.45);
+    width: 40px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 2;
+    transition: transform 0.2s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.LeftBtn {
+    left: 0px;
+    right: unset;
+}
+
+.RightBtn:hover,
+.LeftBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 35px 2px rgba(0, 0, 0, 0.45);
+}
+
+.RightBtn:active,
+.LeftBtn:active{
+    transform: scale(0.95);
+    box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.45);
+}

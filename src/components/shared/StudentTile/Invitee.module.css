@@ -1,0 +1,83 @@
+.Invitee{
+    padding:30px;
+    background: linear-gradient(145.75deg, #1E2024 13.71%, #2D3038 65.34%);
+    border-radius: 20px;
+    padding-bottom: 15px;
+    min-height: 200px;
+}
+
+.FirstRow {
+    display: flex;
+    gap:50px;
+    justify-content: space-between;
+}
+
+.ProfilePicture{
+    width: 80px;
+    height: 80px;
+}
+
+.Name {
+    font-size: 19px;
+}
+
+.UserDetails {
+    display: flex;
+    gap: 20px;
+}
+
+.Name a:link,
+.Name :visited{
+    color: #3CB2E9;
+    text-decoration: underline;
+}
+.Arrow {
+    width: 12px;
+    margin-left: 5px;
+    transition: transform 0.1s ease-in-out;
+}
+.Name:hover .Arrow{
+    transform: translate(2px, -2px);
+}
+
+.Name:active .Arrow{
+    transform: translate(-2px, 2px) scale(0.9);
+}
+
+.Desc {
+    color: #686B75;
+    font-size: 300;
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 1.2em;
+}
+
+
+
+.PersonalDetails {
+    background: linear-gradient(145.75deg, #1E2024 13.71%, #2D3038 65.34%);
+    background: linear-gradient(170deg, #1E2024 -24.29%, #2D3038 74.34%);
+    border-radius: 13.6078px;
+    display: flex;
+    gap: 20px;
+    align-self: flex-start;
+    padding: 15px 20px;
+}
+
+.Label{
+    color: #686B75;
+    margin-right: 5px;
+}
+
+.Value {
+    font-weight: 700;
+}
+
+.Awaiting {
+    font-size: 17px;
+    color: #44D7B7;
+    background: linear-gradient(146.06deg, #1F2025 9.39%, #2E3038 82.08%);
+    border-radius: 38px;
+    padding: 15px 30px;
+    align-self: center;
+}

@@ -1,0 +1,40 @@
+.SearchBar{
+    background: transparent;
+    border-color: transparent;
+    padding: 12px 20px;
+    color: white;
+    line-height: 0.7;
+    width: 100%;
+    font-family: var(--font);
+    padding-left: 48px;
+    height: 100%;
+
+}
+
+.SearchBar:focus{
+    outline: none;
+}
+
+.SearchBarContainer{
+    background: linear-gradient(145.75deg, #1E2024 13.71%, #2D3038 65.34%);
+    border-radius: 25px;
+    border: 1px solid #51555B;
+    position: relative;
+    /* flex-shrink: 0; */
+    width: 100%;
+    transition: 0.15s border ease-in-out;
+}
+
+.SearchBarContainer:focus-within{
+    border: 2px solid #777b80;
+}
+
+.Icon {
+    
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    height: 18px;
+    transform: translateY(-50%);
+    
+}

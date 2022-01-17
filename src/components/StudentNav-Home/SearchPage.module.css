@@ -1,0 +1,34 @@
+.SearchSection{
+    padding: 40px 60px;
+    background: #393F44;
+    border-radius: 20px;
+ 
+}
+
+.IllusRow {
+    display: flex;
+    align-items: center;
+    gap:10%;
+}
+
+.Illus {
+    height: 240px;
+    flex-shrink: 0;
+}
+
+.Title{
+    font-size: 25px;
+    font-weight: 700;
+}
+
+p {
+    color: #686B75;
+}
+
+.SearchRow{
+    margin-top: 40px;
+}
+
+.JobProfiles {
+    margin-top: 50px;
+}

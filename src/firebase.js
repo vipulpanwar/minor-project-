@@ -7,7 +7,7 @@ import "firebase/firestore";
 import 'firebase/storage';
 
 
-export const mode = "PROD";
+export const mode = "TEST";
 let firebaseConfig, apiURL, cloudFnURL, storageURL;
 
 if( mode =="TEST" )
@@ -24,7 +24,7 @@ if( mode =="TEST" )
   apiURL = "https://test.api.ensvee.com"
   // apiURL = "http://localhost:8000"
 
-  cloudFnURL = "https://us-central1-oneios.cloudfunctions.net/app";
+  cloudFnURL = "https://asia-south1-oneios.cloudfunctions.net/app";
   storageURL = "https://firebasestorage.googleapis.com/v0/b/oneios.appspot.com/o/";
 }
 //   firebaseConfig = {

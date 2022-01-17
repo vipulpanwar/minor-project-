@@ -5,7 +5,7 @@ import {CreateAlert, CreateToast} from '../../store/actions/alert';
 
 import {Slide1, OneColSlide, QualSlide, SkillSlide, PresetSlide} from './Slides';
 
-import {auth, cloudFnURL} from '../../firebase';
+import {auth, cloudFnURL, apiURL} from '../../firebase';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
@@ -537,7 +537,7 @@ class NewJobForm extends React.Component{
             
             let token= await auth.currentUser.getIdToken();
             // await axios.post("https://asia-south1-ensveeproduction.cloudfunctions.net/app/create_job/",{token, job});
-            await axios.post( cloudFnURL + "/create_job/",{token, job});
+            await axios.post( apiURL + "/create_job/",{job, token});
 
             // await axios.post("http://localhost:5001/oneios/us-central1/app/create_job/",{token, job});
 
@@ -549,7 +549,7 @@ class NewJobForm extends React.Component{
             console.log(error);
             this.props.createToast({code:"failure", message:"Something went wrong while posting job"})
         }
-        this.props.close();
+        // this.props.close();
     }
 
 

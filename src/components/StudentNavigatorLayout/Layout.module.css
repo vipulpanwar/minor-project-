@@ -1,0 +1,12 @@
+.MainContainer{
+    background: #2D3038;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    color: #E0E0E0;
+
+}
+
+.Main {
+    padding: 50px 80px;
+}
