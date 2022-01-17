@@ -7,6 +7,7 @@ import userPlaceholder from '../../assets/images/user_placeholder.jpg';
 export const StudentsContext = createContext();
 
 
+
 class StudentsProviderComponent extends Component {
     state = {
         filters:{   
@@ -20,7 +21,7 @@ class StudentsProviderComponent extends Component {
         },
         searchQuery:"",
         hasMore: true,
-        applicants:[]
+        applicants:[ ]
     }
 
     updateFlag = async (studentId, newflag)=>{
@@ -112,7 +113,8 @@ class StudentsProviderComponent extends Component {
         if(more)
             newApplicants = [...this.state.applicants, ...applicants];
 
-        this.setState({applicants: newApplicants, studentLoading: false, hasMore: (applicants.length==limit)});
+        
+        this.setState({studentLoading: false, hasMore: (applicants.length==limit)});
     }
 
     fetchSingle = async (email) =>{
@@ -123,7 +125,7 @@ class StudentsProviderComponent extends Component {
             let snapshot = (await query.where("email", '==', email).get());
             applicant = this.mapApplicantDocsToObj(snapshot)[0];
             
-            this.setState({applicants:[applicant]});
+            // this.setState({applicants:[applicant]});
         }
     }
 

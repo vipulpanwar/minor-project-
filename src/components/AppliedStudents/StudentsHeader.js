@@ -41,13 +41,13 @@ class Studentsheader extends Component{
         </Kebab> */}
         <div className={styles.RightButtonTray}>
             <Button clicked={this.props.showHired? this.goToApplied : this.goToHired} className={styles.TopRightButton}>{this.props.showHired?"Applicants": "Hired Applicants"}</Button>
-            <Button clicked={this.downloadXlsHandler} className={styles.TopRightButton}>Download Xls</Button>
+            {/* <Button clicked={this.downloadXlsHandler} className={styles.TopRightButton}>Download Xls</Button> */}
         </div>
         <Link to="/" className={styles.BackButton}><img src={backIcon}></img></Link>
         <Link to="/" ><img src={logo} className={styles.Logo}></img></Link>
-        <h2 className={styles.Title}> {!this.props.showHired?`${this.props.counts?.count || 0} Students Applied`:`${this.props.counts?.hired || 0} Students Hired`}</h2>
+        <h2 className={styles.Title}> {!this.props.showHired?`${ 1} Students Applied`:`${this.props.counts?.hired || 0} Students Hired`}</h2>
         <h4 className={styles.SubTitle}>{this.props.subTitle}</h4>
-        <SearchBar showHired={this.props.showHired} filterToggle= {this.props.filterToggle} downloadXls={this.downloadXlsHandler}/>
+        {/* <SearchBar showHired={this.props.showHired} filterToggle= {this.props.filterToggle} downloadXls={this.downloadXlsHandler}/> */}
     </header>)
     }
 }

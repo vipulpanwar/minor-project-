@@ -22,28 +22,28 @@ export default  (props)=>{
         }
 
     },[]);
-    useEffect(()=>{
-        // console.log("run");
-        let count=0;
-        let bottom = compactSkillsRef.current.getBoundingClientRect().bottom;
+    // useEffect(()=>{
+    //     // console.log("run");
+    //     let count=0;
+    //     let bottom = compactSkillsRef.current.getBoundingClientRect().bottom;
         
-        Array.from(compactSkillsRef.current.children).forEach(skill=>{
-            if( bottom < skill.getBoundingClientRect().bottom)
-            {
-                skill.style.background="red";
-                // skill.style.display="none";
-                count++;
-            }
-            else
-            {
-                skill.style.background="";
-                // skill.style.display="";
-            }
+    //     Array.from(compactSkillsRef.current.children).forEach(skill=>{
+    //         if( bottom < skill.getBoundingClientRect().bottom)
+    //         {
+    //             skill.style.background="red";
+    //             // skill.style.display="none";
+    //             count++;
+    //         }
+    //         else
+    //         {
+    //             skill.style.background="";
+    //             // skill.style.display="";
+    //         }
 
-        setMoreSkills(count);
-        })
+    //     setMoreSkills(count);
+    //     })
 
-    },[props, windowWidth])
+    // },[props, windowWidth])
 
     return(
             <div style={props.style} className="skills-section">

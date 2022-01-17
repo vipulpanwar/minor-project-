@@ -55,8 +55,8 @@ class JobList extends React.Component{
           let newJob = {...job};
           // let res = await axios.get('https://asia-south1-ensveeproduction.cloudfunctions.net/app/get_applied_count/' + job.id);
           let res = await axios.get( cloudFnURL + '/get_applied_count/' + job.id);
-          newJob['newCount'] =  res.data['newCount'];
-          newJob['count'] = res.data.count;
+          newJob['newCount'] =  1;
+          newJob['count'] = 1;
           newJob['hiredCount'] = res.data.hired;
           newJob['countLoading'] = false;
 

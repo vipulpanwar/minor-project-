@@ -18,13 +18,8 @@ const StudentCard = (props)=>{
     return(
         // !props.student.loading?
         <div  className={styles.StudentCard}>
-            {props.student.flag=="Excellent" && <div className={styles.excellent}><img src={Excellent} alt={props.student.flag}/></div>}
-            {props.student.flag=="Good" && <div className={styles.excellent}><img src={Good} alt={props.student.flag}/></div>}
-            {props.student.flag=="Average" && <div className={styles.excellent}><img src={Average} alt={props.student.flag}/></div>}
-            {props.student.flag=="New" && <div className={styles.excellent}><img src={New} alt={props.student.flag}/></div>}
             <div className={styles.StudentInfo}>
                 <ProfilePicture className={styles.StudentImage} uid={props.student.uid} />
-                {/* <img className={styles.StudentImage} src={PlaceHolder}/> */}
                 <StudentData student={props.student}/>
             </div>
             <Skills  oneLiner="oneLiner" style={{margin:0, marginRight:18, padding:0}} hardSkills={props.student.hskills} softSkills={props.student.sskills}/>
@@ -56,7 +51,7 @@ const StudentData = withRouter((props)=>{
                 <span>Rating: </span>
                 <span>4.5</span>
             </span> */}
-            <Button clicked={()=>props.history.replace(props.location.pathname + `/student/${props.student.email}`)} style={{padding:"13px 25px", width:'unset'}}>
+            <Button clicked={()=>{window.location.replace("https://drive.google.com/file/d/1LaR2PbtiiyU-m2WZdGfifDFEHu7qRjad/view?usp=sharing")}} style={{padding:"13px 25px", width:'unset'}}>
                 View Profile
             </Button>
         </div>
